@@ -1,12 +1,14 @@
 <?php
 /**
- * @version 2.3.1
+ * @version 4.0.0
  * @package JEM
- * @copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright (C) 2005-2009 Christoph Lukes
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 defined('_JEXEC') or die;
+
+use Joomla\CMS\Access\Access;
 
 require_once(JPATH_SITE.'/components/com_jem/factory.php');
 
@@ -143,7 +145,7 @@ class JemHelperBackend
 			$level = 'category';
 		}
 
-		$actions = JAccess::getActions('com_jem', $level);
+    $actions = Access::getActionsFromFile(JPATH_COMPONENT_ADMINISTRATOR. '/access.xml', "/access/section[@name='" . $level . "']/");
 
 		foreach ($actions as $action) {
 			$result->set($action->name,	$user->authorise($action->name, $assetName));

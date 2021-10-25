@@ -1,13 +1,16 @@
 <?php
 /**
- * @version 2.3.1
+ * @version 4.0.0
  * @package JEM
- * @copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright (C) 2005-2009 Christoph Lukes
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 
 defined('_JEXEC') or die;
+
+use Joomla\CMS\Language\Text;
+use Joomla\CMS\HTML\HTMLHelper;
 
 $options = array(
 	'onActive' => 'function(title, description){
@@ -40,58 +43,58 @@ $options = array(
 								<div class="cpanel">
 								<?php
 									$link = 'index.php?option=com_jem&amp;view=events';
-									$this->quickiconButton($link, 'icon-48-events.png', JText::_('COM_JEM_EVENTS'));
+									$this->quickiconButton($link, 'icon-48-events.png', Text::_('COM_JEM_EVENTS'));
 
 									$link = 'index.php?option=com_jem&amp;task=event.add';
-									$this->quickiconButton($link, 'icon-48-eventedit.png', JText::_('COM_JEM_ADD_EVENT'));
+									$this->quickiconButton($link, 'icon-48-eventedit.png', Text::_('COM_JEM_ADD_EVENT'));
 
 									$link = 'index.php?option=com_jem&amp;view=venues';
-									$this->quickiconButton($link, 'icon-48-venues.png', JText::_('COM_JEM_VENUES'));
+									$this->quickiconButton($link, 'icon-48-venues.png', Text::_('COM_JEM_VENUES'));
 
 									$link = 'index.php?option=com_jem&task=venue.add';
-									$this->quickiconButton($link, 'icon-48-venuesedit.png', JText::_('COM_JEM_ADD_VENUE'));
+									$this->quickiconButton($link, 'icon-48-venuesedit.png', Text::_('COM_JEM_ADD_VENUE'));
 
 									$link = 'index.php?option=com_jem&amp;view=categories';
-									$this->quickiconButton($link, 'icon-48-categories.png', JText::_('COM_JEM_CATEGORIES'));
+									$this->quickiconButton($link, 'icon-48-categories.png', Text::_('COM_JEM_CATEGORIES'));
 
 									$link = 'index.php?option=com_jem&amp;task=category.add';
-									$this->quickiconButton($link, 'icon-48-categoriesedit.png', JText::_('COM_JEM_ADD_CATEGORY'));
+									$this->quickiconButton($link, 'icon-48-categoriesedit.png', Text::_('COM_JEM_ADD_CATEGORY'));
 
 									$link = 'index.php?option=com_jem&amp;view=groups';
-									$this->quickiconButton($link, 'icon-48-groups.png', JText::_('COM_JEM_GROUPS'));
+									$this->quickiconButton($link, 'icon-48-groups.png', Text::_('COM_JEM_GROUPS'));
 
 									$link = 'index.php?option=com_jem&amp;task=group.add';
-									$this->quickiconButton($link, 'icon-48-groupedit.png', JText::_('COM_JEM_GROUP_ADD'));
+									$this->quickiconButton($link, 'icon-48-groupedit.png', Text::_('COM_JEM_GROUP_ADD'));
 
 									$link = 'index.php?option=com_jem&amp;task=plugins.plugins';
-									$this->quickiconButton($link, 'icon-48-plugins.png', JText::_('COM_JEM_MANAGE_PLUGINS'));
+									$this->quickiconButton($link, 'icon-48-plugins.png', Text::_('COM_JEM_MANAGE_PLUGINS'));
 
 									//only admins should be able to see these items
 									if (JemFactory::getUser()->authorise('core.manage', 'com_jem')) {
 										$link = 'index.php?option=com_jem&amp;view=settings';
-										$this->quickiconButton($link, 'icon-48-settings.png', JText::_('COM_JEM_SETTINGS_TITLE'));
+										$this->quickiconButton($link, 'icon-48-settings.png', Text::_('COM_JEM_SETTINGS_TITLE'));
 
 										$link = 'index.php?option=com_jem&amp;view=housekeeping';
-										$this->quickiconButton($link, 'icon-48-housekeeping.png', JText::_('COM_JEM_HOUSEKEEPING'));
+										$this->quickiconButton($link, 'icon-48-housekeeping.png', Text::_('COM_JEM_HOUSEKEEPING'));
 
 										$link = 'index.php?option=com_jem&amp;task=sampledata.load';
-										$this->quickiconButton($link, 'icon-48-sampledata.png', JText::_('COM_JEM_MAIN_LOAD_SAMPLE_DATA'));
+										$this->quickiconButton($link, 'icon-48-sampledata.png', Text::_('COM_JEM_MAIN_LOAD_SAMPLE_DATA'));
 
 										$link = 'index.php?option=com_jem&amp;view=updatecheck';
-										$this->quickiconButton($link, 'icon-48-update.png', JText::_('COM_JEM_UPDATECHECK_TITLE'));
+										$this->quickiconButton($link, 'icon-48-update.png', Text::_('COM_JEM_UPDATECHECK_TITLE'));
 
 										$link = 'index.php?option=com_jem&amp;view=import';
-										$this->quickiconButton($link, 'icon-48-tableimport.png', JText::_('COM_JEM_IMPORT_DATA'));
+										$this->quickiconButton($link, 'icon-48-tableimport.png', Text::_('COM_JEM_IMPORT_DATA'));
 
 										$link = 'index.php?option=com_jem&amp;view=export';
-										$this->quickiconButton($link, 'icon-48-tableexport.png', JText::_('COM_JEM_EXPORT_DATA'));
+										$this->quickiconButton($link, 'icon-48-tableexport.png', Text::_('COM_JEM_EXPORT_DATA'));
 
 										$link = 'index.php?option=com_jem&amp;view=cssmanager';
-										$this->quickiconButton( $link, 'icon-48-cssmanager.png', JText::_( 'COM_JEM_CSSMANAGER_TITLE' ) );
+										$this->quickiconButton( $link, 'icon-48-cssmanager.png', Text::_( 'COM_JEM_CSSMANAGER_TITLE' ) );
 									}
 
 									$link = 'index.php?option=com_jem&amp;view=help';
-									$this->quickiconButton($link, 'icon-48-help.png', JText::_('COM_JEM_HELP'));
+									$this->quickiconButton($link, 'icon-48-help.png', Text::_('COM_JEM_HELP'));
 								?>
 								</div>
 							</td>
@@ -99,75 +102,78 @@ $options = array(
 					</table>
 				</td>
 				<td valign="top" width="320px" style="padding: 7px 0 0 5px">
-					<?php echo JHtml::_('sliders.start','stat-pane',$options); ?>
-					<?php echo JHtml::_('sliders.panel', JText::_('COM_JEM_MAIN_EVENT_STATS'),'events'); ?>
+					<?php echo HTMLHelper::_('bootstrap.startAccordion', 'stat-pane', $options); ?>
+					<?php echo HTMLHelper::_('bootstrap.addSlide', 'stat-pane', Text::_('COM_JEM_MAIN_EVENT_STATS'),'events'); ?>
 					<table class="adminlist">
 						<tr>
-							<td><?php echo JText::_('COM_JEM_MAIN_EVENTS_PUBLISHED').': '; ?></td>
+							<td><?php echo Text::_('COM_JEM_MAIN_EVENTS_PUBLISHED').': '; ?></td>
 							<td><b><?php echo $this->events->published; ?> </b></td>
 						</tr>
 						<tr>
-							<td><?php echo JText::_('COM_JEM_MAIN_EVENTS_UNPUBLISHED').': '; ?></td>
+							<td><?php echo Text::_('COM_JEM_MAIN_EVENTS_UNPUBLISHED').': '; ?></td>
 							<td><b><?php echo $this->events->unpublished; ?> </b></td>
 						</tr>
 						<tr>
-							<td><?php echo JText::_('COM_JEM_MAIN_EVENTS_ARCHIVED').': '; ?> </td>
+							<td><?php echo Text::_('COM_JEM_MAIN_EVENTS_ARCHIVED').': '; ?> </td>
 							<td><b><?php echo $this->events->archived; ?> </b></td>
 						</tr>
 						<tr>
-							<td><?php echo JText::_('COM_JEM_MAIN_EVENTS_TRASHED').': '; ?></td>
+							<td><?php echo Text::_('COM_JEM_MAIN_EVENTS_TRASHED').': '; ?></td>
 							<td><b><?php echo $this->events->trashed; ?> </b></td>
 						</tr>
 						<tr>
-							<td><?php echo JText::_('COM_JEM_MAIN_EVENTS_TOTAL').': '; ?></td>
+							<td><?php echo Text::_('COM_JEM_MAIN_EVENTS_TOTAL').': '; ?></td>
 							<td><b><?php echo $this->events->total; ?> </b></td>
 						</tr>
 					</table>
-					<?php echo JHtml::_('sliders.panel', JText::_('COM_JEM_MAIN_VENUE_STATS'), 'venues'); ?>
+					<?php echo HTMLHelper::_('bootstrap.endSlide'); ?>
+					<?php echo HTMLHelper::_('bootstrap.addSlide', 'stat-pane', Text::_('COM_JEM_MAIN_VENUE_STATS'), 'venues'); ?>
 					<table class="adminlist">
 						<tr>
-							<td><?php echo JText::_('COM_JEM_MAIN_VENUES_PUBLISHED').': '; ?></td>
+							<td><?php echo Text::_('COM_JEM_MAIN_VENUES_PUBLISHED').': '; ?></td>
 							<td><b><?php echo $this->venue->published; ?> </b></td>
 						</tr>
 						<tr>
-							<td><?php echo JText::_('COM_JEM_MAIN_VENUES_UNPUBLISHED').': '; ?></td>
+							<td><?php echo Text::_('COM_JEM_MAIN_VENUES_UNPUBLISHED').': '; ?></td>
 							<td><b><?php echo $this->venue->unpublished; ?> </b></td>
 						</tr>
 						<tr>
-							<td><?php echo JText::_('COM_JEM_MAIN_VENUES_TOTAL').': '; ?></td>
+							<td><?php echo Text::_('COM_JEM_MAIN_VENUES_TOTAL').': '; ?></td>
 							<td><b><?php echo $this->venue->total; ?> </b></td>
 						</tr>
 					</table>
-					<?php echo JHtml::_('sliders.panel', JText::_('COM_JEM_MAIN_CATEGORY_STATS'), 'categories'); ?>
+					<?php echo HTMLHelper::_('bootstrap.endSlide'); ?>
+					<?php echo HTMLHelper::_('bootstrap.addSlide', 'stat-pane', Text::_('COM_JEM_MAIN_CATEGORY_STATS'), 'categories'); ?>
 					<table class="adminlist">
 						<tr>
-							<td><?php echo JText::_('COM_JEM_MAIN_CATEGORIES_PUBLISHED').': '; ?></td>
+							<td><?php echo Text::_('COM_JEM_MAIN_CATEGORIES_PUBLISHED').': '; ?></td>
 							<td><b><?php echo $this->category->published; ?> </b></td>
 						</tr>
 						<tr>
-							<td><?php echo JText::_('COM_JEM_MAIN_CATEGORIES_UNPUBLISHED').': '; ?></td>
+							<td><?php echo Text::_('COM_JEM_MAIN_CATEGORIES_UNPUBLISHED').': '; ?></td>
 							<td><b><?php echo $this->category->unpublished; ?> </b></td>
 						</tr>
 						<tr>
-							<td><?php echo JText::_('COM_JEM_MAIN_CATEGORIES_ARCHIVED').': '; ?></td>
+							<td><?php echo Text::_('COM_JEM_MAIN_CATEGORIES_ARCHIVED').': '; ?></td>
 							<td><b><?php echo $this->category->archived; ?> </b></td>
 						</tr>
 						<tr>
-							<td><?php echo JText::_('COM_JEM_MAIN_CATEGORIES_TRASHED').': '; ?></td>
+							<td><?php echo Text::_('COM_JEM_MAIN_CATEGORIES_TRASHED').': '; ?></td>
 							<td><b><?php echo $this->category->trashed; ?> </b></td>
 						</tr>
 						<tr>
-							<td><?php echo JText::_('COM_JEM_MAIN_CATEGORIES_TOTAL').': '; ?></td>
+							<td><?php echo Text::_('COM_JEM_MAIN_CATEGORIES_TOTAL').': '; ?></td>
 							<td><b><?php echo $this->category->total; ?> </b></td>
 						</tr>
 					</table>
-					<?php echo JHtml::_('sliders.end'); ?>
-					<h3 class="title"><?php echo JText::_('COM_JEM_MAIN_DONATE'); ?></h3>
+					<?php echo HTMLHelper::_('bootstrap.endSlide'); ?>
+					<?php echo HTMLHelper::_('bootstrap.endAccordion'); ?>
+					<h3 class="title"><?php echo Text::_('COM_JEM_MAIN_DONATE'); ?></h3>
 					<div class="content">
-						<?php echo JText::_('COM_JEM_MAIN_DONATE_TEXT'); ?> </br></br>
+						<?php echo Text::_('COM_JEM_MAIN_DONATE_TEXT'); ?> </br></br>
 						<div class="center">
 							<a href="https://www.joomlaeventmanager.net/project/donate" target="_blank">
-								<?php echo JHtml::_('image', 'com_jem/PayPal_DonateButton.png', JText::_('COM_JEM_MAIN_DONATE'), NULL, true); ?>
+								<?php echo HTMLHelper::_('image', 'com_jem/PayPal_DonateButton.png', Text::_('COM_JEM_MAIN_DONATE'), NULL, true); ?>
 							</a>
 						</div>
 					</div>
