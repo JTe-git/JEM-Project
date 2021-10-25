@@ -3,7 +3,7 @@
  * JEM Package
  * @package JEM.Package
  *
- * @copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  *
  * @copyright (C) 2008 - 2013 Kunena Team. All rights reserved.
@@ -32,7 +32,7 @@ class Pkg_JemInstallerScript
 			'0' => '5.5' // Preferred version
 			),
 		'Joomla!' => array (
-			'4.0' => '', // Not supported
+			'4.0' => '4.0.0', // Not supported
 			'3.10' => '3.10.0',
 			'3.3' => '3.3.3',
 			'3.2' => '3.2.7',

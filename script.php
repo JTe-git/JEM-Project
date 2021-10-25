@@ -1,23 +1,27 @@
 <?php
 /**
- * @version 2.3.1
+ * @version 4.0.0
  * @package JEM
- * @copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright (C) 2005-2009 Christoph Lukes
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 defined('_JEXEC') or die;
 
-$db = JFactory::getDBO();
-jimport('joomla.filesystem.folder');
-jimport('joomla.filesystem.file');
-jimport('joomla.filesystem.path');
-
+use Joomla\CMS\Factory;
+use Joomla\CMS\Filesystem\File;
+use Joomla\CMS\Filesystem\Folder;
+use Joomla\CMS\Language\Text;
+use Joomla\CMS\Log\Log;
+use Joomla\CMS\Table\Table;
+use Joomla\CMS\Installer\InstallerScript;
+use Joomla\CMS\Filesystem\Path;
+use Joomla\Registry\Registry;
 
 /**
  * Script file of JEM component
 */
-class com_jemInstallerScript
+class com_jemInstallerScript extends InstallerScript
 {
 	private $oldRelease = "";
 	private $newRelease = "";
@@ -25,10 +29,11 @@ class com_jemInstallerScript
 
 	/**
 	 * Method to install the component
+	 * At this point files have been copied and install sql was triggered
 	 *
 	 * @return void
 	 */
-	function install($parent)
+	public function install($parent)
 	{
 		$error = array(
 				'summary' => 0,
@@ -37,13 +42,13 @@ class com_jemInstallerScript
 
 		$this->updateJemSettings216(true);
 		$this->useJemConfig = true;
-
 		$this->getHeader();
 		?>
 
-		<h2><?php echo JText::_('COM_JEM_INSTALL_STATUS'); ?>:</h2>
-		<h3><?php echo JText::_('COM_JEM_INSTALL_CHECK_FOLDERS'); ?>:</h3> <?php
-
+		<h2><?php echo Text::_('COM_JEM_INSTALL_STATUS'); ?>:</h2>
+		<h3><?php echo Text::_('COM_JEM_INSTALL_CHECK_FOLDERS'); ?>:</h3> 
+		
+		<?php
 		$imageDir = "/images/jem";
 		$createDirs = array(
 				$imageDir,
@@ -56,23 +61,23 @@ class com_jemInstallerScript
 		);
 
 		// Check for existance of /images/jem directory
-		if (JFolder::exists(JPATH_SITE.$createDirs[0])) {
-			echo "<p><span style='color:green;'>".JText::_('COM_JEM_INSTALL_SUCCESS').":</span> ".
-				JText::sprintf('COM_JEM_INSTALL_DIRECTORY_EXISTS_SKIP', $createDirs[0])."</p>";
+		if (Folder::exists(JPATH_SITE.$createDirs[0])) {
+			echo "<p><span style='color:green;'>".Text::_('COM_JEM_INSTALL_SUCCESS').":</span> ".
+				Text::sprintf('COM_JEM_INSTALL_DIRECTORY_EXISTS_SKIP', $createDirs[0])."</p>";
 		} else {
-			echo "<p><span style='color:orange;'>".JText::_('COM_JEM_INSTALL_INFO').":</span> ".
-				JText::sprintf('COM_JEM_INSTALL_DIRECTORY_NOT_EXISTS', $createDirs[0])."</p>";
-			echo "<p>".JText::_('COM_JEM_INSTALL_DIRECTORY_TRY_CREATE').":</p>";
+			echo "<p><span style='color:orange;'>".Text::_('COM_JEM_INSTALL_INFO').":</span> ".
+				Text::sprintf('COM_JEM_INSTALL_DIRECTORY_NOT_EXISTS', $createDirs[0])."</p>";
+			echo "<p>".Text::_('COM_JEM_INSTALL_DIRECTORY_TRY_CREATE').":</p>";
 
 			echo "<ul>";
 			// Folder creation
 			foreach($createDirs as $directory) {
-				if (JFolder::create(JPATH_SITE.$directory)) {
-					echo "<li><span style='color:green;'>".JText::_('COM_JEM_INSTALL_SUCCESS').":</span> ".
-						JText::sprintf('COM_JEM_INSTALL_DIRECTORY_CREATED', $directory)."</li>";
+				if (Folder::create(JPATH_SITE.$directory)) {
+					echo "<li><span style='color:green;'>".Text::_('COM_JEM_INSTALL_SUCCESS').":</span> ".
+						Text::sprintf('COM_JEM_INSTALL_DIRECTORY_CREATED', $directory)."</li>";
 				} else {
-					echo "<li><span style='color:red;'>".JText::_('COM_JEM_INSTALL_ERROR').":</span> ".
-						JText::sprintf('COM_JEM_INSTALL_DIRECTORY_NOT_CREATED', $directory)."</li>";
+					echo "<li><span style='color:red;'>".Text::_('COM_JEM_INSTALL_ERROR').":</span> ".
+						Text::sprintf('COM_JEM_INSTALL_DIRECTORY_NOT_CREATED', $directory)."</li>";
 					$error['folders']++;
 				}
 			}
@@ -80,23 +85,23 @@ class com_jemInstallerScript
 		}
 
 		if($error['folders']) {
-			echo "<p>".JText::_('COM_JEM_INSTALL_DIRECTORY_CHECK_EXISTANCE')."</p>";
+			echo "<p>".Text::_('COM_JEM_INSTALL_DIRECTORY_CHECK_EXISTANCE')."</p>";
 		}
 
-		echo "<h3>".JText::_('COM_JEM_INSTALL_SETTINGS')."</h3>";
+		echo "<h3>".Text::_('COM_JEM_INSTALL_SETTINGS')."</h3>";
 
-		$db = JFactory::getDBO();
+		$db = Factory::getDBO();
 		$query = $db->getQuery(true);
 		$query->select('*')->from('#__jem_config');
 		$db->setQuery($query);
 		$conf = $db->loadAssocList();
 
 		if (count($conf)) {
-			echo "<p><span style='color:green;'>".JText::_('COM_JEM_INSTALL_SUCCESS').":</span> ".
-				JText::_('COM_JEM_INSTALL_FOUND_SETTINGS')."</p>";
+			echo "<p><span style='color:green;'>".Text::_('COM_JEM_INSTALL_SUCCESS').":</span> ".
+				Text::_('COM_JEM_INSTALL_FOUND_SETTINGS')."</p>";
 		}
 
-		echo "<h3>".JText::_('COM_JEM_INSTALL_SUMMARY')."</h3>";
+		echo "<h3>".Text::_('COM_JEM_INSTALL_SUMMARY')."</h3>";
 
 		foreach ($error as $k => $v) {
 			if($k != 'summary') {
@@ -107,13 +112,13 @@ class com_jemInstallerScript
 		if($error['summary']) {
 		?>
 			<p style='color: red;'>
-				<b><?php echo JText::_('COM_JEM_INSTALL_INSTALLATION_NOT_SUCCESSFUL'); ?></b>
+				<b><?php echo Text::_('COM_JEM_INSTALL_INSTALLATION_NOT_SUCCESSFUL'); ?></b>
 			</p>
 		<?php
 		} else {
 		?>
 			<p style='color: green;'>
-				<b><?php echo JText::_('COM_JEM_INSTALL_INSTALLATION_SUCCESSFUL'); ?></b>
+				<b><?php echo Text::_('COM_JEM_INSTALL_INSTALLATION_SUCCESSFUL'); ?></b>
 			</p> <?php
 		}
 
@@ -171,8 +176,8 @@ class com_jemInstallerScript
 	function uninstall($parent)
 	{
 		$this->getHeader(); ?>
-		<h2><?php echo JText::_('COM_JEM_UNINSTALL_STATUS'); ?>:</h2>
-		<p><?php echo JText::_('COM_JEM_UNINSTALL_TEXT'); ?></p>
+		<h2><?php echo Text::_('COM_JEM_UNINSTALL_STATUS'); ?>:</h2>
+		<p><?php echo Text::_('COM_JEM_UNINSTALL_TEXT'); ?></p>
 		<?php
 
 		$this->useJemConfig = true; // since 2.1.6
@@ -183,8 +188,8 @@ class com_jemInstallerScript
 			$this->removeJemMenuItems();
 			$this->removeAllJemTables();
 			$imageDir = JPATH_SITE.'/images/jem';
-			if (JFolder::exists($imageDir)) {
-				JFolder::delete($imageDir);
+			if (Folder::exists($imageDir)) {
+				Folder::delete($imageDir);
 			}
 		} else {
 			// prevent dead links on frontend
@@ -200,8 +205,8 @@ class com_jemInstallerScript
 	function update($parent)
 	{
 		$this->getHeader(); ?>
-		<h2><?php echo JText::_('COM_JEM_UPDATE_STATUS'); ?>:</h2>
-		<p><?php echo JText::sprintf('COM_JEM_UPDATE_TEXT', $parent->get('manifest')->version); ?></p>;
+		<h2><?php echo Text::_('COM_JEM_UPDATE_STATUS'); ?>:</h2>
+		<p><?php echo Text::sprintf('COM_JEM_UPDATE_TEXT', $parent->get('manifest')->version); ?></p>;
 		<?php
 	}
 
@@ -211,62 +216,17 @@ class com_jemInstallerScript
 	 *
 	 * @return void
 	 */
-	function preflight($type, $parent)
+	public function preflight($type, $parent)
 	{
-		// Are we installing in J2.5?
-		$jversion = new JVersion();
-		if (version_compare(JVERSION, '4.0.1', 'ge')                       ||  // J! 4.x NOT supported, but allow alpha/beta
-		    !(($jversion->RELEASE >= '3.10' && $jversion->DEV_LEVEL >= '0') ||			
-		      ($jversion->RELEASE >= '3.4' && $jversion->DEV_LEVEL >= '0') ||
-		      ($jversion->RELEASE == '3.3' && $jversion->DEV_LEVEL >= '3') ||
-		      ($jversion->RELEASE == '3.2' && $jversion->DEV_LEVEL >= '7') ||
-		      ($jversion->RELEASE == '2.5' && $jversion->DEV_LEVEL >= '24'))) {
-			\Joomla\CMS\Factory::getApplication()->enqueueMessage(JText::_('COM_JEM_PREFLIGHT_WRONG_JOOMLA_VERSION'), 'warning');
-			return false;
-		}
-
-		// Minimum required PHP version
-		$minPhpVersion = "5.3.1";
-
-		// Abort if PHP release is older than required version
-		if(version_compare(PHP_VERSION, $minPhpVersion, '<')) {
-			\Joomla\CMS\Factory::getApplication()->enqueueMessage(JText::sprintf('COM_JEM_PREFLIGHT_WRONG_PHP_VERSION', $minPhpVersion, PHP_VERSION), 'warning');
-			return false;
-		}
-
-		// Abort if Magic Quotes are enabled, it was removed from phpversion 5.4
-		if (version_compare(phpversion(), '5.4', '<') ) {
-			if (function_exists('get_magic_quotes_gpc')) {
-				if(get_magic_quotes_gpc()) {
-					\Joomla\CMS\Factory::getApplication()->enqueueMessage(JText::_('COM_JEM_PREFLIGHT_MAGIC_QUOTES_ENABLED'), 'warning');
-					return false;
-				}
-			}
-		}
-
-		// Minimum Joomla version as per Manifest file
-		$minJoomlaVersion = $parent->get('manifest')->attributes()->version;
-
-		// abort if the current Joomla release is older than required version
-		$jversion = new JVersion();
-		if(version_compare($jversion->getShortVersion(), $minJoomlaVersion, '<')) {
-			\Joomla\CMS\Factory::getApplication()->enqueueMessage(JText::sprintf('COM_JEM_PREFLIGHT_OLD_JOOMLA_VERSION', $minJoomlaVersion), 'warning');
-			return false;
-		}
-
-		// abort if the release being installed is not newer than the currently installed version
+	    
+	    $this->minimumPhp = '7.2.2';
+	    $this->minimumJoomla = '3.9.9';
+	    
+	    parent::preflight($type, $parent);
+	    
+	   
 		if (strtolower($type) == 'update') {
-			// Installed component version
-			$this->oldRelease = $this->getParam('version');
-
-			// Installing component version as per Manifest file
-			$this->newRelease = $parent->get('manifest')->version;
-
-			if (version_compare($this->newRelease, $this->oldRelease, 'lt')) {
-				\Joomla\CMS\Factory::getApplication()->enqueueMessage(JText::sprintf('COM_JEM_PREFLIGHT_INCORRECT_VERSION_SEQUENCE', $this->oldRelease, $this->newRelease), 'warning');
-				return false;
-			}
-
+	
 			// Remove obsolete files and folder
 			$this->deleteObsoleteFiles();
 
@@ -274,11 +234,11 @@ class com_jemInstallerScript
 			$this->makeFilesWritable();
 
 			// Initialize schema table if necessary
-			$this->initializeSchema($this->oldRelease);
+			$this->initializeSchema($this->release);
 		}
 
 		// $type is the type of change (install, update or discover_install)
-		echo '<p>' . JText::_('COM_JEM_PREFLIGHT_' . strtoupper($type) . '_TEXT') . '</p>';
+		echo '<p>' . Text::_('COM_JEM_PREFLIGHT_' . strtoupper($type) . '_TEXT') . '</p>';	
 	}
 
 	/**
@@ -290,57 +250,11 @@ class com_jemInstallerScript
 	function postflight($type, $parent)
 	{
 		// $type is the type of change (install, update or discover_install)
-		echo '<p>' . JText::_('COM_JEM_POSTFLIGHT_' . strtoupper($type) . '_TEXT') . '</p>';
+		echo '<p>' . Text::_('COM_JEM_POSTFLIGHT_' . strtoupper($type) . '_TEXT') . '</p>';
 
-		if (strtolower($type) == 'update') {
-			// Changes between 1.9.4 -> 1.9.5
-			if (version_compare($this->oldRelease, '1.9.5', 'lt') && version_compare($this->newRelease, '1.9.4', 'gt')) {
-				JTable::addIncludePath(JPATH_ROOT.'/administrator/components/com_jem/tables');
-				$categoryTable = JTable::getInstance('Category', 'JemTable');
-				$categoryTable->rebuild();
-
-				// change category ids in menu items
-				$this->updateJemMenuItems195();
-
-				// change category ids in modules
-				$this->updateJemModules195();
-			}
-			// Changes between 1.9.5 -> 1.9.6
-			if (version_compare($this->oldRelease, '1.9.6', 'lt') && version_compare($this->newRelease, '1.9.5', 'gt')) {
-				// change categoriesdetailed view name in menu items
-				$this->updateJemMenuItems196();
-			}
-			// Changes between 1.9.6 -> 1.9.7
-			if (version_compare($this->oldRelease, '1.9.7', 'lt') && version_compare($this->newRelease, '1.9.6', 'gt')) {
-				// add layout to edit menu items' urls (forgotten in 1.9.6, fix it now)
-				$this->updateJemMenuItems197();
-			}
-			// Changes between 1.9.7 -> 1.9.8
-			if (version_compare($this->oldRelease, '1.9.8', 'lt') && version_compare($this->newRelease, '1.9.7', 'gt')) {
-				// move id from params to link for venuecal menu items
-				$this->updateJemMenuItems198();
-			}
-			// Changes between 2.0.2 -> 2.0.3
-			if (version_compare($this->oldRelease, '2.0.3', 'lt') && version_compare($this->newRelease, '2.0.2', 'gt')) {
-				// remove update server enry
-				$this->removeUpdateServerEntry();
-			}
-			// Changes between 2.1.4 -> 2.1.4.2
-			if (version_compare($this->oldRelease, '2.1.4.2', 'lt') && version_compare($this->newRelease, '2.1.4', 'gt')) {
-				// remove 'htm' and 'html' from default attahment types
-				$this->updateJemSettings2142();
-			}
-			// Changes between 2.1.5 -> 2.1.6
-			if (version_compare($this->oldRelease, '2.1.6-dev3', 'lt') && version_compare($this->newRelease, '2.1.6-dev3', 'ge')) {
-				// move all settings from table #__jem_settings to table #__jem_config storing every setting in it's own record
-				$this->updateJemSettings216();
-			}
-			// !!! Now we have #__jem_config and good old #__jem_seetings is gone !!!
-			// Changes between 2.1.6 -> 2.1.7
-			if (version_compare($this->oldRelease, '2.1.7-dev4', 'lt') && version_compare($this->newRelease, '2.1.7-dev4', 'ge')) {
-				// change registra on table #__jem_events from 2 to 3
-				$this->updateJemEvents217();
-			}
+		if (strtolower($type) == 'update') 
+		{
+		    
 		}
 		elseif (strtolower($type) == 'install') {
 			$this->fixJemMenuItems();
@@ -354,9 +268,9 @@ class com_jemInstallerScript
 	 *
 	 * @return The parameter
 	 */
-	private function getParam($name)
+	public function getParam($name, $id = 0)
 	{
-		$db = JFactory::getDbo();
+		$db = Factory::getDbo();
 		$query = $db->getQuery(true);
 		$query->select('manifest_cache')->from('#__extensions')->where(array("type = 'component'", "element = 'com_jem'"));
 		$db->setQuery($query);
@@ -369,11 +283,11 @@ class com_jemInstallerScript
 	 *
 	 * @param $param_array  An array holding the params to store
 	 */
-	private function setParams($param_array)
+	public function setParams($param_array = null, $type = 'edit', $id = 0)
 	{
 		if (is_array($param_array) && (count($param_array) > 0)) {
 			// read the existing component value(s)
-			$db = JFactory::getDbo();
+			$db = Factory::getDbo();
 			$query = $db->getQuery(true);
 			$query->select('params')->from('#__extensions')->where(array("type = 'component'", "element = 'com_jem'"));
 			$db->setQuery($query);
@@ -402,9 +316,9 @@ class com_jemInstallerScript
 	 */
 	private function getGlobalParams()
 	{
-		$registry = new JRegistry;
+		$registry = new Registry();
 		try {
-			$db = JFactory::getDbo();
+			$db = Factory::getDbo();
 			$query = $db->getQuery(true);
 			if ($this->useJemConfig) {
 				$query->select('value')->from('#__jem_config')
@@ -428,7 +342,7 @@ class com_jemInstallerScript
 	{
 		if (is_array($param_array) && (count($param_array) > 0)) {
 			// read the existing component value(s)
-			$db = JFactory::getDbo();
+			$db = Factory::getDbo();
 			$query = $db->getQuery(true);
 			if ($this->useJemConfig) {
 				$query->select('value')->from('#__jem_config')
@@ -467,8 +381,8 @@ class com_jemInstallerScript
 	{
 		?>
 		<img src="../media/com_jem/images/jemlogo.png" alt="" style="float:left; padding-right:20px;" />
-		<h1><?php echo JText::_('COM_JEM'); ?></h1>
-		<p class="small"><?php echo JText::_('COM_JEM_INSTALLATION_HEADER'); ?></p>
+		<h1><?php echo Text::_('COM_JEM'); ?></h1>
+		<p class="small"><?php echo Text::_('COM_JEM_INSTALLATION_HEADER'); ?></p>
 		<?php
 	}
 
@@ -479,7 +393,7 @@ class com_jemInstallerScript
 	 */
 	private function initializeSchema($versionId)
 	{
-		$db = JFactory::getDbo();
+		$db = Factory::getDbo();
 
 		// Get extension ID of JEM
 		$query = $db->getQuery(true);
@@ -520,7 +434,7 @@ class com_jemInstallerScript
 	private function removeJemMenuItems()
 	{
 		// remove all "com_jem..." frontend entries
-		$db = JFactory::getDbo();
+		$db = Factory::getDbo();
 		$query = $db->getQuery(true);
 		$query->delete('#__menu');
 		$query->where(array('client_id = 0', 'link LIKE "index.php?option=com_jem%"'));
@@ -537,7 +451,7 @@ class com_jemInstallerScript
 	private function disableJemMenuItems()
 	{
 		// unpublish all "com_jem..." frontend entries
-		$db = JFactory::getDbo();
+		$db = Factory::getDbo();
 		$query = $db->getQuery(true);
 		$query->update('#__menu');
 		$query->set('published = 0');
@@ -555,7 +469,7 @@ class com_jemInstallerScript
 	private function fixJemMenuItems()
 	{
 		// Get (new) extension ID of JEM
-		$db = JFactory::getDbo();
+		$db = Factory::getDbo();
 		$query = $db->getQuery(true);
 		$query->select('extension_id')->from('#__extensions')->where(array("type='component'", "element='com_jem'"));
 		$db->setQuery($query);
@@ -676,14 +590,14 @@ class com_jemInstallerScript
 		);
 
 		foreach ($files as $file) {
-			if (JFile::exists(JPATH_ROOT . $file) && !JFile::delete(JPATH_ROOT . $file)) {
-				echo JText::sprintf('FILES_JOOMLA_ERROR_FILE_FOLDER', $file).'<br />';
+			if (File::exists(JPATH_ROOT . $file) && !File::delete(JPATH_ROOT . $file)) {
+				echo Text::sprintf('FILES_JOOMLA_ERROR_FILE_FOLDER', $file).'<br />';
 			}
 		}
 
 		foreach ($folders as $folder) {
-			if (JFolder::exists(JPATH_ROOT . $folder) && !JFolder::delete(JPATH_ROOT . $folder)) {
-				echo JText::sprintf('FILES_JOOMLA_ERROR_FILE_FOLDER', $folder).'<br />';
+			if (Folder::exists(JPATH_ROOT . $folder) && !Folder::delete(JPATH_ROOT . $folder)) {
+				echo Text::sprintf('FILES_JOOMLA_ERROR_FILE_FOLDER', $folder).'<br />';
 			}
 		}
 	}
@@ -696,11 +610,11 @@ class com_jemInstallerScript
 	 */
 	private function makeFilesWritable()
 	{
-		$path = JPath::clean(JPATH_ROOT.'/media/com_jem/css');
-		$files = JFolder::files($path, '.*\.css', false, true); // all css files, full path
+		$path = Path::clean(JPATH_ROOT.'/media/com_jem/css');
+		$files = Folder::files($path, '.*\.css', false, true); // all css files, full path
 		foreach ($files as $fullpath) {
 			if (is_file($fullpath)) {
-				JPath::setPermissions($fullpath);
+				Path::setPermissions($fullpath);
 			}
 		}
 	}
@@ -714,7 +628,7 @@ class com_jemInstallerScript
 	private function updateJemMenuItems195()
 	{
 		// get all "com_jem..." frontend entries
-		$db = JFactory::getDbo();
+		$db = Factory::getDbo();
 		$query = $db->getQuery(true);
 		$query->select('id, link, params');
 		$query->from('#__menu');
@@ -725,7 +639,7 @@ class com_jemInstallerScript
 
 		foreach ($items as $item) {
 			// Decode the item params
-			$reg = new JRegistry;
+			$reg = new Registry();
 			$reg->loadString($item->params);
 
 			// get view
@@ -832,7 +746,7 @@ class com_jemInstallerScript
 	private function updateJemModules195()
 	{
 		// get all "mod_jem..." entries
-		$db = JFactory::getDbo();
+		$db = Factory::getDbo();
 		$query = $db->getQuery(true);
 		$query->select('id, module, params');
 		$query->from('#__modules');
@@ -843,7 +757,7 @@ class com_jemInstallerScript
 
 		foreach ($items as $item) {
 			// Decode the item params
-			$reg = new JRegistry;
+			$reg = new Registry();
 			$reg->loadString($item->params);
 
 			$modified = false;
@@ -900,7 +814,7 @@ class com_jemInstallerScript
 	private function updateJemMenuItems196()
 	{
 		// get all "com_jem..." frontend entries
-		$db = JFactory::getDbo();
+		$db = Factory::getDbo();
 		$query = $db->getQuery(true);
 		$query->select('id, link, params');
 		$query->from('#__menu');
@@ -911,7 +825,7 @@ class com_jemInstallerScript
 		foreach ($items as $item) {
 			$link = $item->link;
 			// Decode the item params
-			$reg = new JRegistry;
+			$reg = new Registry();
 			$reg->loadString($item->params);
 
 			// get view
@@ -950,7 +864,7 @@ class com_jemInstallerScript
 						break;
 					}
 				}
-				$reg = new JRegistry;
+				$reg = new Registry();
 				$reg->loadArray($params);
 				break;
 
@@ -971,7 +885,7 @@ class com_jemInstallerScript
 							break;
 						}
 					}
-					$reg = new JRegistry;
+					$reg = new Registry();
 					$reg->loadArray($params);
 				}
 				break;
@@ -997,7 +911,7 @@ class com_jemInstallerScript
 	private function updateJemMenuItems197()
 	{
 		// get all "com_jem..." frontend entries
-		$db = JFactory::getDbo();
+		$db = Factory::getDbo();
 		$query = $db->getQuery(true);
 		$query->select('id, link, params');
 		$query->from('#__menu');
@@ -1033,7 +947,7 @@ class com_jemInstallerScript
 	private function updateJemMenuItems198()
 	{
 		// get all "com_jem..." frontend entries
-		$db = JFactory::getDbo();
+		$db = Factory::getDbo();
 		$query = $db->getQuery(true);
 		$query->select('id, link, params');
 		$query->from('#__menu');
@@ -1044,7 +958,7 @@ class com_jemInstallerScript
 		foreach ($items as $item) {
 			$link = $item->link;
 			// Decode the item params
-			$reg = new JRegistry;
+			$reg = new Registry();
 			$reg->loadString($item->params);
 
 			// get view
@@ -1069,7 +983,7 @@ class com_jemInstallerScript
 							break;
 						}
 					}
-					$reg = new JRegistry;
+					$reg = new Registry();
 					$reg->loadArray($params);
 				}
 				break;
@@ -1094,7 +1008,7 @@ class com_jemInstallerScript
 	private function removeUpdateServerEntry()
 	{
 		// Find entry and get id
-		$db = JFactory::getDbo();
+		$db = Factory::getDbo();
 		$query = $db->getQuery(true);
 		$query->select('update_site_id');
 		$query->from('#__update_sites');
@@ -1128,7 +1042,7 @@ class com_jemInstallerScript
 	private function updateJemSettings2142()
 	{
 		// get all "mod_jem..." entries
-		$db = JFactory::getDbo();
+		$db = Factory::getDbo();
 		$query = $db->getQuery(true);
 		$query->select('attachments_types')
 		      ->from('#__jem_settings')
@@ -1164,7 +1078,7 @@ class com_jemInstallerScript
 	 */
 	private function updateJemSettings216($onInstall = false)
 	{
-		$db = JFactory::getDbo();
+		$db = Factory::getDbo();
 
 		// load data from old #__jem_settings
 		try {
@@ -1181,7 +1095,7 @@ class com_jemInstallerScript
 
 		// Special: swap showtime <-> globalattribs.global_show_timedetails
 		if (!empty($old_data->globalattribs) && isset($old_data->showtime)) {
-			$registry = new JRegistry;
+			$registry = new Registry();
 			$registry->loadString($old_data->globalattribs);
 			$showtime = $old_data->showtime;
 			$old_data->showtime = $registry->get('global_show_timedetails', $showtime);
@@ -1190,8 +1104,8 @@ class com_jemInstallerScript
 		}
 
 		if (empty($old_data)) {
-			echo "<li><span style='color:red;'>".JText::_('COM_JEM_INSTALL_ERROR').":</span> ".
-			          JText::_('COM_JEM_INSTALL_SETTINGS_NOT_FOUND')."</li>";
+			echo "<li><span style='color:red;'>".Text::_('COM_JEM_INSTALL_ERROR').":</span> ".
+			          Text::_('COM_JEM_INSTALL_SETTINGS_NOT_FOUND')."</li>";
 		} else {
 			// save to new #__jem_config table ignoring obsolete fields
 			$old_data = get_object_vars($old_data);
@@ -1240,8 +1154,8 @@ class com_jemInstallerScript
 			}
 
 			if ($oops) {
-				echo "<li><span style='color:red;'>".JText::_('COM_JEM_INSTALL_ERROR').":</span> ".
-				          JText::_('COM_JEM_INSTALL_CONFIG_NOT_STORED')."</li>";
+				echo "<li><span style='color:red;'>".Text::_('COM_JEM_INSTALL_ERROR').":</span> ".
+				          Text::_('COM_JEM_INSTALL_CONFIG_NOT_STORED')."</li>";
 			} else {
 				// remove old #__jem_settings table
 				try {
@@ -1261,7 +1175,7 @@ class com_jemInstallerScript
 	 */
 	private function updateJemEvents217()
 	{
-		$db = JFactory::getDbo();
+		$db = Factory::getDbo();
 		$query = $db->getQuery(true);
 		$query->update('#__jem_events')
 		      ->set('registra = 3')
@@ -1279,7 +1193,7 @@ class com_jemInstallerScript
 	 */
 	private function removeAllJemTables()
 	{
-		$db = JFactory::getDbo();
+		$db = Factory::getDbo();
 		$tables = array('#__jem_attachments',
 		                '#__jem_categories',
 		                '#__jem_cats_event_relations',
