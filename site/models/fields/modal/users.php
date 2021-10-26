@@ -11,6 +11,7 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Factory;
 
 jimport('joomla.form.formfield');
 
@@ -43,7 +44,7 @@ class JFormFieldModal_Users extends JFormField
 		$script[] = '    }';
 
 		// Add to document head
-		JFactory::getDocument()->addScriptDeclaration(implode("\n", $script));
+		Factory::getDocument()->addScriptDeclaration(implode("\n", $script));
 
 		// Setup variables for display
 		$html = array();
@@ -58,7 +59,7 @@ class JFormFieldModal_Users extends JFormField
 		$idlist = implode(',', $ids);
 
 		if (!empty($idlist)) {
-			$db = JFactory::getDbo();
+			$db = Factory::getDbo();
 			$query = $db->getQuery(true);
 			$query->select('COUNT(id)');
 			$query->from('#__users');

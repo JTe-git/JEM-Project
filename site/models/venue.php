@@ -9,6 +9,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\Factory;
 
 require_once dirname(__FILE__) . '/eventslist.php';
 
@@ -27,7 +28,7 @@ class JemModelVenue extends JemModelEventslist
 
 	public function __construct()
 	{
-		$app    = JFactory::getApplication();
+		$app    = Factory::getApplication();
 		$jinput = $app->input;
 		$params = $app->getParams();
 
@@ -47,7 +48,7 @@ class JemModelVenue extends JemModelEventslist
 	 */
 	protected function populateState($ordering = null, $direction = null)
 	{
-		$app         = JFactory::getApplication();
+		$app         = Factory::getApplication();
 		$jemsettings = JemHelper::config();
 		$params      = $app->getParams();
 		$jinput      = $app->input;
@@ -179,7 +180,7 @@ class JemModelVenue extends JemModelEventslist
 	{
 		$user   = JemFactory::getUser();
 
-		$db     = JFactory::getDbo();
+		$db     = Factory::getDbo();
 		$query  = $db->getQuery(true);
 
 		$query->select('id, venue, published, city, state, url, street, custom1, custom2, custom3, custom4, custom5, '.

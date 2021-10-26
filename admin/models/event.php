@@ -9,6 +9,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\Factory;
 
 require_once dirname(__FILE__) . '/admin.php';
 
@@ -127,7 +128,7 @@ class JemModelEvent extends JemModelAdmin
 
 			$item->articletext = trim($item->fulltext) != '' ? $item->introtext . "<hr id=\"system-readmore\" />" . $item->fulltext : $item->introtext;
 
-			$db = JFactory::getDbo();
+			$db = Factory::getDbo();
 
 			$query = $db->getQuery(true);
 			$query->select(array('count(id)'));
@@ -175,7 +176,7 @@ class JemModelEvent extends JemModelAdmin
 	protected function loadFormData()
 	{
 		// Check the session for previously entered form data.
-		$data = JFactory::getApplication()->getUserState('com_jem.edit.event.data', array());
+		$data = Factory::getApplication()->getUserState('com_jem.edit.event.data', array());
 
 		if (empty($data)){
 			$data = $this->getItem();
@@ -191,7 +192,7 @@ class JemModelEvent extends JemModelAdmin
 	 */
 	protected function _prepareTable($table)
 	{
-		$jinput = JFactory::getApplication()->input;
+		$jinput = Factory::getApplication()->input;
 
 		$db = $this->getDbo();
 		$table->title = htmlspecialchars_decode($table->title, ENT_QUOTES);
@@ -240,7 +241,7 @@ class JemModelEvent extends JemModelAdmin
 	public function save($data)
 	{
 		// Variables
-		$app         = JFactory::getApplication();
+		$app         = Factory::getApplication();
 		$jinput      = $app->input;
 		$jemsettings = JemHelper::config();
 		$table       = $this->getTable();
@@ -269,13 +270,13 @@ class JemModelEvent extends JemModelAdmin
 		}
 
 		// convert international date formats...
-		$nullDate = JFactory::getDbo()->getNullDate();
+		$nullDate = Factory::getDbo()->getNullDate();
 		if (!empty($data['dates']) && ($data['dates'] != $nullDate)) {
-			$d = JFactory::getDate($data['dates'], 'UTC');
+			$d = Factory::getDate($data['dates'], 'UTC');
 			$data['dates'] = $d->format('Y-m-d', true, false);
 		}
 		if (!empty($data['enddates']) && ($data['enddates'] != $nullDate)) {
-			$d = JFactory::getDate($data['enddates'], 'UTC');
+			$d = Factory::getDate($data['enddates'], 'UTC');
 			$data['enddates'] = $d->format('Y-m-d', true, false);
 		}
 
@@ -300,7 +301,7 @@ class JemModelEvent extends JemModelAdmin
 			$data['recurrence_byday']  = $recurrencebyday;
 
 			if (!empty($data['recurrence_limit_date']) && ($data['recurrence_limit_date'] != $nullDate)) {
-				$d = JFactory::getDate($data['recurrence_limit_date'], 'UTC');
+				$d = Factory::getDate($data['recurrence_limit_date'], 'UTC');
 				$data['recurrence_limit_date'] = $d->format('Y-m-d', true, false);
 			}
 		}
@@ -556,7 +557,7 @@ class JemModelEvent extends JemModelAdmin
 			}
 		}
 
-		$cache = JFactory::getCache('com_jem');
+		$cache = Factory::getCache('com_jem');
 		$cache->clean();
 
 		return true;

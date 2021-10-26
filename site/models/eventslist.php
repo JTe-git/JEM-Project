@@ -1,13 +1,15 @@
 <?php
 /**
- * @version 2.3.1
+ * @version 4.0.0
  * @package JEM
- * @copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright (C) 2005-2009 Christoph Lukes
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 
 defined('_JEXEC') or die;
+
+use Joomla\CMS\Factory;
 
 jimport('joomla.application.component.modellist');
 // ensure JemFactory is loaded (because model is used by modules too)
@@ -57,7 +59,7 @@ class JemModelEventslist extends JModelList
 	 */
 	protected function populateState($ordering = null, $direction = null)
 	{
-		$app         = JFactory::getApplication();
+		$app         = Factory::getApplication();
 		$jemsettings = JemHelper::config();
 		$task        = $app->input->getCmd('task','');
 		$format      = $app->input->getCmd('format',false);
@@ -213,7 +215,7 @@ class JemModelEventslist extends JModelList
 	 */
 	protected function getListQuery()
 	{
-		$app       = JFactory::getApplication();
+		$app       = Factory::getApplication();
 		$task      = $app->input->getCmd('task', '');
 		$itemid    = $app->input->getInt('id', 0) . ':' . $app->input->getInt('Itemid', 0);
 
@@ -223,7 +225,7 @@ class JemModelEventslist extends JModelList
 		$levels    = $user->getAuthorisedViewLevels();
 
 		# Query
-		$db    = JFactory::getDBO();
+		$db    = Factory::getDBO();
 		$query = $db->getQuery(true);
 
 		# Event
@@ -541,7 +543,7 @@ class JemModelEventslist extends JModelList
 		$settings = JemHelper::globalattribs();
 
 		// Query
-		$db    = JFactory::getDBO();
+		$db    = Factory::getDBO();
 		$query = $db->getQuery(true);
 
 		$case_when_c  = ' CASE WHEN ';
@@ -746,7 +748,7 @@ class JemModelEventslist extends JModelList
 	 */
 	protected function _populatePublishState($task)
 	{
-		$app         = JFactory::getApplication();
+		$app         = Factory::getApplication();
 		$jemsettings = JemHelper::config();
 		$user        = JemFactory::getUser();
 		$userId      = $user->get('id');

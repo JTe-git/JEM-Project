@@ -1,9 +1,9 @@
 <?php
 /**
  * @package My Events
- * @version 2.1.7 for JEM v2.1 & CB v2.0
+ * @version 4.0.0 for JEM v2.1 & CB v2.0
  * @author JEM Community
- * @copyright (C) 2013-2016 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2
  *
  * Just a note:
@@ -13,6 +13,7 @@
 
 defined('_JEXEC') or die;
 
+use Joomla\CMS\Factory;
 
 @include_once (JPATH_SITE.'/components/com_jem/classes/image.class.php');
 @include_once (JPATH_SITE.'/components/com_jem/classes/Zebra_Image.php');
@@ -54,7 +55,7 @@ class jemmyeventsTab extends cbTabHandler {
 		global $_CB_framework;
 
 		/* need JEM's language file, e.g. for JEMOutput::formatDateTime() */
-		$lang = JFactory::getLanguage();
+		$lang = Factory::getLanguage();
 		$lang->load('com_jem', JPATH_BASE.'/components/com_jem');
 
 		$UElanguagePath = dirname(__FILE__);
@@ -104,7 +105,7 @@ class jemmyeventsTab extends cbTabHandler {
 		// Support Joomla access levels instead of single group id
 		// Note: $user is one which profile is requested, not the asking user!
 		//       $juser is the asking user which view access levels must be used.
-		$juser  = JFactory::getUser();
+		$juser  = Factory::getUser();
 		$levels = $juser->getAuthorisedViewLevels();
 
 		$myprofile = !$juser->guest && ($juser->get('id') == $userid); // true if both users are equal
@@ -178,7 +179,7 @@ class jemmyeventsTab extends cbTabHandler {
 		// Support Joomla access levels instead of single group id
 		// Note: $user is one which profile is requested, not the asking user!
 		//       $juser is the asking user which view access levels must be used.
-		$juser     = JFactory::getUser();
+		$juser     = Factory::getUser();
 		$levels    = $juser->getAuthorisedViewLevels();
 		$myprofile = !empty($user->id) && ($juser->get('id') == $user->id); // true if both users are equal
 

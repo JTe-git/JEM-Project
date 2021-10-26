@@ -10,6 +10,7 @@ defined('_JEXEC') or die();
 
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Factory;
 
 /**
  * View class for the Css-manager screen
@@ -31,10 +32,10 @@ class JemViewCssmanager extends JemAdminView
 			return false;
 		}
 
-		$app = JFactory::getApplication();
+		$app = Factory::getApplication();
 
 		// initialise variables
-		$document = JFactory::getDocument();
+		$document = Factory::getDocument();
 		$user = JemFactory::getUser();
 
 		// Load css

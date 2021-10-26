@@ -11,6 +11,7 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Factory;
 
 /**
  * View class for the JEM Help screen
@@ -27,10 +28,10 @@ class JemViewHelp extends JemAdminView
 		jimport('joomla.filesystem.folder');
 
 		//initialise variables
-		$lang = JFactory::getLanguage();
+		$lang = Factory::getLanguage();
 
 		//get vars
-		$helpsearch = JFactory::getApplication()->input->getString('filter_search', '');
+		$helpsearch = Factory::getApplication()->input->getString('filter_search', '');
 
 		// Load css
 		HTMLHelper::_('stylesheet', 'com_jem/backend.css', array(), true);
@@ -64,7 +65,7 @@ class JemViewHelp extends JemAdminView
 	 */
 	public function getHelpTOC($helpsearch)
 	{
-		$lang = JFactory::getLanguage();
+		$lang = Factory::getLanguage();
 		jimport('joomla.filesystem.folder');
 
 		// Check for files in the actual language

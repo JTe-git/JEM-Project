@@ -18,6 +18,7 @@ defined('_JEXEC') or die();
 
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Factory;
 
 # Ensure $use_ajax is defined and boolean
 $use_ajax = !empty($use_ajax);
@@ -126,7 +127,7 @@ if ($day_name_length) {
 }
 
 # Today
-$config    = JFactory::getConfig();
+$config    = Factory::getConfig();
 $tzoffset  = $config->get('config.offset');
 $time      = time() + (($tzoffset + $Time_offset) * 60 * 60); //25/2/08 Change for v 0.6 to incorporate server offset into time;
 $today     = date('j', $time);

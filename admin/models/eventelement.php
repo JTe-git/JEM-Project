@@ -1,12 +1,14 @@
 <?php
 /**
- * @version 2.3.1
+ * @version 4.0.0
  * @package JEM
- * @copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright (C) 2005-2009 Christoph Lukes
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 defined('_JEXEC') or die;
+
+use Joomla\CMS\Factory;
 
 jimport('joomla.application.component.model');
 
@@ -43,7 +45,7 @@ class JemModelEventelement extends JModelLegacy
 	{
 		parent::__construct();
 
-		$app = JFactory::getApplication();
+		$app = Factory::getApplication();
 
 		$limit      = $app->getUserStateFromRequest( 'com_jem.limit', 'limit', $app->getCfg('list_limit'), 'int');
 		$limitstart = $app->getUserStateFromRequest( 'com_jem.limitstart', 'limitstart', 0, 'int' );
@@ -151,7 +153,7 @@ class JemModelEventelement extends JModelLegacy
 	 */
 	protected function _buildContentOrderBy()
 	{
-		$app = JFactory::getApplication();
+		$app = Factory::getApplication();
 
 		$filter_order     = $app->getUserStateFromRequest( 'com_jem.eventelement.filter_order', 'filter_order', 'a.dates', 'cmd' );
 		$filter_order_Dir = $app->getUserStateFromRequest( 'com_jem.eventelement.filter_order_Dir', 'filter_order_Dir', '', 'word' );
@@ -172,7 +174,7 @@ class JemModelEventelement extends JModelLegacy
 	 */
 	protected function _buildContentWhere()
 	{
-		$app    = JFactory::getApplication();
+		$app    = Factory::getApplication();
 		$user   = JemFactory::getUser();
 		$levels = $user->getAuthorisedViewLevels();
 		$itemid = $app->input->getInt('id', 0) . ':' . $app->input->getInt('Itemid', 0);

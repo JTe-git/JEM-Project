@@ -1,13 +1,15 @@
 <?php
 /**
- * @version 2.3.1
+ * @version 4.0.0
  * @package JEM
- * @copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright (C) 2005-2009 Christoph Lukes
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 
 defined('_JEXEC') or die;
+
+use Joomla\CMS\Factory;
 
 /**
  * Model-Venueslist
@@ -24,7 +26,7 @@ class JemModelVenueslist extends JModelList
 	{
 		parent::__construct();
 
-		$app = JFactory::getApplication();
+		$app = Factory::getApplication();
 		$jemsettings = JEMHelper::config();
 
 		parent::__construct($config);
@@ -38,7 +40,7 @@ class JemModelVenueslist extends JModelList
 	 */
 	protected function populateState($ordering = null, $direction = null)
 	{
-		$app         = JFactory::getApplication();
+		$app         = Factory::getApplication();
 		$jemsettings = JemHelper::config();
 		$jinput      = $app->input;
 		$task        = $jinput->getCmd('task');
@@ -101,8 +103,8 @@ class JemModelVenueslist extends JModelList
 	 */
 	protected function getListQuery()
 	{
-		$app       = JFactory::getApplication();
-		$jinput    = JFactory::getApplication()->input;
+		$app       = Factory::getApplication();
+		$jinput    = Factory::getApplication()->input;
 		$task      = $jinput->getCmd('task', '');
 		$itemid    = $jinput->getInt('id', 0) . ':' . $jinput->getInt('Itemid', 0);
 	
@@ -111,7 +113,7 @@ class JemModelVenueslist extends JModelList
 		$user      = JemFactory::getUser();
 		
 		# Query
-		$db 	= JFactory::getDBO();
+		$db 	= Factory::getDBO();
 		$query = $db->getQuery(true);
 		
 		$case_when_l = ' CASE WHEN ';

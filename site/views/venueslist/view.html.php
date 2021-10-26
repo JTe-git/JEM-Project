@@ -10,6 +10,7 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Factory;
 
 /**
  * View: Venueslist
@@ -28,14 +29,14 @@ class JemViewVenueslist extends JViewLegacy
 		$pagination = $this->get('Pagination');
 		
 		// initialize variables
-		$app          = JFactory::getApplication();
-		$document     = JFactory::getDocument();
+		$app          = Factory::getApplication();
+		$document     = Factory::getDocument();
 		$jemsettings  = JemHelper::config();
 		$settings     = JemHelper::globalattribs();
 		$menu         = $app->getMenu();
 		$menuitem     = $menu->getActive();
 		$params       = $app->getParams();
-		$uri          = JFactory::getURI();
+		$uri          = Factory::getURI();
 		$user         = JemFactory::getUser();
 		$userId       = $user->get('id');
 		$pathway      = $app->getPathWay();

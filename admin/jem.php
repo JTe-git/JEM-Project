@@ -10,6 +10,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\Factory;
 
 // Access check.
 require_once (JPATH_COMPONENT_SITE.'/factory.php');
@@ -46,7 +47,7 @@ require_once (JPATH_COMPONENT.'/controller.php');
 $controller = JControllerLegacy::getInstance('Jem');
 
 // Perform the Request task
-$input = JFactory::getApplication()->input;
+$input = Factory::getApplication()->input;
 $controller->execute($input->getCmd('task'));
 
 // Redirect if set by the controller

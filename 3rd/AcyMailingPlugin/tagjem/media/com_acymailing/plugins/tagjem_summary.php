@@ -1,12 +1,14 @@
 <?php
 /**
- * Version 2.2.0
+ * Version 4.0.0
  * @copyright	Copyright (C) 2014 Thamesmog.
- * @copyright	Copyright (C) 2013 - 2017 joomlaeventmanager.net. All rights reserved.
+ * @copyright	Copyright (C) 2013 - 2022 joomlaeventmanager.net. All rights reserved.
  * @license		http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  * Based on Eventlist11 tag and JEM specific code by JEM Community
  */
 defined('_JEXEC') or die;
+
+use Joomla\CMS\Factory;
 
 include_once(ACYMAILING_ROOT.'components/com_jem/helpers/route.php');
 
@@ -51,7 +53,7 @@ $result .= '<h2><span itemprop="name">'.$event->title.'</span></h2></a>';
 //$result .= '<p>';
 //$contact = $event->conname;
 //$needle = 'index.php?option=com_contact&view=contact&id=' . $event->conid;
-//$menu = JFactory::getApplication()->getMenu();
+//$menu = Factory::getApplication()->getMenu();
 //$item = $menu->getItems('link', $needle, true);
 //$cntlink2 = !empty($item) ? $needle . '&Itemid=' . $item->id : $needle;
 //

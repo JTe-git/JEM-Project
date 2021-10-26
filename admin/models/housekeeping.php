@@ -10,6 +10,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\Factory;
 
 jimport('joomla.application.component.model');
 jimport('joomla.filesystem.folder');
@@ -93,7 +94,7 @@ class JemModelHousekeeping extends JModelLegacy
 	 */
 	public function cleanupCatsEventRelations()
 	{
-		$db = JFactory::getDbo();
+		$db = Factory::getDbo();
 
 		$db->setQuery('DELETE cat FROM #__jem_cats_event_relations as cat'
 				.' LEFT OUTER JOIN #__jem_events as e ON cat.itemid = e.id'
@@ -115,7 +116,7 @@ class JemModelHousekeeping extends JModelLegacy
 	{
 		$result = true;
 		$tables = array('attachments', 'categories', 'cats_event_relations', 'events', 'groupmembers', 'groups', 'register', 'venues');
-		$db = JFactory::getDbo();
+		$db = Factory::getDbo();
 
 		foreach ($tables as $table) {
 			$db->setQuery('TRUNCATE #__jem_'.$table);
@@ -141,7 +142,7 @@ class JemModelHousekeeping extends JModelLegacy
 	 */
 	public function getCountcats()
 	{
-		$db = JFactory::getDbo();
+		$db = Factory::getDbo();
 		$query = $db->getQuery(true);
 		$query->select(array('*'));
 		$query->from('#__jem_cats_event_relations');

@@ -10,6 +10,7 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Factory;
 
 /**
  * Weekcal-View
@@ -25,8 +26,8 @@ class JemViewWeekcal extends JemView
 		HTMLHelper::_('behavior.tooltip');
 
 		// initialize variables
-		$app          = JFactory::getApplication();
-		$document     = JFactory::getDocument();
+		$app          = Factory::getApplication();
+		$document     = Factory::getDocument();
 		$menu         = $app->getMenu();
 		$menuitem     = $menu->getActive();
 		$jemsettings  = JemHelper::config();

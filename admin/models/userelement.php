@@ -1,16 +1,17 @@
 <?php
 /**
- * @version 2.3.1
+ * @version 4.0.0
  * @package JEM
- * @copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright (C) 2005-2009 Christoph Lukes
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 
 defined('_JEXEC') or die;
 
-jimport('joomla.application.component.model');
+use Joomla\CMS\Factory;
 
+jimport('joomla.application.component.model');
 
 /**
  * Userelement-Model
@@ -46,7 +47,7 @@ class JemModelUserelement extends JModelLegacy
 	{
 		parent::__construct();
 
-		$app = JFactory::getApplication();
+		$app = Factory::getApplication();
 
 		$limit      = $app->getUserStateFromRequest( 'com_jem.limit', 'limit', $app->getCfg('list_limit'), 'int');
 		$limitstart = $app->getUserStateFromRequest( 'com_jem.limitstart', 'limitstart', 0, 'int' );
@@ -77,7 +78,7 @@ class JemModelUserelement extends JModelLegacy
 	 */
 	protected function buildQuery()
 	{
-		$app              = JFactory::getApplication();
+		$app              = Factory::getApplication();
 		$jemsettings      = JemHelper::config();
 
 		$filter_order     = $app->getUserStateFromRequest( 'com_jem.userelement.filter_order', 'filter_order', 'u.name', 'cmd' );
@@ -90,7 +91,7 @@ class JemModelUserelement extends JModelLegacy
 		$search           = $this->_db->escape( trim(\Joomla\String\StringHelper::strtolower( $search ) ) );
 
 		// start query
-		$db = JFactory::getDBO();
+		$db = Factory::getDBO();
 		$query = $db->getQuery(true);
 		$query->select(array('u.id', 'u.name', 'u.username', 'u.email'));
 		$query->from('#__users as u');
@@ -125,7 +126,7 @@ class JemModelUserelement extends JModelLegacy
 	 */
 	public function getPagination()
 	{
-		$app         = JFactory::getApplication();
+		$app         = Factory::getApplication();
 		$jemsettings = JemHelper::config();
 
 		$limit       = $app->getUserStateFromRequest('com_jem.userelement.limit', 'limit', $jemsettings->display_num, 'int');

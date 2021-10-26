@@ -9,6 +9,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\Factory;
 
 jimport('joomla.filesystem.folder');
 jimport('joomla.filesystem.file');
@@ -133,7 +134,7 @@ class JemModelCssmanager extends JModelLegacy
 	 */
 	protected function populateState()
 	{
-		$app = JFactory::getApplication('administrator');
+		$app = Factory::getApplication('administrator');
 
 		// Load the parameters.
 		$params = JComponentHelper::getParams('com_jem');
@@ -164,7 +165,7 @@ class JemModelCssmanager extends JModelLegacy
 	public function setStatusLinenumber($status)
 	{
 		// read the existing component value(s)
-		$db = JFactory::getDbo();
+		$db = Factory::getDbo();
 		$query = $db->getQuery(true);
 		$query->select('params')
 		      ->from('#__extensions')

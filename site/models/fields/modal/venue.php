@@ -11,6 +11,7 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Factory;
 
 jimport('joomla.form.formfield');
 
@@ -43,13 +44,13 @@ class JFormFieldModal_Venue extends JFormField
 		$script[] = '    }';
 
 		// Add to document head
-		JFactory::getDocument()->addScriptDeclaration(implode("\n", $script));
+		Factory::getDocument()->addScriptDeclaration(implode("\n", $script));
 
 		// Setup variables for display
 		$html = array();
 		$link = 'index.php?option=com_jem&amp;view=editevent&amp;layout=choosevenue&amp;tmpl=component&amp;function=jSelectVenue_'.$this->id;
 
-		$db = JFactory::getDbo();
+		$db = Factory::getDbo();
 		$query = $db->getQuery(true);
 		$query->select('venue');
 		$query->from('#__jem_venues');

@@ -12,6 +12,8 @@
  **/
 defined ( '_JEXEC' ) or die ();
 
+use Joomla\CMS\Factory;
+
 /**
  * JEM package installer script.
  */
@@ -83,7 +85,7 @@ class Pkg_JemInstallerScript
 	public function postflight($type, $parent) {
 		// Clear Joomla system cache.
 		/** @var JCache|JCacheController $cache */
-		$cache = JFactory::getCache();
+		$cache = Factory::getCache();
 		$cache->clean('_system');
 
 		// Remove all compiled files from APC cache.
@@ -124,7 +126,7 @@ class Pkg_JemInstallerScript
 	}
 
 	public function checkRequirements($version) {
-		$db = JFactory::getDbo();
+		$db = Factory::getDbo();
 		$pass  = $this->checkVersion('PHP', phpversion());
 		$pass &= $this->checkVersion('Joomla!', JVERSION);
 		$pass &= $this->checkVersion('MySQL', $db->getVersion ());
@@ -137,7 +139,7 @@ class Pkg_JemInstallerScript
 	// Internal functions
 
 	protected function checkVersion($name, $version) {
-		$app = JFactory::getApplication();
+		$app = Factory::getApplication();
 
 		$major = $minor = 0;
 		foreach ($this->versions[$name] as $major=>$minor) {
@@ -156,7 +158,7 @@ class Pkg_JemInstallerScript
 	}
 
 	protected function checkDbo($name, $types) {
-		$app = JFactory::getApplication();
+		$app = Factory::getApplication();
 
 		if (in_array($name, $types)) {
 			return true;
@@ -166,7 +168,7 @@ class Pkg_JemInstallerScript
 	}
 
 	protected function checkExtensions($extensions) {
-		$app = JFactory::getApplication();
+		$app = Factory::getApplication();
 
 		$pass = 1;
 		foreach ($extensions as $name) {
@@ -179,7 +181,7 @@ class Pkg_JemInstallerScript
 	}
 
 	protected function checkMagicQuotes() {
-		$app = JFactory::getApplication();
+		$app = Factory::getApplication();
 
 		// Abort if Magic Quotes are enabled, it was removed from phpversion 5.4
 		if (version_compare(phpversion(), '5.4', '<')) {

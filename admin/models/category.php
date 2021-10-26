@@ -9,6 +9,7 @@
 defined('_JEXEC') or die();
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\Factory;
 
 jimport('joomla.application.component.modeladmin');
 
@@ -77,7 +78,7 @@ class JemModelCategory extends JModelAdmin
 	 */
 	protected function populateState()
 	{
-		$app = JFactory::getApplication('administrator');
+		$app = Factory::getApplication('administrator');
 
 		$parentId = $app->input->getInt('parent_id', 0);
 		$this->setState('category.parent_id', $parentId);
@@ -130,7 +131,7 @@ class JemModelCategory extends JModelAdmin
 			// Convert the created and modified dates to local user time for
 			// display in the form.
 			jimport('joomla.utilities.date');
-			$tz = new DateTimeZone(JFactory::getApplication()->getCfg('offset'));
+			$tz = new DateTimeZone(Factory::getApplication()->getCfg('offset'));
 
 			if (intval($result->created_time)) {
 				$date = new JDate($result->created_time);
@@ -198,7 +199,7 @@ class JemModelCategory extends JModelAdmin
 	protected function loadFormData()
 	{
 		// Check the session for previously entered form data.
-		$data = JFactory::getApplication()->getUserState('com_jem.edit.category.data', array());
+		$data = Factory::getApplication()->getUserState('com_jem.edit.category.data', array());
 
 		if (empty($data)) {
 			$data = $this->getItem();
@@ -221,7 +222,7 @@ class JemModelCategory extends JModelAdmin
 		// Initialise variables;
 		$dispatcher = JemFactory::getDispatcher();
 		$table = $this->getTable();
-		$jinput = JFactory::getApplication()->input;
+		$jinput = Factory::getApplication()->input;
 
 		$pk = (!empty($data['id'])) ? $data['id'] : (int) $this->getState($this->getName() . '.id');
 		$isNew = true;
@@ -329,7 +330,7 @@ class JemModelCategory extends JModelAdmin
 		if (parent::publish($pks, $value)) {
 			// Initialise variables.
 			$dispatcher = JemFactory::getDispatcher();
-			$extension = JFactory::getApplication()->input->getCmd('extension', '');
+			$extension = Factory::getApplication()->input->getCmd('extension', '');
 
 			// Include the content plugins for the change of category state
 			// event.
@@ -407,7 +408,7 @@ class JemModelCategory extends JModelAdmin
 		$table = $this->getTable();
 		$db = $this->getDbo();
 		$user = JemFactory::getUser();
-		$extension = JFactory::getApplication()->input->get('extension', '', 'word');
+		$extension = Factory::getApplication()->input->get('extension', '', 'word');
 		$i = 0;
 
 		// Check that the parent exists
@@ -577,7 +578,7 @@ class JemModelCategory extends JModelAdmin
 		$db = $this->getDbo();
 		$query = $db->getQuery(true);
 		$user = JemFactory::getUser();
-		$extension = JFactory::getApplication()->input->get('extension', '', 'word');
+		$extension = Factory::getApplication()->input->get('extension', '', 'word');
 
 		// Check that the parent exists.
 		if ($parentId) {
@@ -685,7 +686,7 @@ class JemModelCategory extends JModelAdmin
 	 */
 	protected function cleanCache($group = null, $client_id = 0)
 	{
-		$extension = JFactory::getApplication()->input->getCmd('extension', '');
+		$extension = Factory::getApplication()->input->getCmd('extension', '');
 		switch ($extension)
 		{
 			case 'com_content':

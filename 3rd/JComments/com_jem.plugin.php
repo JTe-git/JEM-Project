@@ -2,9 +2,9 @@
 /**
  * JComments plugin for JEM
  * 
- * @version 2.1.0
+ * @version 4.0.0
  * @package JEM
- * @copyright (C) 2013-2015 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * 
  * @author Sergey M. Litvinov (smart@joomlatune.ru)
  * @copyright (C) 2006-2013 by Sergey M. Litvinov (http://www.joomlatune.ru)
@@ -13,18 +13,20 @@
 
 defined('_JEXEC') or die;
 
+use Joomla\CMS\Factory;
+
 class jc_com_jem extends JCommentsPlugin
 {
 	function getObjectTitle($id)
 	{
-		$db = JFactory::getDbo();
+		$db = Factory::getDbo();
 		$db->setQuery( 'SELECT title, id FROM #__jem_events WHERE id = ' . $id );
 		return $db->loadResult();
 	}
 
 	function getObjectLink($id)
 	{
-		$db = JFactory::getDBO();
+		$db = Factory::getDBO();
 
 		$query = 'SELECT a.id, CASE WHEN CHAR_LENGTH(a.alias) THEN CONCAT_WS(\':\', a.id, a.alias) ELSE a.id END as slug'
 			. ' FROM #__jem_events AS a'
@@ -46,7 +48,7 @@ class jc_com_jem extends JCommentsPlugin
 
 	function getObjectOwner($id) {
 
-		$db = JFactory::getDbo();
+		$db = Factory::getDbo();
 		$db->setQuery( 'SELECT created_by, id FROM #__jem_events WHERE id = ' . $id );
 		$userid = $db->loadResult();
 

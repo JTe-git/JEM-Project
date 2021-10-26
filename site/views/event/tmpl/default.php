@@ -10,6 +10,7 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Factory;
 
 HTMLHelper::addIncludePath(JPATH_COMPONENT . '/helpers');
 
@@ -19,7 +20,7 @@ $images      = json_decode($this->item->datimage);
 $attribs     = json_decode($this->item->attribs);
 $user        = JemFactory::getUser();
 $jemsettings = JemHelper::config();
-$document    = JFactory::getDocument();
+$document    = Factory::getDocument();
 
 // Add expiration date, if old events will be archived or removed
 if ($jemsettings->oldevent > 0) {
@@ -140,7 +141,7 @@ HTMLHelper::_('behavior.modal', 'a.flyermodal');
 			<?php $author = $this->item->created_by_alias ? $this->item->created_by_alias : $this->item->author; ?>
 			<?php if (!empty($this->item->contactid2) && $params->get('event_link_author') == true) :
 				$needle = 'index.php?option=com_contact&view=contact&id=' . $this->item->contactid2;
-				$menu = JFactory::getApplication()->getMenu();
+				$menu = Factory::getApplication()->getMenu();
 				$item = $menu->getItems('link', $needle, true);
 				$cntlink = !empty($item) ? $needle . '&Itemid=' . $item->id : $needle;
 				echo Text::sprintf('COM_JEM_EVENT_CREATED_BY', HTMLHelper::_('link', JRoute::_($cntlink), $author));
@@ -216,7 +217,7 @@ HTMLHelper::_('behavior.modal', 'a.flyermodal');
 		$contact = $this->item->conname;
 		if ($params->get('event_link_contact') == true) :
 			$needle = 'index.php?option=com_contact&view=contact&id=' . $this->item->conid;
-			$menu = JFactory::getApplication()->getMenu();
+			$menu = Factory::getApplication()->getMenu();
 			$item = $menu->getItems('link', $needle, true);
 			$cntlink2 = !empty($item) ? $needle . '&Itemid=' . $item->id : $needle;
 			echo Text::sprintf('COM_JEM_EVENT_CONTACT', HTMLHelper::_('link', JRoute::_($cntlink2), $contact));

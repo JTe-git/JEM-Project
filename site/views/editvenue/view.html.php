@@ -10,6 +10,7 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Factory;
 
 /**
  * Editvenue-View
@@ -29,16 +30,16 @@ class JemViewEditvenue extends JemView
 		// Initialise variables.
 		$jemsettings = JemHelper::config();
 		$settings    = JemHelper::globalattribs();
-		$app         = JFactory::getApplication();
+		$app         = Factory::getApplication();
 		$user        = JemFactory::getUser();
-		$document    = JFactory::getDocument();
+		$document    = Factory::getDocument();
 		$model       = $this->getModel();
 		$menu        = $app->getMenu();
 		$menuitem    = $menu->getActive();
 		$pathway     = $app->getPathway();
 		$url         = JUri::root();
 
-		$language    = JFactory::getLanguage();
+		$language    = Factory::getLanguage();
 		$language    = $language->getTag();
 		$language    = substr($language, 0,2);
 
@@ -205,7 +206,7 @@ class JemViewEditvenue extends JemView
 	 */
 	protected function _prepareDocument()
 	{
-		$app = JFactory::getApplication();
+		$app = Factory::getApplication();
 
 		$title = $this->params->get('page_title');
 		if ($app->getCfg('sitename_pagetitles', 0) == 1) {

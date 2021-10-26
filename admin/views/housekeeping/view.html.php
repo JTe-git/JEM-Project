@@ -10,6 +10,7 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Factory;
 
 /**
  * Housekeeping-View
@@ -19,7 +20,7 @@ class JemViewHousekeeping extends JemAdminView
 
 	public function display($tpl = null) {
 
-		$app = JFactory::getApplication();
+		$app = Factory::getApplication();
 
 		$this->totalcats = $this->get('Countcats');
 

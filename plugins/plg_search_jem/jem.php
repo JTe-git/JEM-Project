@@ -11,11 +11,10 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\Factory;
 
 jimport('joomla.plugin.plugin');
 jimport('joomla.html.parameter');
-
-
 
 
 class plgSearchJEM extends JPlugin
@@ -63,11 +62,11 @@ class plgSearchJEM extends JPlugin
 			return array(); // we need jem please
 		}
 
-		$db     = JFactory::getDBO();
-		$app    = JFactory::getApplication();
+		$db     = Factory::getDBO();
+		$app    = Factory::getApplication();
 		$user   = JemFactory::getUser();
 		$groups = implode(',', $user->getAuthorisedViewLevels());
-		$tag    = JFactory::getLanguage()->getTag();
+		$tag    = Factory::getLanguage()->getTag();
 
 		require_once(JPATH_SITE.'/components/com_jem/helpers/route.php');
 

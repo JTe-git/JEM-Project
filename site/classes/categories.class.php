@@ -11,6 +11,7 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Factory;
 
 // ensure JemFactory is loaded (because this class is used by modules or plugins too)
 require_once(JPATH_SITE.'/components/com_jem/factory.php');
@@ -136,8 +137,8 @@ class JemCategories
 	 */
 	protected function _load($id)
 	{
-		$db = JFactory::getDbo();
-		$app = JFactory::getApplication();
+		$db = Factory::getDbo();
+		$app = Factory::getApplication();
 		$user = JemFactory::getUser();
 		$levels = $user->getAuthorisedViewLevels();
 
@@ -355,13 +356,13 @@ class JemCategories
 		$user      = JemFactory::getUser();
 		$userid    = (int)$user->get('id');
 		$levels    = $user->getAuthorisedViewLevels();
-		$app       = JFactory::getApplication();
+		$app       = Factory::getApplication();
 		$params    = $app->getParams();
 		$catswitch = $params->get('categoryswitch', '0');
 		$settings  = JemHelper::globalattribs();
 
 		// Query
-		$db    = JFactory::getDBO();
+		$db    = Factory::getDBO();
 		$query = $db->getQuery(true);
 
 		$case_when_c  = ' CASE WHEN ';
@@ -429,7 +430,7 @@ class JemCategories
 
 	public function getPath()
 	{
-		$db = JFactory::getDBO();
+		$db = Factory::getDBO();
 		$parentcats = array();
 		$cid = $this->id;
 		$user = JemFactory::getUser();
@@ -479,12 +480,12 @@ class JemCategories
 	 */
 	static protected function buildParentCats($cid)
 	{
-		$db         = JFactory::getDBO();
+		$db         = Factory::getDBO();
 		$parentcats = array();
 		$user       = JemFactory::getUser();
 		$userid     = (int)$user->get('id');
 		$levels     = $user->getAuthorisedViewLevels();
-		$app        = JFactory::getApplication();
+		$app        = Factory::getApplication();
 
 		// start with parent
 		$query = 'SELECT parent_id FROM #__jem_categories WHERE id = ' . (int) $cid;
@@ -578,7 +579,7 @@ class JemCategories
 	 */
 	static public function getCategoriesTree($published = false)
 	{
-		$db = JFactory::getDBO();
+		$db = Factory::getDBO();
 		$user = JemFactory::getUser();
 		$levels = $user->getAuthorisedViewLevels();
 		$state = array(0,1);
@@ -722,7 +723,7 @@ class JemCategories
 	 */
 	static public function getChilds($id)
 	{
-		$db = JFactory::getDBO();
+		$db = Factory::getDBO();
 		$user = JemFactory::getUser();
 		$levels = $user->getAuthorisedViewLevels();
 		$query = ' SELECT id, parent_id ' . ' FROM #__jem_categories ' . ' WHERE published = 1 AND access IN ('.implode(',', $levels).')';
@@ -1195,10 +1196,10 @@ class JemCategoryNode extends JObject
 	{
 		if ($modified_user)
 		{
-			return JFactory::getUser($this->modified_user_id);
+			return Factory::getUser($this->modified_user_id);
 		}
 
-		return JFactory::getUser($this->created_user_id);
+		return Factory::getUser($this->created_user_id);
 	}
 
 	/**

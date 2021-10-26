@@ -10,6 +10,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\Factory;
 
 /**
  * Source view
@@ -52,7 +53,7 @@ class JemViewSource extends JemAdminView
 	 */
 	protected function addToolbar()
 	{
-		JFactory::getApplication()->input->set('hidemainmenu', true);
+		Factory::getApplication()->input->set('hidemainmenu', true);
 
 		$user  = JemFactory::getUser();
 		$canDo = JemHelperBackend::getActions(0);

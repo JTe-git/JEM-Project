@@ -10,6 +10,7 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Factory;
 
 // ensure JemFactory is loaded (because this class is used by modules or plugins too)
 require_once(JPATH_SITE.'/components/com_jem/factory.php');
@@ -26,7 +27,7 @@ class JemOutput
 	 */
 	static public function footer()
 	{
-		$app = JFactory::getApplication();
+		$app = Factory::getApplication();
 
 		if ($app->input->get('print','','int')) {
 			return;
@@ -156,8 +157,8 @@ class JemOutput
 			$settings  = JemHelper::globalattribs();
 			$settings2 = JemHelper::config();
 
-			$uri = JFactory::getURI();
-			$app = JFactory::getApplication();
+			$uri = Factory::getURI();
+			$app = Factory::getApplication();
 
 			if ($app->input->get('print','','int')) {
 				return;
@@ -192,9 +193,9 @@ class JemOutput
 	static public function addvenuebutton($addvenuelink, $params, $settings2)
 	{
 		if ($addvenuelink) {
-			$app      = JFactory::getApplication();
+			$app      = Factory::getApplication();
 			$settings = JemHelper::globalattribs();
-			$uri      = JFactory::getURI();
+			$uri      = Factory::getURI();
 
 			if ($app->input->get('print','','int')) {
 				return;
@@ -230,9 +231,9 @@ class JemOutput
 	static public function addusersbutton($adduserslink, $eventid)
 	{
 		if ($adduserslink) {
-			$app      = JFactory::getApplication();
+			$app      = Factory::getApplication();
 			$settings = JemHelper::globalattribs();
-			$uri      = JFactory::getURI();
+			$uri      = Factory::getURI();
 
 			if ($app->input->get('print','','int')) {
 				return;
@@ -265,7 +266,7 @@ class JemOutput
 	 **/
 	static public function removebutton($text, $attributes = array())
 	{
-		$app      = JFactory::getApplication();
+		$app      = Factory::getApplication();
 
 		$output = HTMLHelper::_('jemhtml.icon', 'com_jem/publish_r.png', 'fa fa-lg fa-times-circle jem-removebutton', $text, $attributes, !$app->isSite());
 
@@ -282,7 +283,7 @@ class JemOutput
 	 **/
 	static public function prepareAddEventButton($urlparams = '')
 	{
-		$uri = JFactory::getURI();
+		$uri = Factory::getURI();
 		$image = HTMLHelper::_('image', 'com_jem/icon-16-new.png', Text::_('COM_JEM_DELIVER_NEW_EVENT'), NULL, true);
 		$url   = 'index.php?option=com_jem&task=event.add&a_id=0&date={date}&return='.base64_encode($uri);
 		if (!empty($urlparams) && preg_match('/^[a-z]+=\w+$/i', $urlparams)) {
@@ -309,7 +310,7 @@ class JemOutput
 	{
 		$settings  = JemHelper::globalattribs();
 		$settings2 = JemHelper::config();
-		$app       = JFactory::getApplication();
+		$app       = Factory::getApplication();
 
 		if ($settings->get('global_show_archive_icon',1)) {
 			if ($app->input->get('print','','int')) {
@@ -378,7 +379,7 @@ class JemOutput
 	static public function editbutton($item, $params, $attribs, $allowedtoedit, $view)
 	{
 		if ($allowedtoedit) {
-			$app = JFactory::getApplication();
+			$app = Factory::getApplication();
 
 			if ($app->input->get('print','','int')) {
 				return;
@@ -392,7 +393,7 @@ class JemOutput
 			// Initialise variables.
 			$user   = JemFactory::getUser();
 			$userId = $user->get('id');
-			$uri    = JFactory::getURI();
+			$uri    = Factory::getURI();
 			$settings = JemHelper::globalattribs();
 
 			HTMLHelper::_('behavior.tooltip');
@@ -404,7 +405,7 @@ class JemOutput
 			{
 				case 'editevent':
 					if (property_exists($item, 'checked_out') && property_exists($item, 'checked_out_time') && $item->checked_out > 0 && $item->checked_out != $userId) {
-						$checkoutUser = JFactory::getUser($item->checked_out);
+						$checkoutUser = Factory::getUser($item->checked_out);
 						$button = HTMLHelper::_('image', 'system/checked_out.png', NULL, NULL, true);
 						$date = HTMLHelper::_('date', $item->checked_out_time);
 						return '<span ' . self::tooltip(Text::_('JLIB_HTML_CHECKED_OUT'), htmlspecialchars(Text::sprintf('COM_JEM_GLOBAL_CHECKED_OUT_BY', $checkoutUser->name) . ' <br /> ' . $date, ENT_COMPAT, 'UTF-8')) . '>' . $button . '</span>';
@@ -423,7 +424,7 @@ class JemOutput
 
 				case 'editvenue':
 					if (property_exists($item, 'vChecked_out') && property_exists($item, 'vChecked_out_time') && $item->vChecked_out > 0 && $item->vChecked_out != $userId) {
-						$checkoutUser = JFactory::getUser($item->vChecked_out);
+						$checkoutUser = Factory::getUser($item->vChecked_out);
 						$button = HTMLHelper::_('image', 'system/checked_out.png', NULL, NULL, true);
 						$date = HTMLHelper::_('date', $item->vChecked_out_time);
 						return '<span ' . self::tooltip(Text::_('JLIB_HTML_CHECKED_OUT'), htmlspecialchars(Text::sprintf('COM_JEM_GLOBAL_CHECKED_OUT_BY', $checkoutUser->name) . ' <br /> ' . $date, ENT_COMPAT, 'UTF-8')) . '>' . $button . '</span>';
@@ -442,7 +443,7 @@ class JemOutput
 
 				case 'venue':
 					if (property_exists($item, 'vChecked_out') && property_exists($item, 'vChecked_out_time') && $item->vChecked_out > 0 && $item->vChecked_out != $userId) {
-						$checkoutUser = JFactory::getUser($item->vChecked_out);
+						$checkoutUser = Factory::getUser($item->vChecked_out);
 						$button = HTMLHelper::_('image', 'system/checked_out.png', NULL, NULL, true);
 						$date = HTMLHelper::_('date', $item->vChecked_out_time);
 						return '<span ' . self::tooltip(Text::_('JLIB_HTML_CHECKED_OUT'), htmlspecialchars(Text::sprintf('COM_JEM_GLOBAL_CHECKED_OUT_BY', $checkoutUser->name) . ' <br /> ' . $date, ENT_COMPAT, 'UTF-8')) . '>' . $button . '</span>';
@@ -484,7 +485,7 @@ class JemOutput
 	static public function copybutton($item, $params, $attribs, $allowedtoadd, $view)
 	{
 		if ($allowedtoadd) {
-			$app = JFactory::getApplication();
+			$app = Factory::getApplication();
 
 			if ($app->input->get('print','','int')) {
 				return;
@@ -493,7 +494,7 @@ class JemOutput
 			// Initialise variables.
 			$user   = JemFactory::getUser();
 			$userId = $user->get('id');
-			$uri    = JFactory::getURI();
+			$uri    = Factory::getURI();
 			$settings = JemHelper::globalattribs();
 
 			HTMLHelper::_('behavior.tooltip');
@@ -558,7 +559,7 @@ class JemOutput
 	 */
 	static public function printbutton($print_link, $params)
 	{
-		$app      = JFactory::getApplication();
+		$app      = Factory::getApplication();
 		$settings = JemHelper::globalattribs();
 
 		if ($settings->get('global_show_print_icon',0)) {
@@ -604,7 +605,7 @@ class JemOutput
 	 */
 	static public function mailbutton($slug, $view, $params)
 	{
-		$app 		= JFactory::getApplication();
+		$app 		= Factory::getApplication();
 		$settings	= JemHelper::globalattribs();
 
 		if ($settings->get('global_show_email_icon')) {
@@ -617,7 +618,7 @@ class JemOutput
 
 			$uri = JUri::getInstance();
 			$base = $uri->toString(array('scheme', 'host', 'port'));
-			$template = JFactory::getApplication()->getTemplate();
+			$template = Factory::getApplication()->getTemplate();
 			$link = $base.JRoute::_('index.php?option=com_jem&view='.$view.'&id='.$slug, false);
 
 			$url = 'index.php?option=com_mailto&tmpl=component&template='.$template.'&link='.MailToHelper::addLink($link);
@@ -646,7 +647,7 @@ class JemOutput
 	 */
 	static public function icalbutton($slug, $view)
 	{
-		$app = JFactory::getApplication();
+		$app = Factory::getApplication();
 		$settings = JemHelper::globalattribs();
 
 		if ($settings->get('global_show_ical_icon','0')==1) {
@@ -680,7 +681,7 @@ class JemOutput
 	 */
 	static public function publishbutton($prefix)
 	{
-		$app = JFactory::getApplication();
+		$app = Factory::getApplication();
 
 		if (empty($prefix) || $app->input->get('print','','int')) {
 			// button in popup or wrong call
@@ -708,7 +709,7 @@ class JemOutput
 	 */
 	static public function trashbutton($prefix)
 	{
-		$app = JFactory::getApplication();
+		$app = Factory::getApplication();
 
 		if (empty($prefix) || $app->input->get('print','','int')) {
 			// button in popup or wrong call
@@ -736,7 +737,7 @@ class JemOutput
 	 */
 	static public function unpublishbutton($prefix)
 	{
-		$app = JFactory::getApplication();
+		$app = Factory::getApplication();
 
 		if (empty($prefix) || $app->input->get('print','','int')) {
 			// button in popup or wrong call
@@ -764,7 +765,7 @@ class JemOutput
 	 */
 	static public function exportbutton($eventid)
 	{
-		$app = JFactory::getApplication();
+		$app = Factory::getApplication();
 
 		HTMLHelper::_('behavior.tooltip');
 
@@ -793,7 +794,7 @@ class JemOutput
 	 */
 	static public function backbutton($backlink, $view)
 	{
-		$app = JFactory::getApplication();
+		$app = Factory::getApplication();
 		$id  = $app->input->getInt('id');
 		$fid = $app->input->getInt('Itemid');
 
@@ -918,7 +919,7 @@ class JemOutput
 				$api		= trim($params->get('global_googleapi'));
 				$clientid	= trim($params->get('global_googleclientid'));
 
-				$document 	= JFactory::getDocument();
+				$document 	= Factory::getDocument();
 
 				# do we have a client-ID?
 				if ($clientid) {
@@ -952,7 +953,7 @@ class JemOutput
 	 */
 	static public function recurrenceicon($event, $showinline = true, $showtitle = true)
 	{
-		$app = JFactory::getApplication();
+		$app = Factory::getApplication();
 		$settings = JemHelper::globalattribs();
 		$settings2 = JemHelper::config();
 		$item = empty($event->recurr_bak) ? $event : $event->recurr_bak;
@@ -985,7 +986,7 @@ class JemOutput
 	static public function publishstateicon($item, $ignorestates = array(-2, 1, 2), $showinline = true, $showtitle = true)
 	{
 		//$settings = JemHelper::globalattribs();  /// @todo use global setting to influence visibility of publish state icon?
-		$app = JFactory::getApplication();
+		$app = Factory::getApplication();
 
 		// early return
 		if (is_object($item)) {

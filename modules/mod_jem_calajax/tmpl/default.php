@@ -12,6 +12,7 @@ defined('_JEXEC') or die();
 
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Factory;
 
 //Month Names
 $uxtime_first_of_month = gmmktime(0, 0, 0, $prev_month, 1, $offset_year);
@@ -35,7 +36,7 @@ function mod_jem_calajax_click<?php print $module->id; ?>(url) {
 <?php
  }
 
-$document = JFactory::getDocument();
+$document = Factory::getDocument();
 if ($Default_Stylesheet == 1) {
 	$document->addStyleSheet(JUri::base() . 'modules/mod_jem_calajax/mod_jem_calajax.css');
 } else {
@@ -61,7 +62,7 @@ if (!defined('_IN_AJAXCALL')) {
 	$day_names_short = array();
 	$day_names_long = array();
 
-	$user = JFactory::getUser();
+	$user = Factory::getUser();
 	$userLanguage = $user->getParam('language');
 
 	if ($userLanguage) {
@@ -69,7 +70,7 @@ if (!defined('_IN_AJAXCALL')) {
 	} else {
 		$lng = JComponentHelper::getParams('com_languages')->get('site');
 	}
-	$lang = JFactory::getLanguage();
+	$lang = Factory::getLanguage();
 	$lang->setLanguage($lng);
 	$lang->load();
 
@@ -157,7 +158,7 @@ if (!defined('_IN_AJAXCALL')) {
 	}
 
 	// Today
-	$config    = JFactory::getConfig();
+	$config    = Factory::getConfig();
 	$tzoffset  = $config->get('config.offset');
 	$time      = time() + (($tzoffset + $Time_offset)*60*60); //25/2/08 Change for v 0.6 to incorporate server offset into time;
 	$today     = date('j', $time);

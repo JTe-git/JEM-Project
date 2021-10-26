@@ -10,6 +10,7 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Factory;
 
 /**
  * Venueselect-View
@@ -18,11 +19,11 @@ class JemViewVenueelement extends JViewLegacy {
 
 	public function display($tpl = null)
 	{
-		$app = JFactory::getApplication();
+		$app = Factory::getApplication();
 
 		//initialise variables
-		$db			= JFactory::getDBO();
-		$document	= JFactory::getDocument();
+		$db			= Factory::getDBO();
+		$document	= Factory::getDocument();
 		$itemid 	= $app->input->getInt('id', 0) . ':' . $app->input->getInt('Itemid', 0);
 
 		HTMLHelper::_('behavior.tooltip');

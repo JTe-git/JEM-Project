@@ -1,14 +1,16 @@
 <?php
 /**
- * @version 2.3.1
+ * @version 4.0.0
  * @package JEM
- * @copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright (C) 2005-2009 Christoph Lukes
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  *
  * Based on: https://gist.github.com/dongilbert/4195504
  */
 defined('_JEXEC') or die();
+
+use Joomla\CMS\Factory;
 
 jimport('joomla.application.component.modellist');
 
@@ -68,7 +70,7 @@ class JemModelExport extends JModelList
 	protected function getListQuery()
 	{
 		// Retrieve variables
-		$jinput    = JFactory::getApplication()->input;
+		$jinput    = Factory::getApplication()->input;
 		$startdate = $jinput->get('dates', '', 'string');
 		$enddate   = $jinput->get('enddates', '', 'string');
 		$cats      = $jinput->get('cid', array(), 'array');
@@ -114,7 +116,7 @@ class JemModelExport extends JModelList
 	{
 		$this->populateState();
 
-		$jinput = JFactory::getApplication()->input;
+		$jinput = Factory::getApplication()->input;
 		$includecategories = $jinput->get('categorycolumn', 0, 'int');
 
 		$db  = $this->getDbo();
@@ -308,7 +310,7 @@ class JemModelExport extends JModelList
 	{
 		// @todo alter function
 
-		$db    = JFactory::getDBO();
+		$db    = Factory::getDBO();
 		$where = ' WHERE c.published = 1';
 		$query = 'SELECT c.* FROM #__jem_categories AS c' . $where . ' ORDER BY parent_id, c.lft';
 		$db->setQuery($query);

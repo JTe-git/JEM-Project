@@ -10,8 +10,9 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\Factory;
 
-$document = JFactory::getDocument();
+$document = Factory::getDocument();
 $module_name = 'mod_jem';
 /*
 $css_path = JPATH_THEMES. '/'.$document->template.'/css/'.$module_name;

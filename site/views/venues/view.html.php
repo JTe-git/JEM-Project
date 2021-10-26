@@ -9,6 +9,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\Factory;
 
 /**
  * Venues-View
@@ -20,8 +21,8 @@ class JemViewVenues extends JemView
 	 */
 	public function display($tpl = null)
 	{
-		$app         = JFactory::getApplication();
-		$document    = JFactory::getDocument();
+		$app         = Factory::getApplication();
+		$document    = Factory::getDocument();
 		$jemsettings = JemHelper::config();
 		$settings    = JemHelper::globalattribs();
 		$user        = JemFactory::getUser();

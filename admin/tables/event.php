@@ -9,6 +9,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\Factory;
 
 /**
  * JEM Event Table
@@ -80,7 +81,7 @@ class JemTableEvent extends JTable
 	 */
 	public function check()
 	{
-		$jinput = JFactory::getApplication()->input;
+		$jinput = Factory::getApplication()->input;
 
 		if (trim($this->title) == '') {
 			$this->setError(Text::_('COM_JEM_EVENT_ERROR_NAME'));
@@ -95,7 +96,7 @@ class JemTableEvent extends JTable
 		if (empty($this->alias)) {
 			$this->alias = JemHelper::stringURLSafe($this->title);
 			if (trim(str_replace('-', '', $this->alias)) == '') {
-				$this->alias = JFactory::getDate()->format('Y-m-d-H-i-s');
+				$this->alias = Factory::getDate()->format('Y-m-d-H-i-s');
 			}
 		}
 
@@ -110,7 +111,7 @@ class JemTableEvent extends JTable
 
 
 		// Dates
-		$nullDate = JFactory::getDbo()->getNullDate();
+		$nullDate = Factory::getDbo()->getNullDate();
 
 		if (empty($this->enddates) || ($this->enddates == $nullDate)) {
 			$this->enddates = null;
@@ -163,10 +164,10 @@ class JemTableEvent extends JTable
 	 */
 	public function store($updateNulls = true)
 	{
-		$date        = JFactory::getDate();
+		$date        = Factory::getDate();
 		$user        = JemFactory::getUser();
 		$userid      = $user->get('id');
-		$app         = JFactory::getApplication();
+		$app         = Factory::getApplication();
 		$jinput      = $app->input;
 		$jemsettings = JemHelper::config();
 
@@ -417,7 +418,7 @@ class JemTableEvent extends JTable
 		$id = $this->id;
 
 		if (parent::delete($pk)) {
-			$db = JFactory::getDbo();
+			$db = Factory::getDbo();
 			$query = $db->getQuery(true);
 			$query->delete($db->quoteName('#__jem_cats_event_relations'));
 			$query->where('itemid = '.$db->quote($id));

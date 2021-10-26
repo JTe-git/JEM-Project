@@ -11,6 +11,7 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Factory;
 
 /**
  * View class: Venues
@@ -25,7 +26,7 @@ use Joomla\CMS\HTML\HTMLHelper;
 	public function display($tpl = null)
 	{
 		$user     = JemFactory::getUser();
-		$document = JFactory::getDocument();
+		$document = Factory::getDocument();
 		$url      = JUri::root();
 		$settings = JemHelper::globalattribs();
 

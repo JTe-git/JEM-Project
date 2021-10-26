@@ -11,6 +11,7 @@ defined('_JEXEC') or die();
 
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Factory;
 
 jimport('joomla.form.formfield');
 jimport('joomla.html.parameter.element');
@@ -47,13 +48,13 @@ class JFormFieldEvent extends JFormFieldList
 		$script[] = '	}';
 
 		// Add the script to the document head.
-		JFactory::getDocument()->addScriptDeclaration(implode("\n", $script));
+		Factory::getDocument()->addScriptDeclaration(implode("\n", $script));
 
 		// Setup variables for display.
 		$html = array();
 		$link = 'index.php?option=com_jem&amp;view=eventelement&amp;tmpl=component&amp;object='.$this->id;
 
-		$db = JFactory::getDBO();
+		$db = Factory::getDBO();
 		$db->setQuery(
 			'SELECT title' .
 			' FROM #__jem_events' .

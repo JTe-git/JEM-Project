@@ -1,12 +1,14 @@
 <?php
 /**
- * @version     2.3.1
+ * @version     4.0.0
  * @package     JEM
- * @copyright   Copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright   Copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright   Copyright (C) 2005-2009 Christoph Lukes
  * @license     http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 defined('_JEXEC') or die;
+
+use Joomla\CMS\Factory;
 
 jimport('joomla.application.component.modellist');
 
@@ -59,7 +61,7 @@ class JemModelCategories extends JModelList
 	protected function populateState($ordering = null, $direction = null)
 	{
 		// Initialise variables.
-		$app = JFactory::getApplication();
+		$app = Factory::getApplication();
 		$context = $this->context;
 
 		$extension = $app->getUserStateFromRequest('com_jem.categories.filter.extension', 'extension', 'com_jem', 'cmd');
@@ -224,7 +226,7 @@ class JemModelCategories extends JModelList
 	public function getItems()
 	{
 		$items = parent::getItems();
-		$app   = JFactory::getApplication();
+		$app   = Factory::getApplication();
 
 		foreach ($items as $item) {
 			$item->assignedevents = $this->countCatEvents($item->id);

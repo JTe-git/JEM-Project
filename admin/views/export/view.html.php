@@ -11,6 +11,7 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Factory;
 
 /**
  * View class Export
@@ -26,7 +27,7 @@ class JemViewExport extends JemAdminView
 		jimport('joomla.html.pane');
 
 		//initialise variables
-		$document	= JFactory::getDocument();
+		$document	= Factory::getDocument();
 
 		// Load css
 		HTMLHelper::_('stylesheet', 'com_jem/backend.css', array(), true);

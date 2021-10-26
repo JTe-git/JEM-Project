@@ -10,6 +10,7 @@
 defined('JPATH_BASE') or die;
 
 use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Factory;
 
 JFormHelper::loadFieldClass('list');
 
@@ -68,15 +69,15 @@ class JFormFieldCatOptions extends JFormFieldList
 		}
 
 		// Output
-		$currentid = JFactory::getApplication()->input->getInt('a_id');
+		$currentid = Factory::getApplication()->input->getInt('a_id');
 		if (!$currentid) { // special case: new event as copy of another one
-			$currentid = JFactory::getApplication()->input->getInt('from_id');
+			$currentid = Factory::getApplication()->input->getInt('from_id');
 		}
 
 		// Get the field options.
 		$options = (array) $this->getOptions();
 
-		$db = JFactory::getDbo();
+		$db = Factory::getDbo();
 		$query = $db->getQuery(true);
 		$query->select('DISTINCT catid');
 		$query->from('#__jem_cats_event_relations');
@@ -110,7 +111,7 @@ class JFormFieldCatOptions extends JFormFieldList
 	 */
 	protected function getOptions()
 	{
-		$currentid = JFactory::getApplication()->input->getInt('a_id');
+		$currentid = Factory::getApplication()->input->getInt('a_id');
 		$options = self::getCategories($currentid);
 		$options = array_values($options);
 
@@ -148,7 +149,7 @@ class JFormFieldCatOptions extends JFormFieldList
 	 */
 	public function getCategories($id)
 	{
-		$db     = JFactory::getDbo();
+		$db     = Factory::getDbo();
 		$user   = JemFactory::getUser();
 		$userid = (int) $user->get('id');
 

@@ -10,6 +10,7 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Factory;
 
 /**
  * Category View
@@ -31,7 +32,7 @@ class JemViewCategory extends JemAdminView
 		$this->canDo	= JemHelperBackend::getActions($this->state->get('category.component'));
 
 
-		$document	= JFactory::getDocument();
+		$document	= Factory::getDocument();
 
 		// Check for errors.
 		$errors = $this->get('Errors');
@@ -63,7 +64,7 @@ class JemViewCategory extends JemAdminView
 
 		parent::display($tpl);
 
-		JFactory::getApplication()->input->set('hidemainmenu', true);
+		Factory::getApplication()->input->set('hidemainmenu', true);
 		$this->addToolbar();
 	}
 

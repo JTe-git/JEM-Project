@@ -10,8 +10,9 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Factory;
 
-$function = JFactory::getApplication()->input->getCmd('function', 'jSelectVenue');
+$function = Factory::getApplication()->input->getCmd('function', 'jSelectVenue');
 ?>
 
 <script type="text/javascript">

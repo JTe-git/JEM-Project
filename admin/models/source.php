@@ -10,6 +10,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\Factory;
 
 jimport('joomla.application.component.modelform');
 jimport('joomla.filesystem.file');
@@ -33,7 +34,7 @@ class JemModelSource extends JModelForm
 	 */
 	protected function populateState()
 	{
-		$app = JFactory::getApplication('administrator');
+		$app = Factory::getApplication('administrator');
 
 		// Load the User state.
 		$id = $app->getUserState('com_jem.edit.source.id');
@@ -62,10 +63,10 @@ class JemModelSource extends JModelForm
 	public function getForm($data = array(), $loadData = true)
 	{
 		// Initialise variables.
-		$app = JFactory::getApplication();
+		$app = Factory::getApplication();
 
 		// Codemirror or Editor None should be enabled
-		$db = JFactory::getDBO();
+		$db = Factory::getDBO();
 		$query = $db->getQuery(true);
 		$query->select('COUNT(*)');
 		$query->from('#__extensions as a');
@@ -93,7 +94,7 @@ class JemModelSource extends JModelForm
 	protected function loadFormData()
 	{
 		// Check the session for previously entered form data.
-		$data = JFactory::getApplication()->getUserState('com_jem.edit.source.data', array());
+		$data = Factory::getApplication()->getUserState('com_jem.edit.source.data', array());
 
 		if (empty($data)) {
 			$data = $this->getSource();

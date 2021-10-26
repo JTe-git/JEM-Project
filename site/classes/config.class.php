@@ -1,12 +1,14 @@
 <?php
 /**
- * @version 2.3.1
+ * @version 4.0.0
  * @package JEM
- * @copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 
 defined('_JEXEC') or die;
+
+use Joomla\CMS\Factory;
 
 /**
  * JemConfig class to handle JEM configuration
@@ -97,7 +99,7 @@ class JemConfig
 	 */
 	protected function loadData()
 	{
-		$db = JFactory::getDbo();
+		$db = Factory::getDbo();
 
 		// new table
 		$query = $db->getQuery(true);
@@ -193,7 +195,7 @@ class JemConfig
 		}
 
 		// Store into new table
-		$db = JFactory::getDbo();
+		$db = Factory::getDbo();
 		$query = $db->getQuery(true);
 		$query->select(array($db->quoteName('keyname'), $db->quoteName('value')));
 		$query->from('#__jem_config');

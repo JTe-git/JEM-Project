@@ -10,6 +10,7 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Factory;
 
 /**
  * Eventslist-View
@@ -30,14 +31,14 @@ class JemViewEventslist extends JemView
 	public function display($tpl = null)
 	{
 		// Initialize variables
-		$app         = JFactory::getApplication();
+		$app         = Factory::getApplication();
 		$jemsettings = JemHelper::config();
 		$settings    = JemHelper::globalattribs();
 		$menu        = $app->getMenu();
 		$menuitem    = $menu->getActive();
-		$document    = JFactory::getDocument();
+		$document    = Factory::getDocument();
 		$params      = $app->getParams();
-		$uri         = JFactory::getURI();
+		$uri         = Factory::getURI();
 		$jinput      = $app->input;
 		$task        = $jinput->getCmd('task', '');
 		$print       = $jinput->getBool('print', false);
@@ -178,7 +179,7 @@ class JemViewEventslist extends JemView
 	{
 		// TODO: Refactor with parent _prepareDocument() function
 
-	//	$app   = JFactory::getApplication();
+	//	$app   = Factory::getApplication();
 	//	$menus = $app->getMenu();
 
 		if ($this->params->get('menu-meta_description'))

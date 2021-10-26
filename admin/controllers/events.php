@@ -9,6 +9,7 @@
 defined( '_JEXEC' ) or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\Factory;
 
 jimport('joomla.application.component.controlleradmin');
 
@@ -49,7 +50,7 @@ class JemControllerEvents extends JControllerAdmin
 
 		// Initialise variables.
 		$user   = JemFactory::getUser();
-		$ids    = JFactory::getApplication()->input->get('cid', array(), 'array');
+		$ids    = Factory::getApplication()->input->get('cid', array(), 'array');
 		$values = array('featured' => 1, 'unfeatured' => 0);
 		$task   = $this->getTask();
 		$value  = \Joomla\Utilities\ArrayHelper::getValue($values, $task, 0, 'int');

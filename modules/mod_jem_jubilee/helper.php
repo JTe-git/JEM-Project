@@ -11,6 +11,7 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Factory;
 
 JModelLegacy::addIncludePath(JPATH_SITE.'/components/com_jem/models', 'JemModel');
 
@@ -35,7 +36,7 @@ abstract class ModJemJubileeHelper
 		static $formats  = array('year' => 'Y', 'month' => 'F', 'day' => 'j', 'weekday' => 'l', 'md' => 'md');
 		static $defaults = array('year' => '&nbsp;', 'month' => '', 'day' => '?', 'weekday' => '', 'md' => '');
 
-		$db     = JFactory::getDBO();
+		$db     = Factory::getDBO();
 		$user   = JemFactory::getUser();
 		$levels = $user->getAuthorisedViewLevels();
 
@@ -361,8 +362,8 @@ abstract class ModJemJubileeHelper
 	 */
 	protected static function _get_local_now($cleartime = true)
 	{
-		$app    = JFactory::getApplication();
-		$user   = JFactory::getUser();
+		$app    = Factory::getApplication();
+		$user   = Factory::getUser();
 		$offset = $app->get('offset');
 		$userTz = $user->getParam('timezone', $offset);
 

@@ -921,7 +921,7 @@ class com_jemInstallerScript extends InstallerScript
 
 		foreach ($items as $item) {
 			// check uri
-			$uri = JFactory::getURI($item->link); // with a little help of JUri
+			$uri = Factory::getURI($item->link); // with a little help of JUri
 			$layout = $uri->getVar('layout', '');
 			if ($layout != 'edit') {              // if layout is not set to 'edit'
 				$uri->setVar('layout', 'edit');   //   set it

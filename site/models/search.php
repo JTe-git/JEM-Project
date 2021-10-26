@@ -1,13 +1,15 @@
 <?php
 /**
- * @version 2.3.1
+ * @version 4.0.0
  * @package JEM
- * @copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright (C) 2005-2009 Christoph Lukes
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 
 defined('_JEXEC') or die;
+
+use Joomla\CMS\Factory;
 
 jimport('joomla.application.component.model');
 
@@ -55,7 +57,7 @@ class JemModelSearch extends JModelLegacy
 	{
 		parent::__construct();
 
-		$app = JFactory::getApplication();
+		$app = Factory::getApplication();
 		$jemsettings = JemHelper::config();
 
 		//get the number of events from database
@@ -88,7 +90,7 @@ class JemModelSearch extends JModelLegacy
 	 */
 	public function getData()
 	{
-		$pop = JFactory::getApplication()->input->getBool('pop', false);
+		$pop = Factory::getApplication()->input->getBool('pop', false);
 
 		// Lets load the content if it doesn't already exist
 		if (empty($this->_data)) {
@@ -178,7 +180,7 @@ class JemModelSearch extends JModelLegacy
 	 */
 	protected function _buildOrderBy()
 	{
-		$app  = JFactory::getApplication();
+		$app  = Factory::getApplication();
 		$task = $app->input->getCmd('task', '');
 
 		$filter_order      = $this->getState('filter_order');
@@ -208,7 +210,7 @@ class JemModelSearch extends JModelLegacy
 	 */
 	protected function _buildWhere()
 	{
-		$app = JFactory::getApplication();
+		$app = Factory::getApplication();
 
 		// Get the paramaters of the active menu item
 		$params       = $app->getParams();
@@ -341,7 +343,7 @@ class JemModelSearch extends JModelLegacy
 
 	public function getCountryOptions()
 	{
-		$app = JFactory::getApplication();
+		$app = Factory::getApplication();
 
 		$filter_continent = $app->getUserStateFromRequest('com_jem.search.filter_continent', 'filter_continent', '', 'string');
 
@@ -363,7 +365,7 @@ class JemModelSearch extends JModelLegacy
 
 	public function getCityOptions()
 	{
-		if (!$country = JFactory::getApplication()->input->getString('filter_country', '')) {
+		if (!$country = Factory::getApplication()->input->getString('filter_country', '')) {
 			return array();
 		}
 		$query = ' SELECT DISTINCT l.city as value, l.city as text '
@@ -385,8 +387,8 @@ class JemModelSearch extends JModelLegacy
 	 */
 	public function getCategoryTree()
 	{
-		$app = JFactory::getApplication();
-		$db = JFactory::getDBO();
+		$app = Factory::getApplication();
+		$db = Factory::getDBO();
 
 		// Get the paramaters of the active menu item
 		$params = $app->getParams('com_jem');

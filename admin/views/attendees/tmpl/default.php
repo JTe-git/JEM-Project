@@ -10,6 +10,7 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Factory;
 
 HTMLHelper::_('behavior.tooltip');
 
@@ -19,7 +20,7 @@ $userId		= $user->get('id');
 $listOrder	= $this->escape($this->state->get('list.ordering'));
 $listDirn	= $this->escape($this->state->get('list.direction'));
 
-JFactory::getDocument()->addScriptDeclaration('
+Factory::getDocument()->addScriptDeclaration('
 	Joomla.submitbutton = function(task)
 	{
 		document.adminForm.task.value=task;
@@ -31,7 +32,7 @@ JFactory::getDocument()->addScriptDeclaration('
 		}
 	};
 ');
-JFactory::getDocument()->addScriptDeclaration('
+Factory::getDocument()->addScriptDeclaration('
     function submitName(node) {
       node.parentNode.previousElementSibling.childNodes[0].checked = true;
       Joomla.submitbutton("attendees.edit");

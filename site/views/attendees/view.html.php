@@ -10,6 +10,7 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Factory;
 
 /**
  * Attendees-view
@@ -19,7 +20,7 @@ class JemViewAttendees extends JemView
 {
 	public function display($tpl = null)
 	{
-		$app  = JFactory::getApplication();
+		$app  = Factory::getApplication();
 		$user = JemFactory::getUser();
 
 		//redirect if not logged in
@@ -43,12 +44,12 @@ class JemViewAttendees extends JemView
 		}
 
 		//initialise variables
-		$document	= JFactory::getDocument();
+		$document	= Factory::getDocument();
 		$settings	= $this->settings;
 		$params 	= $app->getParams();
 		$menu		= $app->getMenu();
 		$menuitem	= $menu->getActive();
-		$uri 		= JFactory::getURI();
+		$uri 		= Factory::getURI();
 
 		HTMLHelper::_('behavior.tooltip');
 		HTMLHelper::_('behavior.modal', 'a.flyermodal');
@@ -153,8 +154,8 @@ class JemViewAttendees extends JemView
 	 */
 	protected function _displayprint($tpl = null)
 	{
-		$document	= JFactory::getDocument();
-		$app		= JFactory::getApplication();
+		$document	= Factory::getDocument();
+		$app		= Factory::getApplication();
 		$params		= $app->getParams();
 
 		// Load css
@@ -184,10 +185,10 @@ class JemViewAttendees extends JemView
 	 */
 	protected function _displayaddusers($tpl)
 	{
-		$app         = JFactory::getApplication();
+		$app         = Factory::getApplication();
 		$jinput      = $app->input;
-	//	$db          = JFactory::getDBO();
-		$document    = JFactory::getDocument();
+	//	$db          = Factory::getDBO();
+		$document    = Factory::getDocument();
 		$model       = $this->getModel();
 		$event       = $this->get('Event');
 

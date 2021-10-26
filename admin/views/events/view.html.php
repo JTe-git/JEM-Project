@@ -11,6 +11,7 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\Factory;
 
 /**
  * Events-View
@@ -25,7 +26,7 @@ class JemViewEvents extends JemAdminView
 	public function display($tpl = null)
 	{
 		$user 		= JemFactory::getUser();
-		$document	= JFactory::getDocument();
+		$document	= Factory::getDocument();
 		$settings 	= JemHelper::globalattribs();
 
 		$jemsettings = JemAdmin::config();

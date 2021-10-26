@@ -1,13 +1,15 @@
 <?php
 /**
- * @version 2.1.2
+ * @version 4.0.0
  * @package JEM
  * @subpackage JEM Finder Plugin
- * @copyright (C) 2013-2015 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 
 defined('_JEXEC') or die;
+
+use Joomla\CMS\Factory;
 
 jimport('joomla.application.component.helper');
 
@@ -365,7 +367,7 @@ class plgFinderJEM extends FinderIndexerAdapter {
 	 */
 	protected function getListQuery($sql = null)
 	{
-		$db = JFactory::getDbo();
+		$db = Factory::getDbo();
 		// Check if we can use the supplied SQL query.
 		$sql = $sql instanceof JDatabaseQuery ? $sql : $db->getQuery(true);
 
@@ -424,7 +426,7 @@ class plgFinderJEM extends FinderIndexerAdapter {
 
 	protected function getStateQuery()
 	{
-		$db = JFactory::getDbo();
+		$db = Factory::getDbo();
 		// Check if we can use the supplied SQL query.
 		$sql = $db->getQuery(true);
 

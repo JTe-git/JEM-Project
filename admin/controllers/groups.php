@@ -11,6 +11,7 @@
 defined( '_JEXEC' ) or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\Factory;
 
 jimport('joomla.application.component.controlleradmin');
 
@@ -49,7 +50,7 @@ class JemControllerGroups extends JControllerAdmin
 		// Check for request forgeries
 		JSession::checkToken() or jexit('Invalid Token');
 
-		$jinput = JFactory::getApplication()->input;
+		$jinput = Factory::getApplication()->input;
 		$cid = $jinput->get('cid',  0, 'array');
 
 		if (!is_array($cid) || count($cid) < 1) {

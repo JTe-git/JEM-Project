@@ -10,6 +10,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\Factory;
 ?>
 
 <!-- RECURRENCE -->
@@ -78,7 +79,7 @@ use Joomla\CMS\Language\Text;
 	<?php /* show "old" recurrence settings for information */
 	if (!empty($this->item->recurr_bak->recurrence_type)) {
 		$recurr_type = '';
-		$nullDate = JFactory::getDbo()->getNullDate();
+		$nullDate = Factory::getDbo()->getNullDate();
 		$rlDate = $this->item->recurr_bak->recurrence_limit_date;
 		if (!empty($rlDate) && (strpos($nullDate, $rlDate) !== 0)) {
 			$recurr_limit_date = JemOutput::formatdate($rlDate);

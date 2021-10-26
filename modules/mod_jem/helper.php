@@ -10,6 +10,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\Factory;
 
 JModelLegacy::addIncludePath(JPATH_SITE.'/components/com_jem/models', 'JemModel');
 
@@ -29,7 +30,7 @@ abstract class ModJemHelper
 	{
 		mb_internal_encoding('UTF-8');
 
-		$db       = JFactory::getDBO();
+		$db       = Factory::getDBO();
 		$user     = JemFactory::getUser();
 		$levels   = $user->getAuthorisedViewLevels();
 		$settings = JemHelper::config();

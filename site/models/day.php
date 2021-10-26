@@ -9,6 +9,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\Factory;
 
 require_once dirname(__FILE__) . '/eventslist.php';
 
@@ -26,7 +27,7 @@ class JemModelDay extends JemModelEventslist
 	{
 		parent::__construct();
 
-		$rawday = JFactory::getApplication()->input->getInt('id', null);
+		$rawday = Factory::getApplication()->input->getInt('id', null);
 		$this->setDate($rawday);
 	}
 
@@ -38,7 +39,7 @@ class JemModelDay extends JemModelEventslist
 	 */
 	public function setDate($date)
 	{
-		$app = JFactory::getApplication();
+		$app = Factory::getApplication();
 
 		# Get the params of the active menu item
 		$params = $app->getParams('com_jem');
@@ -87,7 +88,7 @@ class JemModelDay extends JemModelEventslist
 	{
 		# parent::populateState($ordering, $direction);
 
-		$app               = JFactory::getApplication();
+		$app               = Factory::getApplication();
 		$jemsettings       = JemHelper::config();
 		$itemid            = $app->input->getInt('id', 0) . ':' . $app->input->getInt('Itemid', 0);
 		$params            = $app->getParams();

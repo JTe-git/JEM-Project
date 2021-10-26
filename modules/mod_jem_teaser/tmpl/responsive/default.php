@@ -11,6 +11,7 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Factory;
 
 if ($params->get('use_modal', 0)) {
 	HTMLHelper::_('behavior.modal', 'a.flyermodal');
@@ -19,7 +20,7 @@ if ($params->get('use_modal', 0)) {
 	$modal = 'notmodal';
 }
 /*
-if (JFactory::getApplication()->input->getInt('jem-rss','0') == 1) {		
+if (Factory::getApplication()->input->getInt('jem-rss','0') == 1) {		
   ob_get_clean();
   createRSSfeed($list);
   jexit(); 
@@ -253,7 +254,7 @@ if(substr($baseurl, -1) == '/') {
 echo '<?xml version="1.0" encoding="UTF-8" ?>';
 echo '<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">';
 echo '<channel>';
-  $doc = JFactory::getDocument(); 
+  $doc = Factory::getDocument(); 
   $page_title = $doc->getTitle();
   echo '<title>'.$page_title.'</title>';
   echo '<link>'.JURI::current().'</link>';

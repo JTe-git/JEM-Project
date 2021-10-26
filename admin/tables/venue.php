@@ -9,6 +9,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\Factory;
 
 /**
  * JEM Venue Table
@@ -40,7 +41,7 @@ class JemTableVenue extends JTable
 	 */
 	public function check()
 	{
-		$jinput = JFactory::getApplication()->input;
+		$jinput = Factory::getApplication()->input;
 
 		if (trim($this->venue) == '') {
 			$this->setError(Text::_('COM_JEM_VENUE_ERROR_NAME'));
@@ -52,7 +53,7 @@ class JemTableVenue extends JTable
 		if (empty($this->alias)) {
 			$this->alias = JemHelper::stringURLSafe($this->venue);
 			if (trim(str_replace('-', '', $this->alias)) == '') {
-				$this->alias = JFactory::getDate()->format('Y-m-d-H-i-s');
+				$this->alias = Factory::getDate()->format('Y-m-d-H-i-s');
 			}
 		}
 
@@ -119,10 +120,10 @@ class JemTableVenue extends JTable
 	 */
 	public function store($updateNulls = false)
 	{
-		$date        = JFactory::getDate();
+		$date        = Factory::getDate();
 		$user        = JemFactory::getUser();
 		$userid      = $user->get('id');
-		$app         = JFactory::getApplication();
+		$app         = Factory::getApplication();
 		$jinput      = $app->input;
 		$jemsettings = JemHelper::config();
 

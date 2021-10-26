@@ -11,6 +11,7 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Factory;
 
 /**
  * View class for the JEM imageselect screen
@@ -27,7 +28,7 @@ class JemViewImagehandler extends JViewLegacy
 	 */
 	public function display($tpl = null)
 	{
-		$app    = JFactory::getApplication();
+		$app    = Factory::getApplication();
 		$option = $app->input->getString('option', 'com_jem');
 
 		HTMLHelper::_('behavior.framework');
@@ -109,11 +110,11 @@ class JemViewImagehandler extends JViewLegacy
 	protected function _displayuploadimage($tpl = null)
 	{
 		//initialise variables
-		$uri         = JFactory::getURI()->toString();
+		$uri         = Factory::getURI()->toString();
 		$jemsettings = JemAdmin::config();
 
 		//get vars
-		$task = JFactory::getApplication()->input->get('task', '');
+		$task = Factory::getApplication()->input->get('task', '');
 
 		// Load css
 		HTMLHelper::_('stylesheet', 'com_jem/backend.css', array(), true);

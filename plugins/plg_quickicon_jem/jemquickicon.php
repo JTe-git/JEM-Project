@@ -12,6 +12,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\Factory;
 
 /**
  * JEM Quickicon Plugin
@@ -27,7 +28,7 @@ class plgQuickiconJEMquickicon extends JPlugin
 	public function onGetIcons($context)
 	{
 		if ($context != $this->params->get('context', 'mod_quickicon') ||
-		    !JFactory::getUser()->authorise('core.manage', 'com_jem')  ||
+		    !Factory::getUser()->authorise('core.manage', 'com_jem')  ||
 		    !file_exists(JPATH_ADMINISTRATOR.'/components/com_jem/helpers/helper.php')) {
 			return;
 		}

@@ -10,6 +10,7 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Factory;
 
 /**
  * Categoryelement-View
@@ -19,9 +20,9 @@ class JemViewCategoryelement extends JViewLegacy {
 	public function display($tpl = null)
 	{
 		//initialise variables
-		$document	= JFactory::getDocument();
-		$db			= JFactory::getDBO();
-		$app 		= JFactory::getApplication();
+		$document	= Factory::getDocument();
+		$db			= Factory::getDBO();
+		$app 		= Factory::getApplication();
 		$itemid 	= $app->input->getInt('id', 0) . ':' . $app->input->getInt('Itemid', 0);
 
 		HTMLHelper::_('behavior.tooltip');

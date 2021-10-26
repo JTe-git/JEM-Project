@@ -10,6 +10,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\Factory;
 
 jimport('joomla.application.component.controlleradmin');
 
@@ -43,8 +44,8 @@ class JemControllerVenues extends JControllerAdmin
 		// Check for token
 		JSession::checkToken() or jexit(Text::_('COM_JEM_GLOBAL_INVALID_TOKEN'));
 
-		$user = JFactory::getUser();
-		$app = JFactory::getApplication();
+		$user = Factory::getUser();
+		$app = Factory::getApplication();
 		$jinput = $app->input;
 		$cid = $jinput->get('cid',array(),'array');
 
@@ -84,7 +85,7 @@ class JemControllerVenues extends JControllerAdmin
 			}
 		}
 
-		$cache = JFactory::getCache('com_jem');
+		$cache = Factory::getCache('com_jem');
 		$cache->clean();
 
 		$this->setRedirect( 'index.php?option=com_jem&view=venues');

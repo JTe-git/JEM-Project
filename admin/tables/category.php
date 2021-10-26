@@ -9,6 +9,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\Factory;
 
 jimport('joomla.database.tablenested');
 
@@ -52,7 +53,7 @@ class JemTableCategory extends JTableNested
 			return;
 		}
 
-		$db = JFactory::getDbo();
+		$db = Factory::getDbo();
 		$query = $db->getQuery(true);
 
 		// Insert columns.
@@ -148,7 +149,7 @@ class JemTableCategory extends JTableNested
 
 		$this->alias = JemHelper::stringURLSafe($this->alias);
 		if (trim(str_replace('-', '', $this->alias)) == '') {
-			$this->alias = JFactory::getDate()->format('Y-m-d-H-i-s');
+			$this->alias = Factory::getDate()->format('Y-m-d-H-i-s');
 		}
 
 		return true;
@@ -196,7 +197,7 @@ class JemTableCategory extends JTableNested
 	 */
 	public function store($updateNulls = false)
 	{
-		$date = JFactory::getDate();
+		$date = Factory::getDate();
 		$user = JemFactory::getUser();
 
 		if ($this->id) {

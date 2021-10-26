@@ -10,6 +10,7 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Factory;
 
 /**
  * Category-View
@@ -44,15 +45,15 @@ class JemViewCategory extends JemView
 			HTMLHelper::_('behavior.tooltip');
 
 			//initialize variables
-			$app         = JFactory::getApplication();
-			$document    = JFactory::getDocument();
+			$app         = Factory::getApplication();
+			$document    = Factory::getDocument();
 			$jemsettings = JemHelper::config();
 			$settings    = JemHelper::globalattribs();
 			$user        = JemFactory::getUser();
 			$menu        = $app->getMenu();
 			$menuitem    = $menu->getActive();
 			$params      = $app->getParams();
-			$uri         = JFactory::getURI();
+			$uri         = Factory::getURI();
 			$pathway     = $app->getPathWay();
 			$print       = $app->input->getBool('print', false);
 
@@ -150,8 +151,8 @@ class JemViewCategory extends JemView
 			### Category List view ###
 
 			//initialize variables
-			$app         = JFactory::getApplication();
-			$document    = JFactory::getDocument();
+			$app         = Factory::getApplication();
+			$document    = Factory::getDocument();
 			$jemsettings = JemHelper::config();
 			$settings    = JemHelper::globalattribs();
 			$user        = JemFactory::getUser();
@@ -160,7 +161,7 @@ class JemViewCategory extends JemView
 			HTMLHelper::_('behavior.tooltip');
 
 			// get menu information
-			$uri      = JFactory::getURI();
+			$uri      = Factory::getURI();
 			$pathway  = $app->getPathWay();
 			$menu     = $app->getMenu();
 			$menuitem = $menu->getActive();

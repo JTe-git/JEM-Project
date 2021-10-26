@@ -10,6 +10,7 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Factory;
 
 /**
  * Search-View
@@ -22,14 +23,14 @@ class JemViewSearch extends JemView
 	public function display($tpl = null)
 	{
 		// initialize variables
-		$app          = JFactory::getApplication();
-		$document     = JFactory::getDocument();
+		$app          = Factory::getApplication();
+		$document     = Factory::getDocument();
 		$jemsettings  = JemHelper::config();
 		$settings     = JemHelper::globalattribs();
 		$menu         = $app->getMenu();
 		$menuitem     = $menu->getActive();
 		$params       = $app->getParams();
-		$uri          = JFactory::getURI();
+		$uri          = Factory::getURI();
 		$pathway      = $app->getPathWay();
 	//	$user         = JemFactory::getUser();
 
@@ -191,7 +192,7 @@ class JemViewSearch extends JemView
 	 */
 	protected function _buildSortLists()
 	{
-		$app = JFactory::getApplication();
+		$app = Factory::getApplication();
 		$task = $app->input->get('task', '');
 
 		$filter_order = $app->input->getCmd('filter_order', 'a.dates');

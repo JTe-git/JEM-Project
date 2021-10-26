@@ -11,6 +11,7 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Factory;
 
 /**
  * View class for the JEM Settings screen
@@ -25,8 +26,8 @@ class JemViewSettings extends JemAdminView
 
 	public function display($tpl = null)
 	{
-		$app         = JFactory::getApplication();
-		$document    = JFactory::getDocument();
+		$app         = Factory::getApplication();
+		$document    = Factory::getDocument();
 		$form        = $this->get('Form');
 		$data        = $this->get('Data');
 		$state       = $this->get('State');

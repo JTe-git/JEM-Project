@@ -10,6 +10,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\Factory;
 
 jimport('joomla.application.component.controller');
 
@@ -37,7 +38,7 @@ class JemControllerAttendee extends JControllerLegacy
 	 */
 	public function back()
 	{
-		$this->setRedirect('index.php?option=com_jem&view=attendees&eventid='.JFactory::getApplication()->input->getInt('event', 0));
+		$this->setRedirect('index.php?option=com_jem&view=attendees&eventid='.Factory::getApplication()->input->getInt('event', 0));
 	}
 
 	/**
@@ -52,10 +53,10 @@ class JemControllerAttendee extends JControllerLegacy
 		JSession::checkToken() or jexit(Text::_('JINVALID_TOKEN'));
 
 		$attendee = JTable::getInstance('jem_register', '');
-		$attendee->bind(JFactory::getApplication()->input->post->getArray(/*get them all*/));
+		$attendee->bind(Factory::getApplication()->input->post->getArray(/*get them all*/));
 		$attendee->checkin();
 
-		$this->setRedirect('index.php?option=com_jem&view=attendees&eventid='.JFactory::getApplication()->input->getInt('event', 0));
+		$this->setRedirect('index.php?option=com_jem&view=attendees&eventid='.Factory::getApplication()->input->getInt('event', 0));
 	}
 
 	/**
@@ -70,7 +71,7 @@ class JemControllerAttendee extends JControllerLegacy
 		JSession::checkToken() or jexit(Text::_('JINVALID_TOKEN'));
 
 		// Defining JInput
-		$jinput = JFactory::getApplication()->input;
+		$jinput = Factory::getApplication()->input;
 
 		// retrieving task "apply"
 		$task = $jinput->getCmd('task');
@@ -142,7 +143,7 @@ class JemControllerAttendee extends JControllerLegacy
 			}
 			$msg = Text::_('COM_JEM_ATTENDEE_SAVED');
 
-			$cache = JFactory::getCache('com_jem');
+			$cache = Factory::getCache('com_jem');
 			$cache->clean();
 		} else {
 			$msg 	= '';
@@ -153,7 +154,7 @@ class JemControllerAttendee extends JControllerLegacy
 
 	public function selectUser()
 	{
-		$jinput = JFactory::getApplication()->input;
+		$jinput = Factory::getApplication()->input;
 		$jinput->set('view', 'userelement');
 		parent::display();
 	}

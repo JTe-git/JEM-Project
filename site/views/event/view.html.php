@@ -9,6 +9,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\Factory;
 
 /**
  * Event-View
@@ -36,11 +37,11 @@ class JemViewEvent extends JemView
 	{
 		$jemsettings       = JemHelper::config();
 		$settings          = JemHelper::globalattribs();
-		$app               = JFactory::getApplication();
+		$app               = Factory::getApplication();
 		$user              = JemFactory::getUser();
 		$userId            = $user->get('id');
 		$dispatcher        = JemFactory::getDispatcher();
-		$document          = JFactory::getDocument();
+		$document          = Factory::getDocument();
 		$model             = $this->getModel();
 		$menu              = $app->getMenu();
 		$menuitem          = $menu->getActive();
@@ -386,7 +387,7 @@ class JemViewEvent extends JemView
 	 */
 	protected function _prepareDocument()
 	{
-		$app     = JFactory::getApplication();
+		$app     = Factory::getApplication();
 	//	$menus   = $app->getMenu();
 	//	$pathway = $app->getPathway();
 

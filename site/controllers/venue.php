@@ -9,6 +9,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\Factory;
 
 require_once (JPATH_COMPONENT_SITE.'/classes/controller.form.class.php');
 
@@ -45,7 +46,7 @@ class JemControllerVenue extends JemControllerForm
 		// Initialise variables.
 		$user = JemFactory::getUser();
 		// venues don't have a category yet
-		//$categoryId = \Joomla\Utilities\ArrayHelper::getValue($data, 'catid', JFactory::getApplication()->input->getInt('catid', 0), 'int');
+		//$categoryId = \Joomla\Utilities\ArrayHelper::getValue($data, 'catid', Factory::getApplication()->input->getInt('catid', 0), 'int');
 
 		if ($user->can('add', 'venue')) {
 			return true;
@@ -158,7 +159,7 @@ class JemControllerVenue extends JemControllerForm
 	protected function getRedirectToItemAppend($recordId = null, $urlVar = 'a_id')
 	{
 		// Need to override the parent method completely.
-		$jinput = JFactory::getApplication()->input;
+		$jinput = Factory::getApplication()->input;
 		$tmpl   = $jinput->getCmd('tmpl', '');
 		$layout = $jinput->getCmd('layout', 'edit');
 		$task   = $jinput->getCmd('task', '');
@@ -206,7 +207,7 @@ class JemControllerVenue extends JemControllerForm
 	 */
 	protected function getReturnPage()
 	{
-		$return = JFactory::getApplication()->input->get('return', null, 'base64');
+		$return = Factory::getApplication()->input->get('return', null, 'base64');
 
 		if (empty($return) || !JUri::isInternal(base64_decode($return))) {
 			return JUri::base();

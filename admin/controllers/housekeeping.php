@@ -9,6 +9,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\Factory;
 
 jimport('joomla.application.component.controller');
 
@@ -42,7 +43,7 @@ class JemControllerHousekeeping extends JControllerLegacy
 		// Check for request forgeries
 		JSession::checkToken('get') or jexit('Invalid Token');
 
-		$task = JFactory::getApplication()->input->get('task', '');
+		$task = Factory::getApplication()->input->get('task', '');
 		$model = $this->getModel('housekeeping');
 
 		if ($task == 'cleaneventimg') {

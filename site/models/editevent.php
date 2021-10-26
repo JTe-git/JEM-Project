@@ -1,13 +1,15 @@
 <?php
 /**
- * @version 2.3.1
+ * @version 4.0.0
  * @package JEM
- * @copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright (C) 2005-2009 Christoph Lukes
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 
 defined('_JEXEC') or die;
+
+use Joomla\CMS\Factory;
 
 // Base this model on the backend version.
 require_once JPATH_ADMINISTRATOR . '/components/com_jem/models/event.php';
@@ -24,7 +26,7 @@ class JemModelEditevent extends JemModelEvent
 	 */
 	protected function populateState()
 	{
-		$app = JFactory::getApplication();
+		$app = Factory::getApplication();
 
 		// Load state from the request.
 		$pk = $app->input->getInt('a_id', 0);
@@ -127,7 +129,7 @@ class JemModelEditevent extends JemModelEvent
 		//$asset = 'com_jem.event.' . $value->id;
 		//$asset = 'com_jem';
 
-		$db = JFactory::getDbo();
+		$db = Factory::getDbo();
 		$query = $db->getQuery(true);
 		$query->select(array('count(id)'));
 		$query->from('#__jem_register');
@@ -228,7 +230,7 @@ class JemModelEditevent extends JemModelEvent
 	 */
 	protected function buildQueryVenues()
 	{
-		$app              = JFactory::getApplication();
+		$app              = Factory::getApplication();
 		$params           = JemHelper::globalattribs();
 
 		$filter_order     = $app->getUserStateFromRequest('com_jem.selectvenue.filter_order', 'filter_order', 'l.venue', 'cmd');
@@ -242,7 +244,7 @@ class JemModelEditevent extends JemModelEvent
 		$search           = $this->_db->escape(trim(\Joomla\String\StringHelper::strtolower($search)));
 
 		// Query
-		$db    = JFactory::getDBO();
+		$db    = Factory::getDBO();
 		$query = $db->getQuery(true);
 		$query->select(array('l.id','l.state','l.city','l.country','l.published','l.venue','l.ordering'));
 		$query->from('#__jem_venues as l');
@@ -294,7 +296,7 @@ class JemModelEditevent extends JemModelEvent
 	public function getVenuesPagination()
 	{
 		$jemsettings = JemHelper::config();
-		$app         = JFactory::getApplication();
+		$app         = Factory::getApplication();
 		$limit       = $app->getUserStateFromRequest('com_jem.selectvenue.limit', 'limit', $jemsettings->display_num, 'int');
 		$limitstart  = $app->input->getInt('limitstart', 0);
 		// correct start value if required
@@ -333,7 +335,7 @@ class JemModelEditevent extends JemModelEvent
 	public function getContactsPagination()
 	{
 		$jemsettings = JemHelper::config();
-		$app         = JFactory::getApplication();
+		$app         = Factory::getApplication();
 		$limit       = $app->getUserStateFromRequest('com_jem.selectcontact.limit', 'limit', $jemsettings->display_num, 'int');
 		$limitstart  = $app->input->getInt('limitstart', 0);
 		// correct start value if required
@@ -354,7 +356,7 @@ class JemModelEditevent extends JemModelEvent
 	 */
 	protected function buildQueryContacts()
 	{
-		$app              = JFactory::getApplication();
+		$app              = Factory::getApplication();
 		$jemsettings      = JemHelper::config();
 
 		$filter_order     = $app->getUserStateFromRequest('com_jem.selectcontact.filter_order', 'filter_order', 'con.ordering', 'cmd');
@@ -368,7 +370,7 @@ class JemModelEditevent extends JemModelEvent
 		$search           = $this->_db->escape(trim(\Joomla\String\StringHelper::strtolower($search)));
 
 		// Query
-		$db    = JFactory::getDBO();
+		$db    = Factory::getDBO();
 		$query = $db->getQuery(true);
 		$query->select(array('con.*'));
 		$query->from('#__contact_details As con');
@@ -432,7 +434,7 @@ class JemModelEditevent extends JemModelEvent
 
 		// Add registration status if available
 		$itemId     = (int)$this->getState('event.id');
-		$db         = JFactory::getDBO();
+		$db         = Factory::getDBO();
 		$qry        = $db->getQuery(true);
 		// #__jem_register (id, event, uid, waiting, status, comment)
 		$qry->select(array('reg.uid, reg.status, reg.waiting'));
@@ -463,7 +465,7 @@ class JemModelEditevent extends JemModelEvent
 	public function getUsersPagination()
 	{
 		$jemsettings = JemHelper::config();
-		$app         = JFactory::getApplication();
+		$app         = Factory::getApplication();
 		$limit       = 0;//$app->getUserStateFromRequest('com_jem.selectusers.limit', 'limit', $jemsettings->display_num, 'int');
 		$limitstart  = 0;//$app->input->getInt('limitstart', 0);
 		// correct start value if required
@@ -484,7 +486,7 @@ class JemModelEditevent extends JemModelEvent
 	 */
 	protected function buildQueryUsers()
 	{
-		$app              = JFactory::getApplication();
+		$app              = Factory::getApplication();
 		$jemsettings      = JemHelper::config();
 
 		// no filters, hard-coded
@@ -494,7 +496,7 @@ class JemModelEditevent extends JemModelEvent
 		$search           = '';
 
 		// Query
-		$db    = JFactory::getDBO();
+		$db    = Factory::getDBO();
 		$query = $db->getQuery(true);
 		$query->select(array('usr.id, usr.name'));
 		$query->from('#__users As usr');
@@ -540,7 +542,7 @@ class JemModelEditevent extends JemModelEvent
 	public function getInvitedUsers()
 	{
 		$itemId = (int)$this->getState('event.id');
-		$db     = JFactory::getDBO();
+		$db     = Factory::getDBO();
 		$query  = $db->getQuery(true);
 		// #__jem_register (id, event, uid, waiting, status, comment)
 		$query->select(array('reg.uid'));

@@ -1,9 +1,9 @@
 <?php
 /**
- * @version 2.1.6
+ * @version 4.0.0
  * @package JEM
  * @subpackage JEM - Module-Calendar(AJAX)
- * @copyright (C) 2015-2016 joomlaeventmanager.net
+ * @copyright (C) 2015-2022 joomlaeventmanager.net
  * @copyright (C) 2005-2009 Bart Eversdijk. All rights reserved.
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  *
@@ -22,6 +22,7 @@
  define( 'DS', DIRECTORY_SEPARATOR );
  define( '_IN_AJAXCALL', 1 );
 
+use Joomla\CMS\Factory;
 
 // Make sure the BASE-path starts at the base of Joomla!
 // Define this variable, because normal variable are cleared by the framework
@@ -35,25 +36,25 @@ if (strpos(php_sapi_name(), 'cgi') !== false && !empty($_SERVER['REQUEST_URI']) 
 require_once JPATH_BASE.'/includes/defines.php';
 require_once JPATH_BASE.'/includes/framework.php';
 
-$app 	= JFactory::getApplication('site');
+$app 	= Factory::getApplication('site');
 $app->initialise();
 
 // Get the module properties and render the module in a minimal HTML page
-$document	= JFactory::getDocument();
+$document	= Factory::getDocument();
 $renderer	= $document->loadRenderer('module');
 
-$app = JFactory::getApplication();
+$app = Factory::getApplication();
 $jinput = $app->input;
 $Itemid = $jinput->get('Itemid','0');
 
 $modid		= $jinput->getInt('modid', 0);
 $wheremenu 	= isset( $Itemid ) ? ' ( mm.menuid = '. (int) $Itemid .' OR mm.menuid = 0 )' : '';
 
-$user	= JFactory::getUser();
-$db		= JFactory::getDBO();
+$user	= Factory::getUser();
+$db		= Factory::getDBO();
 $groups = implode(',', $user->getAuthorisedViewLevels());
 
-$db = JFactory::getDbo();
+$db = Factory::getDbo();
 $query = $db->getQuery(true);
 $query->select(array('a.id','a.title','a.module','a.position','a.content','a.showtitle','a.params'));
 $query->from('#__modules AS a');

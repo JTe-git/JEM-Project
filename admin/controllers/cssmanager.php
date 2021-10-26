@@ -1,13 +1,15 @@
 <?php
 /**
- * @version 2.3.1
+ * @version 4.0.0
  * @package JEM
- * @copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright (C) 2005-2009 Christoph Lukes
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  *
  */
 defined('_JEXEC') or die();
+
+use Joomla\CMS\Factory;
 
 jimport('joomla.application.component.controlleradmin');
 
@@ -52,7 +54,7 @@ class JemControllerCssmanager extends JControllerAdmin
 	 */
 	public function linenumber()
 	{
-		$task  = JFactory::getApplication()->input->get('task', '');
+		$task  = Factory::getApplication()->input->get('task', '');
 		$model = $this->getModel();
 
 		switch ($task)

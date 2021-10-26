@@ -1,12 +1,14 @@
 <?php
 /**
- * @version 2.3.1
+ * @version 4.0.0
  * @package JEM
- * @copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright (C) 2005-2009 Christoph Lukes
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 defined('_JEXEC') or die;
+
+use Joomla\CMS\Factory;
 
 require_once dirname(__FILE__) . '/eventslist.php';
 
@@ -29,7 +31,7 @@ class JemModelWeekcal extends JemModelEventslist
 	 */
 	protected function populateState($ordering = null, $direction = null)
 	{
-		$app           = JFactory::getApplication();
+		$app           = Factory::getApplication();
 		$task          = $app->input->getCmd('task', '');
 		$params        = $app->getParams();
 		$top_category  = $params->get('top_category', 0);
@@ -49,7 +51,7 @@ class JemModelWeekcal extends JemModelEventslist
 
 		#only select events within specified dates. (chosen weeknrs)
 
-		$config = JFactory::getConfig();
+		$config = Factory::getConfig();
 		$offset = $config->get('offset');
 		date_default_timezone_set($offset);
 		$datetime = new DateTime();
@@ -123,7 +125,7 @@ class JemModelWeekcal extends JemModelEventslist
 			return array();
 		}
 
-		$app          = JFactory::getApplication();
+		$app          = Factory::getApplication();
 		$params       = $app->getParams();
 		$startdayonly = $this->getState('filter.calendar_startdayonly');
 
@@ -182,7 +184,7 @@ class JemModelWeekcal extends JemModelEventslist
 		$startdate = $this->getState('filter.date.from');
 		$enddate   = $this->getState('filter.date.to');
 		if (empty($startdate) || empty($enddate)) {
-			$config = JFactory::getConfig();
+			$config = Factory::getConfig();
 			$offset = $config->get('offset');
 			$firstweekday  = $params->get('firstweekday', 1); // 1 = Monday, 0 = Sunday
 			$numberOfWeeks = $params->get('nrweeks', '1');
@@ -242,7 +244,7 @@ class JemModelWeekcal extends JemModelEventslist
 	public function getCurrentweek()
 	{
 		if (!isset($this->_currentweek)) {
-			$app = JFactory::getApplication();
+			$app = Factory::getApplication();
 			$params  = $app->getParams('com_jem');
 			$weekday = $params->get('firstweekday', 1); // 1 = Monday, 0 = Sunday
 

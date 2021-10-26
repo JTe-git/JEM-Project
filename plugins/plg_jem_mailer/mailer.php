@@ -21,6 +21,7 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Factory;
 
 // Import library dependencies
 jimport('joomla.event.plugin');
@@ -51,7 +52,7 @@ class plgJemMailer extends JPlugin
 		parent::__construct($subject, $config);
 		$this->loadLanguage();
 
-		$app = JFactory::getApplication();
+		$app = Factory::getApplication();
 		$jemsettings = JemHelper::globalattribs();
 
 		$this->_SiteName     = $app->getCfg('sitename');
@@ -93,7 +94,7 @@ class plgJemMailer extends JPlugin
 		$username = empty($this->_UseLoginName) ? $user->name : $user->username;
 
 		// get data
-		$db       = JFactory::getDBO();
+		$db       = Factory::getDBO();
 		$query    = $db->getQuery(true);
 
 		$case_when  = ' CASE WHEN ';
@@ -272,7 +273,7 @@ class plgJemMailer extends JPlugin
 		}
 
 		// get data
-		$db    = JFactory::getDBO();
+		$db    = Factory::getDBO();
 		$query = $db->getQuery(true);
 
 		$case_when  = ' CASE WHEN ';
@@ -373,7 +374,7 @@ class plgJemMailer extends JPlugin
 		$username = empty($this->_UseLoginName) ? $user->name : $user->username;
 
 		// get data
-		$db 	  = JFactory::getDBO();
+		$db 	  = Factory::getDBO();
 		$query	  = $db->getQuery(true);
 
 		$case_when  = ' CASE WHEN ';
@@ -540,7 +541,7 @@ class plgJemMailer extends JPlugin
 		$username = empty($this->_UseLoginName) ? $user->name : $user->username;
 
 		// get data
-		$db       = JFactory::getDBO();
+		$db       = Factory::getDBO();
 		$query    = $db->getQuery(true);
 
 		$case_when  = ' CASE WHEN ';
@@ -676,7 +677,7 @@ class plgJemMailer extends JPlugin
 		$username = empty($this->_UseLoginName) ? $user->name : $user->username;
 
 		// get data
-		$db 	= JFactory::getDBO();
+		$db 	= Factory::getDBO();
 		$query	= $db->getQuery(true);
 
 		$case_when = ' CASE WHEN ';
@@ -768,7 +769,7 @@ class plgJemMailer extends JPlugin
 	 */
 	private function _getRecipients(array $send_to, array $skip, $eventid, $creatorid, $userid, $venueid = 0)
 	{
-		$db = JFactory::getDBO();
+		$db = Factory::getDBO();
 
 		######################
 		## RECEIVERS - USER ##
@@ -979,7 +980,7 @@ class plgJemMailer extends JPlugin
 	 */
 	private function _mailer($data)
 	{
-		$app  = JFactory::getApplication();
+		$app  = Factory::getApplication();
 		$user = JemFactory::getUser();
 		$sent = array('ok' => 0, 'failed' => 0);
 
@@ -1066,7 +1067,7 @@ class plgJemMailer extends JPlugin
 		$result = false;
 
 		try {
-			$mail = JFactory::getMailer();
+			$mail = Factory::getMailer();
 		//	$mail->set('exceptions', false);
 			$mail->setSender(array($this->_MailFrom, $this->_FromName));
 			$mail->setSubject($subject);
@@ -1115,7 +1116,7 @@ class plgJemMailer extends JPlugin
 		if ($this->params->get('fetch_admin_mails', '0')) {
 
 			// get data
-			$db 	= JFactory::getDBO();
+			$db 	= Factory::getDBO();
 			$query	= $db->getQuery(true);
 
 			$query->select(array('u.id','u.email','u.name'));

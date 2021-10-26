@@ -10,6 +10,7 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Factory;
 
 include_once(JPATH_SITE.'/components/com_jem/helpers/helper.php');
 include_once(JPATH_SITE.'/components/com_jem/classes/image.class.php');
@@ -50,7 +51,7 @@ class plgAcymailingTagjem extends JPlugin
 			return;
 		}
 
-		$app = JFactory::getApplication();
+		$app = Factory::getApplication();
 
 		$pageInfo = new stdClass();
 		$pageInfo->filter = new stdClass();
@@ -88,7 +89,7 @@ class plgAcymailingTagjem extends JPlugin
 		$opendates[] = HTMLHelper::_('select.option', 'only', Text::_('COM_JEM_SHOW_OPENDATES_ONLY'));
 		$opendates[] = HTMLHelper::_('select.option', '0', Text::_('JOOMEXT_NO'));
 
-		$db = JFactory::getDBO();
+		$db = Factory::getDBO();
 
 		if (!empty($pageInfo->search)) {
 			$searchVal = '\'%'.acymailing_getEscaped($pageInfo->search, true).'%\'';
@@ -564,7 +565,7 @@ class plgAcymailingTagjem extends JPlugin
 		// The first argument is a list of events...
 		$allEvents = explode('-', $arguments[0]);
 
-		$db = JFactory::getDBO();
+		$db = Factory::getDBO();
 		foreach ($allEvents as $oneEvent) {
 			$tag->id = (int)$oneEvent;
 
@@ -590,7 +591,7 @@ class plgAcymailingTagjem extends JPlugin
 			$event = $db->loadObject();
 
 			if (empty($event)) {
-				$app = JFactory::getApplication();
+				$app = Factory::getApplication();
 				if ($app->isAdmin()) {
 					$app->enqueueMessage('The event "'.$tag->id.'" could not be loaded', 'notice');
 				}
@@ -723,7 +724,7 @@ class plgAcymailingTagjem extends JPlugin
 		}
 
 		$this->tags = array();
-		$db = JFactory::getDBO();
+		$db = Factory::getDBO();
 
 		foreach ($results as $var => $allresults) {
 			foreach ($allresults[0] as $i => $oneTag) {

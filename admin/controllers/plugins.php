@@ -10,6 +10,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\Factory;
 
 jimport('joomla.application.component.controller');
 
@@ -37,7 +38,7 @@ class JemControllerPlugins extends JControllerLegacy
 	 */
 	public function plugins()
 	{
-		$db = JFactory::getDBO();
+		$db = Factory::getDBO();
 
 		$query = $db->getQuery(true);
 		$query->select(array('count(*)'));

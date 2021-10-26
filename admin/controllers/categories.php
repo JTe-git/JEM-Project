@@ -9,6 +9,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\Factory;
 
 jimport('joomla.application.component.controlleradmin');
 
@@ -70,8 +71,8 @@ class JemControllerCategories extends JControllerAdmin
 		JSession::checkToken() or jexit(Text::_('JINVALID_TOKEN'));
 
 		// Get the arrays from the Request
-		$order = JFactory::getApplication()->input->post->get('order', array(), 'array');
-		$originalOrder = explode(',', JFactory::getApplication()->input->getString('original_order_values', ''));
+		$order = Factory::getApplication()->input->post->get('order', array(), 'array');
+		$originalOrder = explode(',', Factory::getApplication()->input->getString('original_order_values', ''));
 
 		// Make sure something has changed
 		if ($order !== $originalOrder) {
@@ -92,8 +93,8 @@ class JemControllerCategories extends JControllerAdmin
  		JSession::checkToken() or jexit(Text::_('JINVALID_TOKEN'));
 
  		// Get items to remove from the request.
- 		$cid = JFactory::getApplication()->input->get('cid', array(), 'array');
- 		$extension = JFactory::getApplication()->input->get('extension', '');
+ 		$cid = Factory::getApplication()->input->get('cid', array(), 'array');
+ 		$extension = Factory::getApplication()->input->get('extension', '');
 
  		if (!is_array($cid) || count($cid) < 1)
  		{
@@ -134,7 +135,7 @@ class JemControllerCategories extends JControllerAdmin
 		// Check for request forgeries
 		JSession::checkToken() or jexit('Invalid Token');
 
- 		$cid= JFactory::getApplication()->input->post->get('cid', array(), 'array');
+ 		$cid= Factory::getApplication()->input->post->get('cid', array(), 'array');
 
  		if (!is_array($cid) || count($cid) < 1) {
 			 \Joomla\CMS\Factory::getApplication()->enqueueMessage(Text::_('COM_JEM_SELECT_ITEM_TO_DELETE'), 'warning');
@@ -144,7 +145,7 @@ class JemControllerCategories extends JControllerAdmin
 
  		$msg = $model->delete($cid);
 
- 		$cache = JFactory::getCache('com_jem');
+ 		$cache = Factory::getCache('com_jem');
  		$cache->clean();
 
  		$this->setRedirect('index.php?option=com_jem&view=categories', $msg);

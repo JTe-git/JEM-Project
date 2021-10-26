@@ -11,6 +11,7 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Factory;
 
 /**
  * View class: Attendee
@@ -20,8 +21,8 @@ class JemViewAttendee extends JViewLegacy {
 	public function display($tpl = null)
 	{
 		//initialise variables
-		$document = JFactory::getDocument();
-		$jinput   = JFactory::getApplication()->input;
+		$document = Factory::getDocument();
+		$jinput   = Factory::getApplication()->input;
 
 		$this->jemsettings = JemHelper::config();
 
@@ -61,10 +62,10 @@ class JemViewAttendee extends JViewLegacy {
 	 */
 	protected function addToolbar()
 	{
-		JFactory::getApplication()->input->set('hidemainmenu', true);
+		Factory::getApplication()->input->set('hidemainmenu', true);
 
 		//get vars
-		$cid        = JFactory::getApplication()->input->get('cid', array(), 'array');
+		$cid        = Factory::getApplication()->input->get('cid', array(), 'array');
 		$user       = JemFactory::getUser();
 		$checkedOut = false; // don't know, table hasn't such a field
 		$canDo      = JemHelperBackend::getActions();

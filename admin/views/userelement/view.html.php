@@ -11,6 +11,7 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Factory;
 
 /**
  * View class for the JEM userelement screen
@@ -22,12 +23,12 @@ class JEMViewUserElement extends JViewLegacy {
 
 	public function display($tpl = null)
 	{
-		$app = JFactory::getApplication();
+		$app = Factory::getApplication();
 
 		// initialise variables
-		$document	= JFactory::getDocument();
+		$document	= Factory::getDocument();
 		$jemsettings = JEMAdmin::config();
-		$db = JFactory::getDBO();
+		$db = Factory::getDBO();
 
 		// get var
 		$filter_order		= $app->getUserStateFromRequest('com_jem.userelement.filter_order', 'filter_order', 'u.name', 'cmd');

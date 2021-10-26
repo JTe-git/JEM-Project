@@ -9,6 +9,7 @@
 defined('JPATH_BASE') or die;
 
 use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Factory;
 
 JFormHelper::loadFieldClass('list');
 
@@ -67,10 +68,10 @@ class JFormFieldCatOptions extends JFormFieldList
 		// Get the field options.
 		$options = (array) $this->getOptions();
 
-		$jinput = JFactory::getApplication()->input;
+		$jinput = Factory::getApplication()->input;
 		$currentid = $jinput->getInt('id');
 
-		$db		= JFactory::getDbo();
+		$db		= Factory::getDbo();
 		$query	= $db->getQuery(true);
 		$query->select('DISTINCT catid');
 		$query->from('#__jem_cats_event_relations');

@@ -9,6 +9,7 @@
 defined('_JEXEC') or die();
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\Factory;
 
 jimport('joomla.application.component.modelitem');
 
@@ -33,7 +34,7 @@ class JemModelEvent extends JModelItem
 	 */
 	protected function populateState()
 	{
-		$app = JFactory::getApplication('site');
+		$app = Factory::getApplication('site');
 
 		// Load state from the request.
 		$pk = $app->input->getInt('id', 0);
@@ -117,7 +118,7 @@ class JemModelEvent extends JModelItem
 
 				# Filter contact by language
 				if ($this->getState('filter.language')) {
-					$subQuery->where('(contact.language in (' . $db->quote(JFactory::getLanguage()->getTag()) . ',' . $db->quote('*') . ') OR contact.language IS NULL)');
+					$subQuery->where('(contact.language in (' . $db->quote(Factory::getLanguage()->getTag()) . ',' . $db->quote('*') . ') OR contact.language IS NULL)');
 				}
 
 				$query->select('(' . $subQuery . ') as contactid2');
@@ -125,7 +126,7 @@ class JemModelEvent extends JModelItem
 				# Filter event by language
 				/* commented out yet because it's incomplete
 				if ($this->getState('filter.language')) {
-					$query->where('a.language in (' . $db->quote(JFactory::getLanguage()->getTag()) . ',' . $db->quote('*') . ')');
+					$query->where('a.language in (' . $db->quote(Factory::getLanguage()->getTag()) . ',' . $db->quote('*') . ')');
 				}
 				*/
 
@@ -232,7 +233,7 @@ class JemModelEvent extends JModelItem
 	 */
 	public function hit($pk = 0)
 	{
-		$hitcount = JFactory::getApplication()->input->getInt('hitcount', 1);
+		$hitcount = Factory::getApplication()->input->getInt('hitcount', 1);
 
 		if ($hitcount) {
 			// Initialise variables.
@@ -269,13 +270,13 @@ class JemModelEvent extends JModelItem
 		$user      = JemFactory::getUser();
 	//	$userid    = (int)$user->get('id');
 		$levels    = $user->getAuthorisedViewLevels();
-	//	$app       = JFactory::getApplication();
+	//	$app       = Factory::getApplication();
 	//	$params    = $app->getParams();
 	//	$catswitch = $params->get('categoryswitch', '0');
 		$settings  = JemHelper::globalattribs();
 
 		// Query
-		$db = JFactory::getDBO();
+		$db = Factory::getDBO();
 		$query = $db->getQuery(true);
 
 		$case_when_c  = ' CASE WHEN ';
@@ -556,7 +557,7 @@ class JemModelEvent extends JModelItem
 	 */
 	protected function _doRegister($eventId, $uid, $uip, $status, $comment, &$errMsg, $regid = 0, $respectPlaces = true)
 	{
-	//	$app = JFactory::getApplication('site');
+	//	$app = Factory::getApplication('site');
 	//	$user = JemFactory::getUser();
 	//	$jemsettings = JemHelper::config();
 		$registration = (empty($uid) || empty($eventId)) ? false : $this->getUserRegistration($eventId, $uid);
@@ -639,7 +640,7 @@ class JemModelEvent extends JModelItem
 	 */
 	public function userregister()
 	{
-		$app = JFactory::getApplication('site');
+		$app = Factory::getApplication('site');
 		$user = JemFactory::getUser();
 		$jemsettings = JemHelper::config();
 
@@ -689,7 +690,7 @@ class JemModelEvent extends JModelItem
 	 */
 	public function adduser($eventId, $uid, $status, $comment, &$errMsg, $regid = 0, $respectPlaces = true)
 	{
-	//	$app = JFactory::getApplication('site');
+	//	$app = Factory::getApplication('site');
 		$user = JemFactory::getUser();
 		$jemsettings = JemHelper::config();
 

@@ -10,6 +10,7 @@ defined('_JEXEC') or die();
 
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Factory;
 
 /**
  * Editevent-View
@@ -44,10 +45,10 @@ class JemViewEditevent extends JemView
 		// Initialise variables.
 		$jemsettings = JemHelper::config();
 		$settings    = JemHelper::globalattribs();
-		$app         = JFactory::getApplication();
+		$app         = Factory::getApplication();
 		$user        = JemFactory::getUser();
 		$userId      = $user->get('id');
-		$document    = JFactory::getDocument();
+		$document    = Factory::getDocument();
 		$model       = $this->getModel();
 		$menu        = $app->getMenu();
 		$menuitem    = $menu->getActive();
@@ -240,7 +241,7 @@ class JemViewEditevent extends JemView
 	 */
 	protected function _prepareDocument()
 	{
-		$app = JFactory::getApplication();
+		$app = Factory::getApplication();
 
 		$title = $this->params->get('page_title');
 		if ($app->getCfg('sitename_pagetitles', 0) == 1) {
@@ -272,11 +273,11 @@ class JemViewEditevent extends JemView
 	 */
 	protected function _displaychoosevenue($tpl)
 	{
-		$app         = JFactory::getApplication();
-		$jinput      = JFactory::getApplication()->input;
+		$app         = Factory::getApplication();
+		$jinput      = Factory::getApplication()->input;
 		$jemsettings = JemHelper::config();
-	//	$db          = JFactory::getDBO();
-		$document    = JFactory::getDocument();
+	//	$db          = Factory::getDBO();
+		$document    = Factory::getDocument();
 
 		$filter_order     = $app->getUserStateFromRequest('com_jem.selectvenue.filter_order', 'filter_order', 'l.venue', 'cmd');
 		$filter_order_Dir = $app->getUserStateFromRequest('com_jem.selectvenue.filter_order_Dir', 'filter_order_Dir', 'ASC', 'word');
@@ -323,11 +324,11 @@ class JemViewEditevent extends JemView
 	 */
 	protected function _displaychoosecontact($tpl)
 	{
-		$app         = JFactory::getApplication();
-		$jinput      = JFactory::getApplication()->input;
+		$app         = Factory::getApplication();
+		$jinput      = Factory::getApplication()->input;
 		$jemsettings = JemHelper::config();
-	//	$db          = JFactory::getDBO();
-		$document    = JFactory::getDocument();
+	//	$db          = Factory::getDBO();
+		$document    = Factory::getDocument();
 
 		$filter_order     = $app->getUserStateFromRequest('com_jem.selectcontact.filter_order', 'filter_order', 'con.name', 'cmd');
 		$filter_order_Dir = $app->getUserStateFromRequest('com_jem.selectcontact.filter_order_Dir', 'filter_order_Dir', '', 'word');
@@ -378,11 +379,11 @@ class JemViewEditevent extends JemView
 	 */
 	protected function _displaychooseusers($tpl)
 	{
-		$app         = JFactory::getApplication();
+		$app         = Factory::getApplication();
 		$jinput      = $app->input;
 		$jemsettings = JemHelper::config();
-	//	$db          = JFactory::getDBO();
-		$document    = JFactory::getDocument();
+	//	$db          = Factory::getDBO();
+		$document    = Factory::getDocument();
 		$model       = $this->getModel();
 
 		// no filters, hard-coded

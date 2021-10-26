@@ -1,13 +1,15 @@
 <?php
 /**
- * @version 2.3.1
+ * @version 4.0.0
  * @package JEM
- * @copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright (C) 2005-2009 Christoph Lukes
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 
 defined('_JEXEC') or die;
+
+use Joomla\CMS\Factory;
 
 jimport('joomla.application.component.model');
 jimport('joomla.html.pagination');
@@ -31,7 +33,7 @@ class JemModelMyattendances extends JModelLegacy
 	{
 		parent::__construct();
 
-		$app = JFactory::getApplication();
+		$app = Factory::getApplication();
 		$jemsettings = JemHelper::config();
 
 		//get the number of events
@@ -58,7 +60,7 @@ class JemModelMyattendances extends JModelLegacy
 	 */
 	public function getAttending()
 	{
-		$pop = JFactory::getApplication()->input->getBool('pop', false);
+		$pop = Factory::getApplication()->input->getBool('pop', false);
 
 		// Lets load the content if it doesn't already exist
 		if (empty($this->_attending)) {
@@ -168,7 +170,7 @@ class JemModelMyattendances extends JModelLegacy
 	 */
 	protected function _buildOrderByAttending()
 	{
-		$app  = JFactory::getApplication();
+		$app  = Factory::getApplication();
 		$task = $app->input->getCmd('task', '');
 
 		$filter_order = $app->getUserStateFromRequest('com_jem.myattendances.filter_order', 'filter_order', 'a.dates', 'cmd');
@@ -208,7 +210,7 @@ class JemModelMyattendances extends JModelLegacy
 	 */
 	protected function _buildAttendingWhere()
 	{
-		$app      = JFactory::getApplication();
+		$app      = Factory::getApplication();
 
 		// Get the paramaters of the active menu item
 		$params   = $app->getParams();

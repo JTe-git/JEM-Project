@@ -10,6 +10,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\Factory;
 
 jimport('joomla.application.component.model');
 
@@ -49,7 +50,7 @@ class JemModelImport extends JModelLegacy
 	 */
 	public function __construct()
 	{
-		$app = JFactory::getApplication();
+		$app = Factory::getApplication();
 		$this->elprefix = $app->getUserStateFromRequest('com_jem.import.elimport.prefix', 'prefix', '#__', 'cmd');
 		if ($this->elprefix == '') {
 			$this->elprefix = '#__';
@@ -209,7 +210,7 @@ class JemModelImport extends JModelLegacy
 			return $this->storeCatsEventRelations($events, $replace);
 		}
 
-		$db = JFactory::getDbo();
+		$db = Factory::getDbo();
 
 		// in case imported data has no key field explicitely add it with value 0 and don't try to replace
 		$presetkey = in_array('id', $fieldsname) ? false : 'id';
@@ -391,7 +392,7 @@ class JemModelImport extends JModelLegacy
 	 */
 	private function storeCatsEventRelations(array $events, $replace = true)
 	{
-		$db = JFactory::getDbo();
+		$db = Factory::getDbo();
 		$columns = array('catid', 'itemid', 'ordering');
 		$result  = array('added' => 0, 'updated' => 0, 'ignored' => 0);
 
@@ -624,7 +625,7 @@ class JemModelImport extends JModelLegacy
 	{
 		// attachments - MUST be transformed after potential objects are stored!
 		if (strcasecmp($tablename, 'attachments') === 0) {
-			$default_view_level = JFactory::getConfig()->get('access', 1);
+			$default_view_level = Factory::getConfig()->get('access', 1);
 			$valid_view_levels  = $this->_getViewLevels();
 			$current_user_id    = JemFactory::getUser()->get('id');
 			$valid_user_ids     = $this->_getUserIds();
@@ -649,7 +650,7 @@ class JemModelImport extends JModelLegacy
 		}
 		// categories
 		elseif (strcasecmp($tablename, 'categories') === 0) {
-			$default_view_level = JFactory::getConfig()->get('access', 1);
+			$default_view_level = Factory::getConfig()->get('access', 1);
 			$valid_view_levels  = $this->_getViewLevels();
 			$current_user_id    = JemFactory::getUser()->get('id');
 			$valid_user_ids     = $this->_getUserIds();
@@ -702,7 +703,7 @@ class JemModelImport extends JModelLegacy
 		}
 		// events
 		elseif (strcasecmp($tablename, 'events') === 0) {
-			$default_view_level = JFactory::getConfig()->get('access', 1);
+			$default_view_level = Factory::getConfig()->get('access', 1);
 			$valid_view_levels  = $this->_getViewLevels();
 			$cat_levels         = $this->_getCategoryViewLevels();
 			$current_user_id    = JemFactory::getUser()->get('id');
@@ -994,7 +995,7 @@ class JemModelImport extends JModelLegacy
 	{
 		if (empty(static::$_user_ids))
 		{
-			$db = JFactory::getDbo();
+			$db = Factory::getDbo();
 			$query = $db->getQuery(true);
 			$query->select('a.id')
 			      ->from($db->quoteName('#__users') . ' AS a')
@@ -1016,7 +1017,7 @@ class JemModelImport extends JModelLegacy
 	{
 		if (empty(static::$_view_levels))
 		{
-			$db = JFactory::getDbo();
+			$db = Factory::getDbo();
 			$query = $db->getQuery(true);
 			$query->select('a.id')
 			      ->from($db->quoteName('#__viewlevels') . ' AS a')
@@ -1036,7 +1037,7 @@ class JemModelImport extends JModelLegacy
 	 */
 	protected function _getCategoryViewLevels()
 	{
-		$db = JFactory::getDbo();
+		$db = Factory::getDbo();
 		$query = $db->getQuery(true);
 		$query->select('a.id, a.access')
 		      ->from($db->quoteName('#__jem_categories') . ' AS a')
@@ -1060,7 +1061,7 @@ class JemModelImport extends JModelLegacy
 	{
 		$ret = $defaultLevel;
 
-		$db = JFactory::getDbo();
+		$db = Factory::getDbo();
 		$query = $db->getQuery(true);
 		$query->select('c.access')
 		      ->from($db->quoteName($this->elprefix.'eventlist_categories') . ' AS c')
@@ -1095,7 +1096,7 @@ class JemModelImport extends JModelLegacy
 		$ok = preg_match('/([^0-9]+)([0-9]+)/', $object, $matches);
 		if ($ok && (count($matches) == 3)) {
 			$id = $matches[2];
-			$db = JFactory::getDbo();
+			$db = Factory::getDbo();
 			$query = $db->getQuery(true);
 
 			switch ($matches[1]) {
@@ -1130,7 +1131,7 @@ class JemModelImport extends JModelLegacy
 	 */
 	private function _rootkey()
 	{
-		$db = JFactory::getDbo();
+		$db = Factory::getDbo();
 		$query = $db->getQuery(true);
 		$query->select('c.id');
 		$query->from('#__jem_categories AS c');

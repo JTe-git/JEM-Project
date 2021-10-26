@@ -12,6 +12,7 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Factory;
 
 $options = array(
 		'onActive' => 'function(title, description){
@@ -369,7 +370,7 @@ function showUnregistraUntil()
 		<?php /* show "old" recurrence settings for information */
 		if (!empty($this->item->recurr_bak->recurrence_type)) {
 			$recurr_type = '';
-			$nullDate = JFactory::getDbo()->getNullDate();
+			$nullDate = Factory::getDbo()->getNullDate();
 			$rlDate = $this->item->recurr_bak->recurrence_limit_date;
 			if (!empty($rlDate) && (strpos($nullDate, $rlDate) !== 0)) {
 				$recurr_limit_date = JemOutput::formatdate($rlDate);

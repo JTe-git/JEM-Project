@@ -11,6 +11,7 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Factory;
 
 /**
  * View class for the JEM Contactelement screen
@@ -22,11 +23,11 @@ class JEMViewContactelement extends JViewLegacy {
 
 	public function display($tpl = null)
 	{
-		$app = JFactory::getApplication();
+		$app = Factory::getApplication();
 
 		//initialise variables
-		$db			= JFactory::getDBO();
-		$document	= JFactory::getDocument();
+		$db			= Factory::getDBO();
+		$document	= Factory::getDocument();
 
 		HTMLHelper::_('behavior.tooltip');
 		HTMLHelper::_('behavior.modal');

@@ -10,6 +10,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\Factory;
 
 jimport('joomla.application.component.controller');
 
@@ -48,7 +49,7 @@ class JemControllerAttendees extends JControllerLegacy
 		// Check for request forgeries.
 		JSession::checkToken() or jexit(Text::_('JINVALID_TOKEN'));
 
-		$jinput = JFactory::getApplication()->input;
+		$jinput = Factory::getApplication()->input;
 		$cid = $jinput->get('cid',  0, 'array');
 		$eventid = $jinput->getInt('eventid');
 
@@ -79,7 +80,7 @@ class JemControllerAttendees extends JControllerLegacy
 			echo "<script> alert('" . $modelAttendeeList->getError() . "'); window.history.go(-1); </script>\n";
 		}
 
-		$cache = JFactory::getCache('com_jem');
+		$cache = Factory::getCache('com_jem');
 		$cache->clean();
 
 		$msg = $total . ' ' . Text::_('COM_JEM_REGISTERED_USERS_DELETED');
@@ -120,7 +121,7 @@ class JemControllerAttendees extends JControllerLegacy
 		// Check for request forgeries
 		JSession::checkToken() or jexit(Text::_('JINVALID_TOKEN'));
 
-		$app  = JFactory::getApplication();
+		$app  = Factory::getApplication();
 		$pks  = $app->input->get('cid', array(), 'array');
 		$task = $this->getTask();
 
@@ -181,7 +182,7 @@ class JemControllerAttendees extends JControllerLegacy
 		// Check for request forgeries.
 		JSession::checkToken() or jexit(Text::_('JINVALID_TOKEN'));
 
-		$jinput = JFactory::getApplication()->input;
+		$jinput = Factory::getApplication()->input;
 		$jinput->set('view', 'attendee');
 		// 'attendee' expects event id as 'event' not 'id'
 		$jinput->set('event', $jinput->getInt('eventid'));
@@ -201,8 +202,8 @@ class JemControllerAttendees extends JControllerLegacy
 		// Check for request forgeries
 		JSession::checkToken() or jexit(Text::_('JINVALID_TOKEN'));
 
-		$user    = JFactory::getUser();
-		$app     = JFactory::getApplication();
+		$user    = Factory::getUser();
+		$app     = Factory::getApplication();
 		$eventid = $app->input->getInt('eventid');
 		$ids     = $app->input->get('cid', array(), 'array');
 		$values  = array('setWaitinglist' => 2, 'setAttending' => 1, 'setInvited' => 0, 'setNotAttending' => -1);

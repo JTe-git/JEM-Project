@@ -1,20 +1,20 @@
 <?php
 /**
- * @version 2.3.1
+ * @version 4.0.0
  * @package JEM
- * @copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright (C) 2005-2009 Christoph Lukes
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 
 defined('JPATH_BASE') or die;
 
+use Joomla\CMS\Factory;
+
 //JFormHelper::loadFieldClass('list');
 
 jimport('joomla.html.html');
 jimport('joomla.form.formfield');
-
-
 
 /**
  * CountryOptions Field class.
@@ -59,10 +59,10 @@ class JFormFieldCatOptions2 extends JFormField
 		//$categories = JEMCategories::getCategoriesTree(0);
 		//$Lists['parent_id'] 		= JEMCategories::buildcatselect($categories, 'parent_id', $row->parent_id, 1);
 
-		$currentid = JFactory::getApplication()->input->getInt('id');
+		$currentid = Factory::getApplication()->input->getInt('id');
 		$categories = JEMCategories::getCategoriesTree(0);
 
-		$db		= JFactory::getDbo();
+		$db		= Factory::getDbo();
 		$query	= $db->getQuery(true);
 		$query = 'SELECT DISTINCT parent_id FROM #__jem_categories WHERE id = '. $db->quote($currentid);
 

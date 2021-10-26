@@ -10,6 +10,7 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Factory;
 
 jimport('joomla.filesystem.file');
 jimport('joomla.filesystem.folder');
@@ -161,7 +162,7 @@ class JemHelper
 					$dispatcher->trigger('onJemBeforeCleanup', array($jemsettings, $forced));
 				}
 
-				$db = JFactory::getDbo();
+				$db = Factory::getDbo();
 				$query = $db->getQuery(true);
 
 				// Get the last event occurence of each recurring published events, with unlimited repeat, or last date not passed.
@@ -187,7 +188,7 @@ class JemHelper
 					$ref_event = JTable::getInstance('Event', 'JemTable');
 					$ref_event->load($recurrence_row['id']);
 
-					$db = JFactory::getDbo();
+					$db = Factory::getDbo();
 					$query = $db->getQuery(true);
 					$query->select('*');
 					$query->from($db->quoteName('#__jem_events').' AS a');
@@ -418,7 +419,7 @@ class JemHelper
 		}
 
 		try {
-			$db = JFactory::getDbo();
+			$db = Factory::getDbo();
 			$nulldate = explode(' ', $db->getNullDate());
 			$db->setQuery('UPDATE #__jem_events'
 			            . ' SET recurrence_first_id = 0, recurrence_type = 0'
@@ -473,7 +474,7 @@ class JemHelper
 		$fullPaththumb = JPath::clean(JPATH_SITE.'/images/jem/'.$folder.'/small/'.$filename);
 		if (is_file($fullPath)) {
 			// Count usage and don't delete if used elsewhere.
-			$db = JFactory::getDBO();
+			$db = Factory::getDBO();
 			$db->setQuery($countquery_tmpl . $db->quote($filename));
 			if (null === ($usage = $db->loadObjectList())) {
 				return false;
@@ -489,7 +490,7 @@ class JemHelper
 		}
 		elseif (empty($filename) && is_dir($fullPath)) {
 			// get image files used
-			$db = JFactory::getDBO();
+			$db = Factory::getDBO();
 			$db->setQuery($imagequery);
 			if (null === ($used = $db->loadAssocList('image', 'count'))) {
 				return false;
@@ -527,7 +528,7 @@ class JemHelper
 	{
 		$jemsettings = JemHelper::config();
 		$basepath    = JPATH_SITE.'/'.$jemsettings->attachments_path;
-		$db          = JFactory::getDBO();
+		$db          = Factory::getDBO();
 		$res         = true;
 
 		// Get list of all folders matching type (format is "$type$id")
@@ -642,11 +643,11 @@ class JemHelper
 	 */
 	static public function getAccesslevelOptions($ownonly = false, $disabledLevels = false)
 	{
-		$db = JFactory::getDBO();
+		$db = Factory::getDBO();
 		$where = '';
 		$selDisabled = '';
 		if ($ownonly) {
-			$levels = JFactory::getUser()->getAuthorisedViewLevels();
+			$levels = Factory::getUser()->getAuthorisedViewLevels();
 			$allLevels = $levels;
 			if (!empty($disabledLevels)) {
 				if (!is_array($disabledLevels)) {
@@ -798,7 +799,7 @@ class JemHelper
 	 */
 	static public function updateWaitingList($event)
 	{
-		$db = Jfactory::getDBO();
+		$db = Factory::getDBO();
 
 		// get event details for registration
 		$query = ' SELECT maxplaces, waitinglist FROM #__jem_events WHERE id = ' . $db->Quote($event);
@@ -866,7 +867,7 @@ class JemHelper
 		}
 		$ids = implode(",", $ids);
 
-		$db = Jfactory::getDBO();
+		$db = Factory::getDBO();
 
 		// status 1: user registered (attendee or waiting list), status -1: user exlicitely unregistered, status 0: user is invited but hadn't answered yet
 		$query = ' SELECT COUNT(id) as total,'
@@ -909,7 +910,7 @@ class JemHelper
 	{
 		$user     = JemFactory::getUser();
 		$userTz   = $user->getParam('timezone');
-		$timeZone = JFactory::getConfig()->get('offset');
+		$timeZone = Factory::getConfig()->get('offset');
 
 		/* disabled for now
 		if($userTz) {
@@ -948,7 +949,7 @@ class JemHelper
 		require_once JPATH_SITE.'/components/com_jem/classes/iCalcreator.class.php';
 		$jemsettings   = JemHelper::config();
 		$timezone_name = JemHelper::getTimeZoneName();
-		$config        = JFactory::getConfig();
+		$config        = Factory::getConfig();
 		$sitename      = $config->get('sitename');
 
 		// get categories names
@@ -1237,7 +1238,7 @@ class JemHelper
 	 */
 	public static function getModuleLayoutPath($module, $layout = 'default')
 	{
-		$template = \JFactory::getApplication()->getTemplate();
+		$template = \Factory::getApplication()->getTemplate();
 		$defaultLayout = $layout;
 		$suffix = self::getLayoutStyleSuffix();
 
@@ -1616,7 +1617,7 @@ class JemHelper
 			break;
 		} // switch
 
-		$document = JFactory::getDocument();
+		$document = Factory::getDocument();
 		$document->addStyleDeclaration($style);
 
 		return true;
@@ -1629,7 +1630,7 @@ class JemHelper
 	 */
 	static public function loadCustomTag()
 	{
-		$document = JFactory::getDocument();
+		$document = Factory::getDocument();
 		$tag = "";
 		$tag .= "<!--[if IE]><style type='text/css'>.floattext{zoom:1;}, * html #jem dd { height: 1%; }</style><![endif]-->";
 
@@ -1669,7 +1670,7 @@ class JemHelper
 				break;
 		}
 
-		$db = JFactory::getDbo();
+		$db = Factory::getDbo();
 		$query = $db->getQuery(true);
 		$query->select(array($column));
 		$query->from('#__extensions');

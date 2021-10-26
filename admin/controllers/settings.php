@@ -10,6 +10,7 @@
 defined('_JEXEC') or die();
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\Factory;
 
 /**
  * JEM Component Settings Controller
@@ -73,7 +74,7 @@ class JemControllerSettings extends JControllerLegacy
 		JSession::checkToken() or jexit(Text::_('JINVALID_TOKEN'));
 
 		// Initialise variables.
-		$app = JFactory::getApplication();
+		$app = Factory::getApplication();
 		$data = $app->input->get('jform', array(), 'array');
 
 		$task = $this->getTask();
@@ -164,7 +165,7 @@ class JemControllerSettings extends JControllerLegacy
 
 		// Check if the user is authorized to do this.
 		if (!JemFactory::getUser()->authorise('core.admin', 'com_jem')) {
-			JFactory::getApplication()->redirect('index.php', Text::_('JERROR_ALERTNOAUTHOR'));
+			Factory::getApplication()->redirect('index.php', Text::_('JERROR_ALERTNOAUTHOR'));
 			return;
 		}
 

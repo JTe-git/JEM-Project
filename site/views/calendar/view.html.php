@@ -10,6 +10,7 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Factory;
 
 /**
  * Calendar-View
@@ -21,14 +22,14 @@ class JemViewCalendar extends JemView
 	 */
 	public function display($tpl = null)
 	{
-		$app = JFactory::getApplication();
+		$app = Factory::getApplication();
 
 		// Load tooltips behavior
 		HTMLHelper::_('behavior.tooltip');
 		HTMLHelper::_('behavior.framework');
 
 		// initialize variables
-		$document     = JFactory::getDocument();
+		$document     = Factory::getDocument();
 		$menu         = $app->getMenu();
 		$menuitem     = $menu->getActive();
 		$jemsettings  = JemHelper::config();

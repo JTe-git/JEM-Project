@@ -11,6 +11,7 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Factory;
 
 /**
  * View class: Attendees
@@ -19,8 +20,8 @@ class JemViewAttendees extends JemAdminView
 {
 	public function display($tpl = null)
 	{
-		$app = JFactory::getApplication();
-		$db  = JFactory::getDBO();
+		$app = Factory::getApplication();
+		$db  = Factory::getDBO();
 
 		$this->jemsettings = JemHelper::config();
 

@@ -10,6 +10,7 @@ defined('_JEXEC') or die ();
 
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Factory;
 
 /**
  * Venue-View
@@ -38,14 +39,14 @@ class JemViewVenue extends JemView
 			HTMLHelper::_('behavior.tooltip');
 
 			// initialize variables
-			$app         = JFactory::getApplication();
-			$document    = JFactory::getDocument();
+			$app         = Factory::getApplication();
+			$document    = Factory::getDocument();
 			$menu        = $app->getMenu();
 			$menuitem    = $menu->getActive();
 			$jemsettings = JemHelper::config();
 			$settings    = JemHelper::globalattribs();
 			$params      = $app->getParams();
-			$uri         = JFactory::getURI();
+			$uri         = Factory::getURI();
 			$pathway     = $app->getPathWay();
 			$jinput      = $app->input;
 			$print       = $jinput->getBool('print', false);
@@ -149,15 +150,15 @@ class JemViewVenue extends JemView
 			### Venue List view ###
 
 			// initialize variables
-			$app         = JFactory::getApplication();
-			$document    = JFactory::getDocument();
+			$app         = Factory::getApplication();
+			$document    = Factory::getDocument();
 			$menu        = $app->getMenu();
 			$menuitem    = $menu->getActive();
 			$jemsettings = JemHelper::config();
 			$settings    = JemHelper::globalattribs();
 			$params      = $app->getParams('com_jem');
 			$pathway     = $app->getPathWay ();
-			$uri         = JFactory::getURI();
+			$uri         = Factory::getURI();
 			$jinput      = $app->input;
 			$task        = $jinput->getCmd('task', '');
 			$print       = $jinput->getBool('print', false);

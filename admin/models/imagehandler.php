@@ -1,13 +1,15 @@
 <?php
 /**
- * @version 2.3.1
+ * @version 4.0.0
  * @package JEM
- * @copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright (C) 2005-2009 Christoph Lukes
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 
 defined('_JEXEC') or die;
+
+use Joomla\CMS\Factory;
 
 jimport('joomla.application.component.model');
 jimport('joomla.filesystem.folder');
@@ -41,7 +43,7 @@ class JemModelImagehandler extends JModelLegacy
 	{
 		parent::__construct();
 
-		$app        = JFactory::getApplication();
+		$app        = Factory::getApplication();
 		$option     = $app->input->getString('option', 'com_jem');
 		$task       = $app->input->getVar('task', '');
 		$limit      = $app->getUserStateFromRequest($option.'imageselect'.$task.'limit', 'limit', $app->getCfg('list_limit'), 'int');
@@ -60,7 +62,7 @@ class JemModelImagehandler extends JModelLegacy
 		static $set = false;
 
 		if (!$set) {
-			$folder = JFactory::getApplication()->input->get('folder', '');
+			$folder = Factory::getApplication()->input->get('folder', '');
 			$this->setState('folder', $folder);
 
 			$set = true;

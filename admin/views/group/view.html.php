@@ -11,6 +11,7 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Factory;
 
 /**
  * View class Group
@@ -45,9 +46,9 @@ class JemViewGroup extends JemAdminView
 
 		//initialise variables
 		$jemsettings = JemHelper::config();
-		$document	= JFactory::getDocument();
+		$document	= Factory::getDocument();
 		$this->settings	= JemAdmin::config();
-		$task		= JFactory::getApplication()->input->get('task', '');
+		$task		= Factory::getApplication()->input->get('task', '');
 		$this->task = $task;
 		$url 		= JUri::root();
 
@@ -79,7 +80,7 @@ class JemViewGroup extends JemAdminView
 	 */
 	protected function addToolbar()
 	{
-		JFactory::getApplication()->input->set('hidemainmenu', true);
+		Factory::getApplication()->input->set('hidemainmenu', true);
 
 		$user		= JemFactory::getUser();
 		$isNew		= ($this->item->id == 0);

@@ -10,6 +10,7 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Factory;
 
 /**
  * Eventelement-View
@@ -18,13 +19,13 @@ class JemViewEventelement extends JViewLegacy {
 
 	public function display($tpl = null)
 	{
-		$app = JFactory::getApplication();
+		$app = Factory::getApplication();
 
 		//initialise variables
 		$user        = JemFactory::getUser();
-		$db          = JFactory::getDBO();
+		$db          = Factory::getDBO();
 		$jemsettings = JEMAdmin::config();
-		$document    = JFactory::getDocument();
+		$document    = Factory::getDocument();
 		$itemid      = $app->input->getInt('id', 0) . ':' . $app->input->getInt('Itemid', 0);
 
 		HTMLHelper::_('behavior.tooltip');

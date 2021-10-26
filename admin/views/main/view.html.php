@@ -11,6 +11,7 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Factory;
 
 /**
  * View class for the JEM home screen
@@ -26,7 +27,7 @@ class JemViewMain extends JemAdminView
 		jimport('joomla.html.pane');
 
 		//initialise variables
-		$document = JFactory::getDocument();
+		$document = Factory::getDocument();
 		$user     = JemFactory::getUser();
 
 		// Get data from the model
@@ -75,7 +76,7 @@ class JemViewMain extends JemAdminView
 	protected function quickiconButton($link, $image, $text, $modal = 0)
 	{
 		// Initialise variables
-		$lang = JFactory::getLanguage();
+		$lang = Factory::getLanguage();
 		?>
 		<div style="float:<?php echo ($lang->isRTL()) ? 'right' : 'left'; ?>;">
 			<div class="icon">

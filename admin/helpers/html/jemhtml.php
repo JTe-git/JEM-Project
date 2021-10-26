@@ -12,6 +12,7 @@ defined('_JEXEC') or die();
 
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Factory;
 
 /**
  * JHtml Class
@@ -43,7 +44,7 @@ abstract class JHtmlJemHtml
 				)
 		);
 		$state = \Joomla\Utilities\ArrayHelper::getValue($states, (int) $value, $states[1]);
-		$no_iconfont = (bool)JFactory::getApplication()->isAdmin(); // requires font and css loaded which isn't yet on backend
+		$no_iconfont = (bool)Factory::getApplication()->isAdmin(); // requires font and css loaded which isn't yet on backend
 		$html = HTMLHelper::_('jemhtml.icon', 'com_jem/'.$state[0], 'fa fa-fw fa-lg '.$state[1].' jem-featured-'.$state[1], $state[3], null, $no_iconfont);
 		if ($canChange) {
 			$html = '<a href="#" onclick="return listItemTask(\'cb' . $i . '\',\'' . $state[2] . '\')" title="' . Text::_($state[4]) . '">' . $html . '</a>';
@@ -83,7 +84,7 @@ abstract class JHtmlJemHtml
 				)
 		);
 		$state = \Joomla\Utilities\ArrayHelper::getValue($states, (int) $value, $states[1]);
-		$no_iconfont = (bool)JFactory::getApplication()->isAdmin(); // requires font and css loaded which isn't yet on backend
+		$no_iconfont = (bool)Factory::getApplication()->isAdmin(); // requires font and css loaded which isn't yet on backend
 		$html = HTMLHelper::_('jemhtml.icon', 'com_jem/'.$state[0], 'fa fa-fw fa-lg '.$state[1].' jem-attendance-status-'.$state[1], $state[3], null, $no_iconfont);
 		if ($canChange) {
 			$html = '<a href="#" onclick="return listItemTask(\'cb' . $i . '\',\'' . $state[2] . '\')" title="' . Text::_($state[4]) . '">' . $html . '</a>';
@@ -215,7 +216,7 @@ abstract class JHtmlJemHtml
 				)
 		);
 
-		$backend = (bool)JFactory::getApplication()->isAdmin();
+		$backend = (bool)Factory::getApplication()->isAdmin();
 		$state   = \Joomla\Utilities\ArrayHelper::getValue($states, (int) $value, $states[-99]);
 
 		if (version_compare(JVERSION, '3.3', 'lt')) {

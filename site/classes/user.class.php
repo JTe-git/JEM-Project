@@ -1,13 +1,15 @@
 <?php
 /**
- * @version 2.3.1
+ * @version 4.0.0
  * @package JEM
- * @copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright (C) 2005-2009 Christoph Lukes
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 
 defined('_JEXEC') or die;
+
+use Joomla\CMS\Factory;
 
 /**
  * JEM user class with additional functions.
@@ -94,7 +96,7 @@ abstract class JemUserAbstract extends JUser
 	 */
 	static function superuser()
 	{
-		$user = JFactory::getUser();
+		$user = Factory::getUser();
 
     	if ($user->authorise('core.manage', 'com_jem')) {
     		return true;
@@ -128,7 +130,7 @@ abstract class JemUserAbstract extends JUser
 	public function ismaintainer($action, $eventid = false)
 	{
 		// lets look if the user is a maintainer
-		$db = JFactory::getDBO();
+		$db = Factory::getDBO();
 
 		$query = 'SELECT gr.id' . ' FROM #__jem_groups AS gr'
 				. ' LEFT JOIN #__jem_groupmembers AS g ON g.group_id = gr.id'
@@ -189,7 +191,7 @@ abstract class JemUserAbstract extends JUser
 		 *
 		 * views: venues, venue, editvenue
 		 */
-		$db = JFactory::getDBO();
+		$db = Factory::getDBO();
 		$query = 'SELECT gr.id'
 				. ' FROM #__jem_groups AS gr'
 				. ' LEFT JOIN #__jem_groupmembers AS g ON g.group_id = gr.id'
@@ -223,7 +225,7 @@ abstract class JemUserAbstract extends JUser
 			return false;
 		}
 
-		$db	= JFactory::getDBO();
+		$db	= Factory::getDBO();
 
 		if (is_array($asset) && !empty($asset)) {
 			array_walk($asset, function(&$v, $k, $db) { $v = $db->quoteName($v); }, $db);
@@ -342,7 +344,7 @@ abstract class JemUserAbstract extends JUser
 		}
 
 		// We have to check ALL categories, also those not seen by user.
-		$db = JFactory::getDBO();
+		$db = Factory::getDBO();
 		$query  = 'SELECT DISTINCT c.*' . $disable
 		        . ' FROM #__jem_categories AS c'
 		        . ' WHERE c.published = 1'
@@ -494,7 +496,7 @@ abstract class JemUserAbstract extends JUser
 
 						$levels = $this->getAuthorisedViewLevels();
 						// We have to check ALL categories, also those not seen by user.
-						$db = JFactory::getDBO();
+						$db = Factory::getDBO();
 						$query  = 'SELECT DISTINCT c.id, c.groupid, c.access'
 						        . ' FROM #__jem_categories AS c';
 						if (!empty($id)) {

@@ -1,9 +1,9 @@
 <?php
 /**
- * @version 2.2.3
+ * @version 4.0.0
  * @package JEM
  * @subpackage JEM Calendar Module
- * @copyright (C) 2013-2017 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright (C) 2008 Toni Smillie www.qivva.com
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  *
@@ -14,6 +14,8 @@
  * License: http://keithdevens.com/software/license
  */
 defined('_JEXEC') or die;
+
+use Joomla\CMS\Factory;
 
 JModelLegacy::addIncludePath(JPATH_SITE.'/components/com_jem/models', 'JemModel');
 
@@ -64,7 +66,7 @@ abstract class ModJemCalHelper extends JModuleHelper
 	 */
 	public static function getAjax()
 	{
-		$app     = JFactory::getApplication();
+		$app     = Factory::getApplication();
 		$modid   = $app->input->getInt('modjemcal_id');
 		# JModuleHelper doesn't provide module by id - but we
 		$module = self::getModuleById($modid);
@@ -83,7 +85,7 @@ abstract class ModJemCalHelper extends JModuleHelper
 		# Set params for the model
 		$model->setState('params', $params);
 
-		$db       = JFactory::getDbo();
+		$db       = Factory::getDbo();
 		$user     = JemFactory::getUser();
 		$levels   = $user->getAuthorisedViewLevels();
 		$settings = JemHelper::globalattribs();

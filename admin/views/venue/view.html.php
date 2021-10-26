@@ -11,6 +11,7 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Factory;
 
 /**
  * View class: Venue
@@ -41,10 +42,10 @@ class JemViewVenue extends JemAdminView
 		HTMLHelper::_('behavior.formvalidation');
 
 		//initialise variables
-		$document       = JFactory::getDocument();
+		$document       = Factory::getDocument();
 		$this->settings = JemAdmin::config();
 		$globalregistry = JemHelper::globalattribs();
-		$task           = JFactory::getApplication()->input->get('task', '');
+		$task           = Factory::getApplication()->input->get('task', '');
 		$this->task     = $task;
 
 		// Load css
@@ -55,7 +56,7 @@ class JemViewVenue extends JemAdminView
 		HTMLHelper::_('script', 'com_jem/attachments.js', false, true);
 		//$document->addScript('https://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places');
 
-		$language = JFactory::getLanguage();
+		$language = Factory::getLanguage();
 		$language = $language->getTag();
 		$language = substr($language, 0,2);
 
@@ -82,7 +83,7 @@ class JemViewVenue extends JemAdminView
 	 */
 	protected function addToolbar()
 	{
-		JFactory::getApplication()->input->set('hidemainmenu', true);
+		Factory::getApplication()->input->set('hidemainmenu', true);
 
 		$user       = JemFactory::getUser();
 		$isNew      = ($this->item->id == 0);

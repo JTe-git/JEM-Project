@@ -9,6 +9,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\Factory;
 
 /**
  * Categories-View
@@ -20,9 +21,9 @@ class JemViewCategories extends JemView
 	 */
 	public function display($tpl = null)
 	{
-		$app = JFactory::getApplication();
+		$app = Factory::getApplication();
 
-		$document    = JFactory::getDocument();
+		$document    = Factory::getDocument();
 		$jemsettings = JemHelper::config();
 		$user        = JemFactory::getUser();
 		$print       = $app->input->getBool('print', false);

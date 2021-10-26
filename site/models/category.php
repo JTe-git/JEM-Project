@@ -1,12 +1,14 @@
 <?php
 /**
- * @version 2.3.1
+ * @version 4.0.0
  * @package JEM
- * @copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright (C) 2005-2009 Christoph Lukes
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 defined('_JEXEC') or die;
+
+use Joomla\CMS\Factory;
 
 require_once dirname(__FILE__) . '/eventslist.php';
 
@@ -33,7 +35,7 @@ class JemModelCategory extends JemModelEventslist
 	 */
 	public function __construct()
 	{
-		$app    = JFactory::getApplication();
+		$app    = Factory::getApplication();
 		// Get the parameters of the active menu item
 		$params = $app->getParams();
 
@@ -90,7 +92,7 @@ class JemModelCategory extends JemModelEventslist
 	protected function populateState($ordering = null, $direction = null)
 	{
 		// Initiliase variables.
-		$app         = JFactory::getApplication('site');
+		$app         = Factory::getApplication('site');
 		$jemsettings = JemHelper::config();
 		$task        = $app->input->getCmd('task','');
 		$format      = $app->input->getCmd('format',false);
@@ -244,7 +246,7 @@ class JemModelCategory extends JemModelEventslist
 	protected function getListQuery()
 	{
 		//$params  = $this->state->params;
-		//$jinput  = JFactory::getApplication()->input;
+		//$jinput  = Factory::getApplication()->input;
 		//$task    = $jinput->get('task','','cmd');
 
 		// Create a new query object.

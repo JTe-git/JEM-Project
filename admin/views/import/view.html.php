@@ -11,6 +11,7 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Factory;
 
 /**
  * View class for the JEM import screen
@@ -48,7 +49,7 @@ class JemViewImport extends JemAdminView
 		$this->jemTables 		= $this->get('JemTablesCount');
 		$this->existingJemData 	= $this->get('ExistingJemData');
 
-		$app = JFactory::getApplication();
+		$app = Factory::getApplication();
 		$jinput = $app->input;
 		$progress = new stdClass();
 		$progress->step 	= $jinput->get('step', 0, 'INT');

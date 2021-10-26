@@ -10,6 +10,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\Factory;
 
 jimport('joomla.application.component.controller');
 
@@ -40,7 +41,7 @@ class JemControllerMyevents extends JControllerLegacy
 		// Check for request forgeries
 		JSession::checkToken() or jexit('Invalid Token');
 
-		$app = JFactory::getApplication();
+		$app = Factory::getApplication();
 		$input = $app->input;
 
 		$cid = $input->get('cid', array(), 'array');
@@ -70,7 +71,7 @@ class JemControllerMyevents extends JControllerLegacy
 		// Check for request forgeries
 		JSession::checkToken() or jexit('Invalid Token');
 
-		$app = JFactory::getApplication();
+		$app = Factory::getApplication();
 		$input = $app->input;
 
 		$cid = $input->get('cid', array(), 'array');
@@ -103,7 +104,7 @@ class JemControllerMyevents extends JControllerLegacy
 		// Check for request forgeries
 		JSession::checkToken() or jexit('Invalid Token');
 
-		$app = JFactory::getApplication();
+		$app = Factory::getApplication();
 		$input = $app->input;
 
 		$cid = $input->get('cid', array(), 'array');

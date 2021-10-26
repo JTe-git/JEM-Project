@@ -1,9 +1,9 @@
 <?php
 /**
- * @version 2.2.2
+ * @version 4.0.0
  * @package JEM
  * @subpackage JEM - Module-Calendar(AJAX)
- * @copyright (C) 2015-2017 joomlaeventmanager.net
+ * @copyright (C) 2015-2022 joomlaeventmanager.net
  * @copyright (C) 2008-2010 Toni Smillie www.qivva.com
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
 
@@ -17,6 +17,8 @@
 */
 
 defined('_JEXEC') or die;
+
+use Joomla\CMS\Factory;
 
 JModelLegacy::addIncludePath(JPATH_SITE.'/components/com_jem/models', 'JemModel');
 require_once JPATH_SITE . '/components/com_jem/helpers/helper.php';
@@ -39,7 +41,7 @@ abstract class ModJemCalajaxHelper
 		$levels		= $user->getAuthorisedViewLevels();
 		$settings 	= JemHelper::globalattribs();
 
-		$app 	= JFactory::getApplication();
+		$app 	= Factory::getApplication();
 		$jinput	= $app->input;
 		$item	= $jinput->getInt('Itemid');
 

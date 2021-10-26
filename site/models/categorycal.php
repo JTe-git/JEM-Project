@@ -1,12 +1,14 @@
 <?php
 /**
- * @version 2.3.1
+ * @version 4.0.0
  * @package JEM
- * @copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright (C) 2005-2009 Christoph Lukes
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 defined('_JEXEC') or die;
+
+use Joomla\CMS\Factory;
 
 require_once dirname(__FILE__) . '/eventslist.php';
 
@@ -36,7 +38,7 @@ class JemModelCategoryCal extends JemModelEventslist
 	 */
 	public function __construct()
 	{
-		$app    = JFactory::getApplication();
+		$app    = Factory::getApplication();
 		$params = $app->getParams();
 
 		$id = $app->input->getInt('id', 0);
@@ -73,7 +75,7 @@ class JemModelCategoryCal extends JemModelEventslist
 	 */
 	protected function populateState($ordering = null, $direction = null)
 	{
-		$app          = JFactory::getApplication();
+		$app          = Factory::getApplication();
 		$params       = $app->getParams();
 		$itemid       = $app->input->getInt('Itemid', 0);
 		$task         = $app->input->getCmd('task', '');

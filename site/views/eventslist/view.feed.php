@@ -9,6 +9,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\Factory;
 
 /**
  * Eventslist-Feed
@@ -20,8 +21,8 @@ class JemViewEventslist extends JViewLegacy
 	 */
 	public function display($cachable = false, $urlparams = false)
 	{
-		$app = JFactory::getApplication();
-		$doc = JFactory::getDocument();
+		$app = Factory::getApplication();
+		$doc = Factory::getDocument();
 		$jemsettings = JemHelper::config();
 
 		// Get some data from the model

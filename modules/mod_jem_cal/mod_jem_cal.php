@@ -18,6 +18,7 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Factory;
 
 require_once(dirname(__FILE__).'/helper.php');
 require_once(JPATH_SITE.'/components/com_jem/helpers/route.php');
@@ -34,7 +35,7 @@ if (version_compare(JVERSION, '3.3', 'ge')) {
 }
 
 # Parameters
-$app                 = JFactory::getApplication();
+$app                 = Factory::getApplication();
 $day_name_length     = $params->get('day_name_length', '2');
 $first_day           = $params->get('first_day', '1');
 $Year_length         = $params->get('Year_length', '1');
@@ -81,7 +82,7 @@ if ($Remember == 1) {
 }
 
 # Set today
-$config      = JFactory::getConfig();
+$config      = Factory::getConfig();
 $tzoffset    = $config->get('config.offset');
 $time        = time() + (($tzoffset + $Time_offset) * 60 * 60);
 $today_month = date('m', $time);
@@ -160,7 +161,7 @@ $mod_name = 'mod_jem_cal';
 if ($Default_Stylesheet == 1) {
 	JemHelper::loadModuleStyleSheet($mod_name);
 } else {
-	$document = JFactory::getDocument();
+	$document = Factory::getDocument();
 	$document->addStyleSheet(JUri::base() . $User_stylesheet);
 }
 

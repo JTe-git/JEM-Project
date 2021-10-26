@@ -1,15 +1,16 @@
 <?php
 /**
- * @version 2.3.1
+ * @version 4.0.0
  * @package JEM
- * @copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright (C) 2005-2009 Christoph Lukes
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 defined('_JEXEC') or die;
 
-jimport('joomla.application.component.model');
+use Joomla\CMS\Factory;
 
+jimport('joomla.application.component.model');
 
 /**
  * Contactelement-Model
@@ -51,7 +52,7 @@ class JemModelContactelement extends JModelLegacy
 	{
 		parent::__construct();
 
-		$app =  JFactory::getApplication();
+		$app =  Factory::getApplication();
 
 		$limit      = $app->getUserStateFromRequest( 'com_jem.limit', 'limit', $app->getCfg('list_limit'), 'int');
 		$limitstart = $app->getUserStateFromRequest( 'com_jem.limitstart', 'limitstart', 0, 'int' );
@@ -79,7 +80,7 @@ class JemModelContactelement extends JModelLegacy
 	 */
 	protected function buildQuery()
 	{
-		$app              = JFactory::getApplication();
+		$app              = Factory::getApplication();
 
 		$filter_order     = $app->getUserStateFromRequest( 'com_jem.contactelement.filter_order','filter_order','con.ordering','cmd');
 		$filter_order_Dir = $app->getUserStateFromRequest( 'com_jem.contactelement.filter_order_Dir','filter_order_Dir','','word' );
@@ -92,7 +93,7 @@ class JemModelContactelement extends JModelLegacy
 		$search           = $this->_db->escape( trim(\Joomla\String\StringHelper::strtolower( $search ) ) );
 
 		// start query
-		$db = JFactory::getDBO();
+		$db = Factory::getDBO();
 		$query = $db->getQuery(true);
 		$query->select(array('con.*'));
 		$query->from('#__contact_details as con');
