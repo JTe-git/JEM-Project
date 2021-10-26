@@ -1,9 +1,9 @@
 <?php
 /**
- * @version 2.3.0
+ * @version 4.0.0
  * @package JEM
  * @subpackage JEM Calendar Module
- * @copyright (C) 2013-2020 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright (C) 2008 Toni Smillie www.qivva.com
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  *
@@ -15,6 +15,8 @@
  */
 
 defined('_JEXEC') or die;
+
+use Joomla\CMS\Language\Text;
 
 require_once(dirname(__FILE__).'/helper.php');
 require_once(JPATH_SITE.'/components/com_jem/helpers/route.php');
@@ -42,8 +44,8 @@ $Show_Tooltips       = $params->get('Show_Tooltips', '1');
 $Show_Tooltips_Title = $params->get('Show_Tooltips_Title', '1');
 $Remember            = $params->get('Remember', '1');
 $use_ajax            = $params->get('use_ajax', '1');
-$CalTooltipsTitle    = $params->get('cal15q_tooltips_title', JText::_('MOD_JEM_CAL_EVENT'));
-$CalTooltipsTitlePl  = $params->get('cal15q_tooltipspl_title', JText::_('MOD_JEM_CAL_EVENTS'));
+$CalTooltipsTitle    = $params->get('cal15q_tooltips_title', Text::_('MOD_JEM_CAL_EVENT'));
+$CalTooltipsTitlePl  = $params->get('cal15q_tooltipspl_title', Text::_('MOD_JEM_CAL_EVENTS'));
 $Default_Stylesheet  = $params->get('Default_Stylesheet', '1');
 $User_stylesheet     = $params->get('User_stylesheet', 'modules/mod_jem_cal/tmpl/mod_jem_cal.css');
 $tooltips_max_events = $params->get('tooltips_max_events', 0);

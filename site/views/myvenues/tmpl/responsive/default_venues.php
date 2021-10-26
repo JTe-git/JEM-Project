@@ -1,19 +1,21 @@
 <?php
 /**
- * @version 2.3.1
+ * @version 4.0.0
  * @package JEM
- * @copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright (C) 2005-2009 Christoph Lukes
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 defined('_JEXEC') or die;
+
+use Joomla\CMS\Language\Text;
 
 JHtml::_('behavior.tooltip');
 ?>
 
 <?php if (!$this->params->get('show_page_heading', 1)) :
            /* hide this if page heading is shown */     ?>
-<h2><?php echo JText::_('COM_JEM_MY_VENUES'); ?></h2>
+<h2><?php echo Text::_('COM_JEM_MY_VENUES'); ?></h2>
 <?php endif; ?>
 
 <style>
@@ -75,21 +77,21 @@ JHtml::_('behavior.tooltip');
 		<?php if ($this->settings->get('global_show_filter',1)) : ?>
       <div id="jem_filter" class="floattext jem-form jem-row jem-justify-start">
         <div>
-          <?php echo '<label for="filter">'.JText::_('COM_JEM_FILTER').'</label>'; ?>
+          <?php echo '<label for="filter">'.Text::_('COM_JEM_FILTER').'</label>'; ?>
         </div>
         <div class="jem-row jem-justify-start jem-nowrap">
           <?php echo $this->lists['filter']; ?>
           <input type="text" name="filter_search" id="filter_search" value="<?php echo $this->lists['search'];?>" class="inputbox" onchange="document.adminForm.submit();" />
         </div>
         <div class="jem-row jem-justify-start jem-nowrap">
-          <button class="btn btn-primary" type="submit"><?php echo JText::_('JSEARCH_FILTER_SUBMIT'); ?></button>
-          <button class="btn btn-secondary" type="button" onclick="document.id('filter_search').value='';this.form.submit();"><?php echo JText::_('JSEARCH_FILTER_CLEAR'); ?></button> 
+          <button class="btn btn-primary" type="submit"><?php echo Text::_('JSEARCH_FILTER_SUBMIT'); ?></button>
+          <button class="btn btn-secondary" type="button" onclick="document.id('filter_search').value='';this.form.submit();"><?php echo Text::_('JSEARCH_FILTER_CLEAR'); ?></button> 
         </div>
 		<?php if ($this->settings->get('global_display',1)) : ?>
 		<div class="jem-limit-smallist">
 		<?php
-		echo '<label for="limit">'.JText::_('COM_JEM_DISPLAY_NUM').'</label>';
-		//echo '<span class="jem-limit-text">'.JText::_('COM_JEM_DISPLAY_NUM').'</span>&nbsp;';
+		echo '<label for="limit">'.Text::_('COM_JEM_DISPLAY_NUM').'</label>';
+		//echo '<span class="jem-limit-text">'.Text::_('COM_JEM_DISPLAY_NUM').'</span>&nbsp;';
 		echo $this->venues_pagination->getLimitBox();
 		?>
 		</div>
@@ -102,7 +104,7 @@ JHtml::_('behavior.tooltip');
     <div class="jem-list-row jem-small-list">
       <?php if (empty($this->print) && !empty($this->permissions->canPublishVenue)) : ?>
 				<div class="sectiontableheader jem-myvenues-check">
-          <input type="checkbox" value="" title="<?php echo JText::_('JGLOBAL_CHECK_ALL'); ?>" onclick="Joomla.checkAll(this)" />
+          <input type="checkbox" value="" title="<?php echo Text::_('JGLOBAL_CHECK_ALL'); ?>" onclick="Joomla.checkAll(this)" />
         </div>
       <?php endif; ?>
       <?php if ($this->jemsettings->showlocate == 1) : ?>
@@ -114,13 +116,13 @@ JHtml::_('behavior.tooltip');
       <?php if ($this->jemsettings->showstate == 1) : ?>
         <div id="jem_state" class="sectiontableheader">&nbsp;<?php echo JHtml::_('grid.sort', 'COM_JEM_TABLE_STATE', 'l.state', $this->lists['order_Dir'], $this->lists['order']); ?></div>
       <?php endif; ?> 
-      <div class="jem-myvenues-status" ><?php echo JText::_('JSTATUS'); ?></div>
+      <div class="jem-myvenues-status" ><?php echo Text::_('JSTATUS'); ?></div>
     </div>    
   </div>
 
 	<ul class="eventlist">
 		<?php if (count((array)$this->venues) == 0) : ?>
-			<li class="jem-event"><?php echo JText::_('COM_JEM_NO_VENUES'); ?></li>
+			<li class="jem-event"><?php echo Text::_('COM_JEM_NO_VENUES'); ?></li>
 		<?php else :?>
 			<?php foreach ($this->venues as $i => $row) : ?>
         <?php if (!empty($row->featured)) :   ?>
@@ -140,7 +142,7 @@ JHtml::_('behavior.tooltip');
             <?php endif; ?>
 
             <?php if ($this->jemsettings->showlocate == 1) : ?>
-                <div class="jem-event-info-small jem-event-venue" title="<?php echo JText::_('COM_JEM_TABLE_LOCATION').': '.$this->escape($row->venue); ?>">
+                <div class="jem-event-info-small jem-event-venue" title="<?php echo Text::_('COM_JEM_TABLE_LOCATION').': '.$this->escape($row->venue); ?>">
                   <i class="fa fa-map-marker" aria-hidden="true"></i>
                   <?php if (($this->jemsettings->showlinkvenue == 1) && !empty($row->venueslug)) : ?>
                     <?php echo "<a href='".JRoute::_(JemHelperRoute::getVenueRoute($row->venueslug))."'>".$this->escape($row->venue)."</a>"; ?>
@@ -152,7 +154,7 @@ JHtml::_('behavior.tooltip');
 
             <?php if ($this->jemsettings->showcity == 1) : ?>
               <?php if (!empty($row->city)) : ?>
-                <div class="jem-event-info-small jem-event-city" title="<?php echo JText::_('COM_JEM_TABLE_CITY').': '.$this->escape($row->city); ?>">
+                <div class="jem-event-info-small jem-event-city" title="<?php echo Text::_('COM_JEM_TABLE_CITY').': '.$this->escape($row->city); ?>">
                   <i class="fa fa-building-o" aria-hidden="true"></i>
                   <?php echo $this->escape($row->city); ?>
                 </div>
@@ -163,7 +165,7 @@ JHtml::_('behavior.tooltip');
 
             <?php if ($this->jemsettings->showstate == 1) : ?>
               <?php if (!empty($row->state)) : ?>
-                <div class="jem-event-info-small jem-event-state" title="<?php echo JText::_('COM_JEM_TABLE_STATE').': '.$this->escape($row->state); ?>">
+                <div class="jem-event-info-small jem-event-state" title="<?php echo Text::_('COM_JEM_TABLE_STATE').': '.$this->escape($row->state); ?>">
                   <i class="fa fa-map-o" aria-hidden="true"></i>
                   <?php echo $this->escape($row->state); ?>
                 </div>

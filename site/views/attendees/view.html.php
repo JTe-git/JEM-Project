@@ -1,12 +1,14 @@
 <?php
 /**
- * @version 2.3.1
+ * @version 4.0.0
  * @package JEM
- * @copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright (C) 2005-2009 Christoph Lukes
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 defined('_JEXEC') or die;
+
+use Joomla\CMS\Language\Text;
 
 /**
  * Attendees-view
@@ -21,7 +23,7 @@ class JemViewAttendees extends JemView
 
 		//redirect if not logged in
 		if (!$user->get('id')) {
-			$app->enqueueMessage(JText::_('COM_JEM_NEED_LOGGED_IN'), 'error');
+			$app->enqueueMessage(Text::_('COM_JEM_NEED_LOGGED_IN'), 'error');
 			return false;
 		}
 
@@ -68,8 +70,8 @@ class JemViewAttendees extends JemView
 
 		// Merge params.
 		// Because this view is not useable for menu item we always overwrite $params.
-		$pagetitle = JText::_('COM_JEM_MYEVENT_MANAGEATTENDEES') . ' - ' . $event->title;
-		$params->set('page_heading', JText::_('COM_JEM_MYEVENT_MANAGEATTENDEES')); // event title is shown separate
+		$pagetitle = Text::_('COM_JEM_MYEVENT_MANAGEATTENDEES') . ' - ' . $event->title;
+		$params->set('page_heading', Text::_('COM_JEM_MYEVENT_MANAGEATTENDEES')); // event title is shown separate
 		//$params->set('show_page_heading', 1); // always show?
 		$params->set('introtext', ''); // there can't be an introtext
 		$params->set('showintrotext', 0);
@@ -77,10 +79,10 @@ class JemViewAttendees extends JemView
 
 		// Add site name to title if param is set
 		if ($app->getCfg('sitename_pagetitles', 0) == 1) {
-			$pagetitle = JText::sprintf('JPAGETITLE', $app->getCfg('sitename'), $pagetitle);
+			$pagetitle = Text::sprintf('JPAGETITLE', $app->getCfg('sitename'), $pagetitle);
 		}
 		elseif ($app->getCfg('sitename_pagetitles', 0) == 2) {
-			$pagetitle = JText::sprintf('JPAGETITLE', $pagetitle, $app->getCfg('sitename'));
+			$pagetitle = Text::sprintf('JPAGETITLE', $pagetitle, $app->getCfg('sitename'));
 		}
 
 		$document->setTitle($pagetitle);
@@ -105,9 +107,9 @@ class JemViewAttendees extends JemView
 		//build filter selectlist
 		$filters = array();
 		if ($settings->get('global_regname', '1')) {
-			$filters[] = JHtml::_('select.option', '1', JText::_('COM_JEM_NAME'));
+			$filters[] = JHtml::_('select.option', '1', Text::_('COM_JEM_NAME'));
 		} else {
-			$filters[] = JHtml::_('select.option', '2', JText::_('COM_JEM_USERNAME'));
+			$filters[] = JHtml::_('select.option', '2', Text::_('COM_JEM_USERNAME'));
 		}
 		$lists['filter'] = JHtml::_('select.genericlist', $filters, 'filter', array('size'=>'1','class'=>'inputbox'), 'value', 'text', $filter);
 
@@ -115,11 +117,11 @@ class JemViewAttendees extends JemView
 		$lists['search'] = $search;
 
 		// attendee status
-		$options = array(JHtml::_('select.option', -2, JText::_('COM_JEM_ATT_FILTER_ALL')),
-		                 JHtml::_('select.option',  0, JText::_('COM_JEM_ATT_FILTER_INVITED')),
-		                 JHtml::_('select.option', -1, JText::_('COM_JEM_ATT_FILTER_NOT_ATTENDING')),
-		                 JHtml::_('select.option',  1, JText::_('COM_JEM_ATT_FILTER_ATTENDING')),
-		                 JHtml::_('select.option',  2, JText::_('COM_JEM_ATT_FILTER_WAITING'))) ;
+		$options = array(JHtml::_('select.option', -2, Text::_('COM_JEM_ATT_FILTER_ALL')),
+		                 JHtml::_('select.option',  0, Text::_('COM_JEM_ATT_FILTER_INVITED')),
+		                 JHtml::_('select.option', -1, Text::_('COM_JEM_ATT_FILTER_NOT_ATTENDING')),
+		                 JHtml::_('select.option',  1, Text::_('COM_JEM_ATT_FILTER_ATTENDING')),
+		                 JHtml::_('select.option',  2, Text::_('COM_JEM_ATT_FILTER_WAITING'))) ;
 		$lists['status'] = JHtml::_('select.genericlist', $options, 'filter_status', array('class'=>'inputbox','onChange'=>'this.form.submit();'), 'value', 'text', $filter_status);
 
 		// table ordering
@@ -203,7 +205,7 @@ class JemViewAttendees extends JemView
 		// Load css
 		JemHelper::loadCss('jem');
 
-		$document->setTitle(JText::_('COM_JEM_SELECT_USERS_AND_STATUS'));
+		$document->setTitle(Text::_('COM_JEM_SELECT_USERS_AND_STATUS'));
 
 		// Get/Create the model
 	//	$model->setState('event.id', $eventId);
@@ -216,7 +218,7 @@ class JemViewAttendees extends JemView
 
 		//Build search filter - unused
 		$filters = array();
-		$filters[] = JHtml::_('select.option', '1', JText::_('COM_JEM_NAME'));
+		$filters[] = JHtml::_('select.option', '1', Text::_('COM_JEM_NAME'));
 		$searchfilter = JHtml::_('select.genericlist', $filters, 'filter_type', array('size'=>'1','class'=>'inputbox'), 'value', 'text', $filter_type);
 
 		// search filter - unused

@@ -1,8 +1,8 @@
 <?php
 /**
- * @version 2.3.1
+ * @version 4.0.0
  * @package JEM
- * @copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright (C) 2005-2009 Christoph Lukes
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
@@ -21,6 +21,8 @@
  * Thanks to Maik Lindner (http://nifox.com) for his help developing this class
  */
 defined('_JEXEC') or die;
+
+use Joomla\CMS\Language\Text;
 
 class JemCalendar
 {
@@ -801,18 +803,18 @@ class JemCalendar
 		if (!$var) $var=@$this->actmonth;
 		if ($this->monthNames) return $this->monthNames[$var-1];
 		switch($var) {
-			case 1: return JText::_($this->jan);
-			case 2: return JText::_($this->feb);
-			case 3: return JText::_($this->mar);
-			case 4: return JText::_($this->apr);
-			case 5: return JText::_($this->may);
-			case 6: return JText::_($this->jun);
-			case 7: return JText::_($this->jul);
-			case 8: return JText::_($this->aug);
-			case 9: return JText::_($this->sep);
-			case 10: return JText::_($this->oct);
-			case 11: return JText::_($this->nov);
-			case 12: return JText::_($this->dec);
+			case 1: return Text::_($this->jan);
+			case 2: return Text::_($this->feb);
+			case 3: return Text::_($this->mar);
+			case 4: return Text::_($this->apr);
+			case 5: return Text::_($this->may);
+			case 6: return Text::_($this->jun);
+			case 7: return Text::_($this->jul);
+			case 8: return Text::_($this->aug);
+			case 9: return Text::_($this->sep);
+			case 10: return Text::_($this->oct);
+			case 11: return Text::_($this->nov);
+			case 12: return Text::_($this->dec);
 		}
 	}
 	/*
@@ -823,13 +825,13 @@ class JemCalendar
 	function getDayName($var=false) {
 		if ($this->dayNames) return $this->dayNames[$var];
 		switch($var) {
-			case 0: return JText::_($this->sun);
-			case 1: return JText::_($this->mon);
-			case 2: return JText::_($this->tue);
-			case 3: return JText::_($this->wed);
-			case 4: return JText::_($this->thu);
-			case 5: return JText::_($this->fri);
-			case 6: return JText::_($this->sat);
+			case 0: return Text::_($this->sun);
+			case 1: return Text::_($this->mon);
+			case 2: return Text::_($this->tue);
+			case 3: return Text::_($this->wed);
+			case 4: return Text::_($this->thu);
+			case 5: return Text::_($this->fri);
+			case 6: return Text::_($this->sat);
 		}
 	}
 	/*

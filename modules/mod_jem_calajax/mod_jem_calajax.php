@@ -1,9 +1,9 @@
 <?php
 /**
- * @version 2.2.2
+ * @version 4.0.0
  * @package JEM
  * @subpackage JEM - Module-Calendar(AJAX)
- * @copyright (C) 2015-2017 joomlaeventmanager.net
+ * @copyright (C) 2015-2022 joomlaeventmanager.net
  * @copyright (C) 2008-2010 Toni Smillie www.qivva.com
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  *
@@ -18,6 +18,8 @@
  */
 
 defined('_JEXEC') or die;
+
+use Joomla\CMS\Language\Text;
 
 require_once __DIR__ . '/helper.php';
 require_once JPATH_SITE . '/components/com_jem/helpers/route.php';
@@ -42,8 +44,8 @@ if (version_compare(JVERSION, '3.3', 'ge')) {
 	$Show_Tooltips_Title = $params->get('Show_Tooltips_Title', '1');
 	$Remember            = $params->get('Remember', '1');
 	$LocaleOverride      = $params->get('locale_override', '');
-	$CalTooltipsTitle    = $params->get('cal15q_tooltips_title', JText::_('MOD_JEM_CALAJAX_EVENT'));
-	$CalTooltipsTitlePl  = $params->get('cal15q_tooltipspl_title', JText::_('MOD_JEM_CALAJAX_EVENTS'));
+	$CalTooltipsTitle    = $params->get('cal15q_tooltips_title', Text::_('MOD_JEM_CALAJAX_EVENT'));
+	$CalTooltipsTitlePl  = $params->get('cal15q_tooltipspl_title', Text::_('MOD_JEM_CALAJAX_EVENTS'));
 	$UseJoomlaLanguage   = $params->get('UseJoomlaLanguage', '1');
 	$Default_Stylesheet  = $params->get('Default_Stylesheet', '1');
 	$User_stylesheet     = $params->get('User_stylesheet', 'modules/mod_jem_calajax/mod_jem_calajax.css');

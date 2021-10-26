@@ -1,13 +1,15 @@
 <?php
 /**
- * @version 2.3.1
+ * @version 4.0.0
  * @package JEM
- * @copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright (C) 2005-2009 Christoph Lukes
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 
 defined('_JEXEC') or die;
+
+use Joomla\CMS\Language\Text;
 
 jimport('joomla.filesystem.file');
 require_once(JPATH_SITE.'/components/com_jem/classes/Zebra_Image.php');
@@ -237,7 +239,7 @@ class JemImage
 
 		//check if the upload is an image...getimagesize will return false if not
 		if (!getimagesize($file['tmp_name'])) {
-			\Joomla\CMS\Factory::getApplication()->enqueueMessage(JText::_('COM_JEM_UPLOAD_FAILED_NOT_AN_IMAGE').': '.htmlspecialchars($file['name'], ENT_COMPAT, 'UTF-8'), 'warning');
+			\Joomla\CMS\Factory::getApplication()->enqueueMessage(Text::_('COM_JEM_UPLOAD_FAILED_NOT_AN_IMAGE').': '.htmlspecialchars($file['name'], ENT_COMPAT, 'UTF-8'), 'warning');
 			return false;
 		}
 
@@ -247,13 +249,13 @@ class JemImage
 		$allowable = explode(',', strtolower($filetypes));
 		array_walk($allowable, function(&$v){$v = trim($v);});
 		if (!in_array($fileext, $allowable)) {
-			\Joomla\CMS\Factory::getApplication()->enqueueMessage(JText::_('COM_JEM_WRONG_IMAGE_FILE_TYPE').': '.htmlspecialchars($file['name'], ENT_COMPAT, 'UTF-8'), 'warning');
+			\Joomla\CMS\Factory::getApplication()->enqueueMessage(Text::_('COM_JEM_WRONG_IMAGE_FILE_TYPE').': '.htmlspecialchars($file['name'], ENT_COMPAT, 'UTF-8'), 'warning');
 			return false;
 		}
 
 		//Check filesize
 		if ($imagesize > $sizelimit) {
-			\Joomla\CMS\Factory::getApplication()->enqueueMessage(JText::_('COM_JEM_IMAGE_FILE_SIZE').': '.htmlspecialchars($file['name'], ENT_COMPAT, 'UTF-8'), 'warning');
+			\Joomla\CMS\Factory::getApplication()->enqueueMessage(Text::_('COM_JEM_IMAGE_FILE_SIZE').': '.htmlspecialchars($file['name'], ENT_COMPAT, 'UTF-8'), 'warning');
 			return false;
 		}
 
@@ -264,7 +266,7 @@ class JemImage
 		foreach ($html_tags as $tag) {
 			// A tag is '<tagname ', so we need to add < and a space or '<tagname>'
 			if (stristr($xss_check, '<'.$tag.' ') || stristr($xss_check, '<'.$tag.'>')) {
-				\Joomla\CMS\Factory::getApplication()->enqueueMessage(JText::_('COM_JEM_WARN_IE_XSS'), 'warning');
+				\Joomla\CMS\Factory::getApplication()->enqueueMessage(Text::_('COM_JEM_WARN_IE_XSS'), 'warning');
 				return false;
 			}
 		}

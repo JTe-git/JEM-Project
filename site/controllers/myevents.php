@@ -1,13 +1,15 @@
 <?php
 /**
- * @version 2.3.1
+ * @version 4.0.0
  * @package JEM
- * @copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright (C) 2005-2009 Christoph Lukes
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 
 defined('_JEXEC') or die;
+
+use Joomla\CMS\Language\Text;
 
 jimport('joomla.application.component.controller');
 
@@ -44,7 +46,7 @@ class JemControllerMyevents extends JControllerLegacy
 		$cid = $input->get('cid', array(), 'array');
 
 		if (empty($cid)) {
-			\Joomla\CMS\Factory::getApplication()->enqueueMessage(JText::_('COM_JEM_SELECT_ITEM_TO_PUBLISH'), 'notice');
+			\Joomla\CMS\Factory::getApplication()->enqueueMessage(Text::_('COM_JEM_SELECT_ITEM_TO_PUBLISH'), 'notice');
 			$this->setRedirect(JemHelperRoute::getMyEventsRoute());
 			return;
 		}
@@ -55,7 +57,7 @@ class JemControllerMyevents extends JControllerLegacy
 		}
 
 		$total = count($cid);
-		$msg   = $total.' '.JText::_('COM_JEM_EVENT_PUBLISHED');
+		$msg   = $total.' '.Text::_('COM_JEM_EVENT_PUBLISHED');
 
 		$this->setRedirect(JemHelperRoute::getMyEventsRoute(), $msg);
 	}
@@ -74,7 +76,7 @@ class JemControllerMyevents extends JControllerLegacy
 		$cid = $input->get('cid', array(), 'array');
 
 		if (empty($cid)) {
-			\Joomla\CMS\Factory::getApplication()->enqueueMessage(JText::_('COM_JEM_SELECT_ITEM_TO_UNPUBLISH'), 'notice');
+			\Joomla\CMS\Factory::getApplication()->enqueueMessage(Text::_('COM_JEM_SELECT_ITEM_TO_UNPUBLISH'), 'notice');
 			$this->setRedirect(JemHelperRoute::getMyEventsRoute());
 			return;
 		}
@@ -85,7 +87,7 @@ class JemControllerMyevents extends JControllerLegacy
 		}
 
 		$total = count($cid);
-		$msg   = $total.' '.JText::_('COM_JEM_EVENT_UNPUBLISHED');
+		$msg   = $total.' '.Text::_('COM_JEM_EVENT_UNPUBLISHED');
 
 		$this->setRedirect(JemHelperRoute::getMyEventsRoute(), $msg);
 	}
@@ -107,7 +109,7 @@ class JemControllerMyevents extends JControllerLegacy
 		$cid = $input->get('cid', array(), 'array');
 
 		if (empty($cid)) {
-			\Joomla\CMS\Factory::getApplication()->enqueueMessage(JText::_('COM_JEM_SELECT_ITEM_TO_TRASH'), 'notice');
+			\Joomla\CMS\Factory::getApplication()->enqueueMessage(Text::_('COM_JEM_SELECT_ITEM_TO_TRASH'), 'notice');
 			$this->setRedirect(JemHelperRoute::getMyEventsRoute());
 			return;
 		}
@@ -118,7 +120,7 @@ class JemControllerMyevents extends JControllerLegacy
 		}
 
 		$total = count($cid);
-		$msg   = $total.' '.JText::_('COM_JEM_EVENT_TRASHED');
+		$msg   = $total.' '.Text::_('COM_JEM_EVENT_TRASHED');
 
 		$this->setRedirect(JemHelperRoute::getMyEventsRoute(), $msg);
 	}

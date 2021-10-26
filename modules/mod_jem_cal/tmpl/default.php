@@ -1,9 +1,9 @@
 <?php
 /**
- * @version 2.3.0
+ * @version 4.0.0
  * @package JEM
  * @subpackage JEM Calendar Module
- * @copyright (C) 2013-2020 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright (C) 2008 Toni Smillie www.qivva.com
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  *
@@ -15,6 +15,8 @@
  */
 
 defined('_JEXEC') or die();
+
+use Joomla\CMS\Language\Text;
 
 # Ensure $use_ajax is defined and boolean
 $use_ajax = !empty($use_ajax);
@@ -56,21 +58,21 @@ $day_names_long  = array('SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY',
 $day_names_short = array('SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT');
 $month_names     = array('', 'JANUARY', 'FEBRUARY', 'MARCH', 'APRIL', 'MAY', 'JUNE', 'JULY', 'AUGUST', 'SEPTEMBER', 'OCTOBER', 'NOVEMBER', 'DECEMBER');
 
-$month_name_short = JText::_($month_names[(int)$month] . '_SHORT');
-$month_name_long  = JText::_($month_names[(int)$month]);
+$month_name_short = Text::_($month_names[(int)$month] . '_SHORT');
+$month_name_long  = Text::_($month_names[(int)$month]);
 $weekday  = ($month_weekday + 7 - $first_day) % 7;    # adjust for $first_day of week
 $the_year = $Year_length ? $year : substr($year, -2); # full or last two digits
 
 if (!function_exists('mb_convert_case')) {
 	$the_month = ucfirst(htmlentities($Month_length ? $month_name_short : $month_name_long, ENT_COMPAT, "UTF-8"));
-	$the_month_prev  = ucfirst(htmlentities(JText::_($month_names[(int)$prev_month]  . ($Month_length ? '_SHORT' : '')), ENT_COMPAT, "UTF-8"));
-	$the_month_next  = ucfirst(htmlentities(JText::_($month_names[(int)$next_month]  . ($Month_length ? '_SHORT' : '')), ENT_COMPAT, "UTF-8"));
-	$the_month_today = ucfirst(htmlentities(JText::_($month_names[(int)$today_month] . ($Month_length ? '_SHORT' : '')), ENT_COMPAT, "UTF-8"));
+	$the_month_prev  = ucfirst(htmlentities(Text::_($month_names[(int)$prev_month]  . ($Month_length ? '_SHORT' : '')), ENT_COMPAT, "UTF-8"));
+	$the_month_next  = ucfirst(htmlentities(Text::_($month_names[(int)$next_month]  . ($Month_length ? '_SHORT' : '')), ENT_COMPAT, "UTF-8"));
+	$the_month_today = ucfirst(htmlentities(Text::_($month_names[(int)$today_month] . ($Month_length ? '_SHORT' : '')), ENT_COMPAT, "UTF-8"));
 } else {
 	$the_month = mb_convert_case($Month_length ? $month_name_short : $month_name_long, MB_CASE_TITLE, "UTF-8");
-	$the_month_prev  = mb_convert_case(JText::_($month_names[(int)$prev_month]  . ($Month_length ? '_SHORT' : '')), MB_CASE_TITLE, "UTF-8");
-	$the_month_next  = mb_convert_case(JText::_($month_names[(int)$next_month]  . ($Month_length ? '_SHORT' : '')), MB_CASE_TITLE, "UTF-8");
-	$the_month_today = mb_convert_case(JText::_($month_names[(int)$today_month] . ($Month_length ? '_SHORT' : '')), MB_CASE_TITLE, "UTF-8");
+	$the_month_prev  = mb_convert_case(Text::_($month_names[(int)$prev_month]  . ($Month_length ? '_SHORT' : '')), MB_CASE_TITLE, "UTF-8");
+	$the_month_next  = mb_convert_case(Text::_($month_names[(int)$next_month]  . ($Month_length ? '_SHORT' : '')), MB_CASE_TITLE, "UTF-8");
+	$the_month_today = mb_convert_case(Text::_($month_names[(int)$today_month] . ($Month_length ? '_SHORT' : '')), MB_CASE_TITLE, "UTF-8");
 }
 
 $title = $the_month . '&nbsp;' . $the_year;
@@ -106,12 +108,12 @@ if ($day_name_length) {
 	# If day_name_length is >3, the full name of the day will be printed
 	if ($day_name_length > 3) {
 		for ($d = 0; $d < 7; ++$d) {
-			$dayname = JText::_($day_names_long[($d + $first_day) % 7]);
+			$dayname = Text::_($day_names_long[($d + $first_day) % 7]);
 			$calendar .= '<th class="mod_jemcalq_daynames" abbr="' . $dayname . '">&nbsp;' . $dayname . '&nbsp;</th>';
 		}
 	} else {
 		for ($d = 0; $d < 7; ++$d) {
-			$dayname = JText::_($day_names_short[($d + $first_day) % 7]);
+			$dayname = Text::_($day_names_short[($d + $first_day) % 7]);
 			if (function_exists('mb_substr')) {
 				$calendar .= '<th class="mod_jemcalq_daynames" abbr="' . $dayname . '">&nbsp;' . mb_substr($dayname, 0, $day_name_length, 'UTF-8') . '&nbsp;</th>';
 			} else {
@@ -166,9 +168,9 @@ for ($day = 1; $day <= $days_in_month; $day++, $weekday++) {
 				$title = explode('+%+%+', $title);
 				if ($Show_Tooltips_Title == 1) {
 					if (count($title) > 1) {
-						$tipTitle = count($title) . ' ' . JText::_($CalTooltipsTitlePl);
+						$tipTitle = count($title) . ' ' . Text::_($CalTooltipsTitlePl);
 					} else {
-						$tipTitle = '1 ' . JText::_($CalTooltipsTitle);
+						$tipTitle = '1 ' . Text::_($CalTooltipsTitle);
 					}
 				} else {
 					$tipTitle = '';

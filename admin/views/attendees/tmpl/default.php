@@ -1,12 +1,15 @@
 <?php
 /**
- * @version 2.3.1
+ * @version 4.0.0
  * @package JEM
- * @copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright (C) 2005-2009 Christoph Lukes
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 defined('_JEXEC') or die;
+
+use Joomla\CMS\Language\Text;
+
 JHtml::_('behavior.tooltip');
 
 JHtml::addIncludePath(JPATH_COMPONENT.'/helpers/html');
@@ -44,8 +47,8 @@ JFactory::getDocument()->addScriptDeclaration('
 		<table class="adminlist" style="width:100%;">
 			<tr>
 				<td style="width:100%;padding:10px">
-					<b><?php echo JText::_('COM_JEM_DATE').':'; ?></b>&nbsp;<?php echo $this->event->dates; ?><br />
-					<b><?php echo JText::_('COM_JEM_EVENT_TITLE').':'; ?></b>&nbsp;<?php echo $this->escape($this->event->title); ?>
+					<b><?php echo Text::_('COM_JEM_DATE').':'; ?></b>&nbsp;<?php echo $this->event->dates; ?><br />
+					<b><?php echo Text::_('COM_JEM_EVENT_TITLE').':'; ?></b>&nbsp;<?php echo $this->escape($this->event->title); ?>
 				</td>
 			</tr>
 		</table>
@@ -53,32 +56,32 @@ JFactory::getDocument()->addScriptDeclaration('
 		<table class="adminform">
 			<tr>
 				<td width="100%">
-					<?php echo JText::_('COM_JEM_SEARCH').' '.$this->lists['filter']; ?>
+					<?php echo Text::_('COM_JEM_SEARCH').' '.$this->lists['filter']; ?>
 					<input type="text" name="filter_search" id="filter_search" value="<?php echo $this->lists['search']; ?>" class="text_area" onChange="document.adminForm.submit();" />
-					<button class="buttonfilter" type="submit"><?php echo JText::_('JSEARCH_FILTER_SUBMIT'); ?></button>
-					<button class="buttonfilter" type="button" onclick="document.id('filter_search').value='';this.form.submit();"><?php echo JText::_('JSEARCH_FILTER_CLEAR'); ?></button>
+					<button class="buttonfilter" type="submit"><?php echo Text::_('JSEARCH_FILTER_SUBMIT'); ?></button>
+					<button class="buttonfilter" type="button" onclick="document.id('filter_search').value='';this.form.submit();"><?php echo Text::_('JSEARCH_FILTER_CLEAR'); ?></button>
 				</td>
 				<td style="text-align:right; white-space:nowrap;">
-					<?php echo JText::_('COM_JEM_STATUS').' '.$this->lists['status']; ?>
+					<?php echo Text::_('COM_JEM_STATUS').' '.$this->lists['status']; ?>
 				</td>
 			</tr>
 		</table>
 		<table class="table table-striped" id="attendeeList">
 			<thead>
 				<tr>
-					<th width="1%" class="center"><?php echo JText::_('COM_JEM_NUM'); ?></th>
-					<th width="1%" class="center"><input type="checkbox" name="checkall-toggle" value="" title="<?php echo JText::_('JGLOBAL_CHECK_ALL'); ?>" onclick="Joomla.checkAll(this)" /></th>
+					<th width="1%" class="center"><?php echo Text::_('COM_JEM_NUM'); ?></th>
+					<th width="1%" class="center"><input type="checkbox" name="checkall-toggle" value="" title="<?php echo Text::_('JGLOBAL_CHECK_ALL'); ?>" onclick="Joomla.checkAll(this)" /></th>
 					<th class="title"><?php echo JHtml::_('grid.sort', 'COM_JEM_NAME', 'u.name', $listDirn, $listOrder); ?></th>
 					<th class="title"><?php echo JHtml::_('grid.sort', 'COM_JEM_USERNAME', 'u.username', $listDirn, $listOrder); ?></th>
-					<th class="title"><?php echo JText::_('COM_JEM_EMAIL'); ?></th>
-					<th class="title"><?php echo JText::_('COM_JEM_IP_ADDRESS'); ?></th>
+					<th class="title"><?php echo Text::_('COM_JEM_EMAIL'); ?></th>
+					<th class="title"><?php echo Text::_('COM_JEM_IP_ADDRESS'); ?></th>
 					<th class="title"><?php echo JHtml::_('grid.sort', 'COM_JEM_REGDATE', 'r.uregdate', $listDirn, $listOrder); ?></th>
 					<th class="title center"><?php echo JHtml::_('grid.sort', 'COM_JEM_USER_ID', 'r.uid', $listDirn, $listOrder); ?></th>
 					<th class="title center"><?php echo JHtml::_('grid.sort', 'COM_JEM_HEADER_WAITINGLIST_STATUS', 'r.waiting',$listDirn, $listOrder); ?></th>
 					<?php if (!empty($this->jemsettings->regallowcomments)) : ?>
-					<th class="title"><?php echo JText::_('COM_JEM_COMMENT'); ?></th>
+					<th class="title"><?php echo Text::_('COM_JEM_COMMENT'); ?></th>
 					<?php endif;?>
-					<th class="title center"><?php echo JText::_('COM_JEM_REMOVE_USER'); ?></th>
+					<th class="title center"><?php echo Text::_('COM_JEM_REMOVE_USER'); ?></th>
 					<th width="1%" class="center nowrap"><?php echo JHtml::_('grid.sort', 'COM_JEM_ATTENDEES_REGID', 'r.id', $listDirn, $listOrder ); ?></th>
 				</tr>
 			</thead>
@@ -101,8 +104,8 @@ JFactory::getDocument()->addScriptDeclaration('
 					<td><a href="#" onclick="submitName(this); return false;"><?php echo $row->name; ?></a></td>
 					<td><?php echo $row->username; ?></td>
 					<td class="email"><a href="mailto:<?php echo $row->email; ?>"><?php echo $row->email; ?></a></td>
-					<td><?php echo $row->uip == 'DISABLED' ? JText::_('COM_JEM_DISABLED') : $row->uip; ?></td>
-					<td><?php if (!empty($row->uregdate)) { echo JHtml::_('date', $row->uregdate, JText::_('DATE_FORMAT_LC2')); } ?></td>
+					<td><?php echo $row->uip == 'DISABLED' ? Text::_('COM_JEM_DISABLED') : $row->uip; ?></td>
+					<td><?php if (!empty($row->uregdate)) { echo JHtml::_('date', $row->uregdate, Text::_('DATE_FORMAT_LC2')); } ?></td>
 					<td class="center">
 					<a href="<?php echo JRoute::_('index.php?option=com_users&task=user.edit&id='.$row->uid); ?>"><?php echo $row->uid; ?></a>
 					</td>
@@ -119,7 +122,7 @@ JFactory::getDocument()->addScriptDeclaration('
 					<?php endif; ?>
 					<td class="center">
 						<a href="javascript: void(0);" onclick="return listItemTask('cb<?php echo $i;?>','attendees.remove')">
-							<?php echo JHtml::_('image','com_jem/publish_r.png',JText::_('COM_JEM_REMOVE'),NULL,true); ?>
+							<?php echo JHtml::_('image','com_jem/publish_r.png',Text::_('COM_JEM_REMOVE'),NULL,true); ?>
 						</a>
 					</td>
 					<td class="center">

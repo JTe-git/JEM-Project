@@ -1,13 +1,15 @@
 <?php
 /**
- * @version 2.3.1
+ * @version 4.0.0
  * @package JEM
- * @copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright (C) 2005-2009 Christoph Lukes
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 
 defined('_JEXEC') or die;
+
+use Joomla\CMS\Language\Text;
 
 jimport('joomla.application.component.model');
 
@@ -124,7 +126,7 @@ class JemModelAttendee extends JModelLegacy
 		$attendee = $this->getData();
 
 		if (!$attendee->id) {
-			$this->setError(JText::_('COM_JEM_MISSING_ATTENDEE_ID'));
+			$this->setError(Text::_('COM_JEM_MISSING_ATTENDEE_ID'));
 			return false;
 		}
 
@@ -176,7 +178,7 @@ class JemModelAttendee extends JModelLegacy
 				if ($details->booked >= $details->maxplaces)
 				{
 					if (!$details->waitinglist) {
-						\Joomla\CMS\Factory::getApplication()->enqueueMessage(JText::_('COM_JEM_ERROR_REGISTER_EVENT_IS_FULL'), 'warning');
+						\Joomla\CMS\Factory::getApplication()->enqueueMessage(Text::_('COM_JEM_ERROR_REGISTER_EVENT_IS_FULL'), 'warning');
 						return false;
 					}
 					$row->waiting = 1;

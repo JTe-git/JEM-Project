@@ -1,12 +1,14 @@
 <?php
 /**
- * @version 2.3.1
+ * @version 4.0.0
  * @package JEM
- * @copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright (C) 2005-2009 Christoph Lukes
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 defined('_JEXEC') or die;
+
+use Joomla\CMS\Language\Text;
 
 /**
  * Categories-View
@@ -60,10 +62,10 @@ class JemViewCategories extends JemView
 		}
 
 		if ($task == 'archive') {
-			$pathway->addItem(JText::_('COM_JEM_ARCHIVE'), JRoute::_('index.php?option=com_jem&view=categories&id='.$id.'&task=archive'));
+			$pathway->addItem(Text::_('COM_JEM_ARCHIVE'), JRoute::_('index.php?option=com_jem&view=categories&id='.$id.'&task=archive'));
 			$print_link = JRoute::_('index.php?option=com_jem&view=categories&id='.$id.'&task=archive&print=1&tmpl=component');
-			$pagetitle   .= ' - ' . JText::_('COM_JEM_ARCHIVE');
-			$pageheading .= ' - ' . JText::_('COM_JEM_ARCHIVE');
+			$pagetitle   .= ' - ' . Text::_('COM_JEM_ARCHIVE');
+			$pageheading .= ' - ' . Text::_('COM_JEM_ARCHIVE');
 			$params->set('page_heading', $pageheading);
 		} else {
 			$print_link = JRoute::_('index.php?option=com_jem&view=categories&id='.$id.'&print=1&tmpl=component');
@@ -71,10 +73,10 @@ class JemViewCategories extends JemView
 
 		// Add site name to title if param is set
 		if ($app->getCfg('sitename_pagetitles', 0) == 1) {
-			$pagetitle = JText::sprintf('JPAGETITLE', $app->getCfg('sitename'), $pagetitle);
+			$pagetitle = Text::sprintf('JPAGETITLE', $app->getCfg('sitename'), $pagetitle);
 		}
 		elseif ($app->getCfg('sitename_pagetitles', 0) == 2) {
-			$pagetitle = JText::sprintf('JPAGETITLE', $pagetitle, $app->getCfg('sitename'));
+			$pagetitle = Text::sprintf('JPAGETITLE', $pagetitle, $app->getCfg('sitename'));
 		}
 
 		// Set Page title

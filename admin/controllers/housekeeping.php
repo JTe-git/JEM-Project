@@ -1,12 +1,14 @@
 <?php
 /**
- * @version 2.3.1
+ * @version 4.0.0
  * @package JEM
- * @copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright (C) 2005-2009 Christoph Lukes
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 defined('_JEXEC') or die;
+
+use Joomla\CMS\Language\Text;
 
 jimport('joomla.application.component.controller');
 
@@ -52,7 +54,7 @@ class JemControllerHousekeeping extends JControllerLegacy
 		}
 
 		$link = 'index.php?option=com_jem&view=housekeeping';
-		$msg = JText::sprintf('COM_JEM_HOUSEKEEPING_IMAGES_DELETED', $total);
+		$msg = Text::sprintf('COM_JEM_HOUSEKEEPING_IMAGES_DELETED', $total);
 
 		$this->setRedirect($link, $msg);
 	}
@@ -73,7 +75,7 @@ class JemControllerHousekeeping extends JControllerLegacy
 		$model->cleanupCatsEventRelations();
 
 		$link = 'index.php?option=com_jem&view=housekeeping';
-		$msg = JText::_('COM_JEM_HOUSEKEEPING_CLEANUP_CATSEVENT_RELS_DONE');
+		$msg = Text::_('COM_JEM_HOUSEKEEPING_CLEANUP_CATSEVENT_RELS_DONE');
 
 		$this->setRedirect($link, $msg);
 	}
@@ -90,7 +92,7 @@ class JemControllerHousekeeping extends JControllerLegacy
 		$model->truncateAllData();
 
 		$link = 'index.php?option=com_jem&view=housekeeping';
-		$msg = JText::_('COM_JEM_HOUSEKEEPING_TRUNCATE_ALL_DATA_DONE');
+		$msg = Text::_('COM_JEM_HOUSEKEEPING_TRUNCATE_ALL_DATA_DONE');
 
 		$this->setRedirect($link, $msg);
 	}
@@ -110,7 +112,7 @@ class JemControllerHousekeeping extends JControllerLegacy
 		JemHelper::cleanup(1);
 
 		$link = 'index.php?option=com_jem&view=housekeeping';
-		$msg = JText::_('COM_JEM_HOUSEKEEPING_AUTOARCHIVE_DONE');
+		$msg = Text::_('COM_JEM_HOUSEKEEPING_AUTOARCHIVE_DONE');
 
 		$this->setRedirect($link, $msg);
 	}

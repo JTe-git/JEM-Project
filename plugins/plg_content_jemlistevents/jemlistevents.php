@@ -3,19 +3,21 @@
  * JemListEvent is a Plugin to display events in articles.
  * For more information visit joomlaeventmanager.net
  *
- * @version 2.2.3
+ * @version 4.0.0
  * @package JEM
  * @subpackage JEM_Listevents_Plugin
  * @author JEM Team <info@joomlaeventmanager.net>, Michael Anderau <michael@sternrenaugen.net>, Luis Raposo
- * @copyright (c) 2013-2017 joomlaeventmanager.net
+ * @copyright (c) 2013-2022 joomlaeventmanager.net
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 defined('_JEXEC') or die();
 
+use Joomla\CMS\Language\Text;
+
 // No, it's part of JEM package yet.
 //// Check if JEM is installed.
 //if (!JComponentHelper::isEnabled('com_jem', true)) {
-//	throw new Exception(JText::_('Listevents for JEM works only if JoomlaEventManager (JEM) is installed: <a href=\'https://www.joomlaeventmanager.net\' target=\'_blank\'>www.joomlaeventmanager.net</a>'), 500);
+//	throw new Exception(Text::_('Listevents for JEM works only if JoomlaEventManager (JEM) is installed: <a href=\'https://www.joomlaeventmanager.net\' target=\'_blank\'>www.joomlaeventmanager.net</a>'), 500);
 //	die();
 //}
 

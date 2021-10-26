@@ -1,12 +1,14 @@
 <?php
 /**
- * @version     2.3.1
+ * @version     4.0.0
  * @package     JEM
- * @copyright   Copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright   Copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright   Copyright (C) 2005-2009 Christoph Lukes
  * @license     http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 defined('_JEXEC') or die;
+
+use Joomla\CMS\Language\Text;
 
 // Include the component HTML helpers.
 JHtml::addIncludePath(JPATH_COMPONENT.'/helpers/html');
@@ -29,24 +31,24 @@ $saveOrder 	= ($listOrder == 'a.lft' && strtolower($listDirn) == 'asc');
 	<?php endif; ?>
 		<fieldset id="filter-bar">
 			<div class="filter-search fltlft">
-				<input type="text" name="filter_search" id="filter_search" placeholder="<?php echo JText::_('COM_JEM_SEARCH');?>" value="<?php echo $this->escape($this->state->get('filter.search')); ?>" />
-				<button type="submit"><?php echo JText::_('JSEARCH_FILTER_SUBMIT'); ?></button>
-				<button type="button" onclick="document.id('filter_search').value='';this.form.submit();"><?php echo JText::_('JSEARCH_FILTER_CLEAR'); ?></button>
+				<input type="text" name="filter_search" id="filter_search" placeholder="<?php echo Text::_('COM_JEM_SEARCH');?>" value="<?php echo $this->escape($this->state->get('filter.search')); ?>" />
+				<button type="submit"><?php echo Text::_('JSEARCH_FILTER_SUBMIT'); ?></button>
+				<button type="button" onclick="document.id('filter_search').value='';this.form.submit();"><?php echo Text::_('JSEARCH_FILTER_CLEAR'); ?></button>
 			</div>
 
 			<div class="filter-select fltrt">
 				<select name="filter_level" class="inputbox" onchange="this.form.submit()">
-					<option value=""><?php echo JText::_('JOPTION_SELECT_MAX_LEVELS');?></option>
+					<option value=""><?php echo Text::_('JOPTION_SELECT_MAX_LEVELS');?></option>
 					<?php echo JHtml::_('select.options', $this->f_levels, 'value', 'text', $this->state->get('filter.level'));?>
 				</select>
 
 				<select name="filter_published" class="inputbox" onchange="this.form.submit()">
-					<option value=""><?php echo JText::_('JOPTION_SELECT_PUBLISHED');?></option>
+					<option value=""><?php echo Text::_('JOPTION_SELECT_PUBLISHED');?></option>
 					<?php echo JHtml::_('select.options', JHtml::_('jgrid.publishedOptions'), 'value', 'text', $this->state->get('filter.published'), true);?>
 				</select>
 
 				<select name="filter_access" class="inputbox" onchange="this.form.submit()">
-					<option value=""><?php echo JText::_('JOPTION_SELECT_ACCESS');?></option>
+					<option value=""><?php echo Text::_('JOPTION_SELECT_ACCESS');?></option>
 					<?php echo JHtml::_('select.options', JHtml::_('access.assetgroups'), 'value', 'text', $this->state->get('filter.access'));?>
 				</select>
 			</div>
@@ -57,16 +59,16 @@ $saveOrder 	= ($listOrder == 'a.lft' && strtolower($listDirn) == 'asc');
 			<thead>
 				<tr>
 					<th width="1%">
-						<input type="checkbox" name="checkall-toggle" value="" title="<?php echo JText::_('JGLOBAL_CHECK_ALL'); ?>" onclick="Joomla.checkAll(this)" />
+						<input type="checkbox" name="checkall-toggle" value="" title="<?php echo Text::_('JGLOBAL_CHECK_ALL'); ?>" onclick="Joomla.checkAll(this)" />
 					</th>
 					<th>
 						<?php echo JHtml::_('grid.sort', 'JGLOBAL_TITLE', 'a.catname', $listDirn, $listOrder); ?>
 					</th>
 					<th width="5%" nowrap="nowrap">
-						<?php echo JText::_( 'COM_JEM_COLOR' ); ?>
+						<?php echo Text::_( 'COM_JEM_COLOR' ); ?>
 					</th>
 					<th width="15%"><?php echo JHtml::_('grid.sort', 'COM_JEM_GROUP', 'gr.name', $listDirn, $listOrder ); ?></th>
-					<th width="1%" class="center" nowrap="nowrap"><?php echo JText::_( 'COM_JEM_EVENTS' ); ?></th>
+					<th width="1%" class="center" nowrap="nowrap"><?php echo Text::_( 'COM_JEM_EVENTS' ); ?></th>
 					<th width="5%">
 						<?php echo JHtml::_('grid.sort', 'JSTATUS', 'a.published', $listDirn, $listOrder); ?>
 					</th>
@@ -126,9 +128,9 @@ $saveOrder 	= ($listOrder == 'a.lft' && strtolower($listDirn) == 'asc');
 							<p class="smallsub" title="<?php echo $this->escape($item->path);?>">
 								<?php echo str_repeat('<span class="gtr">|&mdash;</span>', $repeat) ?>
 								<?php if (empty($item->note)) : ?>
-									<?php echo JText::sprintf('JGLOBAL_LIST_ALIAS', $this->escape($item->alias));?>
+									<?php echo Text::sprintf('JGLOBAL_LIST_ALIAS', $this->escape($item->alias));?>
 								<?php else : ?>
-									<?php echo JText::sprintf('JGLOBAL_LIST_ALIAS_NOTE', $this->escape($item->alias), $this->escape($item->note));?>
+									<?php echo Text::sprintf('JGLOBAL_LIST_ALIAS_NOTE', $this->escape($item->alias), $this->escape($item->note));?>
 								<?php endif; ?></p>
 						</td>
 						<td class="center">
@@ -138,12 +140,12 @@ $saveOrder 	= ($listOrder == 'a.lft' && strtolower($listDirn) == 'asc');
 						</td>
 						<td class="center">
 							<?php if ($item->catgroup) : ?>
-								<span <?php echo JEMOutput::tooltip(JText::_('COM_JEM_GROUP_EDIT'), $item->catgroup, 'editlinktip'); ?>>
+								<span <?php echo JEMOutput::tooltip(Text::_('COM_JEM_GROUP_EDIT'), $item->catgroup, 'editlinktip'); ?>>
 								<a href="<?php echo $grouplink; ?>">
 									<?php echo $this->escape($item->catgroup); ?>
 								</a></span>
 							<?php elseif ($item->groupid) : ?>
-								<?php echo JText::sprintf('COM_JEM_CATEGORY_UNKNOWN_GROUP', $item->groupid); ?>
+								<?php echo Text::sprintf('COM_JEM_CATEGORY_UNKNOWN_GROUP', $item->groupid); ?>
 							<?php else : ?>
 								<?php echo '-'; ?>
 							<?php endif; ?>

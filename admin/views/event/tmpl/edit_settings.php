@@ -1,12 +1,15 @@
 <?php
 /**
- * @version 2.3.1
+ * @version 4.0.0
  * @package JEM
- * @copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright (C) 2005-2009 Christoph Lukes
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 // Create shortcut to parameters.
+
+use Joomla\CMS\Language\Text;
+
 $params = $this->state->get('params');
 
 $params = $params->toArray();
@@ -28,7 +31,7 @@ $group = 'attribs';
 
 <div class="width-100">
 	<fieldset class="adminform">
-		<legend><?php echo JText::_('COM_JEM_EVENT'); ?></legend>
+		<legend><?php echo Text::_('COM_JEM_EVENT'); ?></legend>
 		<ul class="adminformlist">
 			<?php foreach ($this->form->getFieldset('basic') as $field): ?>
 				<li><?php echo $field->label; ?> <?php echo $field->input; ?></li>
@@ -41,7 +44,7 @@ $group = 'attribs';
 		</ul>
 	</fieldset>
 	<fieldset class="adminform">
-		<legend><?php echo JText::_('COM_JEM_VENUE'); ?></legend>
+		<legend><?php echo Text::_('COM_JEM_VENUE'); ?></legend>
 		<ul class="adminformlist">
 			<li><?php echo $this->form->getLabel('event_show_locdescription',$group); ?> <?php echo $this->form->getInput('event_show_locdescription',$group); ?></li>
 			<li><?php echo $this->form->getLabel('event_show_detailsadress',$group); ?> <?php echo $this->form->getInput('event_show_detailsadress',$group); ?></li>
@@ -53,7 +56,7 @@ $group = 'attribs';
 	</fieldset>
 	<div class="width-100">
 	<fieldset class="adminform">
-		<legend><?php echo JText::_('COM_JEM_REGISTRATION'); ?></legend>
+		<legend><?php echo Text::_('COM_JEM_REGISTRATION'); ?></legend>
 		<ul class="adminformlist">
 			<li><?php echo $this->form->getLabel('event_comunsolution',$group); ?> <?php echo $this->form->getInput('event_comunsolution',$group); ?></li>
 			<li id="comm1" style="display:none"><?php echo $this->form->getLabel('event_comunoption',$group); ?> <?php echo $this->form->getInput('event_comunoption',$group); ?></li>

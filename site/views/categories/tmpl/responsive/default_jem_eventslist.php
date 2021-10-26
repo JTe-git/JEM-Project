@@ -1,13 +1,15 @@
 <?php
 /**
- * @version 2.3.1
+ * @version 4.0.0
  * @package JEM
- * @copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright (C) 2005-2009 Christoph Lukes
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 
 defined('_JEXEC') or die;
+
+use Joomla\CMS\Language\Text;
 
 if (empty($this->catrow->events)) { return; }
 ?>
@@ -71,7 +73,7 @@ if (empty($this->catrow->events)) { return; }
 
 <ul class="eventlist">
   <?php if (empty($this->catrow->events)) : ?>
-    <li class="jem-event"><?php echo JText::_('COM_JEM_NO_EVENTS'); ?></li>
+    <li class="jem-event"><?php echo Text::_('COM_JEM_NO_EVENTS'); ?></li>
   <?php else : ?>
       <?php
       // Safari has problems with the "onclick" element in the <li>. It covers the links to location and category etc.
@@ -98,7 +100,7 @@ if (empty($this->catrow->events)) { return; }
           <?php endif; ?>
           <div class="jem-event-details">
             <?php if (($this->jemsettings->showtitle == 1) && ($this->jemsettings->showdetails == 1)) : // Display title as title of jem-event with link ?>
-            <h4 title="<?php echo JText::_('COM_JEM_TABLE_TITLE').': '.$this->escape($row->title); ?>">
+            <h4 title="<?php echo Text::_('COM_JEM_TABLE_TITLE').': '.$this->escape($row->title); ?>">
               <a href="<?php echo JRoute::_(JemHelperRoute::getEventRoute($row->slug)); ?>"><?php echo $this->escape($row->title); ?></a>
               <?php echo JemOutput::recurrenceicon($row); ?>
               <?php echo JemOutput::publishstateicon($row); ?>
@@ -108,7 +110,7 @@ if (empty($this->catrow->events)) { return; }
             </h4>
             
             <?php elseif (($this->jemsettings->showtitle == 1) && ($this->jemsettings->showdetails == 0)) : // Display title as title of jem-event without link ?>
-            <h4 title="<?php echo JText::_('COM_JEM_TABLE_TITLE').': '.$this->escape($row->title); ?>">
+            <h4 title="<?php echo Text::_('COM_JEM_TABLE_TITLE').': '.$this->escape($row->title); ?>">
               <?php echo $this->escape($row->title) . JemOutput::recurrenceicon($row) . JemOutput::publishstateicon($row); ?>
               <?php if (!empty($row->featured)) :?>
                 <i class="jem-featured-icon fa fa-exclamation-circle" aria-hidden="true"></i>
@@ -151,7 +153,7 @@ if (empty($this->catrow->events)) { return; }
             <?php // Display other information below in a row ?>
             <div class="jem-list-row">  
               <?php if ($this->jemsettings->showtitle == 1) : ?>
-                <div class="jem-event-info" title="<?php echo JText::_('COM_JEM_TABLE_DATE').': '.strip_tags(JemOutput::formatShortDateTime($row->dates, $row->times, $row->enddates, $row->endtimes, $this->jemsettings->showtime)); ?>" >
+                <div class="jem-event-info" title="<?php echo Text::_('COM_JEM_TABLE_DATE').': '.strip_tags(JemOutput::formatShortDateTime($row->dates, $row->times, $row->enddates, $row->endtimes, $this->jemsettings->showtime)); ?>" >
                   <i class="fa fa-clock-o" aria-hidden="true"></i>
                   <?php
                     echo JemOutput::formatShortDateTime($row->dates, $row->times,
@@ -163,14 +165,14 @@ if (empty($this->catrow->events)) { return; }
               <?php endif; ?>
               
               <?php if ($this->jemsettings->showtitle == 0) : ?>
-                <div class="jem-event-info" title="<?php echo JText::_('COM_JEM_TABLE_TITLE').': '.$this->escape($row->title); ?>">
+                <div class="jem-event-info" title="<?php echo Text::_('COM_JEM_TABLE_TITLE').': '.$this->escape($row->title); ?>">
                   <i class="fa fa-comment-o" aria-hidden="true"></i>
                   <?php echo $this->escape($row->title); ?>
                 </div>
               <?php endif; ?>
               
               <?php if (($this->jemsettings->showlocate == 1) && (!empty($row->locid))) : ?>
-                <div class="jem-event-info" title="<?php echo JText::_('COM_JEM_TABLE_LOCATION').': '.$this->escape($row->venue); ?>">
+                <div class="jem-event-info" title="<?php echo Text::_('COM_JEM_TABLE_LOCATION').': '.$this->escape($row->venue); ?>">
                   <i class="fa fa-map-marker" aria-hidden="true"></i>
                   <?php if ($this->jemsettings->showlinkvenue == 1) : ?>
                     <?php echo "<a href='".JRoute::_(JemHelperRoute::getVenueRoute($row->venueslug))."'>".$this->escape($row->venue)."</a>"; ?>
@@ -181,28 +183,28 @@ if (empty($this->catrow->events)) { return; }
               <?php endif; ?>
 
               <?php if (($this->jemsettings->showcity == 1) && (!empty($row->city))) : ?>
-                <div class="jem-event-info" title="<?php echo JText::_('COM_JEM_TABLE_CITY').': '.$this->escape($row->city); ?>">
+                <div class="jem-event-info" title="<?php echo Text::_('COM_JEM_TABLE_CITY').': '.$this->escape($row->city); ?>">
                   <i class="fa fa-building-o" aria-hidden="true"></i>
                   <?php echo $this->escape($row->city); ?>
                 </div>
               <?php endif; ?>
               
               <?php if (($this->jemsettings->showstate == 1) && (!empty($row->state))): ?>
-                <div class="jem-event-info" title="<?php echo JText::_('COM_JEM_TABLE_STATE').': '.$this->escape($row->state); ?>">
+                <div class="jem-event-info" title="<?php echo Text::_('COM_JEM_TABLE_STATE').': '.$this->escape($row->state); ?>">
                   <i class="fa fa-map-o" aria-hidden="true"></i>
                   <?php echo $this->escape($row->state); ?>
                 </div>
               <?php endif; ?>
               
               <?php if ($this->jemsettings->showcat == 1) : ?>
-                <div class="jem-event-info" title="<?php echo strip_tags(JText::_('COM_JEM_TABLE_CATEGORY').': '.implode(", ", JemOutput::getCategoryList($row->categories, $this->jemsettings->catlinklist))); ?>">
+                <div class="jem-event-info" title="<?php echo strip_tags(Text::_('COM_JEM_TABLE_CATEGORY').': '.implode(", ", JemOutput::getCategoryList($row->categories, $this->jemsettings->catlinklist))); ?>">
                   <i class="fa fa-tag" aria-hidden="true"></i>
                   <?php echo implode(", ", JemOutput::getCategoryList($row->categories, $this->jemsettings->catlinklist)); ?>
                 </div>
               <?php endif; ?>
               
               <?php if (($this->jemsettings->showatte == 1) && (!empty($row->regCount))) : ?>
-                <div class="jem-event-info" title="<?php echo JText::_('COM_JEM_TABLE_ATTENDEES').': '.$this->escape($row->regCount); ?>">
+                <div class="jem-event-info" title="<?php echo Text::_('COM_JEM_TABLE_ATTENDEES').': '.$this->escape($row->regCount); ?>">
                   <i class="fa fa-user" aria-hidden="true"></i>
                   <?php echo $this->escape($row->regCount); ?>
                 </div>

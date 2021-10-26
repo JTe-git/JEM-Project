@@ -1,13 +1,15 @@
 <?php
 /**
- * @version 2.3.1
+ * @version 4.0.0
  * @package JEM
- * @copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright (C) 2005-2009 Christoph Lukes
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 
 defined('_JEXEC') or die;
+
+use Joomla\CMS\Language\Text;
 
 /**
  * JEM Group Table
@@ -30,7 +32,7 @@ class JemTableGroup extends JTable
 	{
 		// Not typed in a category name?
 		if (trim($this->name ) == '') {
-			$this->setError(JText::_('COM_JEM_ADD_GROUP_NAME'));
+			$this->setError(Text::_('COM_JEM_ADD_GROUP_NAME'));
 			return false;
 		}
 
@@ -88,7 +90,7 @@ class JemTableGroup extends JTable
 				$pks = array((int)$this->$k);
 			} else {
 				// Nothing to set publishing state on, return false.
-				$this->setError(JText::_('JLIB_DATABASE_ERROR_NO_ROWS_SELECTED'));
+				$this->setError(Text::_('JLIB_DATABASE_ERROR_NO_ROWS_SELECTED'));
 				return false;
 			}
 		}

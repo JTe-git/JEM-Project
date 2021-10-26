@@ -1,12 +1,14 @@
 <?php
 /**
- * @version     2.3.1
+ * @version     4.0.0
  * @package     JEM
- * @copyright   Copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright   Copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright   Copyright (C) 2005-2009 Christoph Lukes
  * @license     http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 defined('_JEXEC') or die;
+
+use Joomla\CMS\Language\Text;
 
 /**
  * Category View
@@ -50,9 +52,9 @@ class JemViewCategory extends JemAdminView
 
 		$grouplist = array();
 		if (!empty($this->item->groupid) && !array_key_exists($this->item->groupid, $groups)) {
-			$grouplist[] = JHtml::_('select.option', $this->item->groupid, JText::sprintf('COM_JEM_CATEGORY_UNKNOWN_GROUP', $this->item->groupid));
+			$grouplist[] = JHtml::_('select.option', $this->item->groupid, Text::sprintf('COM_JEM_CATEGORY_UNKNOWN_GROUP', $this->item->groupid));
 		}
-		$grouplist[] = JHtml::_('select.option', '0', JText::_('COM_JEM_CATEGORY_NO_GROUP'));
+		$grouplist[] = JHtml::_('select.option', '0', Text::_('COM_JEM_CATEGORY_NO_GROUP'));
 		$grouplist   = array_merge($grouplist, $groups);
 
 		$Lists['groups'] = JHtml::_('select.genericlist', $grouplist, 'groupid', array('size'=>'1','class'=>'inputbox'), 'value', 'text', $this->item->groupid);
@@ -79,7 +81,7 @@ class JemViewCategory extends JemAdminView
 		// Get the results for each action.
 		$canDo = JemHelperBackend::getActions();
 
-		$title = JText::_('COM_JEM_CATEGORY_BASE_'.($isNew?'ADD':'EDIT').'_TITLE');
+		$title = Text::_('COM_JEM_CATEGORY_BASE_'.($isNew?'ADD':'EDIT').'_TITLE');
 		// Prepare the toolbar.
 		JToolBarHelper::title($title, 'category-'.($isNew?'add':'edit').' -category-'.($isNew?'add':'edit'));
 

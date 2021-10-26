@@ -1,13 +1,15 @@
 <?php
 /**
- * @version 2.3.1
+ * @version 4.0.0
  * @package JEM
- * @copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright (C) 2005-2009 Christoph Lukes
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 
 defined('_JEXEC') or die;
+
+use Joomla\CMS\Language\Text;
 
 jimport('joomla.application.component.modelform');
 jimport('joomla.filesystem.file');
@@ -71,7 +73,7 @@ class JemModelSource extends JModelForm
 		$db->setQuery($query);
 		$state = $db->loadResult();
 		if ((int)$state < 1 ) {
-			$app->enqueueMessage(JText::_('COM_JEM_CSSMANAGER_ERROR_EDITOR_DISABLED'), 'warning');
+			$app->enqueueMessage(Text::_('COM_JEM_CSSMANAGER_ERROR_EDITOR_DISABLED'), 'warning');
 		}
 
 		// Get the form.
@@ -131,7 +133,7 @@ class JemModelSource extends JModelForm
 		}
 
 		if (empty($item->source)) {
-			$this->setError(JText::_('COM_JEM_CSSMANAGER_ERROR_SOURCE_FILE_NOT_FOUND'));
+			$this->setError(Text::_('COM_JEM_CSSMANAGER_ERROR_SOURCE_FILE_NOT_FOUND'));
 		}
 
 		return $item;
@@ -169,13 +171,13 @@ class JemModelSource extends JModelForm
 		// Trigger the onExtensionBeforeSave event.
 		$result = $dispatcher->trigger('onExtensionBeforeSave', array('com_jem.source', $data, false));
 		if (in_array(false, $result, true)) {
-			$this->setError(JText::sprintf('COM_JEM_CSSMANAGER_ERROR_FAILED_TO_SAVE_FILENAME', $file));
+			$this->setError(Text::sprintf('COM_JEM_CSSMANAGER_ERROR_FAILED_TO_SAVE_FILENAME', $file));
 			return false;
 		}
 
 		// Try to make the template file writeable.
 		if (!$ftp['enabled'] && JPath::isOwner($filePath) && !JPath::setPermissions($filePath, '0644')) {
-			$this->setError(JText::_('COM_JEM_CSSMANAGER_ERROR_SOURCE_FILE_NOT_WRITABLE'));
+			$this->setError(Text::_('COM_JEM_CSSMANAGER_ERROR_SOURCE_FILE_NOT_WRITABLE'));
 			return false;
 		}
 
@@ -185,10 +187,10 @@ class JemModelSource extends JModelForm
 		$retPerm = (($custom !== false) && !$ftp['enabled'] && JPath::isOwner($filePath) && !JPath::setPermissions($filePath, '0444'));
 		// but report save error with higher priority
 		if (!$return) {
-			$this->setError(JText::sprintf('COM_JEM_CSSMANAGER_ERROR_FAILED_TO_SAVE_FILENAME', $file));
+			$this->setError(Text::sprintf('COM_JEM_CSSMANAGER_ERROR_FAILED_TO_SAVE_FILENAME', $file));
 			return false;
 		} elseif (!$retPerm) {
-			$this->setError(JText::_('COM_JEM_CSSMANAGER_ERROR_SOURCE_FILE_NOT_UNWRITABLE'));
+			$this->setError(Text::_('COM_JEM_CSSMANAGER_ERROR_SOURCE_FILE_NOT_UNWRITABLE'));
 			return false;
 		}
 

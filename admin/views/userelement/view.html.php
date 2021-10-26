@@ -1,14 +1,15 @@
 <?php
 /**
- * @version 2.3.1
+ * @version 4.0.0
  * @package JEM
- * @copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright (C) 2005-2009 Christoph Lukes
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 
 defined('_JEXEC') or die;
 
+use Joomla\CMS\Language\Text;
 
 /**
  * View class for the JEM userelement screen
@@ -34,7 +35,7 @@ class JEMViewUserElement extends JViewLegacy {
 		$search 			= $db->escape(trim(\Joomla\String\StringHelper::strtolower($search)));
 
 		// prepare the document
-		$document->setTitle(JText::_('COM_JEM_SELECTATTENDEE'));
+		$document->setTitle(Text::_('COM_JEM_SELECTATTENDEE'));
 		
 		// Load css
 		JHtml::_('stylesheet', 'com_jem/backend.css', array(), true);

@@ -9,6 +9,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Access\Access;
+use Joomla\CMS\Language\Text;
 
 require_once(JPATH_SITE.'/components/com_jem/factory.php');
 
@@ -51,75 +52,75 @@ class JemHelperBackend
 	public static function addSubmenu($vName)
 	{
 		JemSidebarHelper::addEntry(
-			JText::_('COM_JEM_SUBMENU_MAIN'),
+			Text::_('COM_JEM_SUBMENU_MAIN'),
 			'index.php?option=com_jem&view=main',
 			$vName == 'main'
 		);
 
 		JemSidebarHelper::addEntry(
-			JText::_('COM_JEM_EVENTS'),
+			Text::_('COM_JEM_EVENTS'),
 			'index.php?option=com_jem&view=events',
 			$vName == 'events'
 		);
 
 		JemSidebarHelper::addEntry(
-			JText::_('COM_JEM_VENUES'),
+			Text::_('COM_JEM_VENUES'),
 			'index.php?option=com_jem&view=venues',
 			$vName == 'venues'
 		);
 
 		JemSidebarHelper::addEntry(
-			JText::_('COM_JEM_CATEGORIES'),
+			Text::_('COM_JEM_CATEGORIES'),
 			'index.php?option=com_jem&view=categories',
 			$vName == 'categories'
 		);
 
 		JemSidebarHelper::addEntry(
-			JText::_('COM_JEM_GROUPS'),
+			Text::_('COM_JEM_GROUPS'),
 			'index.php?option=com_jem&view=groups',
 			$vName == 'groups'
 		);
 
 		if (JemFactory::getUser()->authorise('core.manage', 'com_jem')) {
 			JemSidebarHelper::addEntry(
-				JText::_('COM_JEM_SETTINGS_TITLE'),
+				Text::_('COM_JEM_SETTINGS_TITLE'),
 				'index.php?option=com_jem&view=settings',
 				$vName == 'settings'
 			);
 
 			JemSidebarHelper::addEntry(
-				JText::_('COM_JEM_HOUSEKEEPING'),
+				Text::_('COM_JEM_HOUSEKEEPING'),
 				'index.php?option=com_jem&amp;view=housekeeping',
 				$vName == 'housekeeping'
 			);
 
 			JemSidebarHelper::addEntry(
-				JText::_('COM_JEM_UPDATECHECK_TITLE'),
+				Text::_('COM_JEM_UPDATECHECK_TITLE'),
 				'index.php?option=com_jem&amp;view=updatecheck',
 				$vName == 'updatecheck'
 			);
 
 			JemSidebarHelper::addEntry(
-				JText::_('COM_JEM_IMPORT_DATA'),
+				Text::_('COM_JEM_IMPORT_DATA'),
 				'index.php?option=com_jem&amp;view=import',
 				$vName == 'import'
 			);
 
 			JemSidebarHelper::addEntry(
-				JText::_('COM_JEM_EXPORT_DATA'),
+				Text::_('COM_JEM_EXPORT_DATA'),
 				'index.php?option=com_jem&amp;view=export',
 				$vName == 'export'
 			);
 
 			JemSidebarHelper::addEntry(
-				JText::_('COM_JEM_CSSMANAGER_TITLE'),
+				Text::_('COM_JEM_CSSMANAGER_TITLE'),
 				'index.php?option=com_jem&amp;view=cssmanager',
 				$vName == 'cssmanager'
 			);
 		}
 
 		JemSidebarHelper::addEntry(
-			JText::_('COM_JEM_HELP'),
+			Text::_('COM_JEM_HELP'),
 			'index.php?option=com_jem&view=help',
 			$vName == 'help'
 		);
@@ -159,7 +160,7 @@ class JemHelperBackend
 		$options = array();
 		$options = array_merge(JEMHelperCountries::getCountryOptions(),$options);
 
-		array_unshift($options, JHtml::_('select.option', '0', JText::_('COM_JEM_SELECT_COUNTRY')));
+		array_unshift($options, JHtml::_('select.option', '0', Text::_('COM_JEM_SELECT_COUNTRY')));
 
 		return $options;
 	}

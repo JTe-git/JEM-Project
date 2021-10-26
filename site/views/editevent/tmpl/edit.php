@@ -1,12 +1,14 @@
 <?php
 /**
- * @version 2.3.1
+ * @version 4.0.0
  * @package JEM
- * @copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright (C) 2005-2009 Christoph Lukes
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 defined('_JEXEC') or die;
+
+use Joomla\CMS\Language\Text;
 
 JHtml::_('behavior.keepalive');
 JHtml::_('behavior.tooltip');
@@ -51,7 +53,7 @@ window.addEvent('domready', function(){
 			<?php echo $this->form->getField('articletext')->save(); ?>
 			Joomla.submitform(task);
 		} else {
-			alert('<?php echo $this->escape(JText::_('JGLOBAL_VALIDATION_FORM_FAILED'));?>');
+			alert('<?php echo $this->escape(Text::_('JGLOBAL_VALIDATION_FORM_FAILED'));?>');
 		}
 	}
 </script>
@@ -87,8 +89,8 @@ function showUnregistraUntil()
 
 		<form enctype="multipart/form-data" action="<?php echo JRoute::_('index.php?option=com_jem&a_id='.(int) $this->item->id); ?>" method="post" name="adminForm" id="adminForm" class="form-validate">
 
-				<button type="submit" class="btn btn-primary" onclick="Joomla.submitbutton('event.save')"><?php echo JText::_('JSAVE') ?></button>
-				<button type="cancel" class="btn btn-secondary" onclick="Joomla.submitbutton('event.cancel')"><?php echo JText::_('JCANCEL') ?></button>
+				<button type="submit" class="btn btn-primary" onclick="Joomla.submitbutton('event.save')"><?php echo Text::_('JSAVE') ?></button>
+				<button type="cancel" class="btn btn-secondary" onclick="Joomla.submitbutton('event.cancel')"><?php echo Text::_('JCANCEL') ?></button>
 
 		<br>
 			<?php if ($this->item->recurrence_type > 0) : ?>
@@ -97,13 +99,13 @@ function showUnregistraUntil()
 					<?php echo JemOutput::recurrenceicon($this->item, false, false); ?>
 				</div>
 				<div class="floattext" style="margin-left:36px;">
-					<strong><?php echo JText::_('COM_JEM_EDITEVENT_WARN_RECURRENCE_TITLE'); ?></strong>
+					<strong><?php echo Text::_('COM_JEM_EDITEVENT_WARN_RECURRENCE_TITLE'); ?></strong>
 					<br>
 					<?php
 						if (!empty($this->item->recurrence_type) && empty($this->item->recurrence_first_id)) {
-							echo nl2br(JText::_('COM_JEM_EDITEVENT_WARN_RECURRENCE_FIRST_TEXT'));
+							echo nl2br(Text::_('COM_JEM_EDITEVENT_WARN_RECURRENCE_FIRST_TEXT'));
 						} else {
-							echo nl2br(JText::_('COM_JEM_EDITEVENT_WARN_RECURRENCE_TEXT'));
+							echo nl2br(Text::_('COM_JEM_EDITEVENT_WARN_RECURRENCE_TEXT'));
 						}
 					?>
 				</div>
@@ -120,10 +122,10 @@ function showUnregistraUntil()
 
 			<!-- DETAILS TAB -->
 
-			<?php echo JHtml::_('tabs.panel',JText::_('COM_JEM_EDITEVENT_INFO_TAB'), 'editevent-infotab' ); ?>
+			<?php echo JHtml::_('tabs.panel',Text::_('COM_JEM_EDITEVENT_INFO_TAB'), 'editevent-infotab' ); ?>
 
 			<fieldset>
-				<legend><?php echo JText::_('COM_JEM_EDITEVENT_DETAILS_LEGEND'); ?></legend>
+				<legend><?php echo Text::_('COM_JEM_EDITEVENT_DETAILS_LEGEND'); ?></legend>
 					<ul class="adminformlist">
 					<li><?php echo $this->form->getLabel('title'); ?><?php echo $this->form->getInput('title'); ?></li>
 					<?php if (is_null($this->item->id)):?>
@@ -139,7 +141,7 @@ function showUnregistraUntil()
 				</ul>
 			</fieldset>
 			<fieldset>
-				<legend><?php echo JText::_('COM_JEM_EVENT_DESCRIPTION'); ?></legend>
+				<legend><?php echo Text::_('COM_JEM_EVENT_DESCRIPTION'); ?></legend>
 			
 				<div class="clr"></div>
 				<?php echo $this->form->getLabel('articletext'); ?>
@@ -149,7 +151,7 @@ function showUnregistraUntil()
 	<!-- IMAGE -->
 	<?php if ($this->item->datimage || $this->jemsettings->imageenabled != 0) : ?>
 	<fieldset class="jem_fldst_image">
-		<legend><?php echo JText::_('COM_JEM_IMAGE'); ?></legend>
+		<legend><?php echo Text::_('COM_JEM_IMAGE'); ?></legend>
 		<?php
 		if ($this->item->datimage) :
 			echo JemOutput::flyer($this->item, $this->dimage, 'event', 'datimage');
@@ -163,11 +165,11 @@ function showUnregistraUntil()
 				<?php echo $this->form->getLabel('userfile'); ?> <?php echo $this->form->getInput('userfile'); ?>
 			</li>
 			<li>							   
-				<button type="button" class="button3" onclick="document.getElementById('jform_userfile').value = ''"><?php echo JText::_('JSEARCH_FILTER_CLEAR') ?></button>
+				<button type="button" class="button3" onclick="document.getElementById('jform_userfile').value = ''"><?php echo Text::_('JSEARCH_FILTER_CLEAR') ?></button>
 </li>	
 	<?php
 				if ($this->item->datimage) :
-					echo JHtml::image('media/com_jem/images/publish_r.png', null, array('id' => 'userfile-remove', 'data-id' => $this->item->id, 'data-type' => 'events', 'title' => JText::_('COM_JEM_REMOVE_IMAGE')));
+					echo JHtml::image('media/com_jem/images/publish_r.png', null, array('id' => 'userfile-remove', 'data-id' => $this->item->id, 'data-type' => 'events', 'title' => Text::_('COM_JEM_REMOVE_IMAGE')));
 
 				endif;
 				?>
@@ -180,22 +182,22 @@ function showUnregistraUntil()
 	<?php endif; ?>
 
 			<!-- EXTENDED TAB -->
-			<?php echo JHtml::_('tabs.panel', JText::_('COM_JEM_EDITEVENT_EXTENDED_TAB'), 'editevent-extendedtab'); ?>
+			<?php echo JHtml::_('tabs.panel', Text::_('COM_JEM_EDITEVENT_EXTENDED_TAB'), 'editevent-extendedtab'); ?>
 			<?php echo $this->loadTemplate('extended'); ?>
 
 			<!-- PUBLISH TAB -->
 			<?php if ($this->jemsettings->frontendpublish != 0) : ?>			
-			<?php  echo JHtml::_('tabs.panel', JText::_('COM_JEM_EDITEVENT_PUBLISH_TAB'), 'editevent-publishtab'); ?>
+			<?php  echo JHtml::_('tabs.panel', Text::_('COM_JEM_EDITEVENT_PUBLISH_TAB'), 'editevent-publishtab'); ?>
 			<?php echo $this->loadTemplate('publish'); ?>
 			<?php endif; ?>
 			<!-- ATTACHMENTS TAB -->
 			<?php if (!empty($this->item->attachments) || ($this->jemsettings->attachmentenabled != 0)) : ?>
-			<?php echo JHtml::_('tabs.panel',JText::_('COM_JEM_EVENT_ATTACHMENTS_TAB'), 'event-attachments' ); ?>
+			<?php echo JHtml::_('tabs.panel',Text::_('COM_JEM_EVENT_ATTACHMENTS_TAB'), 'event-attachments' ); ?>
 			<?php echo $this->loadTemplate('attachments'); ?>
 			<?php endif; ?>
 
 			<!-- OTHER TAB -->
-			<?php echo JHtml::_('tabs.panel',JText::_('COM_JEM_EVENT_OTHER_TAB'), 'event-other' ); ?>
+			<?php echo JHtml::_('tabs.panel',Text::_('COM_JEM_EVENT_OTHER_TAB'), 'event-other' ); ?>
 			<?php echo $this->loadTemplate('other'); ?>
 
 			<?php echo JHtml::_('tabs.end'); ?>

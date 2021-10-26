@@ -1,8 +1,8 @@
 <?php
 /**
- * @version 2.1.0
+ * @version 4.0.0
  * @package JEM
- * @copyright (C) 2013-2015 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright (C) 2005-2009 Christoph Lukes
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  *
@@ -10,6 +10,8 @@
  */
 
 defined('_JEXEC') or die;
+
+use Joomla\CMS\Language\Text;
 
 /**
  * JEM Quickicon Plugin
@@ -33,7 +35,7 @@ class plgQuickiconJEMquickicon extends JPlugin
 		$useIcons = version_compare(JVERSION, '3.0', '>');
 		$icon = 'com_jem/icon-48-home.png'; // which means '/media/com_jem/images/icon-48-home.png'
 		$text = $this->params->get('displayedtext');
-		if (empty($text)) $text = JText::_('JEM-Events');
+		if (empty($text)) $text = Text::_('JEM-Events');
 
 		return array(array(
 			'link' => 'index.php?option=com_jem',

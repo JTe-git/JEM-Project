@@ -1,13 +1,15 @@
 <?php
 /**
- * @version 2.3.1
+ * @version 4.0.0
  * @package JEM
- * @copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright (C) 2005-2009 Christoph Lukes
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 
 defined('_JEXEC') or die;
+
+use Joomla\CMS\Language\Text;
 
 
 /**
@@ -68,9 +70,9 @@ class JemViewAttendee extends JViewLegacy {
 		$canDo      = JemHelperBackend::getActions();
 
 		if (empty($cid[0])) {
-			JToolBarHelper::title(JText::_('COM_JEM_ADD_ATTENDEE'), 'users');
+			JToolBarHelper::title(Text::_('COM_JEM_ADD_ATTENDEE'), 'users');
 		} else {
-			JToolBarHelper::title(JText::_('COM_JEM_EDIT_ATTENDEE'), 'users');
+			JToolBarHelper::title(Text::_('COM_JEM_EDIT_ATTENDEE'), 'users');
 		}
 
 		// If not checked out, can save the item.

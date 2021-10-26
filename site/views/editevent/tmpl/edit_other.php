@@ -1,12 +1,14 @@
 <?php
 /**
- * @version 2.3.1
+ * @version 4.0.0
  * @package JEM
- * @copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright (C) 2005-2009 Christoph Lukes
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 defined('_JEXEC') or die;
+
+use Joomla\CMS\Language\Text;
 
 $max_custom_fields = $this->settings->get('global_editevent_maxnumcustomfields', -1); // default to All
 ?>
@@ -14,7 +16,7 @@ $max_custom_fields = $this->settings->get('global_editevent_maxnumcustomfields',
 	<!-- CUSTOM FIELDS -->
 	<?php if ($max_custom_fields != 0) : ?>
 	<fieldset class="panelform">
-		<legend><?php echo JText::_('COM_JEM_EVENT_CUSTOMFIELDS_LEGEND'); ?></legend>
+		<legend><?php echo Text::_('COM_JEM_EVENT_CUSTOMFIELDS_LEGEND'); ?></legend>
 		<ul class="adminformlist">
 			<?php
 				$fields = $this->form->getFieldset('custom');

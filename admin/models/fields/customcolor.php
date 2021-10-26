@@ -1,13 +1,15 @@
 <?php
 /**
- * @version 2.3.1
+ * @version 4.0.0
  * @package JEM
- * @copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright (C) 2005-2009 Christoph Lukes
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 
 defined('JPATH_PLATFORM') or die;
+
+use Joomla\CMS\Language\Text;
 
 /**
  * Color Form Field
@@ -52,7 +54,7 @@ class JFormFieldCustomColor extends JFormField
 		$html	= array();
 		$html[] = '<input style="background:'.$this->value.'" type="text" name="' . $this->name . '" id="' . $this->id . '"' . ' value="'
 			. htmlspecialchars($this->value, ENT_COMPAT, 'UTF-8') . '"' . $class . $size .$onclick. '/>';
-		$html[] = '<input title="'.JText::_('JCLEAR').'" type="text" class="button" size="1" value="" id="clear" onclick="return jClearColor(\''.$this->id.'\')">';
+		$html[] = '<input title="'.Text::_('JCLEAR').'" type="text" class="button" size="1" value="" id="clear" onclick="return jClearColor(\''.$this->id.'\')">';
 		
 		return implode("\n", $html);
 	}

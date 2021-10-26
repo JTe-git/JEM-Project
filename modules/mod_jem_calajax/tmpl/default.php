@@ -1,6 +1,6 @@
 <?php
 /**
- * @version 2.2.2
+ * @version 4.0.0
  * @package JEM
  * @subpackage JEM - Module-Calendar(AJAX)
  * @copyright (C) 2015-2017 joomlaeventmanager.net
@@ -9,6 +9,8 @@
 */
 
 defined('_JEXEC') or die();
+
+use Joomla\CMS\Language\Text;
 
 //Month Names
 $uxtime_first_of_month = gmmktime(0, 0, 0, $prev_month, 1, $offset_year);
@@ -72,11 +74,11 @@ if (!defined('_IN_AJAXCALL')) {
 
 	if ($UseJoomlaLanguage == 1) {
 		if ($first_day == 1) {
-			$day_names_long = array(JText::_('MONDAY'),JText::_('TUESDAY'),JText::_('WEDNESDAY'),JText::_('THURSDAY'),JText::_('FRIDAY'),JText::_('SATURDAY'),JText::_('SUNDAY'));
-			$day_names_short = array(JText::_('MON'),JText::_('TUE'),JText::_('WED'),JText::_('THU'),JText::_('FRI'),JText::_('SAT'),JText::_('SUN'));
+			$day_names_long = array(Text::_('MONDAY'),Text::_('TUESDAY'),Text::_('WEDNESDAY'),Text::_('THURSDAY'),Text::_('FRIDAY'),Text::_('SATURDAY'),Text::_('SUNDAY'));
+			$day_names_short = array(Text::_('MON'),Text::_('TUE'),Text::_('WED'),Text::_('THU'),Text::_('FRI'),Text::_('SAT'),Text::_('SUN'));
 		} else {
-			$day_names_long = array(JText::_('SUNDAY'),JText::_('MONDAY'),JText::_('TUESDAY'),JText::_('WEDNESDAY'),JText::_('THURSDAY'),JText::_('FRIDAY'),JText::_('SATURDAY'));
-			$day_names_short = array(JText::_('SUN'),JText::_('MON'),JText::_('TUE'),JText::_('WED'),JText::_('THU'),JText::_('FRI'),JText::_('SAT'));
+			$day_names_long = array(Text::_('SUNDAY'),Text::_('MONDAY'),Text::_('TUESDAY'),Text::_('WEDNESDAY'),Text::_('THURSDAY'),Text::_('FRIDAY'),Text::_('SATURDAY'));
+			$day_names_short = array(Text::_('SUN'),Text::_('MON'),Text::_('TUE'),Text::_('WED'),Text::_('THU'),Text::_('FRI'),Text::_('SAT'));
 		}
 	} else {
 		for ($n = 0, $t = (3 + $first_day) *24 *60 *60; $n < 7; ++$n, $t += 24 *60 *60) { #January 4, 1970 was a Sunday
@@ -93,8 +95,8 @@ if (!defined('_IN_AJAXCALL')) {
 	list($month, $year, $month_name_long, $month_name_short, $weekday) = explode(',', gmstrftime('%m,%Y,%B,%b,%w', $uxtime_first_of_month));
 	if ($UseJoomlaLanguage == 1) {
 		$month_names = array('', 'JANUARY', 'FEBRUARY', 'MARCH', 'APRIL', 'MAY', 'JUNE', 'JULY', 'AUGUST', 'SEPTEMBER', 'OCTOBER', 'NOVEMBER', 'DECEMBER');
-		$month_name_short = JText::_($month_names[(int)$month] . '_SHORT');
-		$month_name_long  = JText::_($month_names[(int)$month]);
+		$month_name_short = Text::_($month_names[(int)$month] . '_SHORT');
+		$month_name_long  = Text::_($month_names[(int)$month]);
 	}
     $weekday = ($weekday + 7 - $first_day) % 7; #adjust for $first_day
 	$year_length = $Year_length ? $year : substr($year, 2, 3);
@@ -192,9 +194,9 @@ if (!defined('_IN_AJAXCALL')) {
 					$title = explode('+%+%+', $title);
 					if ($Show_Tooltips_Title == 1) {
 						if (count($title) > 1) {
-							$tipTitle = count($title) . ' ' . JText::_($CalTooltipsTitlePl);
+							$tipTitle = count($title) . ' ' . Text::_($CalTooltipsTitlePl);
 						} else {
-							$tipTitle = '1 ' . JText::_($CalTooltipsTitle);
+							$tipTitle = '1 ' . Text::_($CalTooltipsTitle);
 						}
 					} else {
 						$tipTitle = '';

@@ -1,13 +1,15 @@
 <?php
 /**
- * @version 2.3.1
+ * @version 4.0.0
  * @package JEM
- * @copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright (C) 2005-2009 Christoph Lukes
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 
 defined('JPATH_PLATFORM') or die;
+
+use Joomla\CMS\Language\Text;
 
 JFormHelper::loadFieldClass('calendar');
 
@@ -44,7 +46,7 @@ if (version_compare(JVERSION, '3.7', 'ge')) {
 
 			// add hint regarding date/time format accepted in edit field
 			$exampleTimestamp = strtotime("NOW");
-			$hint = JText::sprintf('COM_JEM_DATEFIELD_HINT', strftime($this->format, $exampleTimestamp));
+			$hint = Text::sprintf('COM_JEM_DATEFIELD_HINT', strftime($this->format, $exampleTimestamp));
 
 			$extraData = array(
 				'hint' => $hint,
@@ -78,7 +80,7 @@ if (version_compare(JVERSION, '3.7', 'ge')) {
 			if (empty($this->hint)) {
 				// add hint regarding date/time format accepted in edit field
 				$exampleTimestamp = strtotime("NOW");
-				$this->hint = JText::sprintf('COM_JEM_DATEFIELD_HINT', strftime($this->format, $exampleTimestamp));
+				$this->hint = Text::sprintf('COM_JEM_DATEFIELD_HINT', strftime($this->format, $exampleTimestamp));
 			}
 
 			return parent::getInput();

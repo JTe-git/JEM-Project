@@ -1,14 +1,16 @@
 <?php
 /**
- * @version 2.3.1
+ * @version 4.0.0
  * @package JEM
- * @copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright (C) 2005-2009 Christoph Lukes
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  *
  * @todo: move js to a file
  */
 defined('_JEXEC') or die;
+
+use Joomla\CMS\Language\Text;
 
 $options = array(
 		'onActive' => 'function(title, description){
@@ -169,13 +171,13 @@ function showUnregistraUntil()
 			<?php echo JemOutput::recurrenceicon($recurr, false, false); ?>
 		</div>
 		<div class="floattext" style="margin-left:36px;">
-			<strong><?php echo JText::_('COM_JEM_EDITEVENT_WARN_RECURRENCE_TITLE'); ?></strong>
+			<strong><?php echo Text::_('COM_JEM_EDITEVENT_WARN_RECURRENCE_TITLE'); ?></strong>
 			<br>
 			<?php
 				if (!empty($recurr->recurrence_type) && empty($recurr->recurrence_first_id)) {
-					echo nl2br(JText::_('COM_JEM_EDITEVENT_WARN_RECURRENCE_FIRST_TEXT'));
+					echo nl2br(Text::_('COM_JEM_EDITEVENT_WARN_RECURRENCE_FIRST_TEXT'));
 				} else {
-					echo nl2br(JText::_('COM_JEM_EDITEVENT_WARN_RECURRENCE_TEXT'));
+					echo nl2br(Text::_('COM_JEM_EDITEVENT_WARN_RECURRENCE_TEXT'));
 				}
 			?>
 		</div>
@@ -187,12 +189,12 @@ function showUnregistraUntil()
 	<div class="width-55 fltlft">
 
 		<?php echo JHtml::_('tabs.start', 'det-pane'); ?>
-		<?php echo JHtml::_('tabs.panel',JText::_('COM_JEM_EVENT_INFO_TAB'), 'info' ); ?>
+		<?php echo JHtml::_('tabs.panel',Text::_('COM_JEM_EVENT_INFO_TAB'), 'info' ); ?>
 
 		<!-- START OF LEFT FIELDSET -->
 		<fieldset class="adminform">
 			<legend>
-				<?php echo empty($this->item->id) ? JText::_('COM_JEM_NEW_EVENT') : JText::sprintf('COM_JEM_EVENT_DETAILS', $this->item->id); ?>
+				<?php echo empty($this->item->id) ? Text::_('COM_JEM_NEW_EVENT') : Text::sprintf('COM_JEM_EVENT_DETAILS', $this->item->id); ?>
 			</legend>
 
 			<ul class="adminformlist">
@@ -236,10 +238,10 @@ function showUnregistraUntil()
 			<!-- END OF FIELDSET -->
 		</fieldset>
 
-		<?php echo JHtml::_('tabs.panel',JText::_('COM_JEM_EVENT_ATTACHMENTS_TAB'), 'attachments' ); ?>
+		<?php echo JHtml::_('tabs.panel',Text::_('COM_JEM_EVENT_ATTACHMENTS_TAB'), 'attachments' ); ?>
 		<?php echo $this->loadTemplate('attachments'); ?>
 
-		<?php echo JHtml::_('tabs.panel',JText::_('COM_JEM_EVENT_SETTINGS_TAB'), 'event-settings' ); ?>
+		<?php echo JHtml::_('tabs.panel',Text::_('COM_JEM_EVENT_SETTINGS_TAB'), 'event-settings' ); ?>
 		<?php echo $this->loadTemplate('settings'); ?>
 
 		<?php echo JHtml::_('tabs.end'); ?>
@@ -253,7 +255,7 @@ function showUnregistraUntil()
 		<?php echo JHtml::_('sliders.start', 'event-sliders-'.$this->item->id, $options); ?>
 
 		<!-- START OF PANEL PUBLISHING -->
-		<?php echo JHtml::_('sliders.panel', JText::_('COM_JEM_FIELDSET_PUBLISHING'), 'publishing-details'); ?>
+		<?php echo JHtml::_('sliders.panel', Text::_('COM_JEM_FIELDSET_PUBLISHING'), 'publishing-details'); ?>
 
 		<!-- RETRIEVING OF FIELDSET PUBLISHING -->
 		<fieldset class="panelform">
@@ -273,7 +275,7 @@ function showUnregistraUntil()
 			</ul>
 		</fieldset>
 
-		<?php echo JHtml::_('sliders.panel', JText::_('COM_JEM_CUSTOMFIELDS'), 'custom'); ?>
+		<?php echo JHtml::_('sliders.panel', Text::_('COM_JEM_CUSTOMFIELDS'), 'custom'); ?>
 		<fieldset class="panelform">
 			<ul class="adminformlist">
 				<?php foreach($this->form->getFieldset('custom') as $field): ?>
@@ -283,21 +285,21 @@ function showUnregistraUntil()
 			</ul>
 		</fieldset>
 
-		<?php echo JHtml::_('sliders.panel', JText::_('COM_JEM_REGISTRATION'), 'registra'); ?>
+		<?php echo JHtml::_('sliders.panel', Text::_('COM_JEM_REGISTRATION'), 'registra'); ?>
 		<fieldset class="panelform">
 			<ul class="adminformlist">
 				<li><?php echo $this->form->getLabel('registra'); ?> <?php echo $this->form->getInput('registra'); ?>
 				</li>
 				<li><?php echo $this->form->getLabel('unregistra'); ?> <?php echo $this->form->getInput('unregistra'); ?>
 				<!--/li>
-				<li--><span id="jform_unregistra_until_span"><?php echo $this->form->getInput('unregistra_until'); ?><?php echo JText::_('COM_JEM_EVENT_FIELD_ANNULATION_UNTIL_POSTFIX'); ?></span>
+				<li--><span id="jform_unregistra_until_span"><?php echo $this->form->getInput('unregistra_until'); ?><?php echo Text::_('COM_JEM_EVENT_FIELD_ANNULATION_UNTIL_POSTFIX'); ?></span>
 				</li>
 				<li><?php echo $this->form->getLabel('maxplaces'); ?> <?php echo $this->form->getInput('maxplaces'); ?>
 				</li>
-				<li><label><?php echo JText::_ ('COM_JEM_BOOKED_PLACES') . ':';?></label><input id="event-booked" class="readonly inputbox" type="text" readonly="true" value="<?php echo $this->item->booked; ?>" />
+				<li><label><?php echo Text::_ ('COM_JEM_BOOKED_PLACES') . ':';?></label><input id="event-booked" class="readonly inputbox" type="text" readonly="true" value="<?php echo $this->item->booked; ?>" />
 				</li>
 				<?php if ($this->item->maxplaces): ?>
-				<li><label><?php echo JText::_ ('COM_JEM_AVAILABLE_PLACES') . ':';?></label><input id="event-available" class="readonly inputbox" type="text" readonly="true" value="<?php echo ($this->item->maxplaces-$this->item->booked); ?>" />
+				<li><label><?php echo Text::_ ('COM_JEM_AVAILABLE_PLACES') . ':';?></label><input id="event-available" class="readonly inputbox" type="text" readonly="true" value="<?php echo ($this->item->maxplaces-$this->item->booked); ?>" />
 				</li>
 				<?php endif; ?>
 				<li><?php echo $this->form->getLabel('waitinglist'); ?> <?php echo $this->form->getInput('waitinglist'); ?>
@@ -306,7 +308,7 @@ function showUnregistraUntil()
 		</fieldset>
 
 		<!-- START OF PANEL IMAGE -->
-		<?php echo JHtml::_('sliders.panel', JText::_('COM_JEM_IMAGE'), 'image-event'); ?>
+		<?php echo JHtml::_('sliders.panel', Text::_('COM_JEM_IMAGE'), 'image-event'); ?>
 
 		<fieldset class="panelform">
 			<ul class="adminformlist">
@@ -315,7 +317,7 @@ function showUnregistraUntil()
 			</ul>
 		</fieldset>
 
-		<?php echo JHtml::_('sliders.panel', JText::_('COM_JEM_RECURRING_EVENTS'), 'recurrence'); ?>
+		<?php echo JHtml::_('sliders.panel', Text::_('COM_JEM_RECURRING_EVENTS'), 'recurrence'); ?>
 		<fieldset class="panelform">
 			<ul class="adminformlist">
 				<li><?php echo $this->form->getLabel('recurrence_type'); ?> <?php echo $this->form->getInput('recurrence_type'); ?>
@@ -330,7 +332,7 @@ function showUnregistraUntil()
 					$anticipation	= $this->jemsettings->recurrence_anticipation;
 					$limitdate = new JDate('now +'.$anticipation.'days');
 					$limitdate = $limitdate->format('d-m-Y');
-					echo JText::sprintf(JText::_('COM_JEM_EVENT_NOTICE_GENSHIELD'),$limitdate);
+					echo Text::sprintf(Text::_('COM_JEM_EVENT_NOTICE_GENSHIELD'),$limitdate);
 					?></small></div>
 				</li>
 			</ul>
@@ -342,22 +344,22 @@ function showUnregistraUntil()
 			type="text/javascript">
 			<!--
 				var $select_output = new Array();
-				$select_output[1] = "<?php echo JText::_ ('COM_JEM_OUTPUT_DAY'); ?>";
-				$select_output[2] = "<?php echo JText::_ ('COM_JEM_OUTPUT_WEEK'); ?>";
-				$select_output[3] = "<?php echo JText::_ ('COM_JEM_OUTPUT_MONTH'); ?>";
-				$select_output[4] = "<?php echo JText::_ ('COM_JEM_OUTPUT_WEEKDAY'); ?>";
+				$select_output[1] = "<?php echo Text::_ ('COM_JEM_OUTPUT_DAY'); ?>";
+				$select_output[2] = "<?php echo Text::_ ('COM_JEM_OUTPUT_WEEK'); ?>";
+				$select_output[3] = "<?php echo Text::_ ('COM_JEM_OUTPUT_MONTH'); ?>";
+				$select_output[4] = "<?php echo Text::_ ('COM_JEM_OUTPUT_WEEKDAY'); ?>";
 
 				var $weekday = new Array();
-				$weekday[0] = new Array("MO", "<?php echo JText::_ ('COM_JEM_MONDAY'); ?>");
-				$weekday[1] = new Array("TU", "<?php echo JText::_ ('COM_JEM_TUESDAY'); ?>");
-				$weekday[2] = new Array("WE", "<?php echo JText::_ ('COM_JEM_WEDNESDAY'); ?>");
-				$weekday[3] = new Array("TH", "<?php echo JText::_ ('COM_JEM_THURSDAY'); ?>");
-				$weekday[4] = new Array("FR", "<?php echo JText::_ ('COM_JEM_FRIDAY'); ?>");
-				$weekday[5] = new Array("SA", "<?php echo JText::_ ('COM_JEM_SATURDAY'); ?>");
-				$weekday[6] = new Array("SU", "<?php echo JText::_ ('COM_JEM_SUNDAY'); ?>");
+				$weekday[0] = new Array("MO", "<?php echo Text::_ ('COM_JEM_MONDAY'); ?>");
+				$weekday[1] = new Array("TU", "<?php echo Text::_ ('COM_JEM_TUESDAY'); ?>");
+				$weekday[2] = new Array("WE", "<?php echo Text::_ ('COM_JEM_WEDNESDAY'); ?>");
+				$weekday[3] = new Array("TH", "<?php echo Text::_ ('COM_JEM_THURSDAY'); ?>");
+				$weekday[4] = new Array("FR", "<?php echo Text::_ ('COM_JEM_FRIDAY'); ?>");
+				$weekday[5] = new Array("SA", "<?php echo Text::_ ('COM_JEM_SATURDAY'); ?>");
+				$weekday[6] = new Array("SU", "<?php echo Text::_ ('COM_JEM_SUNDAY'); ?>");
 
-				var $before_last = "<?php echo JText::_ ('COM_JEM_BEFORE_LAST'); ?>";
-				var $last = "<?php echo JText::_ ('COM_JEM_LAST'); ?>";
+				var $before_last = "<?php echo Text::_ ('COM_JEM_BEFORE_LAST'); ?>";
+				var $last = "<?php echo Text::_ ('COM_JEM_LAST'); ?>";
 				start_recurrencescript("jform_recurrence_type");
 			-->
 			</script>
@@ -371,43 +373,43 @@ function showUnregistraUntil()
 			if (!empty($rlDate) && (strpos($nullDate, $rlDate) !== 0)) {
 				$recurr_limit_date = JemOutput::formatdate($rlDate);
 			} else {
-				$recurr_limit_date = JText::_('COM_JEM_UNLIMITED');
+				$recurr_limit_date = Text::_('COM_JEM_UNLIMITED');
 			}
 
 			switch ($this->item->recurr_bak->recurrence_type) {
 			case 1:
-				$recurr_type = JText::_('COM_JEM_DAYLY');
+				$recurr_type = Text::_('COM_JEM_DAYLY');
 				$recurr_info = str_ireplace('[placeholder]',
 				                            $this->item->recurr_bak->recurrence_number,
-				                            JText::_('COM_JEM_OUTPUT_DAY'));
+				                            Text::_('COM_JEM_OUTPUT_DAY'));
 				break;
 			case 2:
-				$recurr_type = JText::_('COM_JEM_WEEKLY');
+				$recurr_type = Text::_('COM_JEM_WEEKLY');
 				$recurr_info = str_ireplace('[placeholder]',
 				                            $this->item->recurr_bak->recurrence_number,
-				                            JText::_('COM_JEM_OUTPUT_WEEK'));
+				                            Text::_('COM_JEM_OUTPUT_WEEK'));
 				break;
 			case 3:
-				$recurr_type = JText::_('COM_JEM_MONTHLY');
+				$recurr_type = Text::_('COM_JEM_MONTHLY');
 				$recurr_info = str_ireplace('[placeholder]',
 				                            $this->item->recurr_bak->recurrence_number,
-				                            JText::_('COM_JEM_OUTPUT_MONTH'));
+				                            Text::_('COM_JEM_OUTPUT_MONTH'));
 				break;
 			case 4:
-				$recurr_type = JText::_('COM_JEM_WEEKDAY');
+				$recurr_type = Text::_('COM_JEM_WEEKDAY');
 				$recurr_byday = preg_replace('/(,)([^ ,]+)/', '$1 $2', $this->item->recurr_bak->recurrence_byday);
 				$recurr_days = str_ireplace(array('MO', 'TU', 'WE', 'TH', 'FR', 'SA', 'SO'),
-				                            array(JText::_('COM_JEM_MONDAY'), JText::_('COM_JEM_TUESDAY'),
-				                                  JText::_('COM_JEM_WEDNESDAY'), JText::_('COM_JEM_THURSDAY'),
-				                                  JText::_('COM_JEM_FRIDAY'), JText::_('COM_JEM_SATURDAY'),
-				                                  JText::_('COM_JEM_SUNDAY')),
+				                            array(Text::_('COM_JEM_MONDAY'), Text::_('COM_JEM_TUESDAY'),
+				                                  Text::_('COM_JEM_WEDNESDAY'), Text::_('COM_JEM_THURSDAY'),
+				                                  Text::_('COM_JEM_FRIDAY'), Text::_('COM_JEM_SATURDAY'),
+				                                  Text::_('COM_JEM_SUNDAY')),
 				                            $recurr_byday);
 				$recurr_num  = str_ireplace(array('5', '6'),
-				                            array(JText::_('COM_JEM_LAST'), JText::_('COM_JEM_BEFORE_LAST')),
+				                            array(Text::_('COM_JEM_LAST'), Text::_('COM_JEM_BEFORE_LAST')),
 				                            $this->item->recurr_bak->recurrence_number);
 				$recurr_info = str_ireplace(array('[placeholder]', '[placeholder_weekday]'),
 				                            array($recurr_num, $recurr_days),
-				                            JText::_('COM_JEM_OUTPUT_WEEKDAY'));
+				                            Text::_('COM_JEM_OUTPUT_WEEKDAY'));
 				break;
 			default:
 				break;
@@ -417,10 +419,10 @@ function showUnregistraUntil()
 		 ?>
 				<hr>
 				<fieldset class="panelform">
-					<p><strong><?php echo JText::_('COM_JEM_RECURRING_INFO_TITLE'); ?></strong></p>
+					<p><strong><?php echo Text::_('COM_JEM_RECURRING_INFO_TITLE'); ?></strong></p>
 					<ul>
 						<li>
-							<label><?php echo JText::_('COM_JEM_RECURRENCE'); ?></label>
+							<label><?php echo Text::_('COM_JEM_RECURRENCE'); ?></label>
 							<input type="text" class="readonly" readonly="readonly" value="<?php echo $recurr_type; ?>">
 						</li>
 						<li>
@@ -429,7 +431,7 @@ function showUnregistraUntil()
 							<?php echo $recurr_info; ?>
 						</li>
 						<li>
-							<label><?php echo JText::_('COM_JEM_RECURRENCE_COUNTER'); ?></label>
+							<label><?php echo Text::_('COM_JEM_RECURRENCE_COUNTER'); ?></label>
 							<input type="text" class="readonly" readonly="readonly" value="<?php echo $recurr_limit_date; ?>">
 						</li>
 					</ul>
@@ -439,24 +441,24 @@ function showUnregistraUntil()
 		} ?>
 
 		<!-- START OF PANEL META -->
-		<?php echo JHtml::_('sliders.panel', JText::_('COM_JEM_METADATA_INFORMATION'), 'meta-event'); ?>
+		<?php echo JHtml::_('sliders.panel', Text::_('COM_JEM_METADATA_INFORMATION'), 'meta-event'); ?>
 
 		<!-- RETRIEVING OF FIELDSET META -->
 		<fieldset class="panelform">
-			<input class="inputbox" type="button" onclick="insert_keyword('[title]')" value="<?php echo JText::_ ( 'COM_JEM_EVENT_TITLE' );	?>" />
-			<input class="inputbox" type="button" onclick="insert_keyword('[a_name]')" value="<?php	echo JText::_ ( 'COM_JEM_VENUE' );?>" />
-			<input class="inputbox" type="button" onclick="insert_keyword('[categories]')" value="<?php	echo JText::_ ( 'COM_JEM_CATEGORIES' );?>" />
-			<input class="inputbox" type="button" onclick="insert_keyword('[dates]')" value="<?php echo JText::_ ( 'COM_JEM_DATE' );?>" />
+			<input class="inputbox" type="button" onclick="insert_keyword('[title]')" value="<?php echo Text::_ ( 'COM_JEM_EVENT_TITLE' );	?>" />
+			<input class="inputbox" type="button" onclick="insert_keyword('[a_name]')" value="<?php	echo Text::_ ( 'COM_JEM_VENUE' );?>" />
+			<input class="inputbox" type="button" onclick="insert_keyword('[categories]')" value="<?php	echo Text::_ ( 'COM_JEM_CATEGORIES' );?>" />
+			<input class="inputbox" type="button" onclick="insert_keyword('[dates]')" value="<?php echo Text::_ ( 'COM_JEM_DATE' );?>" />
 
 			<p>
-				<input class="inputbox" type="button" onclick="insert_keyword('[times]')" value="<?php echo JText::_ ( 'COM_JEM_EVENT_TIME' );?>" />
-				<input class="inputbox" type="button" onclick="insert_keyword('[enddates]')" value="<?php echo JText::_ ( 'COM_JEM_ENDDATE' );?>" />
-				<input class="inputbox" type="button" onclick="insert_keyword('[endtimes]')" value="<?php echo JText::_ ( 'COM_JEM_END_TIME' );?>" />
+				<input class="inputbox" type="button" onclick="insert_keyword('[times]')" value="<?php echo Text::_ ( 'COM_JEM_EVENT_TIME' );?>" />
+				<input class="inputbox" type="button" onclick="insert_keyword('[enddates]')" value="<?php echo Text::_ ( 'COM_JEM_ENDDATE' );?>" />
+				<input class="inputbox" type="button" onclick="insert_keyword('[endtimes]')" value="<?php echo Text::_ ( 'COM_JEM_END_TIME' );?>" />
 			</p>
 			<br />
 
 			<br />
-			<label for="meta_keywords"><?php echo JText::_ ('COM_JEM_META_KEYWORDS') . ':';?></label>
+			<label for="meta_keywords"><?php echo Text::_ ('COM_JEM_META_KEYWORDS') . ':';?></label>
 			<br />
 
 			<?php
@@ -468,7 +470,7 @@ function showUnregistraUntil()
 			?>
 			<textarea class="inputbox" name="meta_keywords" id="meta_keywords" rows="5" cols="40" maxlength="150" onfocus="get_inputbox('meta_keywords')" onblur="change_metatags()"><?php echo $meta_keywords; ?></textarea>
 
-			<label for="meta_description"><?php echo JText::_ ('COM_JEM_META_DESCRIPTION') . ':';?></label>
+			<label for="meta_description"><?php echo Text::_ ('COM_JEM_META_DESCRIPTION') . ':';?></label>
 			<br />
 
 			<?php
@@ -497,7 +499,7 @@ function showUnregistraUntil()
 		<script type="text/javascript">
 		<!--
 			starter("<?php
-			echo JText::_ ( 'COM_JEM_META_ERROR' );
+			echo Text::_ ( 'COM_JEM_META_ERROR' );
 			?>");	// window.onload is already in use, call the function manualy instead
 		-->
 		</script>

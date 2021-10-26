@@ -1,13 +1,15 @@
 <?php
 /**
- * @version 2.3.1
+ * @version 4.0.0
  * @package JEM
- * @copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright (C) 2005-2009 Christoph Lukes
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 
 defined('_JEXEC') or die;
+
+use Joomla\CMS\Language\Text;
 
 jimport('joomla.application.component.modellist');
 
@@ -222,16 +224,16 @@ class JemModelAttendees extends JModelList
 		$csv = fopen('php://output', 'w');
 
 		$header = array(
-				JText::_('COM_JEM_NAME'),
-				JText::_('COM_JEM_USERNAME'),
-				JText::_('COM_JEM_EMAIL'),
-				JText::_('COM_JEM_REGDATE'),
-				JText::_('COM_JEM_HEADER_WAITINGLIST_STATUS')
+				Text::_('COM_JEM_NAME'),
+				Text::_('COM_JEM_USERNAME'),
+				Text::_('COM_JEM_EMAIL'),
+				Text::_('COM_JEM_REGDATE'),
+				Text::_('COM_JEM_HEADER_WAITINGLIST_STATUS')
 			);
 		if ($comments) {
-			$header[] = JText::_('COM_JEM_COMMENT');
+			$header[] = Text::_('COM_JEM_COMMENT');
 		}
-		$header[] = JText::_('COM_JEM_ATTENDEES_REGID');
+		$header[] = Text::_('COM_JEM_ATTENDEES_REGID');
 
 		fputcsv($csv, $header, $separator, $delimiter);
 
@@ -249,8 +251,8 @@ class JemModelAttendees extends JModelList
 					$item->name,
 					$item->username,
 					$item->email,
-					empty($item->uregdate) ? '' : JHtml::_('date', $item->uregdate, JText::_('DATE_FORMAT_LC2')),
-					JText::_($txt_stat)
+					empty($item->uregdate) ? '' : JHtml::_('date', $item->uregdate, Text::_('DATE_FORMAT_LC2')),
+					Text::_($txt_stat)
 				);
 			if ($comments) {
 				$comment = strip_tags($item->comment);

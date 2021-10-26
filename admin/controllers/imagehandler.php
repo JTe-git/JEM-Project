@@ -1,13 +1,15 @@
 <?php
 /**
- * @version 2.3.1
+ * @version 4.0.0
  * @package JEM
- * @copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright (C) 2005-2009 Christoph Lukes
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 
-defined('_JEXEC') or die;
+defined('_JEXEC') or die
+
+use Joomla\CMS\Language\Text;
 
 jimport('joomla.application.component.controller');
 jimport('joomla.filesystem.file');
@@ -66,7 +68,7 @@ class JemControllerImagehandler extends JControllerLegacy
 
 		//do we have an upload?
 		if (empty($file['name'])) {
-			echo "<script> alert('".JText::_('COM_JEM_IMAGE_EMPTY')."'); window.history.go(-1); </script>\n";
+			echo "<script> alert('".Text::_('COM_JEM_IMAGE_EMPTY')."'); window.history.go(-1); </script>\n";
 			$app->close();
 		}
 
@@ -83,10 +85,10 @@ class JemControllerImagehandler extends JControllerLegacy
 
 		//upload the image
 		if (!JFile::upload($file['tmp_name'], $filepath)) {
-			echo "<script> alert('".JText::_('COM_JEM_UPLOAD_FAILED')."'); </script>\n";
+			echo "<script> alert('".Text::_('COM_JEM_UPLOAD_FAILED')."'); </script>\n";
 			$app->close();
 		} else {
-			echo "<script> alert('".JText::_('COM_JEM_UPLOAD_COMPLETE')."'); window.parent.SelectImage('$filename', '$filename'); </script>\n";
+			echo "<script> alert('".Text::_('COM_JEM_UPLOAD_COMPLETE')."'); window.parent.SelectImage('$filename', '$filename'); </script>\n";
 			$app->close();
 		}
 	}
@@ -115,7 +117,7 @@ class JemControllerImagehandler extends JControllerLegacy
 		if (count($images)) {
 			foreach ($images as $image) {
 				if ($image !== JFilterInput::getInstance()->clean($image, 'path')) {
-					\Joomla\CMS\Factory::getApplication()->enqueueMessage(JText::_('COM_JEM_UNABLE_TO_DELETE').' '.htmlspecialchars($image, ENT_COMPAT, 'UTF-8'), 'warning');
+					\Joomla\CMS\Factory::getApplication()->enqueueMessage(Text::_('COM_JEM_UNABLE_TO_DELETE').' '.htmlspecialchars($image, ENT_COMPAT, 'UTF-8'), 'warning');
 					continue;
 				}
 

@@ -1,13 +1,15 @@
 <?php
 /**
- * @version 2.3.1
+ * @version 4.0.0
  * @package JEM
- * @copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright (C) 2005-2009 Christoph Lukes
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 
 defined('_JEXEC') or die;
+
+use Joomla\CMS\Language\Text;
 
 /**
  * JEM groups Model class
@@ -42,7 +44,7 @@ class jem_groups extends JTable
 	{
 		// Not typed in a category name?
 		if (trim($this->name) == '') {
-			$this->_error = JText::_('COM_JEM_ADD_GROUP_NAME');
+			$this->_error = Text::_('COM_JEM_ADD_GROUP_NAME');
 			\Joomla\CMS\Factory::getApplication()->enqueueMessage($this->_error, 'warning');
 			return false;
 		}
@@ -53,7 +55,7 @@ class jem_groups extends JTable
 
 		$xid = intval($this->_db->loadResult());
 		if ($xid && $xid != intval($this->id)) {
-			\Joomla\CMS\Factory::getApplication()->enqueueMessage(JText::sprintf('COM_JEM_GROUP_NAME_ALREADY_EXIST', $this->name), 'warning');
+			\Joomla\CMS\Factory::getApplication()->enqueueMessage(Text::sprintf('COM_JEM_GROUP_NAME_ALREADY_EXIST', $this->name), 'warning');
 			return false;
 		}
 

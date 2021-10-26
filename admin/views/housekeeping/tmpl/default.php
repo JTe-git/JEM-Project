@@ -1,13 +1,15 @@
 <?php
 /**
- * @version 2.3.1
+ * @version 4.0.0
  * @package JEM
- * @copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright (C) 2005-2009 Christoph Lukes
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 
 defined('_JEXEC') or die;
+
+use Joomla\CMS\Language\Text;
 ?>
 <form name="adminForm" method="post" id="adminForm">
 	<?php if (isset($this->sidebar)) : ?>
@@ -23,26 +25,26 @@ defined('_JEXEC') or die;
 				<td width="10%">
 					<div class="linkicon">
 						<a href="index.php?option=com_jem&amp;task=housekeeping.cleaneventimg&amp;<?php echo JSession::getFormToken(); ?>=1">
-							<?php echo JHtml::_('image', 'com_jem/icon-48-cleaneventimg.png', JText::_('COM_JEM_HOUSEKEEPING_EVENT_IMG'), NULL, true); ?>
-							<span><?php echo JText::_('COM_JEM_HOUSEKEEPING_EVENT_IMG'); ?></span>
+							<?php echo JHtml::_('image', 'com_jem/icon-48-cleaneventimg.png', Text::_('COM_JEM_HOUSEKEEPING_EVENT_IMG'), NULL, true); ?>
+							<span><?php echo Text::_('COM_JEM_HOUSEKEEPING_EVENT_IMG'); ?></span>
 						</a>
 					</div>
 				</td>
 				<td width="40%" valign="middle">
-					<?php echo JText::_('COM_JEM_HOUSEKEEPING_EVENT_IMG_DESC'); ?>
+					<?php echo Text::_('COM_JEM_HOUSEKEEPING_EVENT_IMG_DESC'); ?>
 				</td>
 
 				<!-- CLEAN VENUE IMG -->
 				<td width="10%">
 					<div class="linkicon">
 						<a href="index.php?option=com_jem&amp;task=housekeeping.cleanvenueimg&amp;<?php echo JSession::getFormToken(); ?>=1">
-							<?php echo JHtml::_('image', 'com_jem/icon-48-cleanvenueimg.png', JText::_('COM_JEM_HOUSEKEEPING_VENUE_IMG'), NULL, true); ?>
-							<span><?php echo JText::_('COM_JEM_HOUSEKEEPING_VENUE_IMG'); ?></span>
+							<?php echo JHtml::_('image', 'com_jem/icon-48-cleanvenueimg.png', Text::_('COM_JEM_HOUSEKEEPING_VENUE_IMG'), NULL, true); ?>
+							<span><?php echo Text::_('COM_JEM_HOUSEKEEPING_VENUE_IMG'); ?></span>
 						</a>
 					</div>
 				</td>
 				<td width="40%" valign="middle">
-					<?php echo JText::_('COM_JEM_HOUSEKEEPING_VENUE_IMG_DESC'); ?>
+					<?php echo Text::_('COM_JEM_HOUSEKEEPING_VENUE_IMG_DESC'); ?>
 				</td>
 			</tr>
 
@@ -51,26 +53,26 @@ defined('_JEXEC') or die;
 				<td width="10%">
 					<div class="linkicon">
 						<a href="index.php?option=com_jem&amp;task=housekeeping.cleancategoryimg&amp;<?php echo JSession::getFormToken(); ?>=1">
-							<?php echo JHtml::_('image', 'com_jem/icon-48-cleancategoryimg.png', JText::_('COM_JEM_HOUSEKEEPING_CATEGORY_IMG'), NULL, true); ?>
-							<span><?php echo JText::_('COM_JEM_HOUSEKEEPING_CATEGORY_IMG'); ?></span>
+							<?php echo JHtml::_('image', 'com_jem/icon-48-cleancategoryimg.png', Text::_('COM_JEM_HOUSEKEEPING_CATEGORY_IMG'), NULL, true); ?>
+							<span><?php echo Text::_('COM_JEM_HOUSEKEEPING_CATEGORY_IMG'); ?></span>
 						</a>
 					</div>
 				</td>
 				<td width="40%" valign="middle">
-					<?php echo JText::_('COM_JEM_HOUSEKEEPING_CATEGORY_IMG_DESC'); ?>
+					<?php echo Text::_('COM_JEM_HOUSEKEEPING_CATEGORY_IMG_DESC'); ?>
 				</td>
 
 				<!-- CLEAN TRIGGER ARCHIVE -->
 				<td width="10%">
 					<div class="linkicon">
 						<a href="index.php?option=com_jem&amp;task=housekeeping.triggerarchive&amp;<?php echo JSession::getFormToken(); ?>=1">
-							<?php echo JHtml::_('image', 'com_jem/icon-48-archive.png', JText::_('COM_JEM_HOUSEKEEPING_TRIGGER_AUTOARCHIVE'), NULL, true); ?>
-							<span><?php echo JText::_('COM_JEM_HOUSEKEEPING_TRIGGER_AUTOARCHIVE'); ?></span>
+							<?php echo JHtml::_('image', 'com_jem/icon-48-archive.png', Text::_('COM_JEM_HOUSEKEEPING_TRIGGER_AUTOARCHIVE'), NULL, true); ?>
+							<span><?php echo Text::_('COM_JEM_HOUSEKEEPING_TRIGGER_AUTOARCHIVE'); ?></span>
 						</a>
 					</div>
 				</td>
 				<td width="40%" valign="middle">
-					<?php echo JText::_('COM_JEM_HOUSEKEEPING_TRIGGER_AUTOARCHIVE_DESC'); ?>
+					<?php echo Text::_('COM_JEM_HOUSEKEEPING_TRIGGER_AUTOARCHIVE_DESC'); ?>
 				</td>
 			</tr>
 
@@ -79,27 +81,27 @@ defined('_JEXEC') or die;
 				<td width="10%">
 					<div class="linkicon">
 						<a href="index.php?option=com_jem&amp;task=housekeeping.cleanupCatsEventRelations&amp;<?php echo JSession::getFormToken(); ?>=1">
-							<?php echo JHtml::_('image', 'com_jem/icon-48-cleancategoryimg.png', JText::_('COM_JEM_HOUSEKEEPING_CATSEVENT_RELS'), NULL, true); ?>
-							<span><?php echo JText::_('COM_JEM_HOUSEKEEPING_CLEANUP_CATSEVENT_RELS'); ?></span>
+							<?php echo JHtml::_('image', 'com_jem/icon-48-cleancategoryimg.png', Text::_('COM_JEM_HOUSEKEEPING_CATSEVENT_RELS'), NULL, true); ?>
+							<span><?php echo Text::_('COM_JEM_HOUSEKEEPING_CLEANUP_CATSEVENT_RELS'); ?></span>
 						</a>
 					</div>
 				</td>
 				<td width="40%" valign="middle">
-					<?php echo JText::_('COM_JEM_HOUSEKEEPING_CLEANUP_CATSEVENT_RELS_DESC'); ?><br/>
-					<?php echo JText::sprintf('COM_JEM_HOUSEKEEPING_TOTAL_CATSEVENT_RELS', $this->totalcats) ?>
+					<?php echo Text::_('COM_JEM_HOUSEKEEPING_CLEANUP_CATSEVENT_RELS_DESC'); ?><br/>
+					<?php echo Text::sprintf('COM_JEM_HOUSEKEEPING_TOTAL_CATSEVENT_RELS', $this->totalcats) ?>
 				</td>
 
 				<!-- TRUNCATE ALL DATA -->
 				<td width="10%">
 					<div class="linkicon">
-						<a href="index.php?option=com_jem&amp;task=housekeeping.truncateAllData&amp;<?php echo JSession::getFormToken(); ?>=1" onclick="javascript:return confirm('<?php echo JText::_('COM_JEM_HOUSEKEEPING_TRUNCATE_ALL_DATA_CONFIRM'); ?>');">
-							<?php echo JHtml::_('image', 'com_jem/icon-48-truncatealldata.png', JText::_('COM_JEM_HOUSEKEEPING_TRUNCATE_ALL_DATA'), NULL, true); ?>
-							<span><?php echo JText::_('COM_JEM_HOUSEKEEPING_TRUNCATE_ALL_DATA'); ?></span>
+						<a href="index.php?option=com_jem&amp;task=housekeeping.truncateAllData&amp;<?php echo JSession::getFormToken(); ?>=1" onclick="javascript:return confirm('<?php echo Text::_('COM_JEM_HOUSEKEEPING_TRUNCATE_ALL_DATA_CONFIRM'); ?>');">
+							<?php echo JHtml::_('image', 'com_jem/icon-48-truncatealldata.png', Text::_('COM_JEM_HOUSEKEEPING_TRUNCATE_ALL_DATA'), NULL, true); ?>
+							<span><?php echo Text::_('COM_JEM_HOUSEKEEPING_TRUNCATE_ALL_DATA'); ?></span>
 						</a>
 					</div>
 				</td>
 				<td width="40%" valign="middle">
-					<?php echo JText::_('COM_JEM_HOUSEKEEPING_TRUNCATE_ALL_DATA_DESC'); ?>
+					<?php echo Text::_('COM_JEM_HOUSEKEEPING_TRUNCATE_ALL_DATA_DESC'); ?>
 				</td>
 			</tr>
 		</table>

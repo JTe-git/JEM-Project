@@ -1,12 +1,14 @@
 <?php
 /**
- * @version 2.3.1
+ * @version 4.0.0
  * @package JEM
- * @copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright (C) 2005-2009 Christoph Lukes
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 defined('_JEXEC') or die;
+
+use Joomla\CMS\Language\Text;
 
 /**
  * Event-View
@@ -69,7 +71,7 @@ class JemViewEvent extends JemView
 
 		// check for data error
 		if (empty($this->item)) {
-			$app->enqueueMessage(JText::_('JERROR_AN_ERROR_HAS_OCCURRED'), 'error');
+			$app->enqueueMessage(Text::_('JERROR_AN_ERROR_HAS_OCCURRED'), 'error');
 			return false;
 		}
 
@@ -136,7 +138,7 @@ class JemViewEvent extends JemView
 
 		// Check the view access to the event (the model has already computed the values).
 		if (!$item->params->get('access-view')) { // && !$item->params->get('show_noauth') &&  $user->get('guest')) { - not supported yet
-			\Joomla\CMS\Factory::getApplication()->enqueueMessage(JText::_('JERROR_ALERTNOAUTHOR'), 'warning');
+			\Joomla\CMS\Factory::getApplication()->enqueueMessage(Text::_('JERROR_ALERTNOAUTHOR'), 'warning');
 			return;
 		}
 
@@ -406,7 +408,7 @@ class JemViewEvent extends JemView
 		if ($menu) {
 			$this->params->def('page_heading', $this->params->get('page_title', $menu->title));
 		} else {
-			$this->params->def('page_heading', JText::_('JGLOBAL_JEM_EVENT'));
+			$this->params->def('page_heading', Text::_('JGLOBAL_JEM_EVENT'));
 		}
 	*/
 		$title = $this->params->get('page_title', '');
@@ -436,9 +438,9 @@ class JemViewEvent extends JemView
 		if (empty($title)) {
 			$title = $app->getCfg('sitename');
 		} elseif ($app->getCfg('sitename_pagetitles', 0) == 1) {
-			$title = JText::sprintf('JPAGETITLE', $app->getCfg('sitename'), $title);
+			$title = Text::sprintf('JPAGETITLE', $app->getCfg('sitename'), $title);
 		} elseif ($app->getCfg('sitename_pagetitles', 0) == 2) {
-			$title = JText::sprintf('JPAGETITLE', $title, $app->getCfg('sitename'));
+			$title = Text::sprintf('JPAGETITLE', $title, $app->getCfg('sitename'));
 		}
 		if (empty($title)) {
 			$title = $this->item->title;
@@ -464,7 +466,7 @@ class JemViewEvent extends JemView
 		if (!empty($this->item->page_title)) {
 			$this->item->title = $this->item->title . ' - ' . $this->item->page_title;
 			$this->document->setTitle($this->item->page_title . ' - '
-					. JText::sprintf('PLG_CONTENT_PAGEBREAK_PAGE_NUM', $this->state->get('list.offset') + 1));
+					. Text::sprintf('PLG_CONTENT_PAGEBREAK_PAGE_NUM', $this->state->get('list.offset') + 1));
 		}
 	}
 }

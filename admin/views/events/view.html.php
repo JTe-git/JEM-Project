@@ -10,6 +10,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Language\Text;
 
 /**
  * Events-View
@@ -68,13 +69,13 @@ class JemViewEvents extends JemAdminView
 
 		// add filter selection for the search
 		$filters = array();
-		$filters[] = HTMLHelper::_('select.option', '1', JText::_('COM_JEM_EVENT_TITLE'));
-		$filters[] = HTMLHelper::_('select.option', '2', JText::_('COM_JEM_VENUE'));
-		$filters[] = HTMLHelper::_('select.option', '3', JText::_('COM_JEM_CITY'));
-		$filters[] = HTMLHelper::_('select.option', '4', JText::_('COM_JEM_CATEGORY'));
-		$filters[] = HTMLHelper::_('select.option', '5', JText::_('COM_JEM_STATE'));
-		$filters[] = HTMLHelper::_('select.option', '6', JText::_('COM_JEM_COUNTRY'));
-		$filters[] = HTMLHelper::_('select.option', '7', JText::_('JALL'));
+		$filters[] = HTMLHelper::_('select.option', '1', Text::_('COM_JEM_EVENT_TITLE'));
+		$filters[] = HTMLHelper::_('select.option', '2', Text::_('COM_JEM_VENUE'));
+		$filters[] = HTMLHelper::_('select.option', '3', Text::_('COM_JEM_CITY'));
+		$filters[] = HTMLHelper::_('select.option', '4', Text::_('COM_JEM_CATEGORY'));
+		$filters[] = HTMLHelper::_('select.option', '5', Text::_('COM_JEM_STATE'));
+		$filters[] = HTMLHelper::_('select.option', '6', Text::_('COM_JEM_COUNTRY'));
+		$filters[] = HTMLHelper::_('select.option', '7', Text::_('JALL'));
 		$lists['filter'] = HTMLHelper::_('select.genericlist', $filters, 'filter_type', array('size'=>'1','class'=>'inputbox'), 'value', 'text', $this->state->get('filter_type'));
 
 		//assign data to template
@@ -95,7 +96,7 @@ class JemViewEvents extends JemAdminView
 	 */
 	protected function addToolbar()
 	{
-		JToolBarHelper::title(JText::_('COM_JEM_EVENTS'), 'events');
+		JToolBarHelper::title(Text::_('COM_JEM_EVENTS'), 'events');
 
 		/* retrieving the allowed actions for the user */
 		$canDo = JemHelperBackend::getActions(0);

@@ -1,13 +1,14 @@
 <?php
 /**
- * @version 2.3.1
+ * @version 4.0.0
  * @package JEM
- * @copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright (C) 2005-2009 Christoph Lukes
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 // Create shortcut to parameters.
 
+use Joomla\CMS\Language\Text;
 
 $params = $this->state->get('params');
 
@@ -28,7 +29,7 @@ defined('_JEXEC') or die;
 
 <div class="width-100">
 	<fieldset class="adminform">
-		<legend><?php echo JText::_('COM_JEM_EVENTS'); ?></legend>
+		<legend><?php echo Text::_('COM_JEM_EVENTS'); ?></legend>
 		<ul class="adminformlist">
 			<?php foreach ($this->form->getFieldset('evevents') as $field): ?>
 				<li><?php echo $field->label; ?> <?php echo $field->input; ?></li>

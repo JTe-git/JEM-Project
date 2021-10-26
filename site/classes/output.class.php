@@ -1,12 +1,14 @@
 <?php
 /**
- * @version 2.3.1
+ * @version 4.0.0
  * @package JEM
- * @copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright (C) 2005-2009 Christoph Lukes
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 defined('_JEXEC') or die;
+
+use Joomla\CMS\Language\Text;
 
 // ensure JemFactory is loaded (because this class is used by modules or plugins too)
 require_once(JPATH_SITE.'/components/com_jem/factory.php');
@@ -163,14 +165,14 @@ class JemOutput
 			JHtml::_('behavior.tooltip');
 
 			if ($settings->get('global_show_icons',1)) {
-				$image = JHtml::_('jemhtml.icon', 'com_jem/submitevent.png', 'fa fa-fw fa-lg fa-calendar-plus-o jem-submitbutton', JText::_('COM_JEM_DELIVER_NEW_EVENT'), NULL, !$app->isSite());
+				$image = JHtml::_('jemhtml.icon', 'com_jem/submitevent.png', 'fa fa-fw fa-lg fa-calendar-plus-o jem-submitbutton', Text::_('COM_JEM_DELIVER_NEW_EVENT'), NULL, !$app->isSite());
 			} else {
-				$image = JText::_('COM_JEM_DELIVER_NEW_EVENT');
+				$image = Text::_('COM_JEM_DELIVER_NEW_EVENT');
 			}
 
 			$url = 'index.php?option=com_jem&task=event.add&return='.base64_encode($uri).'&a_id=0';
-			$overlib = JText::_('COM_JEM_SUBMIT_EVENT_DESC');
-			$output = JHtml::_('link', JRoute::_($url), $image, self::tooltip(JText::_('COM_JEM_DELIVER_NEW_EVENT'), $overlib, '', 'bottom'));
+			$overlib = Text::_('COM_JEM_SUBMIT_EVENT_DESC');
+			$output = JHtml::_('link', JRoute::_($url), $image, self::tooltip(Text::_('COM_JEM_DELIVER_NEW_EVENT'), $overlib, '', 'bottom'));
 
 			return $output;
 		}
@@ -200,14 +202,14 @@ class JemOutput
 			JHtml::_('behavior.tooltip');
 
 			if ($settings->get('global_show_icons',1)) {
-				$image = JHtml::_('jemhtml.icon', 'com_jem/addvenue.png', 'fa fa-fw fa-lg fa-plus-square jem-addvenuebutton', JText::_('COM_JEM_DELIVER_NEW_VENUE'), NULL, !$app->isSite());
+				$image = JHtml::_('jemhtml.icon', 'com_jem/addvenue.png', 'fa fa-fw fa-lg fa-plus-square jem-addvenuebutton', Text::_('COM_JEM_DELIVER_NEW_VENUE'), NULL, !$app->isSite());
 			} else {
-				$image = JText::_('COM_JEM_DELIVER_NEW_VENUE');
+				$image = Text::_('COM_JEM_DELIVER_NEW_VENUE');
 			}
 
 			$url = 'index.php?option=com_jem&task=venue.add&return='.base64_encode($uri).'&a_id=0';
-			$overlib = JText::_('COM_JEM_DELIVER_NEW_VENUE_DESC');
-			$output = JHtml::_('link', JRoute::_($url), $image, self::tooltip(JText::_('COM_JEM_DELIVER_NEW_VENUE'), $overlib, '', 'bottom'));
+			$overlib = Text::_('COM_JEM_DELIVER_NEW_VENUE_DESC');
+			$output = JHtml::_('link', JRoute::_($url), $image, self::tooltip(Text::_('COM_JEM_DELIVER_NEW_VENUE'), $overlib, '', 'bottom'));
 
 			return $output;
 		}
@@ -238,14 +240,14 @@ class JemOutput
 			JHtml::_('behavior.tooltip');
 
 			if ($settings->get('global_show_icons',1)) {
-				$image = JHtml::_('jemhtml.icon', 'com_jem/icon-16-new.png', 'fa fa-fw fa-lg fa-user-plus jem-addusersbutton', JText::_('COM_JEM_ADD_USER_REGISTRATIONS'), NULL, !$app->isSite());
+				$image = JHtml::_('jemhtml.icon', 'com_jem/icon-16-new.png', 'fa fa-fw fa-lg fa-user-plus jem-addusersbutton', Text::_('COM_JEM_ADD_USER_REGISTRATIONS'), NULL, !$app->isSite());
 			} else {
-				$image = JText::_('COM_JEM_ADD_USER_REGISTRATIONS');
+				$image = Text::_('COM_JEM_ADD_USER_REGISTRATIONS');
 			}
 
 			$url = 'index.php?option=com_jem&view=attendees&layout=addusers&tmpl=component&return='.base64_encode($uri).'&id='.$eventid.'&'.JSession::getFormToken().'=1';
-			$overlib = JText::_('COM_JEM_ADD_USER_REGISTRATIONS_DESC');
-			$output = JHtml::_('link', JRoute::_($url), $image, self::tooltip(JText::_('COM_JEM_ADD_USER_REGISTRATIONS'), $overlib, 'flyermodal', 'bottom').' rel="{handler: \'iframe\', size: {x:800, y:450}}"');
+			$overlib = Text::_('COM_JEM_ADD_USER_REGISTRATIONS_DESC');
+			$output = JHtml::_('link', JRoute::_($url), $image, self::tooltip(Text::_('COM_JEM_ADD_USER_REGISTRATIONS'), $overlib, 'flyermodal', 'bottom').' rel="{handler: \'iframe\', size: {x:800, y:450}}"');
 
 			return $output;
 		}
@@ -280,13 +282,13 @@ class JemOutput
 	static public function prepareAddEventButton($urlparams = '')
 	{
 		$uri = JFactory::getURI();
-		$image = JHtml::_('image', 'com_jem/icon-16-new.png', JText::_('COM_JEM_DELIVER_NEW_EVENT'), NULL, true);
+		$image = JHtml::_('image', 'com_jem/icon-16-new.png', Text::_('COM_JEM_DELIVER_NEW_EVENT'), NULL, true);
 		$url   = 'index.php?option=com_jem&task=event.add&a_id=0&date={date}&return='.base64_encode($uri);
 		if (!empty($urlparams) && preg_match('/^[a-z]+=\w+$/i', $urlparams)) {
 			$url .= '&'.$urlparams;
 		}
 		$html  = '<div class="inline-button-right">';
-		$html .= JHtml::_('link', JRoute::_($url), $image, self::tooltip(JText::_('COM_JEM_DELIVER_NEW_EVENT'), JText::_('COM_JEM_SUBMIT_EVENT_DESC'), '', 'bottom'));
+		$html .= JHtml::_('link', JRoute::_($url), $image, self::tooltip(Text::_('COM_JEM_DELIVER_NEW_EVENT'), Text::_('COM_JEM_SUBMIT_EVENT_DESC'), '', 'bottom'));
 		$html .= '</div>';
 
 		return $html;
@@ -323,14 +325,14 @@ class JemOutput
 
 			if ($task == 'archive') {
 				if ($settings->get('global_show_icons',1)) {
-					$image = JHtml::_('jemhtml.icon', 'com_jem/el.png', 'fa fa-fw fa-lg fa-calendar jem-archivebutton-return', JText::_('COM_JEM_SHOW_EVENTS'), NULL, !$app->isSite());
+					$image = JHtml::_('jemhtml.icon', 'com_jem/el.png', 'fa fa-fw fa-lg fa-calendar jem-archivebutton-return', Text::_('COM_JEM_SHOW_EVENTS'), NULL, !$app->isSite());
 				} else {
-					$image = JText::_('COM_JEM_SHOW_EVENTS');
+					$image = Text::_('COM_JEM_SHOW_EVENTS');
 				}
 
 				// TODO: Title and overlib just fit to events view
-				$overlib = JText::_('COM_JEM_SHOW_EVENTS_DESC');
-				$title = JText::_('COM_JEM_SHOW_EVENTS');
+				$overlib = Text::_('COM_JEM_SHOW_EVENTS_DESC');
+				$title = Text::_('COM_JEM_SHOW_EVENTS');
 
 				if ($id) {
 					$url = 'index.php?option=com_jem&view='.$view.'&id='.$id.'&filter_reset=1';
@@ -339,13 +341,13 @@ class JemOutput
 				}
 			} else {
 				if ($settings->get('global_show_icons',1)) {
-					$image = JHtml::_('jemhtml.icon', 'com_jem/archive_front.png', 'fa fa-fw fa-lg fa-archive jem-archivebutton', JText::_('COM_JEM_SHOW_ARCHIVE'), NULL, !$app->isSite());
+					$image = JHtml::_('jemhtml.icon', 'com_jem/archive_front.png', 'fa fa-fw fa-lg fa-archive jem-archivebutton', Text::_('COM_JEM_SHOW_ARCHIVE'), NULL, !$app->isSite());
 				} else {
-					$image = JText::_('COM_JEM_SHOW_ARCHIVE');
+					$image = Text::_('COM_JEM_SHOW_ARCHIVE');
 				}
 
-				$overlib = JText::_('COM_JEM_SHOW_ARCHIVE_DESC');
-				$title = JText::_('COM_JEM_SHOW_ARCHIVE');
+				$overlib = Text::_('COM_JEM_SHOW_ARCHIVE_DESC');
+				$title = Text::_('COM_JEM_SHOW_ARCHIVE');
 
 				if ($id) {
 					$url = 'index.php?option=com_jem&view='.$view.'&id='.$id.'&task=archive'.'&filter_reset=1';
@@ -404,17 +406,17 @@ class JemOutput
 						$checkoutUser = JFactory::getUser($item->checked_out);
 						$button = JHtml::_('image', 'system/checked_out.png', NULL, NULL, true);
 						$date = JHtml::_('date', $item->checked_out_time);
-						return '<span ' . self::tooltip(JText::_('JLIB_HTML_CHECKED_OUT'), htmlspecialchars(JText::sprintf('COM_JEM_GLOBAL_CHECKED_OUT_BY', $checkoutUser->name) . ' <br /> ' . $date, ENT_COMPAT, 'UTF-8')) . '>' . $button . '</span>';
+						return '<span ' . self::tooltip(Text::_('JLIB_HTML_CHECKED_OUT'), htmlspecialchars(Text::sprintf('COM_JEM_GLOBAL_CHECKED_OUT_BY', $checkoutUser->name) . ' <br /> ' . $date, ENT_COMPAT, 'UTF-8')) . '>' . $button . '</span>';
 					}
 
 					if ($showIcon) {
-						$image = JHtml::_('jemhtml.icon', 'com_jem/calendar_edit.png', 'fa fa-fw fa-pencil-square-o jem-editbutton', JText::_('COM_JEM_EDIT_EVENT'), NULL, !$app->isSite());
+						$image = JHtml::_('jemhtml.icon', 'com_jem/calendar_edit.png', 'fa fa-fw fa-pencil-square-o jem-editbutton', Text::_('COM_JEM_EDIT_EVENT'), NULL, !$app->isSite());
 					} else {
-						$image = JText::_('COM_JEM_EDIT_EVENT');
+						$image = Text::_('COM_JEM_EDIT_EVENT');
 					}
 					$id = isset($item->did) ? $item->did : $item->id;
-					$overlib = JText::_('COM_JEM_EDIT_EVENT_DESC');
-					$text = JText::_('COM_JEM_EDIT_EVENT');
+					$overlib = Text::_('COM_JEM_EDIT_EVENT_DESC');
+					$text = Text::_('COM_JEM_EDIT_EVENT');
 					$url = 'index.php?option=com_jem&task=event.edit&a_id='.$id.'&return='.base64_encode($uri);
 					break;
 
@@ -423,17 +425,17 @@ class JemOutput
 						$checkoutUser = JFactory::getUser($item->vChecked_out);
 						$button = JHtml::_('image', 'system/checked_out.png', NULL, NULL, true);
 						$date = JHtml::_('date', $item->vChecked_out_time);
-						return '<span ' . self::tooltip(JText::_('JLIB_HTML_CHECKED_OUT'), htmlspecialchars(JText::sprintf('COM_JEM_GLOBAL_CHECKED_OUT_BY', $checkoutUser->name) . ' <br /> ' . $date, ENT_COMPAT, 'UTF-8')) . '>' . $button . '</span>';
+						return '<span ' . self::tooltip(Text::_('JLIB_HTML_CHECKED_OUT'), htmlspecialchars(Text::sprintf('COM_JEM_GLOBAL_CHECKED_OUT_BY', $checkoutUser->name) . ' <br /> ' . $date, ENT_COMPAT, 'UTF-8')) . '>' . $button . '</span>';
 					}
 
 					if ($showIcon) {
-						$image = JHtml::_('jemhtml.icon', 'com_jem/calendar_edit.png', 'fa fa-fw fa-pencil-square-o jem-editbutton', JText::_('COM_JEM_EDIT_VENUE'), NULL, !$app->isSite());
+						$image = JHtml::_('jemhtml.icon', 'com_jem/calendar_edit.png', 'fa fa-fw fa-pencil-square-o jem-editbutton', Text::_('COM_JEM_EDIT_VENUE'), NULL, !$app->isSite());
 					} else {
-						$image = JText::_('COM_JEM_EDIT_VENUE');
+						$image = Text::_('COM_JEM_EDIT_VENUE');
 					}
 					$id = $item->locid;
-					$overlib = JText::_('COM_JEM_EDIT_VENUE_DESC');
-					$text = JText::_('COM_JEM_EDIT_VENUE');
+					$overlib = Text::_('COM_JEM_EDIT_VENUE_DESC');
+					$text = Text::_('COM_JEM_EDIT_VENUE');
 					$url = 'index.php?option=com_jem&task=venue.edit&a_id='.$id.'&return='.base64_encode($uri);
 					break;
 
@@ -442,17 +444,17 @@ class JemOutput
 						$checkoutUser = JFactory::getUser($item->vChecked_out);
 						$button = JHtml::_('image', 'system/checked_out.png', NULL, NULL, true);
 						$date = JHtml::_('date', $item->vChecked_out_time);
-						return '<span ' . self::tooltip(JText::_('JLIB_HTML_CHECKED_OUT'), htmlspecialchars(JText::sprintf('COM_JEM_GLOBAL_CHECKED_OUT_BY', $checkoutUser->name) . ' <br /> ' . $date, ENT_COMPAT, 'UTF-8')) . '>' . $button . '</span>';
+						return '<span ' . self::tooltip(Text::_('JLIB_HTML_CHECKED_OUT'), htmlspecialchars(Text::sprintf('COM_JEM_GLOBAL_CHECKED_OUT_BY', $checkoutUser->name) . ' <br /> ' . $date, ENT_COMPAT, 'UTF-8')) . '>' . $button . '</span>';
 					}
 
 					if ($showIcon) {
-						$image = JHtml::_('jemhtml.icon', 'com_jem/calendar_edit.png', 'fa fa-fw fa-pencil-square-o jem-editbutton', JText::_('COM_JEM_EDIT_VENUE'), NULL, !$app->isSite());
+						$image = JHtml::_('jemhtml.icon', 'com_jem/calendar_edit.png', 'fa fa-fw fa-pencil-square-o jem-editbutton', Text::_('COM_JEM_EDIT_VENUE'), NULL, !$app->isSite());
 					} else {
-						$image = JText::_('COM_JEM_EDIT_VENUE');
+						$image = Text::_('COM_JEM_EDIT_VENUE');
 					}
 					$id = $item->id;
-					$overlib = JText::_('COM_JEM_EDIT_VENUE_DESC');
-					$text = JText::_('COM_JEM_EDIT_VENUE');
+					$overlib = Text::_('COM_JEM_EDIT_VENUE_DESC');
+					$text = Text::_('COM_JEM_EDIT_VENUE');
 					$url = 'index.php?option=com_jem&task=venue.edit&a_id='.$id.'&return='.base64_encode($uri);
 					break;
 			}
@@ -502,37 +504,37 @@ class JemOutput
 			{
 				case 'editevent':
 					if ($showIcon) {
-						$image = JHtml::_('jemhtml.icon', 'com_jem/calendar_copy.png', 'fa fa-fw fa-files-o jem-copybutton', JText::_('COM_JEM_COPY_EVENT'), NULL, !$app->isSite());
+						$image = JHtml::_('jemhtml.icon', 'com_jem/calendar_copy.png', 'fa fa-fw fa-files-o jem-copybutton', Text::_('COM_JEM_COPY_EVENT'), NULL, !$app->isSite());
 					} else {
-						$image = JText::_('COM_JEM_COPY_EVENT');
+						$image = Text::_('COM_JEM_COPY_EVENT');
 					}
 					$id = isset($item->did) ? $item->did : $item->id;
-					$overlib = JText::_('COM_JEM_COPY_EVENT_DESC');
-					$text = JText::_('COM_JEM_COPY_EVENT');
+					$overlib = Text::_('COM_JEM_COPY_EVENT_DESC');
+					$text = Text::_('COM_JEM_COPY_EVENT');
 					$url = 'index.php?option=com_jem&task=event.copy&a_id='.$id.'&return='.base64_encode($uri);
 					break;
 
 				case 'editvenue':
 					if ($showIcon) {
-						$image = JHtml::_('jemhtml.icon', 'com_jem/calendar_copy.png', 'fa fa-fw fa-files-o jem-copybutton', JText::_('COM_JEM_COPY_VENUE'), NULL, !$app->isSite());
+						$image = JHtml::_('jemhtml.icon', 'com_jem/calendar_copy.png', 'fa fa-fw fa-files-o jem-copybutton', Text::_('COM_JEM_COPY_VENUE'), NULL, !$app->isSite());
 					} else {
-						$image = JText::_('COM_JEM_COPY_VENUE');
+						$image = Text::_('COM_JEM_COPY_VENUE');
 					}
 					$id = $item->locid;
-					$overlib = JText::_('COM_JEM_COPY_VENUE_DESC');
-					$text = JText::_('COM_JEM_COPY_VENUE');
+					$overlib = Text::_('COM_JEM_COPY_VENUE_DESC');
+					$text = Text::_('COM_JEM_COPY_VENUE');
 					$url = 'index.php?option=com_jem&task=venue.copy&a_id='.$id.'&return='.base64_encode($uri);
 					break;
 
 				case 'venue':
 					if ($showIcon) {
-						$image = JHtml::_('jemhtml.icon', 'com_jem/calendar_copy.png', 'fa fa-fw fa-files-o jem-copybutton', JText::_('COM_JEM_COPY_VENUE'), NULL, !$app->isSite());
+						$image = JHtml::_('jemhtml.icon', 'com_jem/calendar_copy.png', 'fa fa-fw fa-files-o jem-copybutton', Text::_('COM_JEM_COPY_VENUE'), NULL, !$app->isSite());
 					} else {
-						$image = JText::_('COM_JEM_COPY_VENUE');
+						$image = Text::_('COM_JEM_COPY_VENUE');
 					}
 					$id = $item->id;
-					$overlib = JText::_('COM_JEM_COPY_VENUE_DESC');
-					$text = JText::_('COM_JEM_COPY_VENUE');
+					$overlib = Text::_('COM_JEM_COPY_VENUE_DESC');
+					$text = Text::_('COM_JEM_COPY_VENUE');
 					$url = 'index.php?option=com_jem&task=venue.copy&a_id='.$id.'&return='.base64_encode($uri);
 					break;
 			}
@@ -564,22 +566,22 @@ class JemOutput
 			$status = 'status=no,toolbar=no,scrollbars=yes,titlebar=no,menubar=no,resizable=yes,width=640,height=480,directories=no,location=no';
 
 			if ($settings->get('global_show_icons',1)) {
-				$image = JHtml::_('jemhtml.icon', 'com_jem/printButton.png', 'fa fa-fw fa-lg fa-print jem-printbutton', JText::_('JGLOBAL_PRINT'), NULL, !$app->isSite());
+				$image = JHtml::_('jemhtml.icon', 'com_jem/printButton.png', 'fa fa-fw fa-lg fa-print jem-printbutton', Text::_('JGLOBAL_PRINT'), NULL, !$app->isSite());
 			} else {
-				$image = JText::_('COM_JEM_PRINT');
+				$image = Text::_('COM_JEM_PRINT');
 			}
 
 			if ($app->input->get('print','','int')) {
 				//button in popup
-				$overlib = JText::_('COM_JEM_PRINT_DESC');
-				$text = JText::_('COM_JEM_PRINT');
-				$title = 'title='.JText::_('JGLOBAL_PRINT');
-				$pimage = JHtml::_('image','system/printButton.png', JText::_('JGLOBAL_PRINT'), $title, true);
+				$overlib = Text::_('COM_JEM_PRINT_DESC');
+				$text = Text::_('COM_JEM_PRINT');
+				$title = 'title='.Text::_('JGLOBAL_PRINT');
+				$pimage = JHtml::_('image','system/printButton.png', Text::_('JGLOBAL_PRINT'), $title, true);
 				$output = '<a href="#" onclick="window.print();return false;">'.$pimage.'</a>';
 			} else {
 				//button in view
-				$overlib = JText::_('COM_JEM_PRINT_DESC');
-				$text = JText::_('COM_JEM_PRINT');
+				$overlib = Text::_('COM_JEM_PRINT_DESC');
+				$text = Text::_('COM_JEM_PRINT');
 				$output = '<a href="' . JRoute::_($print_link) . '" ' . self::tooltip($text, $overlib, 'editlinktip', 'bottom')
 				        . ' onclick="window.open(this.href,\'win2\',\'' . $status . '\'); return false;">' . $image . '</a>';
 			}
@@ -621,13 +623,13 @@ class JemOutput
 			$status = 'width=400,height=350,menubar=yes,resizable=yes';
 
 			if ($settings->get('global_show_icons')) {
-				$image = JHtml::_('jemhtml.icon', 'com_jem/emailButton.png', 'fa fa-fw fa-lg fa-envelope-o jem-mailbutton', JText::_('JGLOBAL_EMAIL'), NULL, !$app->isSite());
+				$image = JHtml::_('jemhtml.icon', 'com_jem/emailButton.png', 'fa fa-fw fa-lg fa-envelope-o jem-mailbutton', Text::_('JGLOBAL_EMAIL'), NULL, !$app->isSite());
 			} else {
-				$image = JText::_('COM_JEM_EMAIL');
+				$image = Text::_('COM_JEM_EMAIL');
 			}
 
-			$overlib = JText::_('COM_JEM_EMAIL_DESC');
-			$text = JText::_('COM_JEM_EMAIL');
+			$overlib = Text::_('COM_JEM_EMAIL_DESC');
+			$text = Text::_('COM_JEM_EMAIL');
 			$output = '<a href="' . JRoute::_($url) . '" ' . self::tooltip($text, $overlib, '', 'bottom')
 			        . ' onclick="window.open(this.href,\'win2\',\'' . $status . '\'); return false;">' . $image . '</a>';
 
@@ -654,13 +656,13 @@ class JemOutput
 			JHtml::_('behavior.tooltip');
 
 			if ($settings->get('global_show_icons','0')==1) {
-				$image = JHtml::_('jemhtml.icon', 'com_jem/iCal2.0.png', 'fa fa-fw fa-lg fa-calendar-check-o jem-icalbutton', JText::_('COM_JEM_EXPORT_ICS'), NULL, !$app->isSite());
+				$image = JHtml::_('jemhtml.icon', 'com_jem/iCal2.0.png', 'fa fa-fw fa-lg fa-calendar-check-o jem-icalbutton', Text::_('COM_JEM_EXPORT_ICS'), NULL, !$app->isSite());
 			} else {
-				$image = JText::_('COM_JEM_EXPORT_ICS');
+				$image = Text::_('COM_JEM_EXPORT_ICS');
 			}
 
-			$overlib = JText::_('COM_JEM_ICAL_DESC');
-			$text = JText::_('COM_JEM_ICAL');
+			$overlib = Text::_('COM_JEM_ICAL_DESC');
+			$text = Text::_('COM_JEM_ICAL');
 
 			$url = 'index.php?option=com_jem&view='.$view.'&id='.$slug.'&format=raw&layout=ics';
 			$output = JHtml::_('link', JRoute::_($url), $image, self::tooltip($text, $overlib, '', 'bottom'));
@@ -686,9 +688,9 @@ class JemOutput
 			// button in view
 			JHtml::_('behavior.tooltip');
 
-			$image = JHtml::_('jemhtml.icon', 'com_jem/publish.png', 'fa fa-fw fa-lg fa-check-circle jem-publishbutton', JText::_('COM_JEM_PUBLISH'), NULL, !$app->isSite());
-			$overlib = JText::_('COM_JEM_PUBLISH_DESC');
-			$text = JText::_('COM_JEM_PUBLISH');
+			$image = JHtml::_('jemhtml.icon', 'com_jem/publish.png', 'fa fa-fw fa-lg fa-check-circle jem-publishbutton', Text::_('COM_JEM_PUBLISH'), NULL, !$app->isSite());
+			$overlib = Text::_('COM_JEM_PUBLISH_DESC');
+			$text = Text::_('COM_JEM_PUBLISH');
 
 			$print_link = "javascript:void(Joomla.submitbutton('" . $prefix . ".publish'));";
 			$output = '<a href="' . JRoute::_($print_link) . '" ' . self::tooltip($text, $overlib, 'editlinktip', 'bottom') . '>' . $image . '</a>';
@@ -714,9 +716,9 @@ class JemOutput
 			// button in view
 			JHtml::_('behavior.tooltip');
 
-			$image = JHtml::_('jemhtml.icon', 'com_jem/trash.png', 'fa fa-fw fa-lg fa-trash jem-trashbutton', JText::_('COM_JEM_TRASH'), NULL, !$app->isSite());
-			$overlib = JText::_('COM_JEM_TRASH_DESC');
-			$text = JText::_('COM_JEM_TRASH');
+			$image = JHtml::_('jemhtml.icon', 'com_jem/trash.png', 'fa fa-fw fa-lg fa-trash jem-trashbutton', Text::_('COM_JEM_TRASH'), NULL, !$app->isSite());
+			$overlib = Text::_('COM_JEM_TRASH_DESC');
+			$text = Text::_('COM_JEM_TRASH');
 
 			$print_link = "javascript:void(Joomla.submitbutton('" . $prefix . ".trash'));";
 			$output = '<a href="' . JRoute::_($print_link) . '" ' . self::tooltip($text, $overlib, 'editlinktip', 'bottom') . '>' . $image . '</a>';
@@ -742,9 +744,9 @@ class JemOutput
 			// button in view
 			JHtml::_('behavior.tooltip');
 
-			$image = JHtml::_('jemhtml.icon', 'com_jem/unpublish.png', 'fa fa-fw fa-lg fa-eye-slash jem-unpublishbutton', JText::_('COM_JEM_UNPUBLISH'), NULL, !$app->isSite());
-			$overlib = JText::_('COM_JEM_UNPUBLISH_DESC');
-			$text = JText::_('COM_JEM_UNPUBLISH');
+			$image = JHtml::_('jemhtml.icon', 'com_jem/unpublish.png', 'fa fa-fw fa-lg fa-eye-slash jem-unpublishbutton', Text::_('COM_JEM_UNPUBLISH'), NULL, !$app->isSite());
+			$overlib = Text::_('COM_JEM_UNPUBLISH_DESC');
+			$text = Text::_('COM_JEM_UNPUBLISH');
 
 			$print_link = "javascript:void(Joomla.submitbutton('" . $prefix . ".unpublish'));";
 			$output = '<a href="' . JRoute::_($print_link) . '" ' . self::tooltip($text, $overlib, 'editlinktip', 'bottom') . '>' . $image . '</a>';
@@ -765,15 +767,15 @@ class JemOutput
 
 		JHtml::_('behavior.tooltip');
 
-		$image = JHtml::_('jemhtml.icon', 'com_jem/export_excel.png', 'fa fa-fw fa-lg fa-download jem-exportbutton', JText::_('COM_JEM_EXPORT'), NULL, !$app->isSite());
+		$image = JHtml::_('jemhtml.icon', 'com_jem/export_excel.png', 'fa fa-fw fa-lg fa-download jem-exportbutton', Text::_('COM_JEM_EXPORT'), NULL, !$app->isSite());
 
 		if ($app->input->get('print','','int')) {
 			//button in popup
 			$output = '';
 		} else {
 			//button in view
-			$overlib = JText::_('COM_JEM_EXPORT_DESC');
-			$text = JText::_('COM_JEM_EXPORT');
+			$overlib = Text::_('COM_JEM_EXPORT_DESC');
+			$text = Text::_('COM_JEM_EXPORT');
 
 			$print_link = 'index.php?option=com_jem&view=attendees&task=attendees.export&tmpl=raw&id=' . $eventid . '&' . JSession::getFormToken() . '=1';
 			$output = '<a href="' . JRoute::_($print_link) . '" ' . self::tooltip($text, $overlib, 'editlinktip', 'bottom') . '>' . $image . '</a>';
@@ -796,15 +798,15 @@ class JemOutput
 
 		JHtml::_('behavior.tooltip');
 
-		$image = JHtml::_('jemhtml.icon', 'com_jem/icon-16-back.png', 'fa fa-fw fa-lg fa-chevron-circle-left jem-backbutton', JText::_('COM_JEM_BACK'), NULL, !$app->isSite());
+		$image = JHtml::_('jemhtml.icon', 'com_jem/icon-16-back.png', 'fa fa-fw fa-lg fa-chevron-circle-left jem-backbutton', Text::_('COM_JEM_BACK'), NULL, !$app->isSite());
 
 		if ($app->input->get('print','','int')) {
 			//button in popup
 			$output = '';
 		} else {
 			//button in view
-			$overlib = JText::_('COM_JEM_BACK');
-			$text = JText::_('COM_JEM_BACK');
+			$overlib = Text::_('COM_JEM_BACK');
+			$text = Text::_('COM_JEM_BACK');
 
 			$link = 'index.php?option=com_jem&view='.$view.'&id='.$id.'&Itemid='.$fid.'&task='.$view.'.back';
 			$output = '<a href="' . JRoute::_($link) . '" ' . self::tooltip($text, $overlib, 'editlinktip', 'bottom') . '>' . $image . '</a>';
@@ -869,7 +871,7 @@ class JemOutput
 		}
 
 		//Link to map
-		$mapimage = JHtml::_('jemhtml.icon', 'com_jem/map_icon.png', 'fa fa-map', JText::_('COM_JEM_MAP'), 'class="jem-mapicon"');
+		$mapimage = JHtml::_('jemhtml.icon', 'com_jem/map_icon.png', 'fa fa-map', Text::_('COM_JEM_MAP'), 'class="jem-mapicon"');
 
 		//set var
 		$output = null;
@@ -895,9 +897,9 @@ class JemOutput
 					$url = 'https://maps.google.'.$params->get($tld).'/maps?hl='.$params->get($lg).'&q=loc:'.$data->latitude.',+'.$data->longitude.'&ie=UTF8&z=15&iwloc=B&output=embed';
 				}
 
-				$message = JText::_('COM_JEM_MAP').':';
+				$message = Text::_('COM_JEM_MAP').':';
 				$attributes = ' rel="{handler: \'iframe\', size: {x: 800, y: 500}}" latitude="" longitude=""';
-				$output = '<dt class="venue_mapicon">'.$message.'</dt><dd class="venue_mapicon"><a class="flyermodal mapicon" title="'.JText::_('COM_JEM_MAP').'" target="_blank" href="'.$url.'"'.$attributes.'>'.$mapimage.'</a></dd>';
+				$output = '<dt class="venue_mapicon">'.$message.'</dt><dd class="venue_mapicon"><a class="flyermodal mapicon" title="'.Text::_('COM_JEM_MAP').'" target="_blank" href="'.$url.'"'.$attributes.'>'.$mapimage.'</a></dd>';
 				break;
 
 			case 2:
@@ -965,8 +967,8 @@ class JemOutput
 		$icon  = $first ? 'fa fa-fw fa-refresh jem-recurrencefirsticon' : 'fa fa-fw fa-refresh jem-recurrenceicon';
 		$showinline &= !($settings2->useiconfont == 1 && $app->isSite());
 		$attr_class = $showinline ? ('class="icon-inline" ') : '';
-		$attr_title = $showtitle  ? ('title="' . JText::_($first ? 'COM_JEM_RECURRING_FIRST_EVENT_DESC' : 'COM_JEM_RECURRING_EVENT_DESC') . '"') : '';
-		$output = JHtml::_('jemhtml.icon', $image, $icon, JText::_('COM_JEM_RECURRING_EVENT'), $attr_class . $attr_title, !$app->isSite());
+		$attr_title = $showtitle  ? ('title="' . Text::_($first ? 'COM_JEM_RECURRING_FIRST_EVENT_DESC' : 'COM_JEM_RECURRING_EVENT_DESC') . '"') : '';
+		$output = JHtml::_('jemhtml.icon', $image, $icon, Text::_('COM_JEM_RECURRING_EVENT'), $attr_class . $attr_title, !$app->isSite());
 
 		return $output;
 	}
@@ -1000,22 +1002,22 @@ class JemOutput
 		case -2: // trashed
 			$image = 'com_jem/trash.png';
 			$icon = 'fa fa-fw fa-lg fa-trash jem-publishstateicon-trashed';
-			$alt   = JText::_('JTRASHED');
+			$alt   = Text::_('JTRASHED');
 			break;
 		case  0: // unpublished F10C: fa-circle-o F070: fa-eye-slash, F192: fa-dot-circle-o
 			$image = 'com_jem/publish_x.png';
 			$icon = 'fa fa-fw fa-lg fa-eye-slash jem-publishstateicon-unpublished';
-			$alt   = JText::_('JUNPUBLISHED');
+			$alt   = Text::_('JUNPUBLISHED');
 			break;
 		case  1: // published F06E: fa-eye
 			$image = 'com_jem/publish.png';
 			$icon = 'fa fa-fw fa-lg fa-check-circle jem-publishstateicon-published';
-			$alt   = JText::_('JPUBLISHED');
+			$alt   = Text::_('JPUBLISHED');
 			break;
 		case  2: // archived
 			$image = 'com_jem/archive_front.png';
 			$icon = 'fa fa-fw fa-lg fa-archive jem-publishstateicon-archived';
-			$alt   = JText::_('JARCHIVED');
+			$alt   = Text::_('JARCHIVED');
 			break;
 		default: // unknown state - abort!
 			return '';
@@ -1081,14 +1083,14 @@ class JemOutput
 				//$url = '#';  // Hoffi, 2014-06-07: '#' doesn't work, it opend "Add event" page - don't use <a, onclick works fine with <img :-)
 				$attributes = $id_attr.' class="flyerimage" onclick="window.open(\''.JUri::base().$image['original'].'\',\'Popup\',\'width='.$image['width'].',height='.$image['height'].',location=no,menubar=no,scrollbars=no,status=no,toolbar=no,resizable=no\')"';
 
-				$icon = '<img '.$attributes.' src="'.JUri::base().$image['thumb'].'" width="'.$image['thumbwidth'].'" height="'.$image['thumbheight'].'" alt="'.$info.'" title="'.JText::_('COM_JEM_CLICK_TO_ENLARGE').'" />';
+				$icon = '<img '.$attributes.' src="'.JUri::base().$image['thumb'].'" width="'.$image['thumbwidth'].'" height="'.$image['thumbheight'].'" alt="'.$info.'" title="'.Text::_('COM_JEM_CLICK_TO_ENLARGE').'" />';
 				$output = '<div class="flyerimage">'.$icon.'</div>';
 			} else {
 				JHtml::_('behavior.modal', 'a.flyermodal');
 				$url = JUri::base().$image['original'];
 				$attributes = $id_attr.' class="flyermodal flyerimage" title="'.$info.'"';
 
-				$icon = '<img src="'.JUri::base().$image['thumb'].'" width="'.$image['thumbwidth'].'" height="'.$image['thumbheight'].'" alt="'.$info.'" title="'.JText::_('COM_JEM_CLICK_TO_ENLARGE').'" />';
+				$icon = '<img src="'.JUri::base().$image['thumb'].'" width="'.$image['thumbwidth'].'" height="'.$image['thumbheight'].'" alt="'.$info.'" title="'.Text::_('COM_JEM_CLICK_TO_ENLARGE').'" />';
 				$output = '<div class="flyerimage"><a href="'.$url.'" '.$attributes.'>'.$icon.'</a></div>';
 			}
 		// Otherwise take the values for the original image specified in the settings
@@ -1142,14 +1144,14 @@ class JemOutput
 				//$url = '#';  // Hoffi, 2014-06-07: '#' doesn't work, it opend "Add event" page - don't use <a, onclick works fine with <img :-)
 				$attributes = $id_attr.' class="flyerimage" onclick="window.open(\''.JUri::base().$image['original'].'\',\'Popup\',\'width='.$image['width'].',height='.$image['height'].',location=no,menubar=no,scrollbars=no,status=no,toolbar=no,resizable=no\')"';
 
-				$icon = '<img '.$attributes.' src="'.JUri::base().$image['thumb'].'" width="'.$image['thumbwidth'].'" height="'.$image['thumbheight'].'" alt="'.$info.'" title="'.JText::_('COM_JEM_CLICK_TO_ENLARGE').'" />';
+				$icon = '<img '.$attributes.' src="'.JUri::base().$image['thumb'].'" width="'.$image['thumbwidth'].'" height="'.$image['thumbheight'].'" alt="'.$info.'" title="'.Text::_('COM_JEM_CLICK_TO_ENLARGE').'" />';
 				$output = '<div class="flyerimage">'.$icon.'</div>';
 			} else {
 				JHtml::_('behavior.modal', 'a.flyermodal');
 				$url = JUri::base().$image['original'];
 				$attributes = $id_attr.' class="flyermodal flyerimage2" title="'.$info.'"';
 
-				$icon = '<img src="'.JUri::base().$image['thumb'].'" width="'.$image['thumbwidth'].'" height="'.$image['thumbheight'].'" alt="'.$info.'" title="'.JText::_('COM_JEM_CLICK_TO_ENLARGE').'" />';
+				$icon = '<img src="'.JUri::base().$image['thumb'].'" width="'.$image['thumbwidth'].'" height="'.$image['thumbheight'].'" alt="'.$info.'" title="'.Text::_('COM_JEM_CLICK_TO_ENLARGE').'" />';
 				$output = '<div class="flyerimage"><a href="'.$url.'" '.$attributes.'>'.$icon.'</a></div>';
 			}
 		// Otherwise take the values for the original image specified in the settings
@@ -1282,7 +1284,7 @@ class JemOutput
 				$output .= '<span class="jem_time-1">'.self::formattime($timeEnd, $timeFormat, $addSuffix).'</span>';
 			}
 		} else {
-			$output .= '<span class="jem_date-1">'.JText::_('COM_JEM_OPEN_DATE').'</span>';
+			$output .= '<span class="jem_date-1">'.Text::_('COM_JEM_OPEN_DATE').'</span>';
 
 			if ($showTime) {
 				if (JemHelper::isValidTime($timeStart)) {
@@ -1333,7 +1335,7 @@ class JemOutput
 
 		if (empty($dateFormat)) {
 			// Use format saved in settings if specified or format in language file otherwise
-			$dateFormat = empty($jemconfig->formatShortDate) ? JText::_('COM_JEM_FORMAT_SHORT_DATE') : $jemconfig->formatShortDate;
+			$dateFormat = empty($jemconfig->formatShortDate) ? Text::_('COM_JEM_FORMAT_SHORT_DATE') : $jemconfig->formatShortDate;
 		}
 
 		if (JemHelper::isValidDate($dateStart)) {
@@ -1343,7 +1345,7 @@ class JemOutput
 				$outDate .= ' - ' . self::formatdate($dateEnd, $dateFormat);
 			}
 		} else {
-			$outDate = JText::_('COM_JEM_OPEN_DATE');
+			$outDate = Text::_('COM_JEM_OPEN_DATE');
 		}
 
 		if ($showTime && JemHelper::isValidTime($timeStart)) {
@@ -1399,7 +1401,7 @@ class JemOutput
 		$params = is_array($dateStart) ? $dateStart : array('dateStart' => $dateStart, 'timeStart' => $timeStart, 'dateEnd' => $dateEnd, 'timeEnd' => $timeEnd, 'showTime' => $showTime);
 		$params['addSuffix'] = true;
 		// Use format saved in settings if specified or format in language file otherwise
-		$params['dateFormat'] = (isset($settings->formatShortDate) && $settings->formatShortDate) ? $settings->formatShortDate : JText::_('COM_JEM_FORMAT_SHORT_DATE');
+		$params['dateFormat'] = (isset($settings->formatShortDate) && $settings->formatShortDate) ? $settings->formatShortDate : Text::_('COM_JEM_FORMAT_SHORT_DATE');
 
 		if (isset($settings->datemode) && ($settings->datemode == 2)) {
 			return self::formatDateTime2Lines($params);
@@ -1508,7 +1510,7 @@ class JemOutput
 					if ($backend) {
 						$path = $category->path;
 						$path = str_replace('/', ' &#187; ', $path);
-						$value  = '<span ' . self::tooltip(JText::_('COM_JEM_EDIT_CATEGORY'), $path, 'editlinktip') . '>';
+						$value  = '<span ' . self::tooltip(Text::_('COM_JEM_EDIT_CATEGORY'), $path, 'editlinktip') . '>';
 						$value .= '<a href="index.php?option=com_jem&amp;task=category.edit&amp;id=' . $category->id . '">' .
 						              $category->catname . '</a>';
 						$value .= '</span>';

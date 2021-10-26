@@ -1,12 +1,14 @@
 <?php
 /**
- * @version 2.3.1
+ * @version 4.0.0
  * @package JEM
- * @copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright (C) 2005-2009 Christoph Lukes
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 defined('_JEXEC') or die;
+
+use Joomla\CMS\Language\Text;
 
 JHtml::_('behavior.modal', 'a.flyermodal');
 ?>
@@ -41,7 +43,7 @@ JHtml::_('behavior.modal', 'a.flyermodal');
 			<dl class="location">
 				<?php if (($this->settings->get('global_show_detlinkvenue',1)) && (!empty($row->url))) : ?>
 				<dt class="venue_website">
-					<?php echo JText::_('COM_JEM_WEBSITE').':'; ?>
+					<?php echo Text::_('COM_JEM_WEBSITE').':'; ?>
 				</dt>
 				<dd class="venue_website">
 					<a href="<?php echo $this->escape($row->url); ?>" target="_blank">
@@ -62,7 +64,7 @@ JHtml::_('behavior.modal', 'a.flyermodal');
 			<dl class="location floattext" itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
 				<?php if ($row->street) : ?>
 				<dt class="venue_street">
-					<?php echo JText::_('COM_JEM_STREET').':'; ?>
+					<?php echo Text::_('COM_JEM_STREET').':'; ?>
 				</dt>
 				<dd class="venue_street" itemprop="streetAddress">
 					<?php echo $this->escape($row->street); ?>
@@ -71,7 +73,7 @@ JHtml::_('behavior.modal', 'a.flyermodal');
 
 				<?php if ($row->postalCode) : ?>
 				<dt class="venue_postalCode">
-					<?php echo JText::_('COM_JEM_ZIP').':'; ?>
+					<?php echo Text::_('COM_JEM_ZIP').':'; ?>
 				</dt>
 				<dd class="venue_postalCode" itemprop="postalCode">
 					<?php echo $this->escape($row->postalCode); ?>
@@ -80,7 +82,7 @@ JHtml::_('behavior.modal', 'a.flyermodal');
 
 				<?php if ($row->city) : ?>
 				<dt class="venue_city">
-					<?php echo JText::_('COM_JEM_CITY').':'; ?>
+					<?php echo Text::_('COM_JEM_CITY').':'; ?>
 				</dt>
 				<dd class="venue_city" itemprop="addressLocality">
 					<?php echo $this->escape($row->city); ?>
@@ -89,7 +91,7 @@ JHtml::_('behavior.modal', 'a.flyermodal');
 
 				<?php if ($row->state) : ?>
 				<dt class="venue_state">
-					<?php echo JText::_('COM_JEM_STATE').':'; ?>
+					<?php echo Text::_('COM_JEM_STATE').':'; ?>
 				</dt>
 				<dd class="venue_state" itemprop="addressRegion">
 					<?php echo $this->escape($row->state); ?>
@@ -98,7 +100,7 @@ JHtml::_('behavior.modal', 'a.flyermodal');
 
 				<?php if ($row->country) : ?>
 				<dt class="venue_country">
-					<?php echo JText::_('COM_JEM_COUNTRY').':'; ?>
+					<?php echo Text::_('COM_JEM_COUNTRY').':'; ?>
 				</dt>
 				<dd class="venue_country">
 					<?php if ($row->country) :
@@ -111,13 +113,13 @@ JHtml::_('behavior.modal', 'a.flyermodal');
 
 				<!-- PUBLISHING STATE -->
 				<?php if (isset($row->published) && (!empty($this->show_status) || $row->published == 0)) : ?>
-				<dt class="published"><?php echo JText::_('JSTATUS'); ?>:</dt>
+				<dt class="published"><?php echo Text::_('JSTATUS'); ?>:</dt>
 				<dd class="published">
 					<?php switch ($row->published) {
-					case  1: echo JText::_('JPUBLISHED');   break;
-					case  0: echo JText::_('JUNPUBLISHED'); break;
-					case  2: echo JText::_('JARCHIVED');    break;
-					case -2: echo JText::_('JTRASHED');     break;
+					case  1: echo Text::_('JPUBLISHED');   break;
+					case  0: echo Text::_('JUNPUBLISHED'); break;
+					case  2: echo Text::_('JARCHIVED');    break;
+					case -2: echo Text::_('JTRASHED');     break;
 					} ?>
 				</dd>
 				<?php endif; ?>
@@ -129,13 +131,13 @@ JHtml::_('behavior.modal', 'a.flyermodal');
 			<?php elseif (isset($row->published) && (!empty($this->show_status) || $row->published == 0)) : ?>
 			<!-- PUBLISHING STATE -->
 			<dl class="floattext">
-				<dt class="published"><?php echo JText::_('JSTATUS'); ?>:</dt>
+				<dt class="published"><?php echo Text::_('JSTATUS'); ?>:</dt>
 				<dd class="published">
 					<?php switch ($row->published) {
-					case  1: echo JText::_('JPUBLISHED');   break;
-					case  0: echo JText::_('JUNPUBLISHED'); break;
-					case  2: echo JText::_('JARCHIVED');    break;
-					case -2: echo JText::_('JTRASHED');     break;
+					case  1: echo Text::_('JPUBLISHED');   break;
+					case  0: echo Text::_('JUNPUBLISHED'); break;
+					case  2: echo Text::_('JARCHIVED');    break;
+					case -2: echo Text::_('JTRASHED');     break;
 					} ?>
 				</dd>
 			</dl>
@@ -143,7 +145,7 @@ JHtml::_('behavior.modal', 'a.flyermodal');
 
 			<dl class="floattext">
 				<dt class="venue_eventspublished">
-					<?php echo JText::_('COM_JEM_VENUES_EVENTS_PUBLISHED').':'; ?>
+					<?php echo Text::_('COM_JEM_VENUES_EVENTS_PUBLISHED').':'; ?>
 				</dt>
 				<dd class="venue_eventspublished">
 					<a href="<?php echo $row->linkEventsPublished; ?>"><?php echo $row->EventsPublished; ?></a>
@@ -152,7 +154,7 @@ JHtml::_('behavior.modal', 'a.flyermodal');
 
 			<dl class="floattext">
 				<dt class="venue_archivedevents">
-					<?php echo JText::_('COM_JEM_VENUES_EVENTS_ARCHIVED').':'; ?>
+					<?php echo Text::_('COM_JEM_VENUES_EVENTS_ARCHIVED').':'; ?>
 				</dt>
 				<dd class="venue_archivedevents">
 					<a href="<?php echo $row->linkEventsArchived; ?>"><?php echo $row->EventsArchived; ?></a>
@@ -179,7 +181,7 @@ JHtml::_('behavior.modal', 'a.flyermodal');
 
 			<?php if ($this->settings->get('global_show_locdescription',1) && $row->locdescription != '' && $row->locdescription != '<br />') : ?>
 			<h2 class="description">
-				<?php echo JText::_('COM_JEM_VENUE_DESCRIPTION').':'; ?>
+				<?php echo Text::_('COM_JEM_VENUE_DESCRIPTION').':'; ?>
 			</h2>
 			<div class="description" itemprop="description">
 				<?php echo $row->locdescription; ?>

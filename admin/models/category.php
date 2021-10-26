@@ -1,12 +1,14 @@
 <?php
 /**
- * @version     2.3.1
+ * @version     4.0.0
  * @package     JEM
- * @copyright   Copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright   Copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright   Copyright (C) 2005-2009 Christoph Lukes
  * @license     http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 defined('_JEXEC') or die();
+
+use Joomla\CMS\Language\Text;
 
 jimport('joomla.application.component.modeladmin');
 
@@ -418,7 +420,7 @@ class JemModelCategory extends JModelAdmin
 				}
 				else {
 					// Non-fatal error
-					$this->setError(JText::_('JGLOBAL_BATCH_MOVE_PARENT_NOT_FOUND'));
+					$this->setError(Text::_('JGLOBAL_BATCH_MOVE_PARENT_NOT_FOUND'));
 					$parentId = 0;
 				}
 			}
@@ -426,7 +428,7 @@ class JemModelCategory extends JModelAdmin
 			$canCreate = ($parentId == $table->getRootId()) ? $user->authorise('core.create', $extension) : $user->authorise('core.create', $extension . '.category.' . $parentId);
 			if (!$canCreate) {
 				// Error since user cannot create in parent category
-				$this->setError(JText::_('COM_CATEGORIES_BATCH_CANNOT_CREATE'));
+				$this->setError(Text::_('COM_CATEGORIES_BATCH_CANNOT_CREATE'));
 				return false;
 			}
 		}
@@ -439,7 +441,7 @@ class JemModelCategory extends JModelAdmin
 			}
 			// Make sure we can create in root
 			elseif (!$user->authorise('core.create', $extension)) {
-				$this->setError(JText::_('COM_CATEGORIES_BATCH_CANNOT_CREATE'));
+				$this->setError(Text::_('COM_CATEGORIES_BATCH_CANNOT_CREATE'));
 				return false;
 			}
 		}
@@ -477,7 +479,7 @@ class JemModelCategory extends JModelAdmin
 				}
 				else {
 					// Not fatal error
-					$this->setError(JText::sprintf('JGLOBAL_BATCH_MOVE_ROW_NOT_FOUND', $pk));
+					$this->setError(Text::sprintf('JGLOBAL_BATCH_MOVE_ROW_NOT_FOUND', $pk));
 					continue;
 				}
 			}
@@ -588,7 +590,7 @@ class JemModelCategory extends JModelAdmin
 				}
 				else {
 					// Non-fatal error
-					$this->setError(JText::_('JGLOBAL_BATCH_MOVE_PARENT_NOT_FOUND'));
+					$this->setError(Text::_('JGLOBAL_BATCH_MOVE_PARENT_NOT_FOUND'));
 					$parentId = 0;
 				}
 			}
@@ -596,7 +598,7 @@ class JemModelCategory extends JModelAdmin
 			$canCreate = ($parentId == $table->getRootId()) ? $user->authorise('core.create', $extension) : $user->authorise('core.create', $extension . '.category.' . $parentId);
 			if (!$canCreate) {
 				// Error since user cannot create in parent category
-				$this->setError(JText::_('COM_CATEGORIES_BATCH_CANNOT_CREATE'));
+				$this->setError(Text::_('COM_CATEGORIES_BATCH_CANNOT_CREATE'));
 				return false;
 			}
 
@@ -607,7 +609,7 @@ class JemModelCategory extends JModelAdmin
 			foreach ($pks as $pk) {
 				if (!$user->authorise('core.edit', $extension . '.category.' . $pk)) {
 					// Error since user cannot edit this category
-					$this->setError(JText::_('COM_CATEGORIES_BATCH_CANNOT_EDIT'));
+					$this->setError(Text::_('COM_CATEGORIES_BATCH_CANNOT_EDIT'));
 					return false;
 				}
 			}
@@ -628,7 +630,7 @@ class JemModelCategory extends JModelAdmin
 				}
 				else {
 					// Not fatal error
-					$this->setError(JText::sprintf('JGLOBAL_BATCH_MOVE_ROW_NOT_FOUND', $pk));
+					$this->setError(Text::sprintf('JGLOBAL_BATCH_MOVE_ROW_NOT_FOUND', $pk));
 					continue;
 				}
 			}
@@ -807,12 +809,12 @@ class JemModelCategory extends JModelAdmin
 
 		if (count($err)) {
 			$cids = implode(', ', $err);
-			$msg = JText::sprintf('COM_JEM_EVENT_ASSIGNED_CATEGORY', $cids);
+			$msg = Text::sprintf('COM_JEM_EVENT_ASSIGNED_CATEGORY', $cids);
 			return $msg;
 		}
 		else {
 			$total = count($cid);
-			$msg = JText::plural('COM_JEM_CATEGORIES_N_ITEMS_DELETED', $total);
+			$msg = Text::plural('COM_JEM_CATEGORIES_N_ITEMS_DELETED', $total);
 			return $msg;
 		}
 	}

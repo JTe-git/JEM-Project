@@ -1,13 +1,15 @@
 <?php
 /**
- * @version 2.3.0
+ * @version 4.0.0
  * @package JEM
  * @subpackage JEM Module
- * @copyright (C) 2013-2020 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright (C) 2005-2009 Christoph Lukes
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 defined('_JEXEC') or die;
+
+use Joomla\CMS\Language\Text;
 
 ?>
 
@@ -43,6 +45,6 @@ defined('_JEXEC') or die;
 		<?php endforeach; ?>
 	</ul>
 <?php else : ?>
-	<?php echo JText::_('MOD_JEM_NO_EVENTS'); ?>
+	<?php echo Text::_('MOD_JEM_NO_EVENTS'); ?>
 <?php endif; ?>
 </div>

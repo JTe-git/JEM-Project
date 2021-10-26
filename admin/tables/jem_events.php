@@ -1,13 +1,15 @@
 <?php
 /**
- * @version 2.3.1
+ * @version 4.0.0
  * @package JEM
- * @copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright (C) 2005-2009 Christoph Lukes
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 
 defined('_JEXEC') or die;
+
+use Joomla\CMS\Language\Text;
 
 /**
  * JEM events Model class
@@ -127,7 +129,7 @@ class jem_events extends JTable
 		}
 
 		if (preg_match("/^:[0-5][0-9](:[0-5][0-9])?$/", $this->times)) {
-			$this->_error = JText::_('WRONGSTARTTIMEFORMAT'.': '.$this->times);
+			$this->_error = Text::_('WRONGSTARTTIMEFORMAT'.': '.$this->times);
 			\Joomla\CMS\Factory::getApplication()->enqueueMessage($this->_error, 'warning');
 			return false;
 		}
@@ -135,7 +137,7 @@ class jem_events extends JTable
 			$this->times = NULL;
 		}
 		if (preg_match("/^:[0-5][0-9](:[0-5][0-9])?$/", $this->endtimes)) {
-			$this->_error = JText::_('WRONGENDTIMEFORMAT'.': '.$this->endtimes);
+			$this->_error = Text::_('WRONGENDTIMEFORMAT'.': '.$this->endtimes);
 			\Joomla\CMS\Factory::getApplication()->enqueueMessage($this->_error, 'warning');
 			return false;
 		}
@@ -149,13 +151,13 @@ class jem_events extends JTable
 		$titlelength = \Joomla\String\StringHelper::strlen($this->title);
 
 		if ($this->title == '') {
-			$this->_error = JText::_('COM_JEM_ADD_TITLE');
+			$this->_error = Text::_('COM_JEM_ADD_TITLE');
 			\Joomla\CMS\Factory::getApplication()->enqueueMessage($this->_error, 'warning');
 			return false;
 		}
 
 		if ($titlelength > 100) {
-			$this->_error = JText::_('COM_JEM_ERROR_TITLE_LONG');
+			$this->_error = Text::_('COM_JEM_ERROR_TITLE_LONG');
 			\Joomla\CMS\Factory::getApplication()->enqueueMessage($this->_error, 'warning');
 			return false;
 		}
@@ -167,14 +169,14 @@ class jem_events extends JTable
 		}
 
 		if ($this->dates && !preg_match("/^[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]$/", $this->dates)) {
-			$this->_error = JText::_('COM_JEM_DATE_WRONG');
+			$this->_error = Text::_('COM_JEM_DATE_WRONG');
 			\Joomla\CMS\Factory::getApplication()->enqueueMessage($this->_error, 'warning');
 			return false;
 		}
 
 		if (isset($this->enddates)) {
 			if (!preg_match("/^[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]$/", $this->enddates)) {
-				$this->_error = JText::_('COM_JEM_ENDDATE_WRONG_FORMAT');
+				$this->_error = Text::_('COM_JEM_ENDDATE_WRONG_FORMAT');
 				\Joomla\CMS\Factory::getApplication()->enqueueMessage($this->_error, 'warning');
 				return false;
 			}
@@ -182,7 +184,7 @@ class jem_events extends JTable
 
 /*		if (isset($this->recurrence_limit_date)) {
 			if (!preg_match("/^[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]$/", $this->recurrence_limit_date)) {
-	 				$this->_error = JText::_('COM_JEM_WRONGRECURRENCEDATEFORMAT');
+	 				$this->_error = Text::_('COM_JEM_WRONGRECURRENCEDATEFORMAT');
 	 				\Joomla\CMS\Factory::getApplication()->enqueueMessage($this->_error, 'warning');
 	 				return false;
 			}
@@ -191,7 +193,7 @@ class jem_events extends JTable
 
 		if (isset($this->times) && $this->times) {
 			if (!preg_match("/^[0-2][0-9]:[0-5][0-9](:[0-5][0-9])?$/", $this->times)) {
-				$this->_error = JText::_('WRONGSTARTTIMEFORMAT'.': '.$this->times);
+				$this->_error = Text::_('WRONGSTARTTIMEFORMAT'.': '.$this->times);
 				\Joomla\CMS\Factory::getApplication()->enqueueMessage($this->_error, 'warning');
 				return false;
 			}
@@ -199,7 +201,7 @@ class jem_events extends JTable
 
 		if (isset($this->endtimes) && $this->endtimes) {
 			if (!preg_match("/^[0-2][0-9]:[0-5][0-9](:[0-5][0-9])?$/", $this->endtimes)) {
-				$this->_error = JText::_('COM_JEM_WRONGENDTIMEFORMAT');
+				$this->_error = Text::_('COM_JEM_WRONGENDTIMEFORMAT');
 				\Joomla\CMS\Factory::getApplication()->enqueueMessage($this->_error, 'warning');
 				return false;
 			}
@@ -207,7 +209,7 @@ class jem_events extends JTable
 
 		//No venue or category choosen?
 		//if ($this->locid == '') {
-		//	$this->_error = JText::_('COM_JEM_VENUE_EMPTY');
+		//	$this->_error = Text::_('COM_JEM_VENUE_EMPTY');
 		//	\Joomla\CMS\Factory::getApplication()->enqueueMessage($this->_error, 'warning');
 		//	return false;
 		//}

@@ -1,13 +1,15 @@
 <?php
 /**
- * @version 2.3.1
+ * @version 4.0.0
  * @package JEM
- * @copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright (C) 2005-2009 Christoph Lukes
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 
 defined('_JEXEC') or die;
+
+use Joomla\CMS\Language\Text;
 
 /**
  * Source controller class
@@ -91,12 +93,12 @@ class JemControllerSource extends JControllerLegacy
 		$context  = 'com_jem.edit.source';
 
 		if (preg_match('#\.\.#', base64_decode($recordId))) {
-			\Joomla\CMS\Factory::getApplication()->enqueueMessage(JText::_('COM_JEM_CSSMANAGER_ERROR_SOURCE_FILE_NOT_FOUND'), 'warning');
+			\Joomla\CMS\Factory::getApplication()->enqueueMessage(Text::_('COM_JEM_CSSMANAGER_ERROR_SOURCE_FILE_NOT_FOUND'), 'warning');
 		}
 
 		// Access check.
 		if (!$this->allowEdit()) {
-			\Joomla\CMS\Factory::getApplication()->enqueueMessage(JText::_('JLIB_APPLICATION_ERROR_EDIT_NOT_PERMITTED'), 'warning');
+			\Joomla\CMS\Factory::getApplication()->enqueueMessage(Text::_('JLIB_APPLICATION_ERROR_EDIT_NOT_PERMITTED'), 'warning');
 		}
 
 		// Check-out succeeded, push the new record id into the session.
@@ -112,7 +114,7 @@ class JemControllerSource extends JControllerLegacy
 	public function cancel()
 	{
 		// Check for request forgeries.
-		JSession::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
+		JSession::checkToken() or jexit(Text::_('JINVALID_TOKEN'));
 
 		// Initialise variables.
 		$app     = JFactory::getApplication();
@@ -133,7 +135,7 @@ class JemControllerSource extends JControllerLegacy
 	public function save()
 	{
 		// Check for request forgeries.
-		JSession::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
+		JSession::checkToken() or jexit(Text::_('JINVALID_TOKEN'));
 
 		// Initialise variables.
 		$app     = JFactory::getApplication();
@@ -152,12 +154,12 @@ class JemControllerSource extends JControllerLegacy
 
 		// Access check.
 		if (!$this->allowSave()) {
-			\Joomla\CMS\Factory::getApplication()->enqueueMessage(JText::_('JERROR_SAVE_NOT_PERMITTED'), 'warning');
+			\Joomla\CMS\Factory::getApplication()->enqueueMessage(Text::_('JERROR_SAVE_NOT_PERMITTED'), 'warning');
 		}
 
 		// Match the stored id's with the submitted.
 		if (empty($data['filename']) || ($data['filename'] != $file)) {
-			throw new Exception(JText::_('COM_JEM_CSSMANAGER_ERROR_SOURCE_ID_FILENAME_MISMATCH'), 500);
+			throw new Exception(Text::_('COM_JEM_CSSMANAGER_ERROR_SOURCE_ID_FILENAME_MISMATCH'), 500);
 		}
 
 		// Validate the posted data.
@@ -202,12 +204,12 @@ class JemControllerSource extends JControllerLegacy
 			$app->setUserState($context.'.data', $data);
 
 			// Redirect back to the edit screen.
-			$this->setMessage(JText::sprintf('JERROR_SAVE_FAILED', $model->getError()), 'warning');
+			$this->setMessage(Text::sprintf('JERROR_SAVE_FAILED', $model->getError()), 'warning');
 			$this->setRedirect(JRoute::_('index.php?option=com_jem&view=source&layout=edit', false));
 			return false;
 		}
 
-		$this->setMessage(JText::_('COM_JEM_CSSMANAGER_FILE_SAVE_SUCCESS'));
+		$this->setMessage(Text::_('COM_JEM_CSSMANAGER_FILE_SAVE_SUCCESS'));
 
 		// Redirect the user and adjust session state based on the chosen task.
 		switch ($task)

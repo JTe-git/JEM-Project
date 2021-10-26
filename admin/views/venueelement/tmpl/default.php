@@ -1,12 +1,14 @@
 <?php
 /**
- * @version 2.3.1
+ * @version 4.0.0
  * @package JEM
- * @copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright (C) 2005-2009 Christoph Lukes
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 defined('_JEXEC') or die;
+
+use Joomla\CMS\Language\Text;
 
 $function = JFactory::getApplication()->input->getCmd('function', 'jSelectVenue');
 ?>
@@ -16,11 +18,11 @@ $function = JFactory::getApplication()->input->getCmd('function', 'jSelectVenue'
 <table class="adminform">
 	<tr>
 		<td width="100%">
-			<?php echo JText::_('COM_JEM_SEARCH').' '.$this->lists['filter']; ?>
+			<?php echo Text::_('COM_JEM_SEARCH').' '.$this->lists['filter']; ?>
 			<input type="text" name="filter_search" id="filter_search" value="<?php echo $this->lists['search']; ?>" class="text_area" onChange="document.adminForm.submit();" />
-			<button type="submit"><?php echo JText::_('JSEARCH_FILTER_SUBMIT'); ?></button>
-			<button type="button" onclick="document.id('filter_search').value='';this.form.submit();"><?php echo JText::_('JSEARCH_FILTER_CLEAR'); ?></button>
-			<button type="button" onclick="if (window.parent) window.parent.<?php echo $this->escape($function);?>('', '<?php echo JText::_('COM_JEM_SELECTVENUE') ?>');"><?php echo JText::_('COM_JEM_NOVENUE')?></button>
+			<button type="submit"><?php echo Text::_('JSEARCH_FILTER_SUBMIT'); ?></button>
+			<button type="button" onclick="document.id('filter_search').value='';this.form.submit();"><?php echo Text::_('JSEARCH_FILTER_CLEAR'); ?></button>
+			<button type="button" onclick="if (window.parent) window.parent.<?php echo $this->escape($function);?>('', '<?php echo Text::_('COM_JEM_SELECTVENUE') ?>');"><?php echo Text::_('COM_JEM_NOVENUE')?></button>
 		</td>
 	</tr>
 </table>
@@ -28,11 +30,11 @@ $function = JFactory::getApplication()->input->getCmd('function', 'jSelectVenue'
 <table class="table table-striped" id="articleList">
 	<thead>
 		<tr>
-			<th class="center" width="7"><?php echo JText::_('COM_JEM_NUM'); ?></th>
+			<th class="center" width="7"><?php echo Text::_('COM_JEM_NUM'); ?></th>
 			<th align="left" class="title"><?php echo JHtml::_('grid.sort', 'COM_JEM_VENUE', 'l.venue', $this->lists['order_Dir'], $this->lists['order'], 'venueelement' ); ?></th>
 			<th align="left" class="title"><?php echo JHtml::_('grid.sort', 'COM_JEM_CITY', 'l.city', $this->lists['order_Dir'], $this->lists['order'], 'venueelement' ); ?></th>
 			<th align="left" class="title"><?php echo JHtml::_('grid.sort', 'COM_JEM_STATE', 'l.state', $this->lists['order_Dir'], $this->lists['order']); ?></th>
-			<th align="left" class="title center"><?php echo JText::_('COM_JEM_COUNTRY'); ?></th>
+			<th align="left" class="title center"><?php echo Text::_('COM_JEM_COUNTRY'); ?></th>
 		</tr>
 	</thead>
 

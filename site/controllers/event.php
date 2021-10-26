@@ -1,12 +1,14 @@
 <?php
 /**
- * @version 2.3.1
+ * @version 4.0.0
  * @package JEM
- * @copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright (C) 2005-2009 Christoph Lukes
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 defined('_JEXEC') or die;
+
+use Joomla\CMS\Language\Text;
 
 require_once (JPATH_COMPONENT_SITE.'/classes/controller.form.class.php');
 
@@ -261,7 +263,7 @@ class JemControllerEvent extends JemControllerForm
 
 			// but show warning if mailer is disabled
 			if (!JPluginHelper::isEnabled('jem', 'mailer')) {
-				\Joomla\CMS\Factory::getApplication()->enqueueMessage(JText::_('COM_JEM_GLOBAL_MAILERPLUGIN_DISABLED'), 'notice');
+				\Joomla\CMS\Factory::getApplication()->enqueueMessage(Text::_('COM_JEM_GLOBAL_MAILERPLUGIN_DISABLED'), 'notice');
 			}
 		}
 	}
@@ -305,7 +307,7 @@ class JemControllerEvent extends JemControllerForm
 
 		$reg = $model->getUserRegistration($id);
 		if ($reg !== false && $reg->id != $rid) {
-			$msg = JText::_('COM_JEM_ALLREADY_REGISTERED');
+			$msg = Text::_('COM_JEM_ALLREADY_REGISTERED');
 			$this->setRedirect(JRoute::_(JemHelperRoute::getEventRoute($id), false), $msg, 'error');
 			$this->redirect();
 			return;
@@ -331,7 +333,7 @@ class JemControllerEvent extends JemControllerForm
 		$cache = JFactory::getCache('com_jem');
 		$cache->clean();
 
-		$msg = JText::_('COM_JEM_REGISTRATION_THANKS_FOR_RESPONSE');
+		$msg = Text::_('COM_JEM_REGISTRATION_THANKS_FOR_RESPONSE');
 
 		$this->setRedirect(JRoute::_(JemHelperRoute::getEventRoute($id), false), $msg);
 	}
@@ -361,7 +363,7 @@ class JemControllerEvent extends JemControllerForm
 		$cache = JFactory::getCache('com_jem');
 		$cache->clean();
 
-		$msg = JText::_('COM_JEM_UNREGISTERED_SUCCESSFULL');
+		$msg = Text::_('COM_JEM_UNREGISTERED_SUCCESSFULL');
 		$this->setRedirect(JRoute::_(JemHelperRoute::getEventRoute($id), false), $msg);
 	}
 }

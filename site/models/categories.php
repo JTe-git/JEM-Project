@@ -1,13 +1,15 @@
 <?php
 /**
- * @version 2.3.1
+ * @version 4.0.0
  * @package JEM
- * @copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright (C) 2005-2009 Christoph Lukes
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 
 defined('_JEXEC') or die;
+
+use Joomla\CMS\Language\Text;
 
 jimport('joomla.application.component.model');
 
@@ -145,7 +147,7 @@ class JemModelCategories extends JModelLegacy
 
 				//Generate description
 				if (empty ($category->description)) {
-					$category->description = JText::_('COM_JEM_NO_DESCRIPTION');
+					$category->description = Text::_('COM_JEM_NO_DESCRIPTION');
 				} else {
 					//execute plugins
 					$category->text = $category->description;
@@ -159,10 +161,10 @@ class JemModelCategories extends JModelLegacy
 				// TODO: Move to view?
 				$task = $app->input->get('task', '');
 				if ($task == 'archive') {
-					$category->linktext   = JText::_('COM_JEM_SHOW_ARCHIVE');
+					$category->linktext   = Text::_('COM_JEM_SHOW_ARCHIVE');
 					$category->linktarget = JRoute::_(JemHelperRoute::getCategoryRoute($category->slug.'&task=archive'));
 				} else {
-					$category->linktext   = JText::_('COM_JEM_SHOW_EVENTS');
+					$category->linktext   = Text::_('COM_JEM_SHOW_EVENTS');
 					$category->linktarget = JRoute::_(JemHelperRoute::getCategoryRoute($category->slug));
 				}
 			}

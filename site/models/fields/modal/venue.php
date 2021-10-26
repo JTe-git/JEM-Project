@@ -1,13 +1,15 @@
 <?php
 /**
- * @version 2.3.1
+ * @version 4.0.0
  * @package JEM
- * @copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright (C) 2005-2009 Christoph Lukes
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 
 defined('_JEXEC') or die;
+
+use Joomla\CMS\Language\Text;
 
 jimport('joomla.form.formfield');
 
@@ -60,7 +62,7 @@ class JFormFieldModal_Venue extends JFormField
 		}
 
 		if (empty($venue)) {
-			$venue = JText::_('COM_JEM_SELECT_VENUE');
+			$venue = Text::_('COM_JEM_SELECT_VENUE');
 		}
 		$venue = htmlspecialchars($venue, ENT_QUOTES, 'UTF-8');
 
@@ -68,8 +70,8 @@ class JFormFieldModal_Venue extends JFormField
 		$html[] = '  <input type="text" id="'.$this->id.'_name" value="'.$venue.'" disabled="disabled" size="35" />';
 
 		// The venue select button
-		$html[] = '    <a class="flyermodal" title="'.JText::_('COM_JEM_SELECT').'" href="'.$link.'&amp;'.JSession::getFormToken().'=1" rel="{handler: \'iframe\', size: {x:800, y:450}}">'.
-					JText::_('COM_JEM_SELECT').'</a>';
+		$html[] = '    <a class="flyermodal" title="'.Text::_('COM_JEM_SELECT').'" href="'.$link.'&amp;'.JSession::getFormToken().'=1" rel="{handler: \'iframe\', size: {x:800, y:450}}">'.
+					Text::_('COM_JEM_SELECT').'</a>';
 
 		// The active venue id field
 		if (0 == (int)$this->value) {

@@ -1,13 +1,15 @@
 <?php
 /**
- * @version 2.3.1
+ * @version 4.0.0
  * @package JEM
- * @copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright (C) 2005-2009 Christoph Lukes
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 
 defined('_JEXEC') or die;
+
+use Joomla\CMS\Language\Text;
 
 jimport('joomla.application.component.controller');
 
@@ -44,14 +46,14 @@ class JemControllerAttendees extends JControllerLegacy
 	public function remove()
 	{
 		// Check for request forgeries.
-		JSession::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
+		JSession::checkToken() or jexit(Text::_('JINVALID_TOKEN'));
 
 		$jinput = JFactory::getApplication()->input;
 		$cid = $jinput->get('cid',  0, 'array');
 		$eventid = $jinput->getInt('eventid');
 
 		if (!is_array($cid) || count($cid) < 1) {
-			throw new Exception(JText::_('COM_JEM_SELECT_ITEM_TO_DELETE'), 500);
+			throw new Exception(Text::_('COM_JEM_SELECT_ITEM_TO_DELETE'), 500);
 		}
 
 		$total = count($cid);
@@ -80,7 +82,7 @@ class JemControllerAttendees extends JControllerLegacy
 		$cache = JFactory::getCache('com_jem');
 		$cache->clean();
 
-		$msg = $total . ' ' . JText::_('COM_JEM_REGISTERED_USERS_DELETED');
+		$msg = $total . ' ' . Text::_('COM_JEM_REGISTERED_USERS_DELETED');
 
 		$this->setRedirect('index.php?option=com_jem&view=attendees&eventid=' . $eventid, $msg);
 	}
@@ -91,7 +93,7 @@ class JemControllerAttendees extends JControllerLegacy
 	public function export()
 	{
 		// Check for request forgeries
-		JSession::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
+		JSession::checkToken() or jexit(Text::_('JINVALID_TOKEN'));
 
 		header('Content-Type: text/x-csv');
 		header('Expires: ' . gmdate('D, d M Y H:i:s') . ' GMT');
@@ -116,14 +118,14 @@ class JemControllerAttendees extends JControllerLegacy
 	public function toggleStatus()
 	{
 		// Check for request forgeries
-		JSession::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
+		JSession::checkToken() or jexit(Text::_('JINVALID_TOKEN'));
 
 		$app  = JFactory::getApplication();
 		$pks  = $app->input->get('cid', array(), 'array');
 		$task = $this->getTask();
 
 		if (empty($pks)) {
-			\Joomla\CMS\Factory::getApplication()->enqueueMessage(JText::_('JERROR_NO_ITEMS_SELECTED'), 'warning');
+			\Joomla\CMS\Factory::getApplication()->enqueueMessage(Text::_('JERROR_NO_ITEMS_SELECTED'), 'warning');
 		} else {
 			\Joomla\Utilities\ArrayHelper::toInteger($pks);
 			$model = $this->getModel('attendee');
@@ -140,13 +142,13 @@ class JemControllerAttendees extends JControllerLegacy
 					$dispatcher->trigger('onUserOnOffWaitinglist', array($pk));
 
 					if ($attendee->waiting) {
-						$msg = JText::_('COM_JEM_ADDED_TO_ATTENDING');
+						$msg = Text::_('COM_JEM_ADDED_TO_ATTENDING');
 					} else {
-						$msg = JText::_('COM_JEM_ADDED_TO_WAITING');
+						$msg = Text::_('COM_JEM_ADDED_TO_WAITING');
 					}
 					$type = 'message';
 				} else {
-					$msg = JText::_('COM_JEM_WAITINGLIST_TOGGLE_ERROR') . ': ' . $model->getError();
+					$msg = Text::_('COM_JEM_WAITINGLIST_TOGGLE_ERROR') . ': ' . $model->getError();
 					$type = 'error';
 				}
 
@@ -158,7 +160,7 @@ class JemControllerAttendees extends JControllerLegacy
 
 		if ($task === 'toggleStatus') {
 			# here we are selecting more rows so a general message would be better
-			$msg = JText::_('COM_JEM_ATTENDEES_CHANGEDSTATUS');
+			$msg = Text::_('COM_JEM_ATTENDEES_CHANGEDSTATUS');
 			$type = "message";
 			$app->enqueueMessage($msg, $type);
 		}
@@ -177,7 +179,7 @@ class JemControllerAttendees extends JControllerLegacy
 	public function edit()
 	{
 		// Check for request forgeries.
-		JSession::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
+		JSession::checkToken() or jexit(Text::_('JINVALID_TOKEN'));
 
 		$jinput = JFactory::getApplication()->input;
 		$jinput->set('view', 'attendee');
@@ -197,7 +199,7 @@ class JemControllerAttendees extends JControllerLegacy
 	public function setStatus()
 	{
 		// Check for request forgeries
-		JSession::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
+		JSession::checkToken() or jexit(Text::_('JINVALID_TOKEN'));
 
 		$user    = JFactory::getUser();
 		$app     = JFactory::getApplication();
@@ -209,7 +211,7 @@ class JemControllerAttendees extends JControllerLegacy
 
 		if (empty($ids))
 		{
-			$message = JText::_('JERROR_NO_ITEMS_SELECTED');
+			$message = Text::_('JERROR_NO_ITEMS_SELECTED');
 			\Joomla\CMS\Factory::getApplication()->enqueueMessage($message, 'warning');
 		}
 		else
@@ -231,28 +233,28 @@ class JemControllerAttendees extends JControllerLegacy
 
 				switch ($value) {
 				case -1:
-					$message = JText::plural('COM_JEM_ATTENDEES_N_ITEMS_NOTATTENDING', count($ids));
+					$message = Text::plural('COM_JEM_ATTENDEES_N_ITEMS_NOTATTENDING', count($ids));
 					foreach ($ids AS $pk) {
 						// onEventUserUnregistered($eventid, $record, $recordid)
 						$dispatcher->trigger('onEventUserUnregistered', array($eventid, false, $pk));
 					}
 					break;
 				case 0:
-					$message = JText::plural('COM_JEM_ATTENDEES_N_ITEMS_INVITED', count($ids));
+					$message = Text::plural('COM_JEM_ATTENDEES_N_ITEMS_INVITED', count($ids));
 					foreach ($ids AS $pk) {
 						// onEventUserRegistered($recordid)
 						$dispatcher->trigger('onEventUserRegistered', array($pk));
 					}
 					break;
 				case 1:
-					$message = JText::plural('COM_JEM_ATTENDEES_N_ITEMS_ATTENDING', count($ids));
+					$message = Text::plural('COM_JEM_ATTENDEES_N_ITEMS_ATTENDING', count($ids));
 					foreach ($ids AS $pk) {
 						// onEventUserRegistered($recordid)
 						$dispatcher->trigger('onEventUserRegistered', array($pk));
 					}
 					break;
 				case 2:
-					$message = JText::plural('COM_JEM_ATTENDEES_N_ITEMS_WAITINGLIST', count($ids));
+					$message = Text::plural('COM_JEM_ATTENDEES_N_ITEMS_WAITINGLIST', count($ids));
 					foreach ($ids AS $pk) {
 						// onUserOnOffWaitinglist($recordid)
 						$dispatcher->trigger('onUserOnOffWaitinglist', array($pk));

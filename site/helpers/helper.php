@@ -1,12 +1,14 @@
 <?php
 /**
- * @version 2.3.1
+ * @version 4.0.0
  * @package JEM
- * @copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright (C) 2005-2009 Christoph Lukes
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 defined('_JEXEC') or die;
+
+use Joomla\CMS\Language\Text;
 
 jimport('joomla.filesystem.file');
 jimport('joomla.filesystem.folder');
@@ -230,7 +232,7 @@ class JemHelper
 								// run query always but don't show error message to "normal" users
 								$user = JemFactory::getUser();
 								if($user->authorise('core.manage')) {
-									echo JText::_('Error saving categories for event "' . $ref_event->title . '" new recurrences\n');
+									echo Text::_('Error saving categories for event "' . $ref_event->title . '" new recurrences\n');
 								}
 							}
 						}
@@ -334,7 +336,7 @@ class JemHelper
 				if (count($selected) == 0)
 				{
 					// this shouldn't happen, but if it does, to prevent problem use the current weekday for the repetition.
-					\Joomla\CMS\Factory::getApplication()->enqueueMessage(JText::_('COM_JEM_WRONG_EVENTRECURRENCE_WEEKDAY'), 'warning');
+					\Joomla\CMS\Factory::getApplication()->enqueueMessage(Text::_('COM_JEM_WRONG_EVENTRECURRENCE_WEEKDAY'), 'warning');
 					$current_weekday = (int) $date_array["weekday"];
 					$selected = array($current_weekday);
 				}
@@ -392,7 +394,7 @@ class JemHelper
 		}
 
 		if ($start_day < $date_array["unixtime"]) {
-			throw new Exception(JText::_('COM_JEM_RECURRENCE_DATE_GENERATION_ERROR'), 500);
+			throw new Exception(Text::_('COM_JEM_RECURRENCE_DATE_GENERATION_ERROR'), 500);
 		}
 
 		return $recurrence_row;
@@ -626,7 +628,7 @@ class JemHelper
 					$result[] = (7 - $firstday) % 7;
 					break;
 				default:
-					\Joomla\CMS\Factory::getApplication()->enqueueMessage(JText::_('COM_JEM_WRONG_EVENTRECURRENCE_WEEKDAY'), 'warning');
+					\Joomla\CMS\Factory::getApplication()->enqueueMessage(Text::_('COM_JEM_WRONG_EVENTRECURRENCE_WEEKDAY'), 'warning');
 			}
 		}
 
@@ -829,7 +831,7 @@ class JemHelper
 			$query = ' UPDATE #__jem_register SET waiting = 0 WHERE id IN ('.implode(',', $bumping).')';
 			$db->setQuery($query);
 			if ($db->execute() === false) {
-				\Joomla\CMS\Factory::getApplication()->enqueueMessage(JText::_('COM_JEM_FAILED_BUMPING_USERS_FROM_WAITING_TO_CONFIRMED_LIST').': '.$db->getErrorMsg(), 'warning');
+				\Joomla\CMS\Factory::getApplication()->enqueueMessage(Text::_('COM_JEM_FAILED_BUMPING_USERS_FROM_WAITING_TO_CONFIRMED_LIST').': '.$db->getErrorMsg(), 'warning');
 			} else {
 				foreach ($bumping AS $register_id)
 				{
@@ -968,7 +970,7 @@ class JemHelper
 
 		// start
 		if (!preg_match('/([0-9]{4})-([0-9]{1,2})-([0-9]{1,2})/', $event->dates, $start_date)) {
-			throw new Exception(JText::_('COM_JEM_ICAL_EXPORT_WRONG_STARTDATE_FORMAT'), 0);
+			throw new Exception(Text::_('COM_JEM_ICAL_EXPORT_WRONG_STARTDATE_FORMAT'), 0);
 		}
 
 		$date = array('year' => (int) $start_date[1], 'month' => (int) $start_date[2], 'day' => (int) $start_date[3]);
@@ -982,7 +984,7 @@ class JemHelper
 			$event->enddates = strftime('%Y-%m-%d', strtotime($event->enddates.' +1 day'));
 
 			if (!preg_match('/([0-9]{4})-([0-9]{1,2})-([0-9]{1,2})/', $event->enddates, $end_date)) {
-				throw new Exception(JText::_('COM_JEM_ICAL_EXPORT_WRONG_ENDDATE_FORMAT'), 0);
+				throw new Exception(Text::_('COM_JEM_ICAL_EXPORT_WRONG_ENDDATE_FORMAT'), 0);
 			}
 
 			$date_end = array('year' => $end_date[1], 'month' => $end_date[2], 'day' => $end_date[3]);
@@ -991,7 +993,7 @@ class JemHelper
 		else // not all day events, there is a start time
 		{
 			if (!preg_match('/([0-9]{2}):([0-9]{2}):([0-9]{2})/', $event->times, $start_time)) {
-				throw new Exception(JText::_('COM_JEM_ICAL_EXPORT_WRONG_STARTTIME_FORMAT'), 0);
+				throw new Exception(Text::_('COM_JEM_ICAL_EXPORT_WRONG_STARTTIME_FORMAT'), 0);
 			}
 
 			$date['hour'] = $start_time[1];
@@ -1014,13 +1016,13 @@ class JemHelper
 			}
 
 			if (!preg_match('/([0-9]{4})-([0-9]{1,2})-([0-9]{1,2})/', $event->enddates, $end_date)) {
-				throw new Exception(JText::_('COM_JEM_ICAL_EXPORT_WRONG_ENDDATE_FORMAT'), 0);
+				throw new Exception(Text::_('COM_JEM_ICAL_EXPORT_WRONG_ENDDATE_FORMAT'), 0);
 			}
 
 			$date_end = array('year' => $end_date[1], 'month' => $end_date[2], 'day' => $end_date[3]);
 
 			if (!preg_match('/([0-9]{2}):([0-9]{2}):([0-9]{2})/', $event->endtimes, $end_time)) {
-				throw new Exception(JText::_('COM_JEM_ICAL_EXPORT_WRONG_STARTTIME_FORMAT'), 0);
+				throw new Exception(Text::_('COM_JEM_ICAL_EXPORT_WRONG_STARTTIME_FORMAT'), 0);
 			}
 
 			$date_end['hour'] = $end_time[1];
@@ -1034,11 +1036,11 @@ class JemHelper
 
 		// item description text
 		$description = $event->title.'\\n';
-		$description .= JText::_('COM_JEM_CATEGORY').': '.implode(', ', $categories).'\\n';
+		$description .= Text::_('COM_JEM_CATEGORY').': '.implode(', ', $categories).'\\n';
 
 		$link = JUri::root().JemHelperRoute::getEventRoute($event->slug);
 		$link = JRoute::_($link);
-		$description .= JText::_('COM_JEM_ICS_LINK').': '.$link.'\\n';
+		$description .= Text::_('COM_JEM_ICS_LINK').': '.$link.'\\n';
 
 		// location
 		$location = array($event->venue);
@@ -1688,7 +1690,7 @@ class JemHelper
 		$options = array();
 		$options = array_merge(JemHelperCountries::getCountryOptions(),$options);
 
-		array_unshift($options, JHtml::_('select.option', '0', JText::_('COM_JEM_SELECT_COUNTRY')));
+		array_unshift($options, JHtml::_('select.option', '0', Text::_('COM_JEM_SELECT_COUNTRY')));
 
 		return $options;
 	}

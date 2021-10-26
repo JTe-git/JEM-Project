@@ -1,12 +1,15 @@
 <?php
 /**
- * Version 2.2.0
+ * Version 4.0.0
  * @copyright Copyright (C) 2014 Ghost Art digital media.
- * @copyright Copyright (C) 2013 - 2017 joomlaeventmanager.net. All rights reserved.
+ * @copyright Copyright (C) 2013 - 2021 joomlaeventmanager.net. All rights reserved.
  * @license   http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  * Based on Eventlist11 tag and JEM specific code by JEM Community
  */
 defined('_JEXEC') or die;
+
+use Joomla\CMS\Language\Text;
+use Joomla\CMS\HTML\HTMLHelper;
 
 include_once(JPATH_SITE.'/components/com_jem/helpers/helper.php');
 include_once(JPATH_SITE.'/components/com_jem/classes/image.class.php');
@@ -32,7 +35,7 @@ class plgAcymailingTagjem extends JPlugin
 	public function acymailing_getPluginType()
 	{
 		$onePlugin = new stdClass();
-		$onePlugin->name = JText::_('JOOMEXT_EVENT'). ' <small>(JEM)</small>';
+		$onePlugin->name = Text::_('JOOMEXT_EVENT'). ' <small>(JEM)</small>';
 		$onePlugin->function = 'acymailingtagjem_show';
 		$onePlugin->help = 'plugin-tagjem';
 
@@ -72,18 +75,18 @@ class plgAcymailingTagjem extends JPlugin
 		$pageInfo->limit->start = $app->getUserStateFromRequest($paramBase.'.limitstart', 'limitstart', 0, 'int');
 
 		$picts = array();
-		$picts[] = JHtml::_('select.option', '1', JText::_('JOOMEXT_YES'));
-		$picts[] = JHtml::_('select.option', 'resized', JText::_('PLG_TAGJEM_RESIZE'));
-		$picts[] = JHtml::_('select.option', '0', JText::_('JOOMEXT_NO'));
+		$picts[] = HTMLHelper::_('select.option', '1', Text::_('JOOMEXT_YES'));
+		$picts[] = HTMLHelper::_('select.option', 'resized', Text::_('PLG_TAGJEM_RESIZE'));
+		$picts[] = HTMLHelper::_('select.option', '0', Text::_('JOOMEXT_NO'));
 
 		$yesno = array();
-		$yesno[] = JHtml::_('select.option', '1', JText::_('JOOMEXT_YES'));
-		$yesno[] = JHtml::_('select.option', '0', JText::_('JOOMEXT_NO'));
+		$yesno[] = HTMLHelper::_('select.option', '1', Text::_('JOOMEXT_YES'));
+		$yesno[] = HTMLHelper::_('select.option', '0', Text::_('JOOMEXT_NO'));
 
 		$opendates = array();
-		$opendates[] = JHtml::_('select.option', 'also', JText::_('COM_JEM_SHOW_OPENDATES_TOO'));
-		$opendates[] = JHtml::_('select.option', 'only', JText::_('COM_JEM_SHOW_OPENDATES_ONLY'));
-		$opendates[] = JHtml::_('select.option', '0', JText::_('JOOMEXT_NO'));
+		$opendates[] = HTMLHelper::_('select.option', 'also', Text::_('COM_JEM_SHOW_OPENDATES_TOO'));
+		$opendates[] = HTMLHelper::_('select.option', 'only', Text::_('COM_JEM_SHOW_OPENDATES_ONLY'));
+		$opendates[] = HTMLHelper::_('select.option', '0', Text::_('JOOMEXT_NO'));
 
 		$db = JFactory::getDBO();
 
@@ -142,9 +145,9 @@ class plgAcymailingTagjem extends JPlugin
 		$db->setQuery('SELECT c.* FROM `#__jem_categories` as c WHERE c.published IN (0, 1) AND c.alias NOT LIKE "root" ORDER BY c.lft ASC');
 		$categories = $db->loadObjectList('id');
 		$categoriesValues = array();
-		$categoriesValues[] = JHtml::_('select.option', '', JText::_('ACY_ALL'));
+		$categoriesValues[] = HTMLHelper::_('select.option', '', Text::_('ACY_ALL'));
 		foreach ($categories as $oneCat) {
-			$categoriesValues[] = JHtml::_('select.option', $oneCat->id, str_repeat('-&nbsp;', $oneCat->level) . $oneCat->catname, ($oneCat->published != 1) ? array('disable' => true) : array());
+			$categoriesValues[] = HTMLHelper::_('select.option', $oneCat->id, str_repeat('-&nbsp;', $oneCat->level) . $oneCat->catname, ($oneCat->published != 1) ? array('disable' => true) : array());
 		}
 
 		// Before AcyMailing 5.0 we have to use Joomla's css classes.
@@ -161,7 +164,7 @@ class plgAcymailingTagjem extends JPlugin
 
 		$tabs = acymailing_get('helper.acytabs');
 		echo $tabs->startPane('jem_tab');
-		echo $tabs->startPanel(JText::_('JOOMEXT_EVENT'), 'jem_event');
+		echo $tabs->startPanel(Text::_('JOOMEXT_EVENT'), 'jem_event');
 	?>
 		<script language="javascript" type="text/javascript">
 			<!--
@@ -217,19 +220,19 @@ class plgAcymailingTagjem extends JPlugin
 		<div class="onelineblockoptions">
 			<table width="100%" class="<?php echo $class_options;?>">
 				<tr id="format" class="acyplugformat">
-					<td valign="baseline" width="25%"><?php echo JText::_('PLG_TAGJEM_SHOW_IMAGES'); ?></td>
-					<td valign="baseline" width="25%"><?php echo JHtml::_('acyselect.radiolist', $picts, 'pict', 'size="1" onclick="updateTag();"', 'value', 'text', $pageInfo->pict); ?>
+					<td valign="baseline" width="25%"><?php echo Text::_('PLG_TAGJEM_SHOW_IMAGES'); ?></td>
+					<td valign="baseline" width="25%"><?php echo HTMLHelper::_('acyselect.radiolist', $picts, 'pict', 'size="1" onclick="updateTag();"', 'value', 'text', $pageInfo->pict); ?>
 					</td>
 					<td valign="baseline" width="50%" colspan="2">
-						<span id="pictsize" <?php if($pageInfo->pict != 'resized') echo 'style="display:none;"'; ?>><!--br/--><?php echo JText::_('PLG_TAGJEM_IMAGE_WIDTH') ?>
+						<span id="pictsize" <?php if($pageInfo->pict != 'resized') echo 'style="display:none;"'; ?>><!--br/--><?php echo Text::_('PLG_TAGJEM_IMAGE_WIDTH') ?>
 							<input name="pictwidth" type="text" onchange="updateTag();" value="<?php echo $pageInfo->pictwidth; ?>" style="width:30px;"/>
-							x <?php echo JText::_('PLG_TAGJEM_IMAGE_HEIGHT') ?>
+							x <?php echo Text::_('PLG_TAGJEM_IMAGE_HEIGHT') ?>
 							<input name="pictheight" type="text" onchange="updateTag();" value="<?php echo $pageInfo->pictheight; ?>" style="width:30px;"/>
 						</span>
 					</td>
 				</tr>
 				<tr>
-					<td valign="baseline" width="25%"><?php echo JText::_('PLG_TAGJEM_TEMPLATE'); ?></td>
+					<td valign="baseline" width="25%"><?php echo Text::_('PLG_TAGJEM_TEMPLATE'); ?></td>
 					<td valign="baseline" width="25%">
 						<?php /* TODO: Collect templates dynamically. */ ?>
 						<select name="templ" size="1" onchange="updateTag();">
@@ -250,7 +253,7 @@ class plgAcymailingTagjem extends JPlugin
 						<?php acymailing_listingsearch($pageInfo->search); ?>
 					</td>
 					<td nowrap="nowrap">
-						<?php echo JHtml::_('select.genericlist', $categoriesValues, 'filter_cat', 'class="inputbox" size="1" onchange="document.adminForm.submit( );"', 'value', 'text', (int)$pageInfo->filter_cat); ?>
+						<?php echo HTMLHelper::_('select.genericlist', $categoriesValues, 'filter_cat', 'class="inputbox" size="1" onchange="document.adminForm.submit( );"', 'value', 'text', (int)$pageInfo->filter_cat); ?>
 					</td>
 				</tr>
 			</table>
@@ -261,19 +264,19 @@ class plgAcymailingTagjem extends JPlugin
 						<th class="title">
 						</th>
 						<th class="title">
-							<?php echo JHTML::_('grid.sort', JText::_('PLG_TAGJEM_TITLE'), 'a.title', $pageInfo->filter->order->dir, $pageInfo->filter->order->value); ?>
+							<?php echo HTMLHelper::_('grid.sort', Text::_('PLG_TAGJEM_TITLE'), 'a.title', $pageInfo->filter->order->dir, $pageInfo->filter->order->value); ?>
 						</th>
 						<th class="title">
-							<?php echo JHTML::_('grid.sort', JText::_('PLG_TAGJEM_DESCRIPTION'), 'a.introtext', $pageInfo->filter->order->dir, $pageInfo->filter->order->value); ?>
+							<?php echo HTMLHelper::_('grid.sort', Text::_('PLG_TAGJEM_DESCRIPTION'), 'a.introtext', $pageInfo->filter->order->dir, $pageInfo->filter->order->value); ?>
 						</th>
 						<th class="title">
-							<?php echo JHTML::_('grid.sort', JText::_('PLG_TAGJEM_DATE'), 'a.dates', $pageInfo->filter->order->dir, $pageInfo->filter->order->value); ?>
+							<?php echo HTMLHelper::_('grid.sort', Text::_('PLG_TAGJEM_DATE'), 'a.dates', $pageInfo->filter->order->dir, $pageInfo->filter->order->value); ?>
 						</th>
 						<th class="title">
-							<?php echo JHTML::_('grid.sort', JText::_('PLG_TAGJEM_VENUE'), 'l.venue', $pageInfo->filter->order->dir, $pageInfo->filter->order->value); ?>
+							<?php echo HTMLHelper::_('grid.sort', Text::_('PLG_TAGJEM_VENUE'), 'l.venue', $pageInfo->filter->order->dir, $pageInfo->filter->order->value); ?>
 						</th>
 						<th class="title titleid">
-							<?php echo JHTML::_('grid.sort', JText::_('PLG_TAGJEM_ID'), 'a.id', $pageInfo->filter->order->dir, $pageInfo->filter->order->value); ?>
+							<?php echo HTMLHelper::_('grid.sort', Text::_('PLG_TAGJEM_ID'), 'a.id', $pageInfo->filter->order->dir, $pageInfo->filter->order->value); ?>
 						</th>
 					</tr>
 				</thead>
@@ -324,7 +327,7 @@ class plgAcymailingTagjem extends JPlugin
 		<?php
 		echo $tabs->endPanel();
 
-		echo $tabs->startPanel(JText::_('UPCOMING_EVENTS'), 'jem_auto');
+		echo $tabs->startPanel(Text::_('UPCOMING_EVENTS'), 'jem_auto');
 		$type = $app->input->request->getString('type');
 		?>
 		<script language="javascript" type="text/javascript">
@@ -393,52 +396,52 @@ class plgAcymailingTagjem extends JPlugin
 		<div class="onelineblockoptions">
 			<table width="100%" class="jem_auto <?php echo $class_options; ?>">
 				<tr id="format" class="acyplugformat">
-					<td valign="baseline" width="25%"><?php echo JText::_('PLG_TAGJEM_SHOW_IMAGES'); ?></td>
-					<td valign="baseline" width="25%"><?php echo JHtml::_('acyselect.radiolist', $picts, 'pictauto', 'size="1" onclick="updateAutoTag();"', 'value', 'text', $pageInfo->pict); ?>
+					<td valign="baseline" width="25%"><?php echo Text::_('PLG_TAGJEM_SHOW_IMAGES'); ?></td>
+					<td valign="baseline" width="25%"><?php echo HTMLHelper::_('acyselect.radiolist', $picts, 'pictauto', 'size="1" onclick="updateAutoTag();"', 'value', 'text', $pageInfo->pict); ?>
 					</td>
 					<td valign="baseline" width="50%" colspan="2">
-						<span id="pictsizeauto" <?php if($pageInfo->pict != 'resized') echo 'style="display:none;"'; ?>><?php echo JText::_('PLG_TAGJEM_IMAGE_WIDTH') ?>
+						<span id="pictsizeauto" <?php if($pageInfo->pict != 'resized') echo 'style="display:none;"'; ?>><?php echo Text::_('PLG_TAGJEM_IMAGE_WIDTH') ?>
 							<input name="pictwidthauto" type="text" onchange="updateAutoTag();" value="<?php echo $pageInfo->pictwidth; ?>" style="width:30px;"/>
-							x <?php echo JText::_('PLG_TAGJEM_IMAGE_HEIGHT') ?>
+							x <?php echo Text::_('PLG_TAGJEM_IMAGE_HEIGHT') ?>
 							<input name="pictheightauto" type="text" onchange="updateAutoTag();" value="<?php echo $pageInfo->pictheight; ?>" style="width:30px;"/>
 						</span>
 					</td>
 				</tr>
 				<tr>
 					<td valign="baseline" width="25%">
-						<span title='<?php echo JText::_('COM_JEM_GLOBAL_FIELD_SHOW_OPENDATES_DESC'); ?>'>
-							<?php echo JText::_('COM_JEM_GLOBAL_FIELD_SHOW_OPENDATES'); ?>
+						<span title='<?php echo Text::_('COM_JEM_GLOBAL_FIELD_SHOW_OPENDATES_DESC'); ?>'>
+							<?php echo Text::_('COM_JEM_GLOBAL_FIELD_SHOW_OPENDATES'); ?>
 						</span>
 					</td>
 					<td valign="baseline" width="25%">
-						<?php echo JHtml::_('acyselect.radiolist', $opendates, 'opendates', 'size="1" onclick="updateAutoTag();"', 'value', 'text', $pageInfo->opendates); ?>
+						<?php echo HTMLHelper::_('acyselect.radiolist', $opendates, 'opendates', 'size="1" onclick="updateAutoTag();"', 'value', 'text', $pageInfo->opendates); ?>
 						<!--select name="opendates" size="1" onchange="updateAutoTag();">
-							<option value="no"><?php echo JText::_('JNo');?></option>
-							<option value="also"><?php echo JText::_('COM_JEM_SHOW_OPENDATES_TOO');?></option>
-							<option value="only"><?php echo JText::_('COM_JEM_SHOW_OPENDATES_ONLY');?></option>
+							<option value="no"><?php echo Text::_('JNo');?></option>
+							<option value="also"><?php echo Text::_('COM_JEM_SHOW_OPENDATES_TOO');?></option>
+							<option value="only"><?php echo Text::_('COM_JEM_SHOW_OPENDATES_ONLY');?></option>
 						</select-->
 					</td>
-					<td valign="baseline" width="25%"><?php echo JText::_('PLG_TAGJEM_FEATURED_EVENTS'); ?></td>
+					<td valign="baseline" width="25%"><?php echo Text::_('PLG_TAGJEM_FEATURED_EVENTS'); ?></td>
 					<td valign="baseline" width="25%">
-						<?php echo JHtml::_('acyselect.radiolist', $yesno, 'featured', 'size="1" onclick="updateAutoTag();"', 'value', 'text', $pageInfo->featured); ?>
+						<?php echo HTMLHelper::_('acyselect.radiolist', $yesno, 'featured', 'size="1" onclick="updateAutoTag();"', 'value', 'text', $pageInfo->featured); ?>
 						<!--select name="featured" size="1" onchange="updateAutoTag();">
-							<option value="0"><?php echo JText::_('JNo');?></option>
-							<option value="1"><?php echo JText::_('JYes');?></option>
+							<option value="0"><?php echo Text::_('JNo');?></option>
+							<option value="1"><?php echo Text::_('JYes');?></option>
 						</select-->
 					</td>
 				</tr>
 				<tr>
-					<td valign="baseline" width="25%"><?php echo JText::_('MAX_ARTICLE'); ?></td>
+					<td valign="baseline" width="25%"><?php echo Text::_('MAX_ARTICLE'); ?></td>
 					<td valign="baseline" width="25%">
 						<input type="text" name="max_article" style="width:50px" value="" onchange="updateAutoTag();"/>
 					</td>
-					<td valign="baseline" width="25%"><?php echo JText::_('MAX_STARTING_DATE'); ?></td>
+					<td valign="baseline" width="25%"><?php echo Text::_('MAX_STARTING_DATE'); ?></td>
 					<td valign="baseline" width="25%">
 						<?php $delayType = acymailing_get('type.delay'); $delayType->onChange = "updateAutoTag();"; echo $delayType->display('delayevent', 7776000, 3); ?>
 					</td>
 				</tr>
 				<tr>
-					<td valign="baseline" width="25%"><?php echo JText::_('PLG_TAGJEM_TEMPLATE'); ?></td>
+					<td valign="baseline" width="25%"><?php echo Text::_('PLG_TAGJEM_TEMPLATE'); ?></td>
 					<td valign="baseline" width="25%">
 						<?php /* TODO: Collect templates dynamically. */ ?>
 						<select name="template" size="1" onchange="updateAutoTag();">
@@ -448,7 +451,7 @@ class plgAcymailingTagjem extends JPlugin
 						</select>
 					</td>
 					<?php if($type === 'autonews') { ?>
-					<td valign="baseline" width="25%"><?php echo JText::_('MIN_ARTICLE'); ?></td>
+					<td valign="baseline" width="25%"><?php echo Text::_('MIN_ARTICLE'); ?></td>
 					<td valign="baseline" width="25%">
 						<input name="min_article" size="10" value="1" onchange="updateAutoTag();"/>
 					</td>
@@ -463,7 +466,7 @@ class plgAcymailingTagjem extends JPlugin
 					<tr>
 						<th class="title"></th>
 						<th class="title">
-							<?php echo JText::_('TAG_CATEGORIES'); ?>
+							<?php echo Text::_('TAG_CATEGORIES'); ?>
 						</th>
 					</tr>
 				</thead>

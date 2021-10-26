@@ -1,8 +1,8 @@
 <?php
 /**
- * @version 2.3.1
+ * @version 4.0.0
  * @package JEM
- * @copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright (C) 2005-2009 Christoph Lukes
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  *
@@ -10,6 +10,8 @@
  */
 
 defined('_JEXEC') or die;
+
+use Joomla\CMS\Language\Text;
 
 // Load tooltips behavior
 JHtml::_('behavior.formvalidation');
@@ -397,7 +399,7 @@ function registraoff()
 	<div id="j-main-container" class="span10">
 	<?php endif; ?>
 		<?php echo JHtml::_('tabs.start', 'settings-pane', array('useCookie'=>1)); ?>
-		<?php echo JHtml::_('tabs.panel', JText::_( 'COM_JEM_BASIC_SETTINGS' ), 'settings-basic'); ?>
+		<?php echo JHtml::_('tabs.panel', Text::_( 'COM_JEM_BASIC_SETTINGS' ), 'settings-basic'); ?>
 
 		<div class="width-50 fltlft">
 			<?php echo $this->loadTemplate('basicdisplay'); ?>
@@ -410,7 +412,7 @@ function registraoff()
 		</div>
 		<div class="clr"></div>
 
-		<?php echo JHtml::_('tabs.panel', JText::_( 'COM_JEM_EVENT_PAGE' ), 'layout2'); ?>
+		<?php echo JHtml::_('tabs.panel', Text::_( 'COM_JEM_EVENT_PAGE' ), 'layout2'); ?>
 
 		<div class="width-50 fltlft">
 			<?php echo $this->loadTemplate('evevents'); ?>
@@ -421,15 +423,15 @@ function registraoff()
 		</div>
 		<div class="clr"></div>
 
-		<?php echo JHtml::_('tabs.panel', JText::_( 'COM_JEM_LAYOUT' ), 'layout'); ?>
+		<?php echo JHtml::_('tabs.panel', Text::_( 'COM_JEM_LAYOUT' ), 'layout'); ?>
 		<?php echo $this->loadTemplate('layout'); ?>
 
-		<?php echo JHtml::_('tabs.panel', JText::_( 'COM_JEM_GLOBAL_PARAMETERS' ), 'parameters'); ?>
+		<?php echo JHtml::_('tabs.panel', Text::_( 'COM_JEM_GLOBAL_PARAMETERS' ), 'parameters'); ?>
 		<?php echo $this->loadTemplate('parameters'); ?>
 
-		<?php echo JHtml::_('tabs.panel', JText::_( 'COM_JEM_USER_CONTROL' ), 'usercontrol'); ?>
+		<?php echo JHtml::_('tabs.panel', Text::_( 'COM_JEM_USER_CONTROL' ), 'usercontrol'); ?>
 		<?php echo $this->loadTemplate('usercontrol'); ?>
-		<?php echo JHtml::_('tabs.panel', JText::_( 'COM_JEM_SETTINGS_TAB_CONFIGINFO' ), 'configinfo'); ?>
+		<?php echo JHtml::_('tabs.panel', Text::_( 'COM_JEM_SETTINGS_TAB_CONFIGINFO' ), 'configinfo'); ?>
 		<?php echo $this->loadTemplate('configinfo'); ?>
 
 		<?php echo JHtml::_('tabs.end'); ?>

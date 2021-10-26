@@ -1,12 +1,14 @@
 <?php
 /**
- * @version 2.3.1
+ * @version 4.0.0
  * @package JEM
- * @copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright (C) 2005-2009 Christoph Lukes
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 defined('JPATH_BASE') or die;
+
+use Joomla\CMS\Language\Text;
 
 /**
  * Hits Field.
@@ -28,6 +30,6 @@ class JFormFieldHits extends JFormField
 	{
 		$onclick	= ' onclick="document.id(\''.$this->id.'\').value=\'0\';"';
 
-		return '<input style="border:0;" type="text" name="'.$this->name.'" id="'.$this->id.'" value="'.htmlspecialchars($this->value, ENT_COMPAT, 'UTF-8').'" readonly="readonly" /><input type="button"'.$onclick.' value="'.JText::_('COM_JEM_RESET_HITS').'" class="button"/>';
+		return '<input style="border:0;" type="text" name="'.$this->name.'" id="'.$this->id.'" value="'.htmlspecialchars($this->value, ENT_COMPAT, 'UTF-8').'" readonly="readonly" /><input type="button"'.$onclick.' value="'.Text::_('COM_JEM_RESET_HITS').'" class="button"/>';
 	}
 }

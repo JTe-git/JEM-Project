@@ -1,12 +1,14 @@
 <?php
 /**
- * @version 2.3.1
+ * @version 4.0.0
  * @package JEM
- * @copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright (C) 2005-2009 Christoph Lukes
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 defined('_JEXEC') or die();
+
+use Joomla\CMS\Language\Text;
 
 /**
  * Editevent-View
@@ -66,13 +68,13 @@ class JemViewEditevent extends JemView
 
 		// check for data error
 		if (empty($item)) {
-			$app->enqueueMessage(JText::_('JERROR_AN_ERROR_HAS_OCCURRED'), 'error');
+			$app->enqueueMessage(Text::_('JERROR_AN_ERROR_HAS_OCCURRED'), 'error');
 			return false;
 		}
 
 		// check for guest
 		if ($userId == 0) {
-			$app->enqueueMessage(JText::_('JERROR_ALERTNOAUTHOR'), 'error');
+			$app->enqueueMessage(Text::_('JERROR_ALERTNOAUTHOR'), 'error');
 			return false;
 		}
 
@@ -86,7 +88,7 @@ class JemViewEditevent extends JemView
 		$authorised = $authorised && in_array($access, $user->getAuthorisedViewLevels());
 
 		if ($authorised !== true) {
-			$app->enqueueMessage(JText::_('JERROR_ALERTNOAUTHOR'), 'error');
+			$app->enqueueMessage(Text::_('JERROR_ALERTNOAUTHOR'), 'error');
 			return false;
 		}
 
@@ -95,8 +97,8 @@ class JemViewEditevent extends JemView
 		                                && ($menuitem->query['view']   == 'editevent')
 		                                && (0 == $item->id)); // menu item is always for new event
 
-		$title = ($item->id == 0) ? JText::_('COM_JEM_EDITEVENT_ADD_EVENT')
-		                          : JText::sprintf('COM_JEM_EDITEVENT_EDIT_EVENT', $item->title);
+		$title = ($item->id == 0) ? Text::_('COM_JEM_EDITEVENT_ADD_EVENT')
+		                          : Text::sprintf('COM_JEM_EDITEVENT_EDIT_EVENT', $item->title);
 
 		if ($useMenuItemParams) {
 			$pagetitle = $menuitem->title ? $menuitem->title : $title;
@@ -193,7 +195,7 @@ class JemViewEditevent extends JemView
 		$this->dimage        = JemImage::flyercreator($this->item->datimage, 'event');
 		$this->jemsettings   = $jemsettings;
 		$this->settings      = $settings;
-		$this->infoimage     = JHtml::_('image', 'com_jem/icon-16-hint.png', JText::_('COM_JEM_NOTES'), NULL, true);
+		$this->infoimage     = JHtml::_('image', 'com_jem/icon-16-hint.png', Text::_('COM_JEM_NOTES'), NULL, true);
 
 		$this->user = $user;
 		$permissions = new stdClass();
@@ -212,9 +214,9 @@ class JemViewEditevent extends JemView
 		}
 
 		// configure image field: show max. file size, and possibly mark field as required
-		$tip = JText::_('COM_JEM_UPLOAD_IMAGE');
+		$tip = Text::_('COM_JEM_UPLOAD_IMAGE');
 		if ((int)$jemsettings->sizelimit > 0) {
-			$tip .= ' <br/>' . JText::sprintf('COM_JEM_MAX_FILE_SIZE_1', (int)$jemsettings->sizelimit);
+			$tip .= ' <br/>' . Text::sprintf('COM_JEM_MAX_FILE_SIZE_1', (int)$jemsettings->sizelimit);
 		}
 		$this->form->setFieldAttribute('userfile', 'description', $tip);
 		if ($jemsettings->imageenabled == 2) {
@@ -241,10 +243,10 @@ class JemViewEditevent extends JemView
 
 		$title = $this->params->get('page_title');
 		if ($app->getCfg('sitename_pagetitles', 0) == 1) {
-			$title = JText::sprintf('JPAGETITLE', $app->getCfg('sitename'), $title);
+			$title = Text::sprintf('JPAGETITLE', $app->getCfg('sitename'), $title);
 		}
 		elseif ($app->getCfg('sitename_pagetitles', 0) == 2) {
-			$title = JText::sprintf('JPAGETITLE', $title, $app->getCfg('sitename'));
+			$title = Text::sprintf('JPAGETITLE', $title, $app->getCfg('sitename'));
 		}
 		$this->document->setTitle($title);
 
@@ -296,13 +298,13 @@ class JemViewEditevent extends JemView
 		$lists['order_Dir'] = $filter_order_Dir;
 		$lists['order']     = $filter_order;
 
-		$document->setTitle(JText::_('COM_JEM_SELECT_VENUE'));
+		$document->setTitle(Text::_('COM_JEM_SELECT_VENUE'));
 		JemHelper::loadCss('jem');
 
 		$filters = array();
-		$filters[] = JHtml::_('select.option', '1', JText::_('COM_JEM_VENUE'));
-		$filters[] = JHtml::_('select.option', '2', JText::_('COM_JEM_CITY'));
-		$filters[] = JHtml::_('select.option', '3', JText::_('COM_JEM_STATE'));
+		$filters[] = JHtml::_('select.option', '1', Text::_('COM_JEM_VENUE'));
+		$filters[] = JHtml::_('select.option', '2', Text::_('COM_JEM_CITY'));
+		$filters[] = JHtml::_('select.option', '3', Text::_('COM_JEM_STATE'));
 		$searchfilter = JHtml::_('select.genericlist', $filters, 'filter_type', array('size'=>'1','class'=>'inputbox'), 'value', 'text', $filter_type);
 
 		$this->rows         = $rows;
@@ -339,7 +341,7 @@ class JemViewEditevent extends JemView
 		// Load css
 		JemHelper::loadCss('jem');
 
-		$document->setTitle(JText::_('COM_JEM_SELECT_CONTACT'));
+		$document->setTitle(Text::_('COM_JEM_SELECT_CONTACT'));
 
 		// Get/Create the model
 		$rows       = $this->get('Contacts');
@@ -351,10 +353,10 @@ class JemViewEditevent extends JemView
 
 		//Build search filter
 		$filters = array();
-		$filters[] = JHtml::_('select.option', '1', JText::_('COM_JEM_NAME'));
-	/*	$filters[] = JHtml::_('select.option', '2', JText::_('COM_JEM_ADDRESS')); */ // data security
-		$filters[] = JHtml::_('select.option', '3', JText::_('COM_JEM_CITY'));
-		$filters[] = JHtml::_('select.option', '4', JText::_('COM_JEM_STATE'));
+		$filters[] = JHtml::_('select.option', '1', Text::_('COM_JEM_NAME'));
+	/*	$filters[] = JHtml::_('select.option', '2', Text::_('COM_JEM_ADDRESS')); */ // data security
+		$filters[] = JHtml::_('select.option', '3', Text::_('COM_JEM_CITY'));
+		$filters[] = JHtml::_('select.option', '4', Text::_('COM_JEM_STATE'));
 		$searchfilter = JHtml::_('select.genericlist', $filters, 'filter_type', array('size'=>'1','class'=>'inputbox'), 'value', 'text', $filter_type);
 
 		// search filter
@@ -397,7 +399,7 @@ class JemViewEditevent extends JemView
 		// Load css
 		JemHelper::loadCss('jem');
 
-		$document->setTitle(JText::_('COM_JEM_SELECT_USERS_TO_INVITE'));
+		$document->setTitle(Text::_('COM_JEM_SELECT_USERS_TO_INVITE'));
 
 		// Get/Create the model
 		$model->setState('event.id', $eventId);
@@ -410,7 +412,7 @@ class JemViewEditevent extends JemView
 
 		//Build search filter - unused
 		$filters = array();
-		$filters[] = JHtml::_('select.option', '1', JText::_('COM_JEM_NAME'));
+		$filters[] = JHtml::_('select.option', '1', Text::_('COM_JEM_NAME'));
 		$searchfilter = JHtml::_('select.genericlist', $filters, 'filter_type', array('size'=>'1','class'=>'inputbox'), 'value', 'text', $filter_type);
 
 		// search filter - unused

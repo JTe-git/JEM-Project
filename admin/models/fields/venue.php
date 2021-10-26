@@ -1,13 +1,15 @@
 <?php
 /**
- * @version 2.3.1
+ * @version 4.0.0
  * @package JEM
- * @copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright (C) 2005-2009 Christoph Lukes
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 
 defined('_JEXEC') or die();
+
+use Joomla\CMS\Language\Text;
 
 jimport('joomla.form.formfield');
 jimport('joomla.html.parameter.element');
@@ -63,7 +65,7 @@ class JFormFieldVenue extends JFormFieldList
 		}
 
 		if (empty($title)) {
-			$title = JText::_('COM_JEM_SELECT_VENUE');
+			$title = Text::_('COM_JEM_SELECT_VENUE');
 		}
 		$title = htmlspecialchars($title, ENT_QUOTES, 'UTF-8');
 
@@ -75,7 +77,7 @@ class JFormFieldVenue extends JFormFieldList
 		//
 		$html[] = '<div class="button2-left">';
 		$html[] = '  <div class="blank">';
-		$html[] = '	<a class="modal" title="'.JText::_('COM_JEM_SELECT_VENUE').'"  href="'.$link.'&amp;'.JSession::getFormToken().'=1" rel="{handler: \'iframe\', size: {x: 800, y: 450}}">'.JText::_('COM_JEM_SELECT_VENUE').'</a>';
+		$html[] = '	<a class="modal" title="'.Text::_('COM_JEM_SELECT_VENUE').'"  href="'.$link.'&amp;'.JSession::getFormToken().'=1" rel="{handler: \'iframe\', size: {x: 800, y: 450}}">'.Text::_('COM_JEM_SELECT_VENUE').'</a>';
 		$html[] = '  </div>';
 		$html[] = '</div>';
 

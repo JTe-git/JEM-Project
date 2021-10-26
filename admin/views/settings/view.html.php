@@ -1,14 +1,15 @@
 <?php
 /**
- * @version 2.3.1
+ * @version 4.0.0
  * @package JEM
- * @copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright (C) 2005-2009 Christoph Lukes
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 
 defined('_JEXEC') or die;
 
+use Joomla\CMS\Language\Text;
 
 /**
  * View class for the JEM Settings screen
@@ -69,7 +70,7 @@ class JemViewSettings extends JemAdminView
 
 		// only admins have access to this view
 		if (!JemFactory::getUser()->authorise('core.manage', 'com_jem')) {
-			\Joomla\CMS\Factory::getApplication()->enqueueMessage(JText::_('JERROR_ALERTNOAUTHOR'), 'warning');
+			\Joomla\CMS\Factory::getApplication()->enqueueMessage(Text::_('JERROR_ALERTNOAUTHOR'), 'warning');
 			$app->redirect('index.php?option=com_jem&view=main');
 		}
 
@@ -93,7 +94,7 @@ class JemViewSettings extends JemAdminView
 	 */
 	protected function addToolbar()
 	{
-		JToolBarHelper::title(JText::_('COM_JEM_SETTINGS_TITLE'), 'settings');
+		JToolBarHelper::title(Text::_('COM_JEM_SETTINGS_TITLE'), 'settings');
 		JToolBarHelper::apply('settings.apply');
 		JToolBarHelper::save('settings.save');
 		JToolBarHelper::cancel('settings.cancel');

@@ -1,12 +1,14 @@
 <?php
 /**
- * @version 2.3.1
+ * @version 4.0.0
  * @package JEM
- * @copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright (C) 2005-2009 Christoph Lukes
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 defined('_JEXEC') or die;
+
+use Joomla\CMS\Language\Text;
 
 $function = JFactory::getApplication()->input->getCmd('function', 'jSelectUsers');
 $checked = 0;
@@ -43,7 +45,7 @@ JHtml::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR.'/helpers/html');
 
 <div id="jem" class="jem_select_users">
 	<h1 class='componentheading'>
-		<?php echo JText::_('COM_JEM_SELECT_USERS_TO_INVITE'); ?>
+		<?php echo Text::_('COM_JEM_SELECT_USERS_TO_INVITE'); ?>
 	</h1>
 	
 	<div class="clr"></div>
@@ -54,7 +56,7 @@ JHtml::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR.'/helpers/html');
 			<div id="jem_filter" class="jem-form jem-row jem-justify-start">
 				<div>
 					<?php
-					echo '<label for="filter_type">'.JText::_('COM_JEM_FILTER').'</label>&nbsp;';
+					echo '<label for="filter_type">'.Text::_('COM_JEM_FILTER').'</label>&nbsp;';
 					?>
 				</div>
 				<div class="jem-row jem-justify-start jem-nowrap">
@@ -62,14 +64,14 @@ JHtml::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR.'/helpers/html');
           <input type="text" name="filter_search" id="filter_search" value="<?php echo $this->lists['search']; ?>" class="inputbox" onChange="document.adminForm.submit();" />
         </div>
 				<div class="jem-row jem-justify-start jem-nowrap">
-          <button type="submit" class="pointer btn btn-primary"><?php echo JText::_('JSEARCH_FILTER_SUBMIT'); ?></button>
-					<button type="button" class="pointer btn btn-secondary" onclick="document.id('filter_search').value='';this.form.submit();"><?php echo JText::_('JSEARCH_FILTER_CLEAR'); ?></button>
-					<?php /*<button type="button" class="pointer btn btn-primary" onclick="if (window.parent) window.parent.<?php echo $this->escape($function);?>('', '0');"><?php echo JText::_('COM_JEM_NOUSERS')?></button>*/ ?>
+          <button type="submit" class="pointer btn btn-primary"><?php echo Text::_('JSEARCH_FILTER_SUBMIT'); ?></button>
+					<button type="button" class="pointer btn btn-secondary" onclick="document.id('filter_search').value='';this.form.submit();"><?php echo Text::_('JSEARCH_FILTER_CLEAR'); ?></button>
+					<?php /*<button type="button" class="pointer btn btn-primary" onclick="if (window.parent) window.parent.<?php echo $this->escape($function);?>('', '0');"><?php echo Text::_('COM_JEM_NOUSERS')?></button>*/ ?>
         </div>
       </div>
 			<div class="jem-row jem-justify-start jem-nowrap">
         <div>
-          <?php echo '<label for="limit">'.JText::_('COM_JEM_DISPLAY_NUM').'</label>&nbsp;'; ?>
+          <?php echo '<label for="limit">'.Text::_('COM_JEM_DISPLAY_NUM').'</label>&nbsp;'; ?>
         </div>
         <div>&nbsp;</div>
         <div>
@@ -83,16 +85,16 @@ JHtml::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR.'/helpers/html');
     
     <div class="jem-sort jem-sort-small">
       <div class="jem-list-row jem-small-list">
-        <div class="sectiontableheader jem-users-number"><?php echo JText::_('COM_JEM_NUM'); ?></div>
-        <div class="sectiontableheader jem-users-checkall"><input type="checkbox" name="checkall-toggle" value="" title="<?php echo JText::_('JGLOBAL_CHECK_ALL'); ?>" onclick="Joomla.checkAll(this)" /></div>
-        <div class="sectiontableheader jem-users-name"><?php echo JText::_('COM_JEM_NAME'); ?></div>
-        <div class="sectiontableheader jem-users-state"><?php echo JText::_('COM_JEM_STATUS'); ?></div>
+        <div class="sectiontableheader jem-users-number"><?php echo Text::_('COM_JEM_NUM'); ?></div>
+        <div class="sectiontableheader jem-users-checkall"><input type="checkbox" name="checkall-toggle" value="" title="<?php echo Text::_('JGLOBAL_CHECK_ALL'); ?>" onclick="Joomla.checkAll(this)" /></div>
+        <div class="sectiontableheader jem-users-name"><?php echo Text::_('COM_JEM_NAME'); ?></div>
+        <div class="sectiontableheader jem-users-state"><?php echo Text::_('COM_JEM_STATUS'); ?></div>
       </div>
     </div>
 
 		<ul class="eventlist eventtable">
       <?php if (empty($this->rows)) : ?>
-        <li class="jem-event jem-list-row jem-small-list"><?php echo JText::_('COM_JEM_NOUSERS'); ?></li>
+        <li class="jem-event jem-list-row jem-small-list"><?php echo Text::_('COM_JEM_NOUSERS'); ?></li>
       <?php else :?>
         <?php foreach ($this->rows as $i => $row) : ?>
           <li class="jem-event jem-list-row jem-small-list row<?php echo $i % 2; ?>">
@@ -142,6 +144,6 @@ JHtml::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR.'/helpers/html');
 	<hr class="jem-hr"/>
 	
 	<div class="jem-row jem-justify-end">
-    <button type="button" class="pointer btn" onclick="if (window.parent) window.parent.<?php echo $this->escape($function);?>(checkList(document.adminForm), document.adminForm.boxchecked.value);"><?php echo JText::_('COM_JEM_SAVE'); ?></button>
+    <button type="button" class="pointer btn" onclick="if (window.parent) window.parent.<?php echo $this->escape($function);?>(checkList(document.adminForm), document.adminForm.boxchecked.value);"><?php echo Text::_('COM_JEM_SAVE'); ?></button>
   </div>
 </div>

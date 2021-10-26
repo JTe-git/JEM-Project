@@ -1,19 +1,21 @@
 <?php
 
 /**
- * @version 2.3.1
+ * @version 4.0.0
  * @package JEM
- * @copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright (C) 2005-2009 Christoph Lukes
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 defined('_JEXEC') or die;
+
+use Joomla\CMS\Language\Text;
 ?>
 
 <!-- RECURRENCE -->
 
 <fieldset class="panelform">
-	<legend><?php echo JText::_('COM_JEM_RECURRENCE'); ?></legend>
+	<legend><?php echo Text::_('COM_JEM_RECURRENCE'); ?></legend>
 	<dl class="adminformlist jem-dl">
 		<dt><?php echo $this->form->getLabel('recurrence_type'); ?></dt>
 		<dd><?php echo $this->form->getInput('recurrence_type'); ?></dd>
@@ -30,7 +32,7 @@ defined('_JEXEC') or die;
 						$anticipation = $this->jemsettings->recurrence_anticipation;
 						$limitdate = new JDate('now +' . $anticipation . 'days');
 						$limitdate = JemOutput::formatLongDateTime($limitdate->format('Y-m-d'), '');
-						echo JText::sprintf(JText::_('COM_JEM_EDITEVENT_NOTICE_GENSHIELD'), $limitdate);
+						echo Text::sprintf(Text::_('COM_JEM_EDITEVENT_NOTICE_GENSHIELD'), $limitdate);
 						?></small></div>
 			</div>
 		</dd>
@@ -42,32 +44,32 @@ defined('_JEXEC') or die;
 		<!--
 		var $select_output = new Array();
 		$select_output[1] = "<?php
-								echo JText::_('COM_JEM_OUTPUT_DAY');
+								echo Text::_('COM_JEM_OUTPUT_DAY');
 								?>";
 		$select_output[2] = "<?php
-								echo JText::_('COM_JEM_OUTPUT_WEEK');
+								echo Text::_('COM_JEM_OUTPUT_WEEK');
 								?>";
 		$select_output[3] = "<?php
-								echo JText::_('COM_JEM_OUTPUT_MONTH');
+								echo Text::_('COM_JEM_OUTPUT_MONTH');
 								?>";
 		$select_output[4] = "<?php
-								echo JText::_('COM_JEM_OUTPUT_WEEKDAY');
+								echo Text::_('COM_JEM_OUTPUT_WEEKDAY');
 								?>";
 
 		var $weekday = new Array();
-		$weekday[0] = new Array("MO", "<?php echo JText::_('COM_JEM_MONDAY'); ?>");
-		$weekday[1] = new Array("TU", "<?php echo JText::_('COM_JEM_TUESDAY'); ?>");
-		$weekday[2] = new Array("WE", "<?php echo JText::_('COM_JEM_WEDNESDAY'); ?>");
-		$weekday[3] = new Array("TH", "<?php echo JText::_('COM_JEM_THURSDAY'); ?>");
-		$weekday[4] = new Array("FR", "<?php echo JText::_('COM_JEM_FRIDAY'); ?>");
-		$weekday[5] = new Array("SA", "<?php echo JText::_('COM_JEM_SATURDAY'); ?>");
-		$weekday[6] = new Array("SU", "<?php echo JText::_('COM_JEM_SUNDAY'); ?>");
+		$weekday[0] = new Array("MO", "<?php echo Text::_('COM_JEM_MONDAY'); ?>");
+		$weekday[1] = new Array("TU", "<?php echo Text::_('COM_JEM_TUESDAY'); ?>");
+		$weekday[2] = new Array("WE", "<?php echo Text::_('COM_JEM_WEDNESDAY'); ?>");
+		$weekday[3] = new Array("TH", "<?php echo Text::_('COM_JEM_THURSDAY'); ?>");
+		$weekday[4] = new Array("FR", "<?php echo Text::_('COM_JEM_FRIDAY'); ?>");
+		$weekday[5] = new Array("SA", "<?php echo Text::_('COM_JEM_SATURDAY'); ?>");
+		$weekday[6] = new Array("SU", "<?php echo Text::_('COM_JEM_SUNDAY'); ?>");
 
 		var $before_last = "<?php
-							echo JText::_('COM_JEM_BEFORE_LAST');
+							echo Text::_('COM_JEM_BEFORE_LAST');
 							?>";
 		var $last = "<?php
-						echo JText::_('COM_JEM_LAST');
+						echo Text::_('COM_JEM_LAST');
 						?>";
 		start_recurrencescript("jform_recurrence_type");
 		-->
@@ -81,56 +83,56 @@ defined('_JEXEC') or die;
 		if (!empty($rlDate) && (strpos($nullDate, $rlDate) !== 0)) {
 			$recurr_limit_date = JemOutput::formatdate($rlDate);
 		} else {
-			$recurr_limit_date = JText::_('COM_JEM_UNLIMITED');
+			$recurr_limit_date = Text::_('COM_JEM_UNLIMITED');
 		}
 
 		switch ($this->item->recurr_bak->recurrence_type) {
 			case 1:
-				$recurr_type = JText::_('COM_JEM_DAYLY');
+				$recurr_type = Text::_('COM_JEM_DAYLY');
 				$recurr_info = str_ireplace(
 					'[placeholder]',
 					$this->item->recurr_bak->recurrence_number,
-					JText::_('COM_JEM_OUTPUT_DAY')
+					Text::_('COM_JEM_OUTPUT_DAY')
 				);
 				break;
 			case 2:
-				$recurr_type = JText::_('COM_JEM_WEEKLY');
+				$recurr_type = Text::_('COM_JEM_WEEKLY');
 				$recurr_info = str_ireplace(
 					'[placeholder]',
 					$this->item->recurr_bak->recurrence_number,
-					JText::_('COM_JEM_OUTPUT_WEEK')
+					Text::_('COM_JEM_OUTPUT_WEEK')
 				);
 				break;
 			case 3:
-				$recurr_type = JText::_('COM_JEM_MONTHLY');
+				$recurr_type = Text::_('COM_JEM_MONTHLY');
 				$recurr_info = str_ireplace(
 					'[placeholder]',
 					$this->item->recurr_bak->recurrence_number,
-					JText::_('COM_JEM_OUTPUT_MONTH')
+					Text::_('COM_JEM_OUTPUT_MONTH')
 				);
 				break;
 			case 4:
-				$recurr_type = JText::_('COM_JEM_WEEKDAY');
+				$recurr_type = Text::_('COM_JEM_WEEKDAY');
 				$recurr_byday = preg_replace('/(,)([^ ,]+)/', '$1 $2', $this->item->recurr_bak->recurrence_byday);
 				$recurr_days = str_ireplace(
 					array('MO', 'TU', 'WE', 'TH', 'FR', 'SA', 'SO'),
 					array(
-						JText::_('COM_JEM_MONDAY'), JText::_('COM_JEM_TUESDAY'),
-						JText::_('COM_JEM_WEDNESDAY'), JText::_('COM_JEM_THURSDAY'),
-						JText::_('COM_JEM_FRIDAY'), JText::_('COM_JEM_SATURDAY'),
-						JText::_('COM_JEM_SUNDAY')
+						Text::_('COM_JEM_MONDAY'), Text::_('COM_JEM_TUESDAY'),
+						Text::_('COM_JEM_WEDNESDAY'), Text::_('COM_JEM_THURSDAY'),
+						Text::_('COM_JEM_FRIDAY'), Text::_('COM_JEM_SATURDAY'),
+						Text::_('COM_JEM_SUNDAY')
 					),
 					$recurr_byday
 				);
 				$recurr_num  = str_ireplace(
 					array('5', '6'),
-					array(JText::_('COM_JEM_LAST'), JText::_('COM_JEM_BEFORE_LAST')),
+					array(Text::_('COM_JEM_LAST'), Text::_('COM_JEM_BEFORE_LAST')),
 					$this->item->recurr_bak->recurrence_number
 				);
 				$recurr_info = str_ireplace(
 					array('[placeholder]', '[placeholder_weekday]'),
 					array($recurr_num, $recurr_days),
-					JText::_('COM_JEM_OUTPUT_WEEKDAY')
+					Text::_('COM_JEM_OUTPUT_WEEKDAY')
 				);
 				break;
 			default:
@@ -140,13 +142,13 @@ defined('_JEXEC') or die;
 		if (!empty($recurr_type)) {
 			?>
 	<hr class="jem-hr" />
-	<p><strong><?php echo JText::_('COM_JEM_RECURRING_INFO_TITLE'); ?></strong></p>
+	<p><strong><?php echo Text::_('COM_JEM_RECURRING_INFO_TITLE'); ?></strong></p>
 	<dl class="adminformlist jem-dl">
-		<dt><label><?php echo JText::_('COM_JEM_RECURRENCE'); ?></label></dt>
+		<dt><label><?php echo Text::_('COM_JEM_RECURRENCE'); ?></label></dt>
 		<dd><input type="text" class="readonly" readonly="readonly" value="<?php echo $recurr_type; ?>"></dd>
 		<dt><label> </label></dt>
 		<dd><?php echo $recurr_info; ?></dd>
-		<dt><label><?php echo JText::_('COM_JEM_RECURRENCE_COUNTER'); ?></label></dt>
+		<dt><label><?php echo Text::_('COM_JEM_RECURRENCE_COUNTER'); ?></label></dt>
 		<dd><input type="text" class="readonly" readonly="readonly" value="<?php echo $recurr_limit_date; ?>"></dt>
 	</dl>
 	<?php
@@ -155,7 +157,7 @@ defined('_JEXEC') or die;
 </fieldset>
 	<!-- CONTACT -->
 <fieldset class="panelform">
-	<legend><?php echo JText::_('COM_JEM_EDITEVENT_FIELD_CONTACT'); ?></legend>
+	<legend><?php echo Text::_('COM_JEM_EDITEVENT_FIELD_CONTACT'); ?></legend>
 	<dl class="jem-dl">
 		<dt><?php echo $this->form->getLabel('contactid'); ?></dt>
 		<dd><?php echo $this->form->getInput('contactid'); ?></dd>
@@ -164,15 +166,15 @@ defined('_JEXEC') or die;
 </fieldset>
 	<!-- REGISTRATION -->
 <fieldset class="panelform">
-	<legend><?php echo JText::_('COM_JEM_EVENT_REGISTRATION_LEGEND'); ?></legend>
+	<legend><?php echo Text::_('COM_JEM_EVENT_REGISTRATION_LEGEND'); ?></legend>
 	<dl class="adminformlist jem-dl">
 		<?php if ($this->jemsettings->showfroregistra == 0) : ?>
 		<dt><?php echo $this->form->getLabel('registra'); ?></dt>
-		<dd><?php echo JText::_('JNO'); ?></dd>
+		<dd><?php echo Text::_('JNO'); ?></dd>
 		<?php else : ?>
 		<?php if ($this->jemsettings->showfroregistra == 1) : ?>
 		<dt><?php echo $this->form->getLabel('registra'); ?></dt>
-		<dd><?php echo JText::_('JYES'); ?></dd>
+		<dd><?php echo Text::_('JYES'); ?></dd>
 		<?php else : ?>
 		<dt><?php echo $this->form->getLabel('registra'); ?></dt>
 		<dd><?php echo $this->form->getInput('registra'); ?></dd>
@@ -183,7 +185,7 @@ defined('_JEXEC') or die;
 		<?php endif; ?>
 		<dt><?php echo $this->form->getLabel('unregistra'); ?></dt>
 		<dd><?php echo $this->form->getInput('unregistra'); ?></dd>
-		<dd><?php echo $this->form->getInput('unregistra_until'); ?> <span id="jform_unregistra_until2"><?php echo JText::_('COM_JEM_EDITEVENT_FIELD_ANNULATION_UNTIL_POSTFIX'); ?></span></dd>
+		<dd><?php echo $this->form->getInput('unregistra_until'); ?> <span id="jform_unregistra_until2"><?php echo Text::_('COM_JEM_EDITEVENT_FIELD_ANNULATION_UNTIL_POSTFIX'); ?></span></dd>
 		<dt><?php echo $this->form->getLabel('maxplaces'); ?></dt>
 		<dd><?php echo $this->form->getInput('maxplaces'); ?></</dd> <dt><?php echo $this->form->getLabel('waitinglist'); ?></dt>
 		<dd><?php echo $this->form->getInput('waitinglist'); ?></dd>

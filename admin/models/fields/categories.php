@@ -1,12 +1,14 @@
 <?php
 /**
- * @version     2.3.1
+ * @version     4.0.0
  * @package     JEM
- * @copyright   Copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright   Copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright   Copyright (C) 2005-2009 Christoph Lukes
  * @license     http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 defined('_JEXEC') or die();
+
+use Joomla\CMS\Language\Text;
 
 jimport('joomla.form.formfield');
 JFormHelper::loadFieldClass('list');
@@ -61,7 +63,7 @@ class JFormFieldCategories extends JFormFieldList
 		}
 
 		if (empty($category)) {
-			$category = JText::_('COM_JEM_SELECT_CATEGORY');
+			$category = Text::_('COM_JEM_SELECT_CATEGORY');
 		}
 		$category = htmlspecialchars($category, ENT_QUOTES, 'UTF-8');
 
@@ -73,8 +75,8 @@ class JFormFieldCategories extends JFormFieldList
 		// The user select button.
 		$html[] = '<div class="button2-left">';
 		$html[] = '  <div class="blank">';
-		$html[] = '	<a class="modal" title="'.JText::_('COM_JEM_SELECT_CATEGORY').'"  href="'.$link.'&amp;'.JSession::getFormToken().'=1" rel="{handler: \'iframe\', size: {x: 800, y: 450}}">'.
-						JText::_('COM_JEM_SELECT_CATEGORY').'</a>';
+		$html[] = '	<a class="modal" title="'.Text::_('COM_JEM_SELECT_CATEGORY').'"  href="'.$link.'&amp;'.JSession::getFormToken().'=1" rel="{handler: \'iframe\', size: {x: 800, y: 450}}">'.
+						Text::_('COM_JEM_SELECT_CATEGORY').'</a>';
 		$html[] = '  </div>';
 		$html[] = '</div>';
 

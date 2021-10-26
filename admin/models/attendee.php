@@ -1,13 +1,15 @@
 <?php
 /**
- * @version 2.3.1
+ * @version 4.0.0
  * @package JEM
- * @copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright (C) 2005-2009 Christoph Lukes
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 
 defined('_JEXEC') or die;
+
+use Joomla\CMS\Language\Text;
 
 jimport('joomla.application.component.model');
 
@@ -138,7 +140,7 @@ class JemModelAttendee extends JModelLegacy
 		$attendee = $this->getData();
 
 		if (!$attendee->id) {
-			$this->setError(JText::_('COM_JEM_MISSING_ATTENDEE_ID'));
+			$this->setError(Text::_('COM_JEM_MISSING_ATTENDEE_ID'));
 			return false;
 		}
 
@@ -205,7 +207,7 @@ class JemModelAttendee extends JModelLegacy
 		$cnt = $db->loadResult();
 
 		if ($cnt > 0) {
-			\Joomla\CMS\Factory::getApplication()->enqueueMessage(JText::_('COM_JEM_ERROR_USER_ALREADY_REGISTERED'), 'warning');
+			\Joomla\CMS\Factory::getApplication()->enqueueMessage(Text::_('COM_JEM_ERROR_USER_ALREADY_REGISTERED'), 'warning');
 			return false;
 		}
 
@@ -254,7 +256,7 @@ class JemModelAttendee extends JModelLegacy
 				if ($register->booked >= $event->maxplaces)
 				{
 					if (!$event->waitinglist) {
-						\Joomla\CMS\Factory::getApplication()->enqueueMessage(JText::_('COM_JEM_ERROR_REGISTER_EVENT_IS_FULL'), 'warning');
+						\Joomla\CMS\Factory::getApplication()->enqueueMessage(Text::_('COM_JEM_ERROR_REGISTER_EVENT_IS_FULL'), 'warning');
 						return false;
 					} else {
 						$row->waiting = 1;
@@ -292,7 +294,7 @@ class JemModelAttendee extends JModelLegacy
 		\Joomla\Utilities\ArrayHelper::toInteger($pks);
 
 		if (empty($pks)) {
-			$this->setError(JText::_('JERROR_NO_ITEMS_SELECTED'));
+			$this->setError(Text::_('JERROR_NO_ITEMS_SELECTED'));
 			return false;
 		}
 

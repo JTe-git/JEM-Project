@@ -1,12 +1,14 @@
 <?php
 /**
- * @version 2.3.1
+ * @version 4.0.0
  * @package JEM
- * @copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright (C) 2005-2009 Christoph Lukes
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 defined('_JEXEC') or die;
+
+use Joomla\CMS\Language\Text;
 
 /**
  * Search-View
@@ -62,14 +64,14 @@ class JemViewSearch extends JemView
 		// Check to see which parameters should take priority
 		if ($useMenuItemParams) {
 			// Menu item params take priority
-			$pagetitle = $params->def('page_title', $menuitem ? $menuitem->title : JText::_('COM_JEM_SEARCH'));
+			$pagetitle = $params->def('page_title', $menuitem ? $menuitem->title : Text::_('COM_JEM_SEARCH'));
 			$pageheading = $params->def('page_heading', $pagetitle);
       $pathwayKeys = array_keys($pathway->getPathway());
       $lastPathwayEntryIndex = end($pathwayKeys);
       $pathway->setItemName($lastPathwayEntryIndex, $menuitem->title);
       //$pathway->setItemName(1, $menuitem->title);
 		} else {
-			$pagetitle = JText::_('COM_JEM_SEARCH');
+			$pagetitle = Text::_('COM_JEM_SEARCH');
 			$pageheading = $pagetitle;
 			$params->set('introtext', ''); // there is no introtext in that case
 			$params->set('showintrotext', 0);
@@ -78,9 +80,9 @@ class JemViewSearch extends JemView
 		$pageclass_sfx = $params->get('pageclass_sfx');
 
 		if ($task == 'archive') {
-			$pathway->addItem(JText::_('COM_JEM_ARCHIVE'), JRoute::_('index.php?option=com_jem&view=search&task=archive'));
-			$pagetitle   .= ' - ' . JText::_('COM_JEM_ARCHIVE');
-			$pageheading .= ' - ' . JText::_('COM_JEM_ARCHIVE');
+			$pathway->addItem(Text::_('COM_JEM_ARCHIVE'), JRoute::_('index.php?option=com_jem&view=search&task=archive'));
+			$pagetitle   .= ' - ' . Text::_('COM_JEM_ARCHIVE');
+			$pageheading .= ' - ' . Text::_('COM_JEM_ARCHIVE');
 		}
 		$pageclass_sfx = $params->get('pageclass_sfx');
 
@@ -88,10 +90,10 @@ class JemViewSearch extends JemView
 
 		// Add site name to title if param is set
 		if ($app->getCfg('sitename_pagetitles', 0) == 1) {
-			$pagetitle = JText::sprintf('JPAGETITLE', $app->getCfg('sitename'), $pagetitle);
+			$pagetitle = Text::sprintf('JPAGETITLE', $app->getCfg('sitename'), $pagetitle);
 		}
 		elseif ($app->getCfg('sitename_pagetitles', 0) == 2) {
-			$pagetitle = JText::sprintf('JPAGETITLE', $pagetitle, $app->getCfg('sitename'));
+			$pagetitle = Text::sprintf('JPAGETITLE', $pagetitle, $app->getCfg('sitename'));
 		}
 
 		// Set Page title
@@ -117,7 +119,7 @@ class JemViewSearch extends JemView
 		// Cause of group limits we can't use class here to build the categories tree
 		$categories   = $this->get('CategoryTree');
 		$catoptions   = array();
-		$catoptions[] = JHtml::_('select.option', '1', JText::_('COM_JEM_SELECT_CATEGORY'));
+		$catoptions[] = JHtml::_('select.option', '1', Text::_('COM_JEM_SELECT_CATEGORY'));
 		$catoptions   = array_merge($catoptions, JemCategories::getcatselectoptions($categories));
 		$selectedcats = ($filter_category) ? array($filter_category) : array();
 
@@ -133,20 +135,20 @@ class JemViewSearch extends JemView
 
 		// country filter
 		$continents = array();
-		$continents[] = JHtml::_('select.option', '',   JText::_('COM_JEM_SELECT_CONTINENT'));
-		$continents[] = JHtml::_('select.option', 'AF', JText::_('COM_JEM_AFRICA'));
-		$continents[] = JHtml::_('select.option', 'AS', JText::_('COM_JEM_ASIA'));
-		$continents[] = JHtml::_('select.option', 'EU', JText::_('COM_JEM_EUROPE'));
-		$continents[] = JHtml::_('select.option', 'NA', JText::_('COM_JEM_NORTH_AMERICA'));
-		$continents[] = JHtml::_('select.option', 'SA', JText::_('COM_JEM_SOUTH_AMERICA'));
-		$continents[] = JHtml::_('select.option', 'OC', JText::_('COM_JEM_OCEANIA'));
-		$continents[] = JHtml::_('select.option', 'AN', JText::_('COM_JEM_ANTARCTICA'));
+		$continents[] = JHtml::_('select.option', '',   Text::_('COM_JEM_SELECT_CONTINENT'));
+		$continents[] = JHtml::_('select.option', 'AF', Text::_('COM_JEM_AFRICA'));
+		$continents[] = JHtml::_('select.option', 'AS', Text::_('COM_JEM_ASIA'));
+		$continents[] = JHtml::_('select.option', 'EU', Text::_('COM_JEM_EUROPE'));
+		$continents[] = JHtml::_('select.option', 'NA', Text::_('COM_JEM_NORTH_AMERICA'));
+		$continents[] = JHtml::_('select.option', 'SA', Text::_('COM_JEM_SOUTH_AMERICA'));
+		$continents[] = JHtml::_('select.option', 'OC', Text::_('COM_JEM_OCEANIA'));
+		$continents[] = JHtml::_('select.option', 'AN', Text::_('COM_JEM_ANTARCTICA'));
 		$lists['continents'] = JHtml::_('select.genericlist', $continents, 'filter_continent', array('class'=>'inputbox'), 'value', 'text', $filter_continent);
 		unset($continents);
 
 		// country filter
 		$countries = array();
-		$countries[] = JHtml::_('select.option', '', JText::_('COM_JEM_SELECT_COUNTRY'));
+		$countries[] = JHtml::_('select.option', '', Text::_('COM_JEM_SELECT_COUNTRY'));
 		$countries = array_merge($countries, $this->get('CountryOptions'));
 		$lists['countries'] = JHtml::_('select.genericlist', $countries, 'filter_country', array('class'=>'inputbox'), 'value', 'text', $filter_country);
 		unset($countries);
@@ -154,7 +156,7 @@ class JemViewSearch extends JemView
 		// city filter
 		if ($filter_country) {
 			$cities = array();
-			$cities[] = JHtml::_('select.option', '', JText::_('COM_JEM_SELECT_CITY'));
+			$cities[] = JHtml::_('select.option', '', Text::_('COM_JEM_SELECT_CITY'));
 			$cities = array_merge($cities, $this->get('CityOptions'));
 			$lists['cities'] = JHtml::_('select.genericlist', $cities, 'filter_city', array('class'=>'inputbox'), 'value', 'text', $filter_city);
 			unset($cities);
@@ -202,8 +204,8 @@ class JemViewSearch extends JemView
 		$filter_type      = $app->input->getString('filter_type', '');
 
 		$sortselects = array();
-		$sortselects[] = JHtml::_('select.option', 'title', JText::_('COM_JEM_TABLE_TITLE'));
-		$sortselects[] = JHtml::_('select.option', 'venue', JText::_('COM_JEM_TABLE_LOCATION'));
+		$sortselects[] = JHtml::_('select.option', 'title', Text::_('COM_JEM_TABLE_TITLE'));
+		$sortselects[] = JHtml::_('select.option', 'venue', Text::_('COM_JEM_TABLE_LOCATION'));
 		$sortselect    = JHtml::_('select.genericlist', $sortselects, 'filter_type', array('size'=>'1','class'=>'inputbox'), 'value', 'text', $filter_type);
 
 		$lists['order_Dir']    = $filter_order_Dir;

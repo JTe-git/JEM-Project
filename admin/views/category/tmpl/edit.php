@@ -1,14 +1,16 @@
 <?php
 /**
- * @version     2.3.1
+ * @version     4.0.0
  * @package     JEM
- * @copyright   Copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright   Copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright   Copyright (C) 2005-2009 Christoph Lukes
  * @license     http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  *
  * @todo make custom colorfield so it can be used within xml
  */
 defined('_JEXEC') or die;
+
+use Joomla\CMS\Language\Text;
 
 // Include the component HTML helpers.
 JHtml::addIncludePath(JPATH_COMPONENT.'/helpers/html');
@@ -28,7 +30,7 @@ JHtml::_('behavior.keepalive');
 			?>
 			Joomla.submitform(task, document.getElementById('item-form'));
 		} else {
-			alert('<?php echo $this->escape(JText::_('JGLOBAL_VALIDATION_FORM_FAILED'));?>');
+			alert('<?php echo $this->escape(Text::_('JGLOBAL_VALIDATION_FORM_FAILED'));?>');
 		}
 	}
 </script>
@@ -36,7 +38,7 @@ JHtml::_('behavior.keepalive');
 <form action="<?php echo JRoute::_('index.php?option=com_jem&layout=edit&id='.(int) $this->item->id); ?>" method="post" name="adminForm" id="item-form" class="form-validate">
 	<div class="width-60 fltlft">
 		<fieldset class="adminform">
-			<legend><?php echo JText::_('COM_JEM_CATEGORY_FIELDSET_DETAILS');?></legend>
+			<legend><?php echo Text::_('COM_JEM_CATEGORY_FIELDSET_DETAILS');?></legend>
 			<ul class="adminformlist">
 				<li><?php echo $this->form->getLabel('catname'); ?>
 				<?php echo $this->form->getInput('catname'); ?></li>
@@ -74,7 +76,7 @@ JHtml::_('behavior.keepalive');
 			<?php echo $this->loadTemplate('options'); ?>
 			<div class="clr"></div>
 
-			<?php echo JHtml::_('sliders.panel', JText::_('COM_JEM_CATEGORY_FIELDSET_EMAIL'), 'confemail'); ?>
+			<?php echo JHtml::_('sliders.panel', Text::_('COM_JEM_CATEGORY_FIELDSET_EMAIL'), 'confemail'); ?>
 			<fieldset class="panelform">
 				<ul class="adminformlist">
 					<li>
@@ -84,16 +86,16 @@ JHtml::_('behavior.keepalive');
 				</ul>
 			</fieldset>
 
-			<?php echo JHtml::_('sliders.panel', JText::_('COM_JEM_GROUP'), 'group'); ?>
+			<?php echo JHtml::_('sliders.panel', Text::_('COM_JEM_GROUP'), 'group'); ?>
 			<fieldset class="panelform">
 				<ul class="adminformlist">
-					<li><label for="groups"> <?php echo JText::_('COM_JEM_GROUP').':'; ?></label>
+					<li><label for="groups"> <?php echo Text::_('COM_JEM_GROUP').':'; ?></label>
 					<?php echo $this->Lists['groups']; ?></li>
 				</ul>
 			</fieldset>
 
 		<!-- START OF PANEL IMAGE -->
-		<?php echo JHtml::_('sliders.panel', JText::_('COM_JEM_IMAGE'), 'category-image'); ?>
+		<?php echo JHtml::_('sliders.panel', Text::_('COM_JEM_IMAGE'), 'category-image'); ?>
 
 		<fieldset class="panelform">
 			<ul class="adminformlist">
@@ -103,7 +105,7 @@ JHtml::_('behavior.keepalive');
 		</fieldset>
 
 
-		<?php echo JHtml::_('sliders.panel', JText::_('JGLOBAL_FIELDSET_METADATA_OPTIONS'), 'meta-options'); ?>
+		<?php echo JHtml::_('sliders.panel', Text::_('JGLOBAL_FIELDSET_METADATA_OPTIONS'), 'meta-options'); ?>
 		<fieldset class="panelform">
 			<?php echo $this->loadTemplate('metadata'); ?>
 		</fieldset>
@@ -112,9 +114,9 @@ JHtml::_('behavior.keepalive');
 		<?php foreach ($fieldSets as $name => $fieldSet) : ?>
 			<?php $label = !empty($fieldSet->label) ? $fieldSet->label : 'COM_JEM_'.$name.'_FIELDSET_LABEL'; ?>
 			<?php if ($name != 'editorConfig' && $name != 'basic-limited') : ?>
-				<?php echo JHtml::_('sliders.panel', JText::_($label), $name.'-options'); ?>
+				<?php echo JHtml::_('sliders.panel', Text::_($label), $name.'-options'); ?>
 				<?php if (isset($fieldSet->description) && trim($fieldSet->description)) : ?>
-					<p class="tip"><?php echo $this->escape(JText::_($fieldSet->description));?></p>
+					<p class="tip"><?php echo $this->escape(Text::_($fieldSet->description));?></p>
 				<?php endif; ?>
 				<fieldset class="panelform">
 					<ul class="adminformlist">

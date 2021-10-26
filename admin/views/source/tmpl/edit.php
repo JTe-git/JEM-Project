@@ -1,13 +1,15 @@
 <?php
 /**
- * @version 2.3.1
+ * @version 4.0.0
  * @package JEM
- * @copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright (C) 2005-2009 Christoph Lukes
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 
 defined('_JEXEC') or die;
+
+use Joomla\CMS\Language\Text;
 
 JHtml::addIncludePath(JPATH_COMPONENT.'/helpers/html');
 JHtml::_('behavior.tooltip');
@@ -21,7 +23,7 @@ JHtml::_('behavior.keepalive');
 			<?php echo $this->form->getField('source')->save(); ?>
 			Joomla.submitform(task, document.getElementById('source-form'));
 		} else {
-			alert('<?php echo $this->escape(JText::_('JGLOBAL_VALIDATION_FORM_FAILED'));?>');
+			alert('<?php echo $this->escape(Text::_('JGLOBAL_VALIDATION_FORM_FAILED'));?>');
 		}
 	}
 </script>
@@ -33,9 +35,9 @@ JHtml::_('behavior.keepalive');
 	<fieldset class="adminform">
 		<legend><?php
 		if ($this->source->custom) {
-			echo JText::sprintf('COM_JEM_CSSMANAGER_FILENAME_CUSTOM', $this->source->filename);
+			echo Text::sprintf('COM_JEM_CSSMANAGER_FILENAME_CUSTOM', $this->source->filename);
 		} else {
-			echo JText::sprintf('COM_JEM_CSSMANAGER_FILENAME', $this->source->filename);
+			echo Text::sprintf('COM_JEM_CSSMANAGER_FILENAME', $this->source->filename);
 		}
 		?></legend>
 

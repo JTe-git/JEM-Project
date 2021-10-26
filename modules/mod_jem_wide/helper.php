@@ -1,13 +1,15 @@
 <?php
 /**
- * @version 2.2.2
+ * @version 4.0.0
  * @package JEM
  * @subpackage JEM Wide Module
- * @copyright (C) 2013-2017 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright (C) 2005-2009 Christoph Lukes
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 defined('_JEXEC') or die;
+
+use Joomla\CMS\Language\Text;
 
 JModelLegacy::addIncludePath(JPATH_SITE.'/components/com_jem/models', 'JemModel');
 
@@ -209,11 +211,11 @@ abstract class ModJemWideHelper
 			if ($method == 2) {
 				//check if today or tomorrow
 				if ($row->dates == $today) {
-					$date = JText::_('MOD_JEM_WIDE_TODAY');
+					$date = Text::_('MOD_JEM_WIDE_TODAY');
 				} elseif ($row->dates == $tomorrow) {
-					$date = JText::_('MOD_JEM_WIDE_TOMORROW');
+					$date = Text::_('MOD_JEM_WIDE_TOMORROW');
 				} elseif ($row->dates == $yesterday) {
-					$date = JText::_('MOD_JEM_WIDE_YESTERDAY');
+					$date = Text::_('MOD_JEM_WIDE_YESTERDAY');
 				}
 				//This one isn't very different from the DAYS AGO output but it seems
 				//adequate to use a different language string here.
@@ -221,7 +223,7 @@ abstract class ModJemWideHelper
 				//the event has an enddate and it's earlier than yesterday
 				elseif ($row->enddates && ($enddates_stamp < $yesterday_stamp)) {
 					$days = round(($today_stamp - $enddates_stamp) / 86400);
-					$date = JText::sprintf('MOD_JEM_WIDE_ENDED_DAYS_AGO', $days);
+					$date = Text::sprintf('MOD_JEM_WIDE_ENDED_DAYS_AGO', $days);
 					// show endtime instead of starttime
 					$times = false;
 					$endtimes = $row->endtimes;
@@ -230,17 +232,17 @@ abstract class ModJemWideHelper
 				//means a currently running event
 				elseif ($row->dates && $row->enddates && ($enddates_stamp > $today_stamp) && ($dates_stamp < $today_stamp)) {
 					$days = round(($today_stamp - $dates_stamp) / 86400);
-					$date = JText::sprintf('MOD_JEM_WIDE_STARTED_DAYS_AGO', $days);
+					$date = Text::sprintf('MOD_JEM_WIDE_STARTED_DAYS_AGO', $days);
 				}
 				//the events date is earlier than yesterday
 				elseif ($row->dates && ($dates_stamp < $yesterday_stamp)) {
 					$days = round(($today_stamp - $dates_stamp) / 86400);
-					$date = JText::sprintf('MOD_JEM_WIDE_DAYS_AGO', $days);
+					$date = Text::sprintf('MOD_JEM_WIDE_DAYS_AGO', $days);
 				}
 				//the events date is later than tomorrow
 				elseif ($row->dates && ($dates_stamp > $tomorrow_stamp)) {
 					$days = round(($dates_stamp - $today_stamp) / 86400);
-					$date = JText::sprintf('MOD_JEM_WIDE_DAYS_AHEAD', $days);
+					$date = Text::sprintf('MOD_JEM_WIDE_DAYS_AHEAD', $days);
 				}
 				else {
 					$date = JEMOutput::formatDateTime('', ''); // Oops - say "Open date"
@@ -251,14 +253,14 @@ abstract class ModJemWideHelper
 				if (($dates_stamp >= $today_stamp) && ($enddates_stamp > $dates_stamp)) {
 					$startdate = JEMOutput::formatdate($row->dates, $dateFormat);
 					$enddate = JEMOutput::formatdate($row->enddates, $dateFormat);
-					$date = JText::sprintf('MOD_JEM_WIDE_FROM_UNTIL', $startdate, $enddate);
+					$date = Text::sprintf('MOD_JEM_WIDE_FROM_UNTIL', $startdate, $enddate);
 					// additionally show endtime
 					$endtimes = $row->endtimes;
 				}
 				//current multidayevent (Until 18.08.2008)
 				elseif ($row->enddates && ($enddates_stamp >= $today_stamp) && ($dates_stamp < $today_stamp)) {
 					$enddate = JEMOutput::formatdate($row->enddates, $dateFormat);
-					$date = JText::sprintf('MOD_JEM_WIDE_UNTIL', $enddate);
+					$date = Text::sprintf('MOD_JEM_WIDE_UNTIL', $enddate);
 					// show endtime instead of starttime
 					$times = false;
 					$endtimes = $row->endtimes;
@@ -266,7 +268,7 @@ abstract class ModJemWideHelper
 				//single day event
 				else {
 					$startdate = JEMOutput::formatdate($row->dates, $dateFormat);
-					$date = JText::sprintf('MOD_JEM_WIDE_ON_DATE', $startdate);
+					$date = Text::sprintf('MOD_JEM_WIDE_ON_DATE', $startdate);
 					// additionally show endtime, but on single day events only to prevent user confusion
 					if (empty($row->enddates)) {
 						$endtimes = $row->endtimes;

@@ -1,12 +1,14 @@
 <?php
 /**
- * @version     2.3.1
+ * @version     4.0.0
  * @package     JEM
- * @copyright   Copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright   Copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright   Copyright (C) 2005-2009 Christoph Lukes
  * @license     http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 defined('JPATH_BASE') or die;
+
+use Joomla\CMS\Language\Text;
 
 // ensure JemFactory is loaded (because field maybe used by modules too)
 require_once(JPATH_SITE.'/components/com_jem/factory.php');
@@ -141,7 +143,7 @@ class JFormFieldCategoryEdit extends JFormFieldList
 			{
 					if ($options[$i]->level == 0)
 					{
-						$options[$i]->text = JText::_('JGLOBAL_ROOT_PARENT');
+						$options[$i]->text = Text::_('JGLOBAL_ROOT_PARENT');
 					}
 			}
 
@@ -217,10 +219,10 @@ class JFormFieldCategoryEdit extends JFormFieldList
 		{
 			if ($row->parent_id == '1') {
 				$parent = new stdClass();
-				$parent->text = JText::_('JGLOBAL_ROOT_PARENT');
+				$parent->text = Text::_('JGLOBAL_ROOT_PARENT');
 				array_unshift($options, $parent);
 			}
-			array_unshift($options, JHtml::_('select.option', '0', JText::_('JGLOBAL_ROOT')));
+			array_unshift($options, JHtml::_('select.option', '0', Text::_('JGLOBAL_ROOT')));
 		}
 
 		// Merge any additional options in the XML definition.

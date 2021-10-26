@@ -1,13 +1,14 @@
 <?php
 /**
- * @version 2.3.1
+ * @version 4.0.0
  * @package JEM
- * @copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright (C) 2005-2009 Christoph Lukes
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 defined('_JEXEC') or die;
 
+use Joomla\CMS\Language\Text;
 
 /**
  * Day-Feed
@@ -54,11 +55,11 @@ class JemViewDay extends JViewLegacy
 				$link = JRoute::_(JemHelperRoute::getEventRoute($row->id));
 
 				// feed item description text
-				$description  = JText::_('COM_JEM_TITLE').': '.$title.'<br />';
-				$description .= JText::_('COM_JEM_VENUE').': '.$row->venue.($row->city ? (' / '.$row->city) : '').'<br />';
-				$description .= JText::_('COM_JEM_CATEGORY').': '.$category.'<br />';
-				$description .= JText::_('COM_JEM_DATE').': '.$displaydate.'<br />';
-				$description .= JText::_('COM_JEM_DESCRIPTION').': '.$row->fulltext;
+				$description  = Text::_('COM_JEM_TITLE').': '.$title.'<br />';
+				$description .= Text::_('COM_JEM_VENUE').': '.$row->venue.($row->city ? (' / '.$row->city) : '').'<br />';
+				$description .= Text::_('COM_JEM_CATEGORY').': '.$category.'<br />';
+				$description .= Text::_('COM_JEM_DATE').': '.$displaydate.'<br />';
+				$description .= Text::_('COM_JEM_DESCRIPTION').': '.$row->fulltext;
 
 				$created = ($row->created ? date('r', strtotime($row->created)) : '');
 

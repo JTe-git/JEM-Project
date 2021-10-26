@@ -1,12 +1,14 @@
 <?php
 /**
- * @version 2.3.1
+ * @version 4.0.0
  * @package JEM
- * @copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright (C) 2005-2009 Christoph Lukes
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 defined('_JEXEC') or die;
+
+use Joomla\CMS\Language\Text;
 
 $user		= JemFactory::getUser();
 $userId		= $user->get('id');
@@ -44,13 +46,13 @@ $(document).ready(function() {
 		<fieldset id="filter-bar">
 			<div class="filter-search fltlft">
 				<?php echo $this->lists['filter']; ?>
-				<input type="text" name="filter_search" id="filter_search" placeholder="<?php echo JText::_('COM_JEM_SEARCH');?>" value="<?php echo $this->escape($this->state->get('filter_search')); ?>" class="text_area" onChange="document.adminForm.submit();" />
-				<button type="submit"><?php echo JText::_('JSEARCH_FILTER_SUBMIT'); ?></button>
-				<button type="button" onclick="document.id('filter_search').value='';this.form.submit();"><?php echo JText::_('JSEARCH_FILTER_CLEAR'); ?></button>
+				<input type="text" name="filter_search" id="filter_search" placeholder="<?php echo Text::_('COM_JEM_SEARCH');?>" value="<?php echo $this->escape($this->state->get('filter_search')); ?>" class="text_area" onChange="document.adminForm.submit();" />
+				<button type="submit"><?php echo Text::_('JSEARCH_FILTER_SUBMIT'); ?></button>
+				<button type="button" onclick="document.id('filter_search').value='';this.form.submit();"><?php echo Text::_('JSEARCH_FILTER_CLEAR'); ?></button>
 			</div>
 			<div class="filter-select fltrt">
 				<select name="filter_state" class="inputbox" onchange="this.form.submit()">
-					<option value=""><?php echo JText::_('JOPTION_SELECT_PUBLISHED');?></option>
+					<option value=""><?php echo Text::_('JOPTION_SELECT_PUBLISHED');?></option>
 					<?php echo JHtml::_('select.options', JHtml::_('jgrid.publishedOptions',array('all' => 0, 'archived' => 0, 'trash' => 0)), 'value', 'text', $this->state->get('filter_state'), true);?>
 				</select>
 			</div>
@@ -60,16 +62,16 @@ $(document).ready(function() {
 		<table class="table table-striped" id="articleList">
 			<thead>
 				<tr>
-					<th width="1%" class="center"><?php echo JText::_('COM_JEM_NUM'); ?></th>
-					<th width="1%" class="center"><input type="checkbox" name="checkall-toggle" value="" title="<?php echo JText::_('JGLOBAL_CHECK_ALL'); ?>" onclick="Joomla.checkAll(this)" /></th>
+					<th width="1%" class="center"><?php echo Text::_('COM_JEM_NUM'); ?></th>
+					<th width="1%" class="center"><input type="checkbox" name="checkall-toggle" value="" title="<?php echo Text::_('JGLOBAL_CHECK_ALL'); ?>" onclick="Joomla.checkAll(this)" /></th>
 					<th class="title"><?php echo JHtml::_('grid.sort', 'COM_JEM_VENUE', 'a.venue', $listDirn, $listOrder ); ?></th>
 					<th width="20%"><?php echo JHtml::_('grid.sort', 'COM_JEM_ALIAS', 'a.alias', $listDirn, $listOrder ); ?></th>
-					<th><?php echo JText::_('COM_JEM_WEBSITE'); ?></th>
+					<th><?php echo Text::_('COM_JEM_WEBSITE'); ?></th>
 					<th><?php echo JHtml::_('grid.sort', 'COM_JEM_CITY', 'a.city', $listDirn, $listOrder ); ?></th>
 					<th><?php echo JHtml::_('grid.sort', 'COM_JEM_STATE', 'a.state', $listDirn, $listOrder ); ?></th>
 					<th width="1%"><?php echo JHtml::_('grid.sort', 'COM_JEM_COUNTRY', 'a.country', $listDirn, $listOrder ); ?></th>
-					<th width="1%" class="center" nowrap="nowrap"><?php echo JText::_('JSTATUS'); ?></th>
-					<th><?php echo JText::_('COM_JEM_CREATION'); ?></th>
+					<th width="1%" class="center" nowrap="nowrap"><?php echo Text::_('JSTATUS'); ?></th>
+					<th><?php echo Text::_('COM_JEM_CREATION'); ?></th>
 					<th width="1%" class="center" nowrap="nowrap"><?php echo JHtml::_('grid.sort', 'COM_JEM_EVENTS', 'assignedevents', $listDirn, $listOrder ); ?></th>
 					<th width="10%">
 						<?php echo JHtml::_('grid.sort', 'JGRID_HEADING_ORDERING', 'a.ordering', $listDirn, $listOrder ); ?>
@@ -141,27 +143,27 @@ $(document).ready(function() {
 						<td class="country"><?php echo $row->country ? $this->escape($row->country) : '-'; ?></td>
 						<td class="center"><?php echo $published; ?></td>
 						<td>
-							<?php echo JText::_('COM_JEM_AUTHOR').': '; ?>
+							<?php echo Text::_('COM_JEM_AUTHOR').': '; ?>
 							<a href="<?php echo 'index.php?option=com_users&amp;task=edit&amp;hidemainmenu=1&amp;cid[]='.$row->created_by; ?>">
 								<?php echo $row->author; ?>
 							</a>
 							<br />
-							<?php echo JText::_('COM_JEM_EMAIL').': '; ?><a href="mailto:<?php echo $row->email; ?>"><?php echo $row->email; ?></a><br />
+							<?php echo Text::_('COM_JEM_EMAIL').': '; ?><a href="mailto:<?php echo $row->email; ?>"><?php echo $row->email; ?></a><br />
 							<?php
-							$created 	= JHtml::_('date',$row->created,JText::_('DATE_FORMAT_LC2'));
-							$modified 		= JHtml::_('date',$row->modified,JText::_('DATE_FORMAT_LC2'));
+							$created 	= JHtml::_('date',$row->created,Text::_('DATE_FORMAT_LC2'));
+							$modified 		= JHtml::_('date',$row->modified,Text::_('DATE_FORMAT_LC2'));
 							$image 			= JHtml::_('image','com_jem/icon-16-info.png', NULL,NULL,true);
 
-							$overlib 		= JText::_('COM_JEM_CREATED_AT').': '.$created.'<br />';
+							$overlib 		= Text::_('COM_JEM_CREATED_AT').': '.$created.'<br />';
 							if ($row->author_ip != '') {
-								$overlib		.= JText::_('COM_JEM_WITH_IP').': '.$row->author_ip.'<br />';
+								$overlib		.= Text::_('COM_JEM_WITH_IP').': '.$row->author_ip.'<br />';
 							}
 							if ($row->modified != '0000-00-00 00:00:00') {
-								$overlib 	.= JText::_('COM_JEM_EDITED_AT').': '.$modified.'<br />';
-								$overlib 	.= JText::_('COM_JEM_GLOBAL_MODIFIEDBY').': '.$row->modified_by.'<br />';
+								$overlib 	.= Text::_('COM_JEM_EDITED_AT').': '.$modified.'<br />';
+								$overlib 	.= Text::_('COM_JEM_GLOBAL_MODIFIEDBY').': '.$row->modified_by.'<br />';
 							}
 							?>
-							<span <?php echo JEMOutput::tooltip(JText::_('COM_JEM_VENUES_STATS'), $overlib, 'editlinktip'); ?>>
+							<span <?php echo JEMOutput::tooltip(Text::_('COM_JEM_VENUES_STATS'), $overlib, 'editlinktip'); ?>>
 								<?php echo $image; ?>
 							</span>
 						</td>

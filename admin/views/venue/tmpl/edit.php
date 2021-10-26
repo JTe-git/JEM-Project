@@ -1,12 +1,14 @@
 <?php
 /**
- * @version 2.3.1
+ * @version 4.0.0
  * @package JEM
- * @copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright (C) 2005-2009 Christoph Lukes
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 defined('_JEXEC') or die;
+
+use Joomla\CMS\Language\Text;
 
 JHtml::_('behavior.tooltip');
 JHtml::_('behavior.formvalidation');
@@ -207,10 +209,10 @@ $location = JemHelper::defineCenterMap($this->form);
 	<div class="width-55 fltlft">
 
 	<?php echo JHtml::_('tabs.start', 'det-pane'); ?>
-	<?php echo JHtml::_('tabs.panel',JText::_('COM_JEM_VENUE_INFO_TAB'), 'info' ); ?>
+	<?php echo JHtml::_('tabs.panel',Text::_('COM_JEM_VENUE_INFO_TAB'), 'info' ); ?>
 		<fieldset class="adminform">
 			<legend>
-				<?php echo empty($this->item->id) ? JText::_('COM_JEM_NEW_VENUE') : JText::sprintf('COM_JEM_VENUE_DETAILS', $this->item->id); ?>
+				<?php echo empty($this->item->id) ? Text::_('COM_JEM_NEW_VENUE') : Text::sprintf('COM_JEM_VENUE_DETAILS', $this->item->id); ?>
 			</legend>
 
 			<ul class="adminformlist">
@@ -250,7 +252,7 @@ $location = JemHelper::defineCenterMap($this->form);
 				<?php echo $this->form->getInput('locdescription'); ?>
 			</div>
 		</fieldset>
-		<?php echo JHtml::_('tabs.panel',JText::_('COM_JEM_EVENT_ATTACHMENTS_TAB'), 'attachments' ); ?>
+		<?php echo JHtml::_('tabs.panel',Text::_('COM_JEM_EVENT_ATTACHMENTS_TAB'), 'attachments' ); ?>
 		<?php echo $this->loadTemplate('attachments'); ?>
 		<?php echo JHtml::_('tabs.end'); ?>
 
@@ -261,7 +263,7 @@ $location = JemHelper::defineCenterMap($this->form);
 	<div class="width-40 fltrt">
 
 	<?php echo JHtml::_('sliders.start', 'venue-sliders-'.$this->item->id, array('useCookie'=>1)); ?>
-	<?php echo JHtml::_('sliders.panel', JText::_('COM_JEM_FIELDSET_PUBLISHING'), 'publishing-details'); ?>
+	<?php echo JHtml::_('sliders.panel', Text::_('COM_JEM_FIELDSET_PUBLISHING'), 'publishing-details'); ?>
 		<fieldset class="panelform">
 			<ul class="adminformlist">
 				<li><?php echo $this->form->getLabel('id'); ?>
@@ -276,7 +278,7 @@ $location = JemHelper::defineCenterMap($this->form);
 				<?php endforeach; ?>
 			</ul>
 		</fieldset>
-	<?php echo JHtml::_('sliders.panel', JText::_('COM_JEM_CUSTOMFIELDS'), 'venue-custom'); ?>
+	<?php echo JHtml::_('sliders.panel', Text::_('COM_JEM_CUSTOMFIELDS'), 'venue-custom'); ?>
 		<fieldset class="panelform">
 			<ul class="adminformlist">
 				<?php foreach($this->form->getFieldset('custom') as $field): ?>
@@ -285,16 +287,16 @@ $location = JemHelper::defineCenterMap($this->form);
 				<?php endforeach; ?>
 			</ul>
 		</fieldset>
-	<?php echo JHtml::_('sliders.panel', JText::_('COM_JEM_IMAGE'), 'image-event'); ?>
+	<?php echo JHtml::_('sliders.panel', Text::_('COM_JEM_IMAGE'), 'image-event'); ?>
 		<fieldset class="panelform">
 			<ul class="adminformlist">
 				<li><?php echo $this->form->getLabel('locimage'); ?>
 					<?php echo $this->form->getInput('locimage'); ?></li>
 			</ul>
 		</fieldset>
-	<?php echo JHtml::_('sliders.panel', JText::_('COM_JEM_METADATA_INFORMATION'), 'meta-event'); ?>
+	<?php echo JHtml::_('sliders.panel', Text::_('COM_JEM_METADATA_INFORMATION'), 'meta-event'); ?>
 		<fieldset class="panelform">
-			<input type="button" class="button" value="<?php echo JText::_( 'COM_JEM_ADD_VENUE_CITY' ); ?>" onclick="meta()" />
+			<input type="button" class="button" value="<?php echo Text::_( 'COM_JEM_ADD_VENUE_CITY' ); ?>" onclick="meta()" />
 			<ul class="adminformlist">
 				<?php foreach($this->form->getFieldset('meta') as $field): ?>
 					<li><?php echo $field->label; ?>
@@ -302,7 +304,7 @@ $location = JemHelper::defineCenterMap($this->form);
 				<?php endforeach; ?>
 			</ul>
 		</fieldset>
-	<?php echo JHtml::_('sliders.panel', JText::_('COM_JEM_FIELDSET_GEODATA'), 'venue-geodata'); ?>
+	<?php echo JHtml::_('sliders.panel', Text::_('COM_JEM_FIELDSET_GEODATA'), 'venue-geodata'); ?>
 		<fieldset class="adminform" id="geodata">
 			<ul class="adminformlist">
 				<li><?php echo $this->form->getLabel('map'); ?>
@@ -310,45 +312,45 @@ $location = JemHelper::defineCenterMap($this->form);
 			</ul>
 			<div class="clr"></div>
 			<div id="mapdiv">
-				<input id="geocomplete" type="text" size="55" placeholder="<?php echo JText::_( 'COM_JEM_VENUE_ADDRPLACEHOLDER' ); ?>" value="" />
-				<input id="find-left" class="geobutton" type="button" value="<?php echo JText::_('COM_JEM_VENUE_ADDR_FINDVENUEDATA');?>" />
+				<input id="geocomplete" type="text" size="55" placeholder="<?php echo Text::_( 'COM_JEM_VENUE_ADDRPLACEHOLDER' ); ?>" value="" />
+				<input id="find-left" class="geobutton" type="button" value="<?php echo Text::_('COM_JEM_VENUE_ADDR_FINDVENUEDATA');?>" />
 				<div class="clr"></div>
 				<div class="map_canvas"></div>
 
 				<ul class="adminformlist">
-					<li><label><?php echo JText::_('COM_JEM_STREET'); ?></label>
+					<li><label><?php echo Text::_('COM_JEM_STREET'); ?></label>
 						<input type="text" disabled="disabled" class="readonly" id="tmp_form_street" />
 					
 						<input type="hidden" class="readonly" id="tmp_form_streetnumber" readonly="readonly" />
 						<input type="hidden" class="readonly" id="tmp_form_route" readonly="readonly" />
 						</li>
 
-					<li><label><?php echo JText::_('COM_JEM_ZIP'); ?></label>
+					<li><label><?php echo Text::_('COM_JEM_ZIP'); ?></label>
 						<input type="text" disabled="disabled" class="readonly" id="tmp_form_postalCode" /></li>
 
-					<li><label><?php echo JText::_('COM_JEM_CITY'); ?></label>
+					<li><label><?php echo Text::_('COM_JEM_CITY'); ?></label>
 						<input type="text" disabled="disabled" class="readonly" id="tmp_form_city"/></li>
 
-					<li><label><?php echo JText::_('COM_JEM_STATE'); ?></label>
+					<li><label><?php echo Text::_('COM_JEM_STATE'); ?></label>
 						<input type="text" disabled="disabled" class="readonly" id="tmp_form_state" /></li>
 						
-					<li><label><?php echo JText::_('COM_JEM_VENUE'); ?></label>
+					<li><label><?php echo Text::_('COM_JEM_VENUE'); ?></label>
 						<input type="text" disabled="disabled" class="readonly" id="tmp_form_venue" /></li>
 
-					<li><label><?php echo JText::_('COM_JEM_COUNTRY'); ?></label>
+					<li><label><?php echo Text::_('COM_JEM_COUNTRY'); ?></label>
 						<input type="text" disabled="disabled" class="readonly" id="tmp_form_country" /></li>
 
-					<li><label><?php echo JText::_('COM_JEM_LATITUDE'); ?></label>
+					<li><label><?php echo Text::_('COM_JEM_LATITUDE'); ?></label>
 						<input type="text" disabled="disabled" class="readonly" id="tmp_form_latitude" /></li>
 
-					<li><label><?php echo JText::_('COM_JEM_LONGITUDE'); ?></label>
+					<li><label><?php echo Text::_('COM_JEM_LONGITUDE'); ?></label>
 						<input type="text" disabled="disabled" class="readonly" id="tmp_form_longitude" /></li>
 				</ul>
 				<div class="clr"></div>
-				<input id="cp-all" class="geobutton" type="button" value="<?php echo JText::_('COM_JEM_VENUE_COPY_DATA'); ?>" style="margin-right: 3em;" />
-				<input id="cp-address" class="geobutton" type="button" value="<?php echo JText::_('COM_JEM_VENUE_COPY_ADDRESS'); ?>" />
-				<input id="cp-venue" class="geobutton" type="button" value="<?php echo JText::_('COM_JEM_VENUE_COPY_VENUE'); ?>" />
-				<input id="cp-latlong" class="geobutton" type="button" value="<?php echo JText::_('COM_JEM_VENUE_COPY_COORDINATES'); ?>" />
+				<input id="cp-all" class="geobutton" type="button" value="<?php echo Text::_('COM_JEM_VENUE_COPY_DATA'); ?>" style="margin-right: 3em;" />
+				<input id="cp-address" class="geobutton" type="button" value="<?php echo Text::_('COM_JEM_VENUE_COPY_ADDRESS'); ?>" />
+				<input id="cp-venue" class="geobutton" type="button" value="<?php echo Text::_('COM_JEM_VENUE_COPY_VENUE'); ?>" />
+				<input id="cp-latlong" class="geobutton" type="button" value="<?php echo Text::_('COM_JEM_VENUE_COPY_COORDINATES'); ?>" />
 			</div>
 		</fieldset>
 	<?php echo JHtml::_('sliders.end'); ?>

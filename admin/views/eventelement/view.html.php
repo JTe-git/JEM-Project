@@ -1,13 +1,14 @@
 <?php
 /**
- * @version 2.3.1
+ * @version 4.0.0
  * @package JEM
- * @copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright (C) 2005-2009 Christoph Lukes
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 defined('_JEXEC') or die;
 
+use Joomla\CMS\Language\Text;
 
 /**
  * Eventelement-View
@@ -37,7 +38,7 @@ class JemViewEventelement extends JViewLegacy {
 		$filter_search    = $db->escape(trim(\Joomla\String\StringHelper::strtolower($filter_search)));
 
 		//prepare the document
-		$document->setTitle(JText::_('COM_JEM_SELECTEVENT'));
+		$document->setTitle(Text::_('COM_JEM_SELECTEVENT'));
 
 		// Load css
 		JHtml::_('stylesheet', 'com_jem/backend.css', array(), true);
@@ -55,10 +56,10 @@ class JemViewEventelement extends JViewLegacy {
 
 		//Create the filter selectlist
 		$filters = array();
-		$filters[] = JHtml::_('select.option', '1', JText::_('COM_JEM_EVENT_TITLE'));
-		$filters[] = JHtml::_('select.option', '2', JText::_('COM_JEM_VENUE'));
-		$filters[] = JHtml::_('select.option', '3', JText::_('COM_JEM_CITY'));
-		//$filters[] = JHtml::_('select.option', '4', JText::_('COM_JEM_CATEGORY'));
+		$filters[] = JHtml::_('select.option', '1', Text::_('COM_JEM_EVENT_TITLE'));
+		$filters[] = JHtml::_('select.option', '2', Text::_('COM_JEM_VENUE'));
+		$filters[] = JHtml::_('select.option', '3', Text::_('COM_JEM_CITY'));
+		//$filters[] = JHtml::_('select.option', '4', Text::_('COM_JEM_CATEGORY'));
 		$lists['filter'] = JHtml::_('select.genericlist', $filters, 'filter_type', array('size'=>'1','class'=>'inputbox'), 'value', 'text', $filter_type);
 
 		// search filter

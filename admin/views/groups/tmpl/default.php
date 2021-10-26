@@ -1,12 +1,14 @@
 <?php
 /**
- * @version 2.3.1
+ * @version 4.0.0
  * @package JEM
- * @copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright (C) 2005-2009 Christoph Lukes
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 defined('_JEXEC') or die;
+
+use Joomla\CMS\Language\Text;
 
 $user		= JemFactory::getUser();
 $userId		= $user->get('id');
@@ -27,9 +29,9 @@ $params		= (isset($this->state->params)) ? $this->state->params : new JObject();
 	<?php endif; ?>
 		<fieldset id="filter-bar">
 			<div class="filter-search fltlft">
-				<input type="text" name="filter_search" id="filter_search" placeholder="<?php echo JText::_('COM_JEM_SEARCH');?>" value="<?php echo $this->escape($this->state->get('filter_search')); ?>" class="text_area" onChange="document.adminForm.submit();" />
-				<button type="submit"><?php echo JText::_('JSEARCH_FILTER_SUBMIT'); ?></button>
-				<button type="button" onclick="document.id('filter_search').value='';this.form.submit();"><?php echo JText::_('JSEARCH_FILTER_CLEAR'); ?></button>
+				<input type="text" name="filter_search" id="filter_search" placeholder="<?php echo Text::_('COM_JEM_SEARCH');?>" value="<?php echo $this->escape($this->state->get('filter_search')); ?>" class="text_area" onChange="document.adminForm.submit();" />
+				<button type="submit"><?php echo Text::_('JSEARCH_FILTER_SUBMIT'); ?></button>
+				<button type="button" onclick="document.id('filter_search').value='';this.form.submit();"><?php echo Text::_('JSEARCH_FILTER_CLEAR'); ?></button>
 			</div>
 		</fieldset>
 		<div class="clr"> </div>
@@ -37,10 +39,10 @@ $params		= (isset($this->state->params)) ? $this->state->params : new JObject();
 		<table class="table table-striped" id="articleList">
 			<thead>
 				<tr>
-				<th width="5" class="center"><?php echo JText::_( 'COM_JEM_NUM' ); ?></th>
-				<th width="5" class="center"><input type="checkbox" name="checkall-toggle" value="" title="<?php echo JText::_('JGLOBAL_CHECK_ALL'); ?>" onclick="Joomla.checkAll(this)" /></th>
+				<th width="5" class="center"><?php echo Text::_( 'COM_JEM_NUM' ); ?></th>
+				<th width="5" class="center"><input type="checkbox" name="checkall-toggle" value="" title="<?php echo Text::_('JGLOBAL_CHECK_ALL'); ?>" onclick="Joomla.checkAll(this)" /></th>
 				<th width="30%" class="title"><?php echo JHtml::_('grid.sort', 'COM_JEM_GROUP_NAME', 'name', $listDirn, $listOrder ); ?></th>
-				<th><?php echo JText::_( 'COM_JEM_DESCRIPTION' ); ?></th>
+				<th><?php echo Text::_( 'COM_JEM_DESCRIPTION' ); ?></th>
 				</tr>
 			</thead>
 

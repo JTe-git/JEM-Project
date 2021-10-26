@@ -1,12 +1,14 @@
 <?php
 /**
- * @version 2.3.1
+ * @version 4.0.0
  * @package JEM
- * @copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright (C) 2005-2009 Christoph Lukes
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 defined('_JEXEC') or die();
+
+use Joomla\CMS\Language\Text;
 
 jimport('joomla.application.component.modelitem');
 
@@ -149,7 +151,7 @@ class JemModelEvent extends JModelItem
 				}
 
 				if (empty($data)) {
-					throw new Exception(JText::_('COM_JEM_EVENT_ERROR_EVENT_NOT_FOUND'), 404);
+					throw new Exception(Text::_('COM_JEM_EVENT_ERROR_EVENT_NOT_FOUND'), 404);
 				}
 
 				# Convert parameter fields to objects.
@@ -569,7 +571,7 @@ class JemModelEvent extends JModelItem
 		}
 
 		if (empty($event)) {
-			$errMsg = JText::_('COM_JEM_EVENT_ERROR_EVENT_NOT_FOUND');
+			$errMsg = Text::_('COM_JEM_EVENT_ERROR_EVENT_NOT_FOUND');
 			return false;
 		}
 
@@ -579,7 +581,7 @@ class JemModelEvent extends JModelItem
 				// check if the user should go on waiting list
 				if ($event->booked >= $event->maxplaces) {
 					if (!$event->waitinglist) {
-						$this->setError(JText::_('COM_JEM_EVENT_FULL_NOTICE'));
+						$this->setError(Text::_('COM_JEM_EVENT_FULL_NOTICE'));
 						return false;
 					}
 					$onwaiting = 1;
@@ -588,14 +590,14 @@ class JemModelEvent extends JModelItem
 		}
 		elseif ($status == 2) {
 			if ($respectPlaces && !$event->waitinglist) {
-				$errMsg = JText::_('COM_JEM_NO_WAITINGLIST');
+				$errMsg = Text::_('COM_JEM_NO_WAITINGLIST');
 				return false;
 			}
 			$onwaiting = 1;
 			$status = 1;
 		}
 		elseif ($respectPlaces && ($oldstat == 1) && ($status == -1) && !$event->unregistra) {
-			$errMsg = JText::_('COM_JEM_ERROR_ANNULATION_NOT_ALLOWED');
+			$errMsg = Text::_('COM_JEM_ERROR_ANNULATION_NOT_ALLOWED');
 			return false;
 		}
 
@@ -621,7 +623,7 @@ class JemModelEvent extends JModelItem
 		}
 		catch (Exception $e) {
 			// we have a unique user-event key so registering twice will fail
-			$errMsg = JText::_(($e->getCode() == 1062) ? 'COM_JEM_ALLREADY_REGISTERED'
+			$errMsg = Text::_(($e->getCode() == 1062) ? 'COM_JEM_ALLREADY_REGISTERED'
 				                                       : 'COM_JEM_ERROR_REGISTRATION');
 			return false;
 		}
@@ -653,7 +655,7 @@ class JemModelEvent extends JModelItem
 
 		// Must be logged in
 		if ($uid < 1) {
-			\Joomla\CMS\Factory::getApplication()->enqueueMessage(JText::_('JERROR_ALERTNOAUTHOR'), 'error');
+			\Joomla\CMS\Factory::getApplication()->enqueueMessage(Text::_('JERROR_ALERTNOAUTHOR'), 'error');
 			return;
 		}
 
@@ -693,7 +695,7 @@ class JemModelEvent extends JModelItem
 
 		// Acting user must be logged in
 		if ($user->get('id') < 1) {
-			\Joomla\CMS\Factory::getApplication()->enqueueMessage(JText::_('JERROR_ALERTNOAUTHOR'), 'error');
+			\Joomla\CMS\Factory::getApplication()->enqueueMessage(Text::_('JERROR_ALERTNOAUTHOR'), 'error');
 			return false;
 		}
 
@@ -719,7 +721,7 @@ class JemModelEvent extends JModelItem
 
 		// Must be logged in
 		if ($userid < 1) {
-			\Joomla\CMS\Factory::getApplication()->enqueueMessage(JText::_('JERROR_ALERTNOAUTHOR'), 'error');
+			\Joomla\CMS\Factory::getApplication()->enqueueMessage(Text::_('JERROR_ALERTNOAUTHOR'), 'error');
 			return;
 		}
 

@@ -1,13 +1,15 @@
 <?php
 /**
- * @version 2.3.1
+ * @version 4.0.0
  * @package JEM
- * @copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright (C) 2005-2009 Christoph Lukes
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  *
  */
 defined('_JEXEC') or die();
+
+use Joomla\CMS\Language\Text;
 
 jimport('joomla.application.component.model');
 jimport('joomla.filesystem.folder');
@@ -58,7 +60,7 @@ class JemModelSampledata extends JModelLegacy
 	public function loadData()
 	{
 		if ($this->checkForJemData()) {
-			\Joomla\CMS\Factory::getApplication()->enqueueMessage(JText::_('COM_JEM_SAMPLEDATA_DATA_ALREADY_INSTALLED'), 'warning');
+			\Joomla\CMS\Factory::getApplication()->enqueueMessage(Text::_('COM_JEM_SAMPLEDATA_DATA_ALREADY_INSTALLED'), 'warning');
 			return false;
 		}
 
@@ -90,7 +92,7 @@ class JemModelSampledata extends JModelLegacy
 
 		// delete temporary extraction folder
 		if (!$this->deleteTmpFolder()) {
-			\Joomla\CMS\Factory::getApplication()->enqueueMessage(JText::_('COM_JEM_SAMPLEDATA_UNABLE_TO_DELETE_TMP_FOLDER'), 'warning');
+			\Joomla\CMS\Factory::getApplication()->enqueueMessage(Text::_('COM_JEM_SAMPLEDATA_UNABLE_TO_DELETE_TMP_FOLDER'), 'warning');
 		}
 
 		return true;
@@ -118,7 +120,7 @@ class JemModelSampledata extends JModelLegacy
 		$result = JArchive::extract($archive, $extractdir);
 
 		if ($result === false) {
-			\Joomla\CMS\Factory::getApplication()->enqueueMessage(JText::_('COM_JEM_SAMPLEDATA_UNABLE_TO_EXTRACT_ARCHIVE'), 'warning');
+			\Joomla\CMS\Factory::getApplication()->enqueueMessage(Text::_('COM_JEM_SAMPLEDATA_UNABLE_TO_EXTRACT_ARCHIVE'), 'warning');
 			return false;
 		}
 

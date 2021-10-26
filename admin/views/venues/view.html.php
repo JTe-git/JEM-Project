@@ -1,14 +1,15 @@
 <?php
 /**
- * @version 2.3.1
+ * @version 4.0.0
  * @package JEM
- * @copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright (C) 2005-2009 Christoph Lukes
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 
 defined('_JEXEC') or die;
 
+use Joomla\CMS\Language\Text;
 
 /**
  * View class: Venues
@@ -62,11 +63,11 @@ defined('_JEXEC') or die;
 
 		// add filter selection for the search
 		$filters = array();
-		$filters[] = JHtml::_('select.option', '1', JText::_('COM_JEM_VENUE'));
-		$filters[] = JHtml::_('select.option', '2', JText::_('COM_JEM_CITY'));
-		$filters[] = JHtml::_('select.option', '3', JText::_('COM_JEM_STATE'));
-		$filters[] = JHtml::_('select.option', '4', JText::_('COM_JEM_COUNTRY'));
-		$filters[] = JHtml::_('select.option', '5', JText::_('JALL'));
+		$filters[] = JHtml::_('select.option', '1', Text::_('COM_JEM_VENUE'));
+		$filters[] = JHtml::_('select.option', '2', Text::_('COM_JEM_CITY'));
+		$filters[] = JHtml::_('select.option', '3', Text::_('COM_JEM_STATE'));
+		$filters[] = JHtml::_('select.option', '4', Text::_('COM_JEM_COUNTRY'));
+		$filters[] = JHtml::_('select.option', '5', Text::_('JALL'));
 		$lists['filter'] = JHtml::_('select.genericlist', $filters, 'filter_type', array('size'=>'1','class'=>'inputbox'), 'value', 'text', $this->state->get('filter_type'));
 
 		//assign data to template
@@ -85,7 +86,7 @@ defined('_JEXEC') or die;
 	 */
 	protected function addToolbar()
 	{
-		JToolBarHelper::title(JText::_('COM_JEM_VENUES'), 'venues');
+		JToolBarHelper::title(Text::_('COM_JEM_VENUES'), 'venues');
 
 		$canDo = JemHelperBackend::getActions(0);
 

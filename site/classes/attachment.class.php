@@ -1,13 +1,15 @@
 <?php
 /**
- * @version 2.3.1
+ * @version 4.0.0
  * @package JEM
- * @copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright (C) 2005-2009 Christoph Lukes
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 
 defined('_JEXEC') or die;
+
+use Joomla\CMS\Language\Text;
 
 jimport('joomla.filesystem.file');
 jimport('joomla.filesystem.folder');
@@ -58,12 +60,12 @@ class JemAttachment extends JObject
 			// check if the filetype is valid
 			$fileext = strtolower(JFile::getExt($file));
 			if (!in_array($fileext, $allowed)) {
-				\Joomla\CMS\Factory::getApplication()->enqueueMessage(JText::_('COM_JEM_ERROR_ATTACHEMENT_EXTENSION_NOT_ALLOWED').': '.$file, 'warning');
+				\Joomla\CMS\Factory::getApplication()->enqueueMessage(Text::_('COM_JEM_ERROR_ATTACHEMENT_EXTENSION_NOT_ALLOWED').': '.$file, 'warning');
 				continue;
 			}
 			// check size
 			if ($rec['size'] > $maxsizeinput) {
-				\Joomla\CMS\Factory::getApplication()->enqueueMessage(JText::sprintf('COM_JEM_ERROR_ATTACHEMENT_FILE_TOO_BIG', $file, $rec['size'], $maxsizeinput), 'warning');
+				\Joomla\CMS\Factory::getApplication()->enqueueMessage(Text::sprintf('COM_JEM_ERROR_ATTACHEMENT_FILE_TOO_BIG', $file, $rec['size'], $maxsizeinput), 'warning');
 				continue;
 			}
 
@@ -71,7 +73,7 @@ class JemAttachment extends JObject
 				// try to create it
 				$res = JFolder::create($path);
 				if (!$res) {
-					\Joomla\CMS\Factory::getApplication()->enqueueMessage(JText::_('COM_JEM_ERROR_COULD_NOT_CREATE_FOLDER').': '.$path, 'warning');
+					\Joomla\CMS\Factory::getApplication()->enqueueMessage(Text::_('COM_JEM_ERROR_COULD_NOT_CREATE_FOLDER').': '.$path, 'warning');
 					return false;
 				}
 			}
@@ -108,7 +110,7 @@ class JemAttachment extends JObject
 			$table->added_by = $user->get('id');
 
 			if (!($table->check() && $table->store())) {
-				\Joomla\CMS\Factory::getApplication()->enqueueMessage(JText::_('COM_JEM_ERROR_ATTACHMENT_SAVING_TO_DB').': '.$table->getError(), 'warning');
+				\Joomla\CMS\Factory::getApplication()->enqueueMessage(Text::_('COM_JEM_ERROR_ATTACHMENT_SAVING_TO_DB').': '.$table->getError(), 'warning');
 			}
 		} // foreach
 
@@ -130,7 +132,7 @@ class JemAttachment extends JObject
 		$table->bind($attach);
 
 		if (!($table->check() && $table->store())) {
-			\Joomla\CMS\Factory::getApplication()->enqueueMessage(JText::_('COM_JEM_ERROR_ATTACHMENT_UPDATING_RECORD').': '.$table->getError(), 'warning');
+			\Joomla\CMS\Factory::getApplication()->enqueueMessage(Text::_('COM_JEM_ERROR_ATTACHMENT_UPDATING_RECORD').': '.$table->getError(), 'warning');
 			return false;
 		}
 
@@ -210,16 +212,16 @@ class JemAttachment extends JObject
 		$res = $db->loadObject();
 
 		if (!$res) {
-			throw new Exception(JText::_('COM_JEM_FILE_NOT_FOUND'), 404);
+			throw new Exception(Text::_('COM_JEM_FILE_NOT_FOUND'), 404);
 		}
 
 		if (!in_array($res->access, $levels)) {
-			throw new Exception(JText::_('COM_JEM_NO_ACCESS'), 403);
+			throw new Exception(Text::_('COM_JEM_NO_ACCESS'), 403);
 		}
 
 		$path = JPATH_SITE.'/'.$jemsettings->attachments_path.'/'.$res->object.'/'.$res->file;
 		if (!file_exists($path)) {
-			throw new Exception(JText::_('COM_JEM_FILE_NOT_FOUND'), 404);
+			throw new Exception(Text::_('COM_JEM_FILE_NOT_FOUND'), 404);
 		}
 
 		return $path;

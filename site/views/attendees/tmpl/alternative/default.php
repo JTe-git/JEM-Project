@@ -1,13 +1,15 @@
 <?php
 /**
- * @version 2.3.1
+ * @version 4.0.0
  * @package JEM
- * @copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright (C) 2005-2009 Christoph Lukes
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 
 defined('_JEXEC') or die;
+
+use Joomla\CMS\Language\Text;
 
 JHtml::_('behavior.tooltip');
 
@@ -54,16 +56,16 @@ $namelabel = $this->settings->get('global_regname', '1') ? 'COM_JEM_NAME' : 'COM
 <?php
 $sort_by = array();
 if ($this->settings->get('global_regname', '1')) {
-	$sort_by[] = JHtml::_('select.option', 'u.name ASC', JText::_('COM_JEM_NAME') . ' ' . JText::_('COM_JEM_ORDER_ASCENDING'));
-	$sort_by[] = JHtml::_('select.option', 'u.name DESC', JText::_('COM_JEM_NAME') . ' ' . JText::_('COM_JEM_ORDER_DESCENDING'));
+	$sort_by[] = JHtml::_('select.option', 'u.name ASC', Text::_('COM_JEM_NAME') . ' ' . Text::_('COM_JEM_ORDER_ASCENDING'));
+	$sort_by[] = JHtml::_('select.option', 'u.name DESC', Text::_('COM_JEM_NAME') . ' ' . Text::_('COM_JEM_ORDER_DESCENDING'));
 } else {
-	$sort_by[] = JHtml::_('select.option', 'u.username ASC', JText::_('COM_JEM_USERNAME') . ' ' . JText::_('COM_JEM_ORDER_ASCENDING'));
-	$sort_by[] = JHtml::_('select.option', 'u.username DESC', JText::_('COM_JEM_USERNAME') . ' ' . JText::_('COM_JEM_ORDER_DESCENDING'));
+	$sort_by[] = JHtml::_('select.option', 'u.username ASC', Text::_('COM_JEM_USERNAME') . ' ' . Text::_('COM_JEM_ORDER_ASCENDING'));
+	$sort_by[] = JHtml::_('select.option', 'u.username DESC', Text::_('COM_JEM_USERNAME') . ' ' . Text::_('COM_JEM_ORDER_DESCENDING'));
 }
-$sort_by[] = JHtml::_('select.option', 'r.uregdate ASC', JText::_('COM_JEM_REGDATE') . ' ' . JText::_('COM_JEM_ORDER_ASCENDING'));
-$sort_by[] = JHtml::_('select.option', 'r.uregdate DESC', JText::_('COM_JEM_REGDATE') . ' ' . JText::_('COM_JEM_ORDER_DESCENDING'));
-$sort_by[] = JHtml::_('select.option', 'r.status ASC', JText::_('COM_JEM_STATUS') . ' ' . JText::_('COM_JEM_ORDER_ASCENDING'));
-$sort_by[] = JHtml::_('select.option', 'r.status DESC', JText::_('COM_JEM_STATUS') . ' ' . JText::_('COM_JEM_ORDER_DESCENDING'));
+$sort_by[] = JHtml::_('select.option', 'r.uregdate ASC', Text::_('COM_JEM_REGDATE') . ' ' . Text::_('COM_JEM_ORDER_ASCENDING'));
+$sort_by[] = JHtml::_('select.option', 'r.uregdate DESC', Text::_('COM_JEM_REGDATE') . ' ' . Text::_('COM_JEM_ORDER_DESCENDING'));
+$sort_by[] = JHtml::_('select.option', 'r.status ASC', Text::_('COM_JEM_STATUS') . ' ' . Text::_('COM_JEM_ORDER_ASCENDING'));
+$sort_by[] = JHtml::_('select.option', 'r.status DESC', Text::_('COM_JEM_STATUS') . ' ' . Text::_('COM_JEM_ORDER_DESCENDING'));
 
 $this->lists['sort_by'] = JHtml::_('select.genericlist', $sort_by, 'sort_by', array('size'=>'1','class'=>'inputbox','onchange'=>'fullOrdering(\'sort_by\', \'\');'), 'value', 'text', $this->lists['order'] . ' ' . $this->lists['order_Dir']);
 ?>
@@ -96,10 +98,10 @@ $this->lists['sort_by'] = JHtml::_('select.genericlist', $sort_by, 'sort_by', ar
 
 	<form action="<?php echo htmlspecialchars($this->action); ?>"  method="post" name="adminForm" id="adminForm">
 		<div>
-			<b><?php echo JText::_('COM_JEM_TITLE').':'; ?></b>
+			<b><?php echo Text::_('COM_JEM_TITLE').':'; ?></b>
 			<a href="<?php echo $detaillink ; ?>"><?php echo $this->escape($this->event->title); ?></a>
 			<br />
-			<b><?php echo JText::_('COM_JEM_DATE').':'; ?></b>
+			<b><?php echo Text::_('COM_JEM_DATE').':'; ?></b>
 			<?php echo JemOutput::formatLongDateTime($this->event->dates, $this->event->times, $this->event->enddates, $this->event->endtimes, $this->settings->get('global_show_timedetails', 1)); ?>
 			<?php
 			$g_reg = $this->jemsettings->showfroregistra;
@@ -108,35 +110,35 @@ $this->lists['sort_by'] = JHtml::_('select.genericlist', $sort_by, 'sort_by', ar
 			?>
 			<br />
 			<br />
-			<b><?php echo JHtml::_('image', 'com_jem/icon-16-warning.png', null, 'class="icon-inline-left"', true) . JText::_('COM_JEM_REGISTRATION_DISABLED'); ?></b><br />
-			<?php echo JText::_(($g_reg < 1) ? 'COM_JEM_REGISTRATION_DISABLED_GLOBAL_HINT' : 'COM_JEM_REGISTRATION_DISABLED_EVENT_HINT'); ?>
+			<b><?php echo JHtml::_('image', 'com_jem/icon-16-warning.png', null, 'class="icon-inline-left"', true) . Text::_('COM_JEM_REGISTRATION_DISABLED'); ?></b><br />
+			<?php echo Text::_(($g_reg < 1) ? 'COM_JEM_REGISTRATION_DISABLED_GLOBAL_HINT' : 'COM_JEM_REGISTRATION_DISABLED_EVENT_HINT'); ?>
 			<?php endif; ?>
 		</div>
 
 		<?php if (empty($this->rows)) : ?>
 
 		<div class="eventtable">
-			<strong><i><?php echo JText::_('COM_JEM_ATTENDEES_EMPTY_YET'); ?></i></strong>
+			<strong><i><?php echo Text::_('COM_JEM_ATTENDEES_EMPTY_YET'); ?></i></strong>
 		</div>
 
 		<?php else : /* empty($this->rows) */ ?>
 
 		<div id="jem_filter" class="floattext">
 			<div class="jem_fleft">
-				<label for="filter"><?php echo JText::_('COM_JEM_SEARCH'); ?></label>
+				<label for="filter"><?php echo Text::_('COM_JEM_SEARCH'); ?></label>
 				<?php echo $this->lists['filter'].'&nbsp;'; ?>
 				<input type="text" name="filter_search" id="filter_search" value="<?php echo $this->lists['search']; ?>" class="inputbox" onChange="document.adminForm.submit();" />
-				<button class="buttonfilter" type="submit"><?php echo JText::_('JSEARCH_FILTER_SUBMIT'); ?></button>
-				<button class="buttonfilter" type="button" onclick="document.id('filter_search').value='';this.form.submit();"><?php echo JText::_('JSEARCH_FILTER_CLEAR'); ?></button>
+				<button class="buttonfilter" type="submit"><?php echo Text::_('JSEARCH_FILTER_SUBMIT'); ?></button>
+				<button class="buttonfilter" type="button" onclick="document.id('filter_search').value='';this.form.submit();"><?php echo Text::_('JSEARCH_FILTER_CLEAR'); ?></button>
 				&nbsp;
 			</div>
 			<div class="jem_fleft" style="white-space:nowrap;">
-				<?php echo JText::_('COM_JEM_STATUS').' '.$this->lists['status']; ?>
+				<?php echo Text::_('COM_JEM_STATUS').' '.$this->lists['status']; ?>
 			</div>
 			<div class="jem_fright">
-				<label for="sort_by"><?php echo JText::_('COM_JEM_ORDERING'); ?></label>
+				<label for="sort_by"><?php echo Text::_('COM_JEM_ORDERING'); ?></label>
 				<?php echo $this->lists['sort_by'].' '; ?>
-				<label for="limit"><?php echo JText::_('COM_JEM_DISPLAY_NUM'); ?></label>
+				<label for="limit"><?php echo Text::_('COM_JEM_DISPLAY_NUM'); ?></label>
 				<?php echo $this->pagination->getLimitBox(); ?>
 			</div>
 		</div>
@@ -177,17 +179,17 @@ $this->lists['sort_by'] = JHtml::_('select.genericlist', $sort_by, 'sort_by', ar
 		?>
 		<div class="eventtable">
 			<div class="row-fluid sectiontableheader">
-				<div class="span<?php echo $a_span['number']; ?>"><?php echo JText::_('COM_JEM_NUM'); ?></div>
-				<div class="span<?php echo $a_span['user']; ?>"><?php echo JText::_($namelabel); ?></div>
+				<div class="span<?php echo $a_span['number']; ?>"><?php echo Text::_('COM_JEM_NUM'); ?></div>
+				<div class="span<?php echo $a_span['user']; ?>"><?php echo Text::_($namelabel); ?></div>
 				<?php if (array_key_exists('email', $a_span)) : ?>
-				<div class="span<?php echo $a_span['email']; ?>"><?php echo JText::_('COM_JEM_EMAIL'); ?></div>
+				<div class="span<?php echo $a_span['email']; ?>"><?php echo Text::_('COM_JEM_EMAIL'); ?></div>
 				<?php endif; ?>
-				<div class="span<?php echo $a_span['date']; ?>"><?php echo JText::_('COM_JEM_REGDATE'); ?></div>
-				<div class="span<?php echo $a_span['status']; ?>"><?php echo JText::_('COM_JEM_STATUS'); ?></div>
+				<div class="span<?php echo $a_span['date']; ?>"><?php echo Text::_('COM_JEM_REGDATE'); ?></div>
+				<div class="span<?php echo $a_span['status']; ?>"><?php echo Text::_('COM_JEM_STATUS'); ?></div>
 				<?php if (array_key_exists('comment', $a_span)) : ?>
-				<div class="span<?php echo $a_span['comment']; ?>"><?php echo JText::_('COM_JEM_COMMENT'); ?></div>
+				<div class="span<?php echo $a_span['comment']; ?>"><?php echo Text::_('COM_JEM_COMMENT'); ?></div>
 				<?php endif; ?>
-				<div class="span<?php echo $a_span['remove']; ?>"><?php echo JText::_('COM_JEM_REMOVE_USER'); ?></div>
+				<div class="span<?php echo $a_span['remove']; ?>"><?php echo Text::_('COM_JEM_REMOVE_USER'); ?></div>
 			</div>
 			<?php foreach ($this->rows as $i => $row) : ?>
 				<div class="row-fluid sectiontableentry<?php echo $this->params->get('pageclass_sfx'); ?>">
@@ -201,7 +203,7 @@ $this->lists['sort_by'] = JHtml::_('select.genericlist', $sort_by, 'sort_by', ar
 					</div>
 					<?php endif; ?>
 					<div class="span<?php echo $a_span['date']; ?> date">
-						<?php if (!empty($row->uregdate)) { echo JHtml::_('date', $row->uregdate, JText::_('DATE_FORMAT_LC2')); } ?>
+						<?php if (!empty($row->uregdate)) { echo JHtml::_('date', $row->uregdate, Text::_('DATE_FORMAT_LC2')); } ?>
 					</div>
 					<div class="span<?php echo $a_span['status']; ?> status">
 						<?php
@@ -220,9 +222,9 @@ $this->lists['sort_by'] = JHtml::_('select.genericlist', $sort_by, 'sort_by', ar
 					<?php endif;?>
 					<div class="span<?php echo $a_span['remove']; ?> remove">
 						<a href="<?php echo JRoute::_($del_link.'&cid[]='.$row->id); ?>"><?php
-							echo JHtml::_('image','com_jem/publish_r.png', JText::_('COM_JEM_ATTENDEES_DELETE'), array('title' => JText::_('COM_JEM_ATTENDEES_DELETE'), 'class' => (version_compare(JVERSION, '3.3', 'lt')) ? 'hasTip' : 'hasTooltip'), true);
+							echo JHtml::_('image','com_jem/publish_r.png', Text::_('COM_JEM_ATTENDEES_DELETE'), array('title' => Text::_('COM_JEM_ATTENDEES_DELETE'), 'class' => (version_compare(JVERSION, '3.3', 'lt')) ? 'hasTip' : 'hasTooltip'), true);
 						?></a><span class="info-text"><?php
-							echo JText::_('COM_JEM_ATTENDEES_DELETE');
+							echo Text::_('COM_JEM_ATTENDEES_DELETE');
 						?></span>
 					</div>
 				</div>

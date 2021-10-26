@@ -1,14 +1,17 @@
 <?php
 /**
- * @version     2.3.1
+ * @version     4.0.0
  * @package     JEM
- * @copyright   Copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright   Copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright   Copyright (C) 2005-2009 Christoph Lukes
  * @license     http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
-defined('_JEXEC') or die; ?>
+defined('_JEXEC') or die; 
 
-<?php echo JHtml::_('sliders.panel', JText::_('JGLOBAL_FIELDSET_PUBLISHING'), 'publishing-details'); ?>
+use Joomla\CMS\Language\Text;
+?>
+
+<?php echo JHtml::_('sliders.panel', Text::_('JGLOBAL_FIELDSET_PUBLISHING'), 'publishing-details'); ?>
 
 	<fieldset class="panelform">
 		<ul class="adminformlist">
@@ -36,9 +39,9 @@ defined('_JEXEC') or die; ?>
 
 foreach ($fieldSets as $name => $fieldSet) :
 	$label = !empty($fieldSet->label) ? $fieldSet->label : 'COM_CATEGORIES_'.$name.'_FIELDSET_LABEL';
-	echo JHtml::_('sliders.panel', JText::_($label), $name.'-options');
+	echo JHtml::_('sliders.panel', Text::_($label), $name.'-options');
 	if (isset($fieldSet->description) && trim($fieldSet->description)) :
-		echo '<p class="tip">'.$this->escape(JText::_($fieldSet->description)).'</p>';
+		echo '<p class="tip">'.$this->escape(Text::_($fieldSet->description)).'</p>';
 	endif;
 	?>
 	<fieldset class="panelform">

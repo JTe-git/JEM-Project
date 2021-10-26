@@ -1,12 +1,14 @@
 <?php
 /**
- * @version 2.3.1
+ * @version 4.0.0
  * @package JEM
- * @copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright (C) 2005-2009 Christoph Lukes
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 defined('_JEXEC') or die;
+
+use Joomla\CMS\Language\Text;
 
 /**
  * Editvenue-View
@@ -53,13 +55,13 @@ class JemViewEditvenue extends JemView
 
 		// check for data error
 		if (empty($item)) {
-			$app->enqueueMessage(JText::_('JERROR_AN_ERROR_HAS_OCCURRED'), 'error');
+			$app->enqueueMessage(Text::_('JERROR_AN_ERROR_HAS_OCCURRED'), 'error');
 			return false;
 		}
 
 		// check for guest
 		if (!$user || $user->id == 0) {
-			$app->enqueueMessage(JText::_('JERROR_ALERTNOAUTHOR'), 'error');
+			$app->enqueueMessage(Text::_('JERROR_ALERTNOAUTHOR'), 'error');
 			return false;
 		}
 
@@ -72,7 +74,7 @@ class JemViewEditvenue extends JemView
 		}
 
 		if ($authorised !== true) {
-			$app->enqueueMessage(JText::_('JERROR_ALERTNOAUTHOR'), 'error');
+			$app->enqueueMessage(Text::_('JERROR_ALERTNOAUTHOR'), 'error');
 			return false;
 		}
 
@@ -81,8 +83,8 @@ class JemViewEditvenue extends JemView
 		                                && $menuitem->query['view']   == 'editvenue'
 		                                && 0 == $item->id); // menu item is always for new venues
 
-		$title = ($item->id == 0) ? JText::_('COM_JEM_EDITVENUE_VENUE_ADD')
-		                          : JText::sprintf('COM_JEM_EDITVENUE_VENUE_EDIT', $item->venue);
+		$title = ($item->id == 0) ? Text::_('COM_JEM_EDITVENUE_VENUE_ADD')
+		                          : Text::sprintf('COM_JEM_EDITVENUE_VENUE_EDIT', $item->venue);
 
 		if ($useMenuItemParams) {
 			$pagetitle = $menuitem->title ? $menuitem->title : $title;
@@ -174,7 +176,7 @@ class JemViewEditvenue extends JemView
 		$this->settings      = $settings;
 		$this->permissions   = $permissions;
 		$this->limage        = JemImage::flyercreator($this->item->locimage, 'venue');
-		$this->infoimage     = JHtml::_('image', 'com_jem/icon-16-hint.png', JText::_('COM_JEM_NOTES'), NULL, true);
+		$this->infoimage     = JHtml::_('image', 'com_jem/icon-16-hint.png', Text::_('COM_JEM_NOTES'), NULL, true);
 		$this->user          = $user;
 
 		if (!$publisher) {
@@ -183,9 +185,9 @@ class JemViewEditvenue extends JemView
 		}
 
 		// configure image field: show max. file size, and possibly mark field as required
-		$tip = JText::_('COM_JEM_UPLOAD_IMAGE');
+		$tip = Text::_('COM_JEM_UPLOAD_IMAGE');
 		if ((int)$jemsettings->sizelimit > 0) {
-			$tip .= ' <br/>' . JText::sprintf('COM_JEM_MAX_FILE_SIZE_1', (int)$jemsettings->sizelimit);
+			$tip .= ' <br/>' . Text::sprintf('COM_JEM_MAX_FILE_SIZE_1', (int)$jemsettings->sizelimit);
 		}
 		$this->form->setFieldAttribute('userfile', 'description', $tip);
 		if ($jemsettings->imageenabled == 2) {
@@ -206,10 +208,10 @@ class JemViewEditvenue extends JemView
 
 		$title = $this->params->get('page_title');
 		if ($app->getCfg('sitename_pagetitles', 0) == 1) {
-			$title = JText::sprintf('JPAGETITLE', $app->getCfg('sitename'), $title);
+			$title = Text::sprintf('JPAGETITLE', $app->getCfg('sitename'), $title);
 		}
 		elseif ($app->getCfg('sitename_pagetitles', 0) == 2) {
-			$title = JText::sprintf('JPAGETITLE', $title, $app->getCfg('sitename'));
+			$title = Text::sprintf('JPAGETITLE', $title, $app->getCfg('sitename'));
 		}
 		$this->document->setTitle($title);
 

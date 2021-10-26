@@ -1,12 +1,14 @@
 <?php
 /**
- * @version 2.3.1
+ * @version 4.0.0
  * @package JEM
- * @copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright (C) 2005-2009 Christoph Lukes
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 defined('_JEXEC') or die;
+
+use Joomla\CMS\Language\Text;
 
 require_once dirname(__FILE__) . '/admin.php';
 
@@ -371,7 +373,7 @@ class JemModelEvent extends JemModelAdmin
 			// Store cats
 			if (!$this->_storeCategoriesSelected($pk, $cats, !$backend, $new)) {
 			//	JemHelper::addLogEntry('Error storing categories for event ' . $pk, __METHOD__, JLog::ERROR);
-				$this->setError(JText::_('COM_JEM_EVENT_ERROR_STORE_CATEGORIES'));
+				$this->setError(Text::_('COM_JEM_EVENT_ERROR_STORE_CATEGORIES'));
 				$saved = false;
 			}
 
@@ -379,7 +381,7 @@ class JemModelEvent extends JemModelAdmin
 			if (!$backend && ($jemsettings->regallowinvitation == 1)) {
 				if (!$this->_storeUsersInvited($pk, $invitedusers, !$backend, $new)) {
 				//	JemHelper::addLogEntry('Error storing users invited for event ' . $pk, __METHOD__, JLog::ERROR);
-					$this->setError(JText::_('COM_JEM_EVENT_ERROR_STORE_INVITED_USERS'));
+					$this->setError(Text::_('COM_JEM_EVENT_ERROR_STORE_INVITED_USERS'));
 					$saved = false;
 				}
 			}
@@ -575,7 +577,7 @@ class JemModelEvent extends JemModelAdmin
 		\Joomla\Utilities\ArrayHelper::toInteger($pks);
 
 		if (empty($pks)) {
-			$this->setError(JText::_('COM_JEM_EVENTS_NO_ITEM_SELECTED'));
+			$this->setError(Text::_('COM_JEM_EVENTS_NO_ITEM_SELECTED'));
 			return false;
 		}
 

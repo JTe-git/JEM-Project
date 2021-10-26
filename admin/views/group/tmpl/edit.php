@@ -1,14 +1,15 @@
 <?php
 /**
- * @version 2.3.1
+ * @version 4.0.0
  * @package JEM
- * @copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright (C) 2005-2009 Christoph Lukes
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 
 defined('_JEXEC') or die;
 
+use Joomla\CMS\Language\Text;
 
 JHtml::_('behavior.tooltip');
 JHtml::_('behavior.formvalidation');
@@ -71,10 +72,10 @@ $params = $params->toArray();
 	<!-- START OF LEFT DIV -->
 	<div class="width-55 fltlft">
 		<?php echo JHtml::_('tabs.start', 'det-pane'); ?>
-		<?php echo JHtml::_('tabs.panel',JText::_('COM_JEM_GROUP_INFO_TAB'), 'group-info' ); ?>
+		<?php echo JHtml::_('tabs.panel',Text::_('COM_JEM_GROUP_INFO_TAB'), 'group-info' ); ?>
 		<fieldset class="adminform">
 			<legend>
-				<?php echo empty($this->item->id) ? JText::_('COM_JEM_NEW_GROUP') : JText::sprintf('COM_JEM_GROUP_DETAILS', $this->item->id); ?>
+				<?php echo empty($this->item->id) ? Text::_('COM_JEM_NEW_GROUP') : Text::sprintf('COM_JEM_GROUP_DETAILS', $this->item->id); ?>
 			</legend>
 			<ul class="adminformlist">
 				<li><?php echo $this->form->getLabel('name');?> <?php echo $this->form->getInput('name'); ?>
@@ -88,9 +89,9 @@ $params = $params->toArray();
 		<fieldset class="adminform">
 			<table class="adminform" style="width: 100%">
 				<tr>
-					<td><b><?php echo JText::_('COM_JEM_GROUP_AVAILABLE_USERS').':'; ?></b></td>
+					<td><b><?php echo Text::_('COM_JEM_GROUP_AVAILABLE_USERS').':'; ?></b></td>
 					<td>&nbsp;</td>
-					<td><b><?php echo JText::_('COM_JEM_GROUP_MAINTAINERS').':'; ?></b></td>
+					<td><b><?php echo Text::_('COM_JEM_GROUP_MAINTAINERS').':'; ?></b></td>
 				</tr>
 				<tr>
 					<td width="44%"><?php echo $this->lists['available_users']; ?></td>
@@ -118,7 +119,7 @@ $params = $params->toArray();
 		<!-- START OF SLIDERS -->
 		<?php echo JHtml::_('sliders.start', 'group-sliders-'.$this->item->id, array('useCookie'=>1)); ?>
 		<!-- START OF PANEL PUBLISHING -->
-		<?php echo JHtml::_('sliders.panel', JText::_('COM_JEM_GROUP_PERMISSIONS'), 'group-permission'); ?>
+		<?php echo JHtml::_('sliders.panel', Text::_('COM_JEM_GROUP_PERMISSIONS'), 'group-permission'); ?>
 		<!-- RETRIEVING OF FIELDSET PUBLISHING -->
 		<fieldset class="panelform">
 			<ul class="adminformlist">

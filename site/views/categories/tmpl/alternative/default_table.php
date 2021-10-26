@@ -1,13 +1,15 @@
 <?php
 /**
- * @version 2.3.1
+ * @version 4.0.0
  * @package JEM
- * @copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright (C) 2005-2009 Christoph Lukes
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 
 defined('_JEXEC') or die;
+
+use Joomla\CMS\Language\Text;
 ?>
 
 <?php
@@ -52,25 +54,25 @@ defined('_JEXEC') or die;
 ?>
 <div class="eventtable">
 	<div class="row-fluid sectiontableheader">
-		<div class="span<?php echo $a_span['date']; ?>"><?php echo JText::_('COM_JEM_TABLE_DATE'); ?></div>
+		<div class="span<?php echo $a_span['date']; ?>"><?php echo Text::_('COM_JEM_TABLE_DATE'); ?></div>
 		<?php if (array_key_exists('title', $a_span)) : ?>
-		<div class="span<?php echo $a_span['title']; ?>"><?php echo JText::_('COM_JEM_TABLE_TITLE'); ?></div>
+		<div class="span<?php echo $a_span['title']; ?>"><?php echo Text::_('COM_JEM_TABLE_TITLE'); ?></div>
 		<?php endif; ?>
 		<?php if (array_key_exists('venue', $a_span)) : ?>
-		<div class="span<?php echo $a_span['venue']; ?>"><?php echo JText::_('COM_JEM_TABLE_LOCATION'); ?></div>
+		<div class="span<?php echo $a_span['venue']; ?>"><?php echo Text::_('COM_JEM_TABLE_LOCATION'); ?></div>
 		<?php endif; ?>
 		<?php if (array_key_exists('category', $a_span)) : ?>
-		<div class="span<?php echo $a_span['category']; ?>"><?php echo JText::_('COM_JEM_TABLE_CATEGORY'); ?></div>
+		<div class="span<?php echo $a_span['category']; ?>"><?php echo Text::_('COM_JEM_TABLE_CATEGORY'); ?></div>
 		<?php endif; ?>
 		<?php if (array_key_exists('attendees', $a_span)) : ?>
-		<div class="span<?php echo $a_span['attendees']; ?>"><?php echo JText::_('COM_JEM_TABLE_ATTENDEES'); ?></div>
+		<div class="span<?php echo $a_span['attendees']; ?>"><?php echo Text::_('COM_JEM_TABLE_ATTENDEES'); ?></div>
 		<?php endif; ?>
 	</div>
 
 	<?php if (empty($this->catrow->events)) : ?>
 		<div class="row-fluid sectiontableentry<?php echo $this->params->get('pageclass_sfx'); ?>" >
 			<div class="span12">
-				<strong><i><?php echo JText::_('COM_JEM_NO_EVENTS'); ?></i></strong>
+				<strong><i><?php echo Text::_('COM_JEM_NO_EVENTS'); ?></i></strong>
 			</div>
 		</div>
 	<?php else : ?>

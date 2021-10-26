@@ -1,13 +1,15 @@
 <?php
 /**
- * @version 2.3.1
+ * @version 4.0.0
  * @package JEM
- * @copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright (C) 2005-2009 Christoph Lukes
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 
 defined('_JEXEC') or die;
+
+use Joomla\CMS\Language\Text;
 
 jimport('joomla.application.component.model');
 
@@ -193,7 +195,7 @@ class JemModelImport extends JModelLegacy
 				}
 			}
 			if (($itemidx === false) || ($catidx === false)) {
-				echo JText::_('COM_JEM_IMPORT_PARSE_ERROR') . "\n";
+				echo Text::_('COM_JEM_IMPORT_PARSE_ERROR') . "\n";
 				return $rec;
 			}
 
@@ -281,7 +283,7 @@ class JemModelImport extends JModelLegacy
 				// Make sure the data is valid
 				if (!$object->checkCsvImport()) {
 					$this->setError($object->getError());
-					echo JText::_('COM_JEM_IMPORT_ERROR_CHECK') . $object->getError() . "\n";
+					echo Text::_('COM_JEM_IMPORT_ERROR_CHECK') . $object->getError() . "\n";
 					continue;
 				}
 
@@ -292,7 +294,7 @@ class JemModelImport extends JModelLegacy
 						// if it fails, it means the record already exists, we can use store().
 						if (!$object->insertIgnore()) {
 							if (!$object->storeCsvImport()) {
-								echo JText::_('COM_JEM_IMPORT_ERROR_STORE') . $this->_db->getErrorMsg() . "\n";
+								echo Text::_('COM_JEM_IMPORT_ERROR_STORE') . $this->_db->getErrorMsg() . "\n";
 								continue;
 							} else {
 								$rec['updated']++;
@@ -306,7 +308,7 @@ class JemModelImport extends JModelLegacy
 					}
 				} else {
 					if (!$object->storeCsvImport()) {
-						echo JText::_('COM_JEM_IMPORT_ERROR_STORE') . $this->_db->getErrorMsg() . "\n";
+						echo Text::_('COM_JEM_IMPORT_ERROR_STORE') . $this->_db->getErrorMsg() . "\n";
 						continue;
 					} else {
 						$rec['added']++;
@@ -318,7 +320,7 @@ class JemModelImport extends JModelLegacy
 				// Make sure the data is valid
 				if (!$object->check()) {
 					$this->setError($object->getError());
-					echo JText::_('COM_JEM_IMPORT_ERROR_CHECK') . $object->getError() . "\n";
+					echo Text::_('COM_JEM_IMPORT_ERROR_CHECK') . $object->getError() . "\n";
 					continue;
 				}
 
@@ -328,7 +330,7 @@ class JemModelImport extends JModelLegacy
 					// if it fails, it means the record already exists, we can use store().
 					if (!$object->insertIgnore()) {
 						if (!$object->store()) {
-							echo JText::_('COM_JEM_IMPORT_ERROR_STORE') . $this->_db->getErrorMsg() . "\n";
+							echo Text::_('COM_JEM_IMPORT_ERROR_STORE') . $this->_db->getErrorMsg() . "\n";
 							continue;
 						} else {
 							$rec['updated']++;
@@ -338,7 +340,7 @@ class JemModelImport extends JModelLegacy
 					}
 				} else {
 					if (!$object->store()) {
-						echo JText::_('COM_JEM_IMPORT_ERROR_STORE') . $this->_db->getErrorMsg() . "\n";
+						echo Text::_('COM_JEM_IMPORT_ERROR_STORE') . $this->_db->getErrorMsg() . "\n";
 						continue;
 					} else {
 						$rec['added']++;
@@ -860,7 +862,7 @@ class JemModelImport extends JModelLegacy
 			// Make sure the data is valid
 			if (!$object->check()) {
 				$this->setError($object->getError());
-				echo JText::_('COM_JEM_IMPORT_ERROR_CHECK').$object->getError()."\n";
+				echo Text::_('COM_JEM_IMPORT_ERROR_CHECK').$object->getError()."\n";
 				continue ;
 			}
 
@@ -870,7 +872,7 @@ class JemModelImport extends JModelLegacy
 				// it means the record already exists, we can use store().
 				if (!$object->insertIgnore()) {
 					if (!$object->store()) {
-						echo JText::_('COM_JEM_IMPORT_ERROR_STORE').$this->_db->getErrorMsg()."\n";
+						echo Text::_('COM_JEM_IMPORT_ERROR_STORE').$this->_db->getErrorMsg()."\n";
 						$rec['error']++;
 						continue ;
 					} else {
@@ -881,7 +883,7 @@ class JemModelImport extends JModelLegacy
 				}
 			} else {
 				if (!$object->store()) {
-					echo JText::_('COM_JEM_IMPORT_ERROR_STORE').$this->_db->getErrorMsg()."\n";
+					echo Text::_('COM_JEM_IMPORT_ERROR_STORE').$this->_db->getErrorMsg()."\n";
 					$rec['error']++;
 					continue ;
 				} else {

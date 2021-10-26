@@ -1,13 +1,15 @@
 <?php
 /**
- * @version 2.3.1
+ * @version 4.0.0
  * @package JEM
- * @copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright (C) 2005-2009 Christoph Lukes
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 
 defined('_JEXEC') or die;
+
+use Joomla\CMS\Language\Text;
 
 jimport('joomla.application.component.controller');
 
@@ -76,7 +78,7 @@ class JemControllerMyvenues extends JControllerLegacy
 		$cid = $input->get('cid', array(), 'array');
 
 		if (empty($cid)) {
-			\Joomla\CMS\Factory::getApplication()->enqueueMessage(JText::_('COM_JEM_SELECT_ITEM_TO_PUBLISH'), 'notice');
+			\Joomla\CMS\Factory::getApplication()->enqueueMessage(Text::_('COM_JEM_SELECT_ITEM_TO_PUBLISH'), 'notice');
 			$this->setRedirect(JemHelperRoute::getMyVenuesRoute());
 			return;
 		}
@@ -87,7 +89,7 @@ class JemControllerMyvenues extends JControllerLegacy
 		}
 
 		$total = count($cid);
-		$msg   = $total . ' ' . JText::_($message);
+		$msg   = $total . ' ' . Text::_($message);
 
 		$this->setRedirect(JemHelperRoute::getMyVenuesRoute(), $msg);
 	}
