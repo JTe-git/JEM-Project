@@ -12,6 +12,7 @@ defined('_JEXEC') or die;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Filesystem\Folder;
+use Joomla\CMS\Filesystem\File;
 
 jimport('joomla.application.component.model');
 jimport('joomla.filesystem.folder');
@@ -77,9 +78,9 @@ class JemModelHousekeeping extends JModelLegacy
 			$fullPaththumb = JPath::clean(JPATH_SITE.'/images/jem/'.$folder.'/small/'.$image);
 
 			if (is_file($fullPath)) {
-				JFile::delete($fullPath);
-				if (JFile::exists($fullPaththumb)) {
-					JFile::delete($fullPaththumb);
+				File::delete($fullPath);
+				if (File::exists($fullPaththumb)) {
+					File::delete($fullPaththumb);
 				}
 			}
 		}

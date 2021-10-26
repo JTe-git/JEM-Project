@@ -11,6 +11,7 @@ defined('_JEXEC') or die;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Filesystem\Folder;
+use Joomla\CMS\Filesystem\File;
 
 jimport('joomla.filesystem.folder');
 jimport('joomla.filesystem.file');
@@ -36,7 +37,7 @@ class JemModelCssmanager extends JModelLegacy
 		$temp->id = base64_encode($name);
 
 		if ($temp->exists) {
-			$ext =  JFile::getExt($path.$name);
+			$ext =  File::getExt($path.$name);
 				if ($ext != 'css') {
 					# the file is valid but the extension not so let's return false
 					$temp->ext = false;
@@ -65,7 +66,7 @@ class JemModelCssmanager extends JModelLegacy
 		$temp->id = base64_encode($filename);
 
 		if ($temp->exists) {
-			$ext =  JFile::getExt($path.$name);
+			$ext =  File::getExt($path.$name);
 			if ($ext != 'css') {
 				# the file is valid but the extension not so let's return false
 				$temp->ext = false;

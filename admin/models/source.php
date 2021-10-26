@@ -11,6 +11,7 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Factory;
+use Joomla\CMS\Filesystem\File;
 
 jimport('joomla.application.component.modelform');
 jimport('joomla.filesystem.file');
@@ -46,7 +47,7 @@ class JemModelSource extends JModelForm
 		$this->setState('filename', $fileName);
 
 		// Save the syntax for later use
-		$app->setUserState('editor.source.syntax', JFile::getExt($fileName));
+		$app->setUserState('editor.source.syntax', File::getExt($fileName));
 
 		// Load the parameters.
 		$params	= JComponentHelper::getParams('com_jem');
@@ -182,7 +183,7 @@ class JemModelSource extends JModelForm
 			return false;
 		}
 
-		$return = JFile::write($filePath, $data['source']);
+		$return = File::write($filePath, $data['source']);
 
 		// Try to make the custom template file read-only again.
 		$retPerm = (($custom !== false) && !$ftp['enabled'] && JPath::isOwner($filePath) && !JPath::setPermissions($filePath, '0444'));

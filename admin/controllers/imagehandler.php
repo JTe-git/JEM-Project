@@ -11,6 +11,7 @@ defined('_JEXEC') or die
 
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Factory;
+use Joomla\CMS\Filesystem\File;
 
 jimport('joomla.application.component.controller');
 jimport('joomla.filesystem.file');
@@ -85,7 +86,7 @@ class JemControllerImagehandler extends JControllerLegacy
 		$filepath = $base_Dir . $filename;
 
 		//upload the image
-		if (!JFile::upload($file['tmp_name'], $filepath)) {
+		if (!File::upload($file['tmp_name'], $filepath)) {
 			echo "<script> alert('".Text::_('COM_JEM_UPLOAD_FAILED')."'); </script>\n";
 			$app->close();
 		} else {
@@ -125,9 +126,9 @@ class JemControllerImagehandler extends JControllerLegacy
 				$fullPath = JPath::clean(JPATH_SITE.'/images/jem/'.$folder.'/'.$image);
 				$fullPaththumb = JPath::clean(JPATH_SITE.'/images/jem/'.$folder.'/small/'.$image);
 				if (is_file($fullPath)) {
-					JFile::delete($fullPath);
-					if (JFile::exists($fullPaththumb)) {
-						JFile::delete($fullPaththumb);
+					File::delete($fullPath);
+					if (File::exists($fullPaththumb)) {
+						File::delete($fullPaththumb);
 					}
 				}
 			}

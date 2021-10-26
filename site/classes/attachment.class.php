@@ -12,6 +12,7 @@ defined('_JEXEC') or die;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Filesystem\Folder;
+use Joomla\CMS\Filesystem\File;
 
 jimport('joomla.filesystem.file');
 jimport('joomla.filesystem.folder');
@@ -60,7 +61,7 @@ class JemAttachment extends JObject
 			}
 
 			// check if the filetype is valid
-			$fileext = strtolower(JFile::getExt($file));
+			$fileext = strtolower(File::getExt($file));
 			if (!in_array($fileext, $allowed)) {
 				\Joomla\CMS\Factory::getApplication()->enqueueMessage(Text::_('COM_JEM_ERROR_ATTACHEMENT_EXTENSION_NOT_ALLOWED').': '.$file, 'warning');
 				continue;
@@ -86,14 +87,14 @@ class JemAttachment extends JObject
 
 			// Make sure that the full file path is safe.
 			$filepath = JPath::clean( $path.'/'.$sanitizedFilename);
-			// Since Joomla! 3.4.0 JFile::upload has some more params to control new security parsing
+			// Since Joomla! 3.4.0 File::upload has some more params to control new security parsing
 			// Unfortunately this parsing is partially stupid so it may reject archives for non-understandable reason.
 			if (version_compare(JVERSION, '3.4', 'lt')) {
-				JFile::upload($rec['tmp_name'], $filepath);
+				File::upload($rec['tmp_name'], $filepath);
 			} else {
 				// switch off parsing archives for byte sequences looking like a script file extension
 				// but keep all other checks running
-				JFile::upload($rec['tmp_name'], $filepath, false, false, array('fobidden_ext_in_content' => false));
+				File::upload($rec['tmp_name'], $filepath, false, false, array('fobidden_ext_in_content' => false));
 			}
 
 			$table = JTable::getInstance('jem_attachments', '');
@@ -287,7 +288,7 @@ class JemAttachment extends JObject
 		JemHelper::addLogEntry("User ${userid} removes attachment " . $res->object.'/'.$res->file, __METHOD__);
 		$path = JPATH_SITE.'/'.$jemsettings->attachments_path.'/'.$res->object.'/'.$res->file;
 		if (file_exists($path)) {
-			JFile::delete($path);
+			File::delete($path);
 		}
 
 		$query = 'DELETE FROM #__jem_attachments '

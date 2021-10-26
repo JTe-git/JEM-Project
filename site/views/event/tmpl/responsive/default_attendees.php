@@ -13,6 +13,7 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Filesystem\File;
 
 $linkreg = 'index.php?option=com_jem&amp;view=attendees&amp;id='.$this->item->id.($this->itemid ? '&Itemid='.$this->itemid : '');
 ?>
@@ -52,9 +53,9 @@ $linkreg = 'index.php?option=com_jem&amp;view=attendees&amp;id='.$this->item->id
 					//$cparams = JComponentHelper::getParams('com_media');
 					//$imgpath = $cparams->get('image_path'); // mostly 'images'
 					$imgpath = 'images'; // CB does NOT respect path set in Media Manager, so we have to ignore this too
-					if (JFile::exists(JPATH_ROOT . '/components/com_comprofiler/plugin/templates/default/images/avatar/tnnophoto_n.png')) {
+					if (File::exists(JPATH_ROOT . '/components/com_comprofiler/plugin/templates/default/images/avatar/tnnophoto_n.png')) {
 						$noimg = 'components/com_comprofiler/plugin/templates/default/images/avatar/tnnophoto_n.png';
-					} elseif (JFile::exists(JPATH_ROOT . '/components/com_comprofiler/images/english/tnnophoto.jpg')) {
+					} elseif (File::exists(JPATH_ROOT . '/components/com_comprofiler/images/english/tnnophoto.jpg')) {
 						$noimg = 'components/com_comprofiler/images/english/tnnophoto.jpg';
 					} else {
 						$noimg = '';
@@ -108,9 +109,9 @@ $linkreg = 'index.php?option=com_jem&amp;view=attendees&amp;id='.$this->item->id
 					if ($this->settings->get('event_comunoption', '0') == 1) :
 						// User has avatar
 						if (!empty($register->avatar)) :
-							if (JFile::exists(JPATH_ROOT . '/' . $imgpath . '/comprofiler/tn' . $register->avatar)) {
+							if (File::exists(JPATH_ROOT . '/' . $imgpath . '/comprofiler/tn' . $register->avatar)) {
 								$useravatar = HTMLHelper::image($imgpath . '/comprofiler/tn' . $register->avatar, $register->name);
-							} elseif (JFile::exists(JPATH_ROOT . '/' . $imgpath . '/comprofiler/' . $register->avatar)) {
+							} elseif (File::exists(JPATH_ROOT . '/' . $imgpath . '/comprofiler/' . $register->avatar)) {
 								$useravatar = HTMLHelper::image($imgpath . '/comprofiler/' . $register->avatar, $register->name);
 							} else {
 								$useravatar = empty($noimg) ? '' : HTMLHelper::image($noimg, $register->name);

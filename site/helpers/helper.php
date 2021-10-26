@@ -12,6 +12,7 @@ use Joomla\CMS\Language\Text;
 use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Filesystem\Folder;
+use Joomla\CMS\Filesystem\File;
 
 jimport('joomla.filesystem.file');
 jimport('joomla.filesystem.folder');
@@ -481,9 +482,9 @@ class JemHelper
 				return false;
 			}
 			if (empty($usage)) {
-				JFile::delete($fullPath);
-				if (JFile::exists($fullPaththumb)) {
-					JFile::delete($fullPaththumb);
+				File::delete($fullPath);
+				if (File::exists($fullPaththumb)) {
+					File::delete($fullPaththumb);
 				}
 
 				return true;
@@ -503,9 +504,9 @@ class JemHelper
 				foreach ($fileList as $file)
 				{
 					if (is_file($fullPath.$file) && substr($file, 0, 1) != '.' && !isset($used[$file])) {
-						JFile::delete($fullPath.$file);
-						if (JFile::exists($fullPaththumb.$file)) {
-							JFile::delete($fullPaththumb.$file);
+						File::delete($fullPath.$file);
+						if (File::exists($fullPaththumb.$file)) {
+							File::delete($fullPaththumb.$file);
 						}
 					}
 				}
@@ -558,7 +559,7 @@ class JemHelper
 			if (!empty($files)) {
 				foreach ($files as $file) {
 					if (!array_key_exists($folder.'/'.$file, $files)) {
-						$res &= JFile::delete($basepath.'/'.$folder.'/'.$file);
+						$res &= File::delete($basepath.'/'.$folder.'/'.$file);
 					}
 				}
 			}
@@ -1289,11 +1290,11 @@ class JemHelper
 			# something was filled, now check if we've a valid file
 			if ($file) {
 				$file = preg_replace('%^/([^/]*)%', '$1', $file); // remove leading single slash
-				$is_file = JFile::exists(JPATH_SITE . '/' . $file);
+				$is_file = File::exists(JPATH_SITE . '/' . $file);
 
 				if ($is_file) {
 					# at this point we do have a valid file but let's check the extension too.
-					$ext =  JFile::getExt($file);
+					$ext =  File::getExt($file);
 					if ($ext != 'css') {
 						# the file is valid but the extension not so let's return false
 						$is_file = false;

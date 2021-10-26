@@ -12,6 +12,7 @@ defined('_JEXEC') or die;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Filesystem\Folder;
+use Joomla\CMS\Filesystem\File;
 
 jimport('joomla.application.component.model');
 
@@ -935,8 +936,8 @@ class JemModelImport extends JModelLegacy
 				$files = Folder::files($fromFolder, null, false, false);
 
 				foreach ($files as $file) {
-					if (!JFile::exists($toFolder.$file)) {
-						JFile::copy($fromFolder.$file, $toFolder.$file);
+					if (!File::exists($toFolder.$file)) {
+						File::copy($fromFolder.$file, $toFolder.$file);
 					}
 				}
 			}
@@ -963,8 +964,8 @@ class JemModelImport extends JModelLegacy
 		if (Folder::exists($fromFolder) && Folder::exists($toFolder)) {
 			$files = Folder::files($fromFolder, null, false, false);
 			foreach ($files as $file) {
-				if (!JFile::exists($toFolder.$file)) {
-					JFile::copy($fromFolder.$file, $toFolder.$file);
+				if (!File::exists($toFolder.$file)) {
+					File::copy($fromFolder.$file, $toFolder.$file);
 				}
 			}
 
@@ -979,8 +980,8 @@ class JemModelImport extends JModelLegacy
 				$files = Folder::files($fromFolder.$folder, null, false, false);
 				$folder .= '/';
 				foreach ($files as $file) {
-					if (!JFile::exists($toFolder.$folder.$file)) {
-						JFile::copy($fromFolder.$folder.$file, $toFolder.$folder.$file);
+					if (!File::exists($toFolder.$folder.$file)) {
+						File::copy($fromFolder.$folder.$file, $toFolder.$folder.$file);
 					}
 				}
 			}

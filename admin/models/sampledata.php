@@ -12,6 +12,7 @@ defined('_JEXEC') or die();
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Filesystem\Folder;
+use Joomla\CMS\Filesystem\File;
 
 jimport('joomla.application.component.model');
 jimport('joomla.filesystem.folder');
@@ -210,7 +211,7 @@ class JemModelSampledata extends JModelLegacy
 				$subDirectory .= "small/";
 			}
 
-			JFile::copy($this->filelist['folder'] . '/' . $file, $imagebase . $subDirectory . $file);
+			File::copy($this->filelist['folder'] . '/' . $file, $imagebase . $subDirectory . $file);
 		}
 		return true;
 	}

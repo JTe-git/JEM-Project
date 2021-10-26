@@ -1,12 +1,14 @@
 <?php
 /**
- * @version 2.3.1
+ * @version 4.0.0
  * @package JEM
- * @copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright (C) 2005-2009 Christoph Lukes
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 defined('_JEXEC') or die;
+
+use Joomla\CMS\Filesystem\File;
 
 jimport('joomla.application.component.model');
 jimport('joomla.filesystem.file');
@@ -66,7 +68,7 @@ class JemModelUpdatecheck extends JModelLegacy
 	 */
 	protected static function CheckFile($filename)
 	{
-		$ext =  JFile::getExt($filename);
+		$ext =  File::getExt($filename);
 		if ($ext == 'xml') {
 			if (@file_get_contents($filename, 0, null, 0, 1)) {
 				return true;
