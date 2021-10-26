@@ -312,7 +312,7 @@ class com_jemInstallerScript extends InstallerScript
 	/**
 	 * Gets globalattrib values from the settings table
 	 *
-	 * @return JRegistry object
+	 * @return Registry object
 	 */
 	private function getGlobalParams()
 	{

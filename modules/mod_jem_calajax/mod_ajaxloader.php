@@ -23,6 +23,7 @@
  define( '_IN_AJAXCALL', 1 );
 
 use Joomla\CMS\Factory;
+use Joomla\Registry\Registry;
 
 // Make sure the BASE-path starts at the base of Joomla!
 // Define this variable, because normal variable are cleared by the framework
@@ -76,6 +77,6 @@ if (!isset($mod->user))  { $mod->user  = 0; }
 if (!isset($mod->style)) { $mod->style = ''; }
 
 $module = JModuleHelper::getModule('mod_jem_calajax');
-$params = new JRegistry($module->params);
+$params = new Registry($module->params);
 
 print $renderer->render($mod, $params->toArray());

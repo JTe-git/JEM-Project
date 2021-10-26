@@ -10,6 +10,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Factory;
+use Joomla\Registry\Registry;
 
 // Base this model on the backend version.
 require_once JPATH_ADMINISTRATOR . '/components/com_jem/models/venue.php';
@@ -98,7 +99,7 @@ class JemModelEditvenue extends JemModelVenue
 		}
 
 		// Convert attrib field to Registry.
-		//$registry = new JRegistry();
+		//$registry = new Registry();
 		//$registry->loadString($value->attribs);
 
 		$globalregistry = JemHelper::globalattribs();

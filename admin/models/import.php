@@ -13,6 +13,7 @@ use Joomla\CMS\Language\Text;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Filesystem\Folder;
 use Joomla\CMS\Filesystem\File;
+use Joomla\Registry\Registry;
 
 jimport('joomla.application.component.model');
 
@@ -484,7 +485,7 @@ class JemModelImport extends JModelLegacy
 
 		try {
 			$par = $result->manifest_cache;
-			$params = new JRegistry;
+			$params = new Registry;
 			$params->loadString($par, 'JSON');
 			return $params->get('version', false);
 		}

@@ -11,6 +11,7 @@ defined('_JEXEC') or die;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Factory;
+use Joomla\Registry\Registry;
 
 include_once(JPATH_SITE.'/components/com_jem/helpers/helper.php');
 include_once(JPATH_SITE.'/components/com_jem/classes/image.class.php');
@@ -27,7 +28,7 @@ class plgAcymailingTagjem extends JPlugin
 		parent::__construct($subject, $config);
 		if (!isset($this->params)) {
 			$plugin = JPluginHelper::getPlugin('acymailing', 'tagjem');
-			$this->params = new JRegistry($plugin->params);
+			$this->params = new Registry($plugin->params);
 		}
 		$this->loadLanguage();
 		$this->loadLanguage('com_jem', JPATH_ADMINISTRATOR.'/components/com_jem');

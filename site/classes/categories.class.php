@@ -12,6 +12,7 @@ defined('_JEXEC') or die;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Factory;
+use Joomla\Registry\Registry;
 
 // ensure JemFactory is loaded (because this class is used by modules or plugins too)
 require_once(JPATH_SITE.'/components/com_jem/factory.php');
@@ -1144,13 +1145,13 @@ class JemCategoryNode extends JObject
 	/**
 	 * Returns the category parameters
 	 *
-	 * @return  JRegistry
+	 * @return  Registry
 	 */
 	public function getParams()
 	{
-		if (!($this->params instanceof JRegistry))
+		if (!($this->params instanceof Registry))
 		{
-			$temp = new JRegistry;
+			$temp = new Registry;
 			$temp->loadString($this->params);
 			$this->params = $temp;
 		}
@@ -1161,13 +1162,13 @@ class JemCategoryNode extends JObject
 	/**
 	 * Returns the category metadata
 	 *
-	 * @return  JRegistry  A JRegistry object containing the metadata
+	 * @return  Registry  A Registry object containing the metadata
 	 */
 	public function getMetadata()
 	{
-		if (!($this->metadata instanceof JRegistry))
+		if (!($this->metadata instanceof Registry))
 		{
-			$temp = new JRegistry;
+			$temp = new Registry;
 			$temp->loadString($this->metadata);
 			$this->metadata = $temp;
 		}

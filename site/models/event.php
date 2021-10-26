@@ -10,6 +10,7 @@ defined('_JEXEC') or die();
 
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Factory;
+use Joomla\Registry\Registry;
 
 jimport('joomla.application.component.modelitem');
 
@@ -156,12 +157,12 @@ class JemModelEvent extends JModelItem
 				}
 
 				# Convert parameter fields to objects.
-				$registry = new JRegistry;
+				$registry = new Registry;
 				$registry->loadString($data->attribs);
-				$data->params = JemHelper::globalattribs(); // returns JRegistry object
+				$data->params = JemHelper::globalattribs(); // returns Registry object
 				$data->params->merge($registry);
 
-				$registry = new JRegistry;
+				$registry = new Registry;
 				$registry->loadString($data->metadata);
 				$data->metadata = $registry;
 

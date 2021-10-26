@@ -10,6 +10,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Factory;
+use Joomla\Registry\Registry;
 
 jimport('joomla.application.component.helper');
 
@@ -274,12 +275,12 @@ class plgFinderJEM extends FinderIndexerAdapter {
 		}
 
 		// Initialize the item parameters.
-		$registry = new JRegistry;
+		$registry = new Registry;
 		$registry->loadString($item->params);
 		$item->params = JComponentHelper::getParams('com_jem', true);
 		$item->params->merge($registry);
 
-		$registry = new JRegistry;
+		$registry = new Registry;
 		$registry->loadString($item->metadata);
 		$item->metadata = $registry;
 

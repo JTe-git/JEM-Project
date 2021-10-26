@@ -10,6 +10,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Factory;
+use Joomla\Registry\Registry;
 
 jimport('joomla.application.component.model');
 jimport('joomla.html.pagination');
@@ -110,7 +111,7 @@ class JemModelMyevents extends JModelLegacy
 				} else {
 					if (empty($item->params)) {
 						// Set event params.
-						$registry = new JRegistry();
+						$registry = new Registry();
 						$registry->loadString($item->attribs);
 						$item->params = clone JemHelper::globalattribs();
 						$item->params->merge($registry);

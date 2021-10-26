@@ -12,6 +12,7 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Factory;
+use Joomla\Registry\Registry;
 
 jimport('joomla.plugin.plugin');
 jimport('joomla.html.parameter');
@@ -80,7 +81,7 @@ class plgSearchJEM extends JPlugin
 
 		// load plugin params info
 		$plugin = JPluginHelper::getPlugin('search', 'jem');
-		$pluginParams = new JRegistry($plugin->params);
+		$pluginParams = new Registry($plugin->params);
 
 		$limit = $pluginParams->def('search_limit', 50);
 

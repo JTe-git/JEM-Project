@@ -10,6 +10,7 @@ defined('_JEXEC') or die();
 
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Factory;
+use Joomla\Registry\Registry;
 
 jimport('joomla.application.component.modeladmin');
 
@@ -124,7 +125,7 @@ class JemModelCategory extends JModelAdmin
 			}
 
 			// Convert the metadata field to an array.
-			$registry = new JRegistry();
+			$registry = new Registry();
 			$registry->loadString($result->metadata);
 			$result->metadata = $registry->toArray();
 

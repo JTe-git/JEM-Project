@@ -9,6 +9,7 @@
 
 defined('_JEXEC') or die;
 
+use Joomla\Registry\Registry;
 use Joomla\CMS\Factory;
 
 jimport('joomla.application.component.modellist');
@@ -495,11 +496,11 @@ class JemModelEventslist extends JModelList
 		# Convert the parameter fields into objects.
 		foreach ($items as $index => $item)
 		{
-			$eventParams = new JRegistry;
+			$eventParams = new Registry;
 			$eventParams->loadString($item->attribs);
 
 			if (empty($stateParams)) {
-				$item->params = new JRegistry;
+				$item->params = new Registry;
 				$item->params->merge($eventParams);
 			} else {
 				$item->params = clone $stateParams;

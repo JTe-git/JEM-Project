@@ -11,6 +11,7 @@ defined('_JEXEC') or die;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Filesystem\File;
+use Joomla\Registry\Registry;
 
 /**
  * JEM Event Table
@@ -55,13 +56,13 @@ class JemTableEvent extends JTable
 		}
 
 		if (isset($array['attribs']) && is_array($array['attribs'])) {
-			$registry = new JRegistry;
+			$registry = new Registry;
 			$registry->loadArray($array['attribs']);
 			$array['attribs'] = (string) $registry;
 		}
 
 		if (isset($array['metadata']) && is_array($array['metadata'])) {
-			$registry = new JRegistry;
+			$registry = new Registry;
 			$registry->loadArray($array['metadata']);
 			$array['metadata'] = (string) $registry;
 		}
