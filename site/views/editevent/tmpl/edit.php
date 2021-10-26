@@ -9,11 +9,12 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\HTML\HTMLHelper;
 
-JHtml::_('behavior.keepalive');
-JHtml::_('behavior.tooltip');
-JHtml::_('behavior.calendar');
-JHtml::_('behavior.formvalidation');
+HTMLHelper::_('behavior.keepalive');
+HTMLHelper::_('behavior.tooltip');
+HTMLHelper::_('behavior.calendar');
+HTMLHelper::_('behavior.formvalidation');
 
 // Create shortcut to parameters.
 $params		= $this->params;
@@ -118,11 +119,11 @@ function showUnregistraUntil()
 			</div>
 			<?php endif; ?>
 
-			<?php echo JHtml::_('tabs.start', 'det-pane'); ?>
+			<?php echo HTMLHelper::_('tabs.start', 'det-pane'); ?>
 
 			<!-- DETAILS TAB -->
 
-			<?php echo JHtml::_('tabs.panel',Text::_('COM_JEM_EDITEVENT_INFO_TAB'), 'editevent-infotab' ); ?>
+			<?php echo HTMLHelper::_('tabs.panel',Text::_('COM_JEM_EDITEVENT_INFO_TAB'), 'editevent-infotab' ); ?>
 
 			<fieldset>
 				<legend><?php echo Text::_('COM_JEM_EDITEVENT_DETAILS_LEGEND'); ?></legend>
@@ -169,7 +170,7 @@ function showUnregistraUntil()
 </li>	
 	<?php
 				if ($this->item->datimage) :
-					echo JHtml::image('media/com_jem/images/publish_r.png', null, array('id' => 'userfile-remove', 'data-id' => $this->item->id, 'data-type' => 'events', 'title' => Text::_('COM_JEM_REMOVE_IMAGE')));
+					echo HTMLHelper::image('media/com_jem/images/publish_r.png', null, array('id' => 'userfile-remove', 'data-id' => $this->item->id, 'data-type' => 'events', 'title' => Text::_('COM_JEM_REMOVE_IMAGE')));
 
 				endif;
 				?>
@@ -182,25 +183,25 @@ function showUnregistraUntil()
 	<?php endif; ?>
 
 			<!-- EXTENDED TAB -->
-			<?php echo JHtml::_('tabs.panel', Text::_('COM_JEM_EDITEVENT_EXTENDED_TAB'), 'editevent-extendedtab'); ?>
+			<?php echo HTMLHelper::_('tabs.panel', Text::_('COM_JEM_EDITEVENT_EXTENDED_TAB'), 'editevent-extendedtab'); ?>
 			<?php echo $this->loadTemplate('extended'); ?>
 
 			<!-- PUBLISH TAB -->
 			<?php if ($this->jemsettings->frontendpublish != 0) : ?>			
-			<?php  echo JHtml::_('tabs.panel', Text::_('COM_JEM_EDITEVENT_PUBLISH_TAB'), 'editevent-publishtab'); ?>
+			<?php  echo HTMLHelper::_('tabs.panel', Text::_('COM_JEM_EDITEVENT_PUBLISH_TAB'), 'editevent-publishtab'); ?>
 			<?php echo $this->loadTemplate('publish'); ?>
 			<?php endif; ?>
 			<!-- ATTACHMENTS TAB -->
 			<?php if (!empty($this->item->attachments) || ($this->jemsettings->attachmentenabled != 0)) : ?>
-			<?php echo JHtml::_('tabs.panel',Text::_('COM_JEM_EVENT_ATTACHMENTS_TAB'), 'event-attachments' ); ?>
+			<?php echo HTMLHelper::_('tabs.panel',Text::_('COM_JEM_EVENT_ATTACHMENTS_TAB'), 'event-attachments' ); ?>
 			<?php echo $this->loadTemplate('attachments'); ?>
 			<?php endif; ?>
 
 			<!-- OTHER TAB -->
-			<?php echo JHtml::_('tabs.panel',Text::_('COM_JEM_EVENT_OTHER_TAB'), 'event-other' ); ?>
+			<?php echo HTMLHelper::_('tabs.panel',Text::_('COM_JEM_EVENT_OTHER_TAB'), 'event-other' ); ?>
 			<?php echo $this->loadTemplate('other'); ?>
 
-			<?php echo JHtml::_('tabs.end'); ?>
+			<?php echo HTMLHelper::_('tabs.end'); ?>
 
 			<input type="hidden" name="task" value="" />
 			<input type="hidden" name="return" value="<?php echo $this->return_page;?>" />
@@ -208,7 +209,7 @@ function showUnregistraUntil()
 			<?php if($this->params->get('enable_category', 0) == 1) :?>
 			<input type="hidden" name="jform[catid]" value="<?php echo $this->params->get('catid', 1);?>"/>
 			<?php endif;?>
-			<?php echo JHtml::_('form.token'); ?>
+			<?php echo HTMLHelper::_('form.token'); ?>
 		</form>
 	</div>
 

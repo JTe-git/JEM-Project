@@ -9,8 +9,9 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\HTML\HTMLHelper;
 
-JHtml::_('behavior.modal');
+HTMLHelper::_('behavior.modal');
 ?>
 <div id="jem" class="jem_category<?php echo $this->pageclass_sfx;?>">
 	<div class="buttons">
@@ -38,7 +39,7 @@ JHtml::_('behavior.modal');
 			$imgattribs['width'] = $jemsettings->imagewidth;
 			$imgattribs['height'] = $jemsettings->imagehight;
 
-			echo JHtml::_('image', 'com_jem/noimage.png', $this->category->catname, $imgattribs, true);
+			echo HTMLHelper::_('image', 'com_jem/noimage.png', $this->category->catname, $imgattribs, true);
 		}
 		else {
 			echo JemOutput::flyer($this->category, $this->cimage, 'category');

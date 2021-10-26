@@ -10,6 +10,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\HTML\HTMLHelper;
 
 /**
  * View class for the JEM home screen
@@ -34,7 +35,7 @@ class JemViewMain extends JemAdminView
 		$category = $this->get('CategoriesData');
 
 		// Load css
-		JHtml::_('stylesheet', 'com_jem/backend.css', array(), true);
+		HTMLHelper::_('stylesheet', 'com_jem/backend.css', array(), true);
 
 		//assign vars to the template
 		$this->events   = $events;
@@ -79,15 +80,15 @@ class JemViewMain extends JemAdminView
 		<div style="float:<?php echo ($lang->isRTL()) ? 'right' : 'left'; ?>;">
 			<div class="icon">
 				<?php if ($modal == 1) : ?>
-					<?php JHtml::_('behavior.modal'); ?>
+					<?php HTMLHelper::_('behavior.modal'); ?>
 					<a href="<?php echo $link.'&amp;tmpl=component'; ?>" style="cursor:pointer" class="modal"
 							rel="{handler: 'iframe', size: {x: 650, y: 400}}">
-						<?php echo JHtml::_('image', 'com_jem/'.$image, $text, NULL, true); ?>
+						<?php echo HTMLHelper::_('image', 'com_jem/'.$image, $text, NULL, true); ?>
 						<span><?php echo $text; ?></span>
 					</a>
 				<?php else : ?>
 					<a href="<?php echo $link; ?>">
-						<?php echo JHtml::_('image', 'com_jem/'.$image, $text, NULL, true); ?>
+						<?php echo HTMLHelper::_('image', 'com_jem/'.$image, $text, NULL, true); ?>
 						<span><?php echo $text; ?></span>
 					</a>
 				<?php endif; ?>

@@ -9,6 +9,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\HTML\HTMLHelper;
 
 $function = JFactory::getApplication()->input->getCmd('function', 'jSelectVenue');
 ?>
@@ -65,9 +66,9 @@ $function = JFactory::getApplication()->input->getCmd('function', 'jSelectVenue'
     <div class="jem-sort jem-sort-small">
       <div class="jem-list-row jem-small-list">
         <div class="sectiontableheader jem-venue-number"><?php echo Text::_('COM_JEM_NUM'); ?></div>
-        <div class="sectiontableheader jem-venue-name"><?php echo JHtml::_('grid.sort', 'COM_JEM_VENUE', 'l.venue', $this->lists['order_Dir'], $this->lists['order'], 'selectvenue' ); ?></div>
-        <div class="sectiontableheader jem-venue-city"><?php echo JHtml::_('grid.sort', 'COM_JEM_CITY', 'l.city', $this->lists['order_Dir'], $this->lists['order'], 'selectvenue' ); ?></div>
-        <div class="sectiontableheader jem-venue-state"><?php echo JHtml::_('grid.sort', 'COM_JEM_STATE', 'l.state', $this->lists['order_Dir'], $this->lists['order']); ?></div>
+        <div class="sectiontableheader jem-venue-name"><?php echo HTMLHelper::_('grid.sort', 'COM_JEM_VENUE', 'l.venue', $this->lists['order_Dir'], $this->lists['order'], 'selectvenue' ); ?></div>
+        <div class="sectiontableheader jem-venue-city"><?php echo HTMLHelper::_('grid.sort', 'COM_JEM_CITY', 'l.city', $this->lists['order_Dir'], $this->lists['order'], 'selectvenue' ); ?></div>
+        <div class="sectiontableheader jem-venue-state"><?php echo HTMLHelper::_('grid.sort', 'COM_JEM_STATE', 'l.state', $this->lists['order_Dir'], $this->lists['order']); ?></div>
         <div class="sectiontableheader jem-venue-country"><?php echo Text::_('COM_JEM_COUNTRY'); ?></div>
       </div>
     </div>

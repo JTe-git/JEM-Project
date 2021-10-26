@@ -10,6 +10,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\HTML\HTMLHelper;
 
 jimport('joomla.application.component.controller');
 
@@ -281,7 +282,7 @@ class JemControllerAttendees extends JControllerLegacy
 			if ($enableemailadress == 1) {
 				$cols[] = $data->email;
 			}
-			$cols[] = empty($data->uregdate) ? '' : JHtml::_('date',$data->uregdate, Text::_('DATE_FORMAT_LC2'));
+			$cols[] = empty($data->uregdate) ? '' : HTMLHelper::_('date',$data->uregdate, Text::_('DATE_FORMAT_LC2'));
 
 			$status = isset($data->status) ? $data->status : 1;
 			if ($status < 0) {

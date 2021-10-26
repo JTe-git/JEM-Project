@@ -10,7 +10,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
-
+use Joomla\CMS\HTML\HTMLHelper;
 
 /**
  * View class: Attendee
@@ -26,13 +26,13 @@ class JemViewAttendee extends JViewLegacy {
 		$this->jemsettings = JemHelper::config();
 
 		// Load the form validation behavior
-		JHtml::_('behavior.formvalidation');
+		HTMLHelper::_('behavior.formvalidation');
 
 		//get vars
 		$event_id = $jinput->getInt('event', 0);
 
 		// Load css
-		JHtml::_('stylesheet', 'com_jem/backend.css', array(), true);
+		HTMLHelper::_('stylesheet', 'com_jem/backend.css', array(), true);
 
 		//Get data from the model
 		$row = $this->get('Data');
@@ -42,7 +42,7 @@ class JemViewAttendee extends JViewLegacy {
 		// TODO: On J! 2.5 we need last param 0 because it defaults to 1 activating a useless feature.
 		//       On J! 3.x this param and the useless feature has been removed so we should remove last param.
 		//       Such changes are of sort "grrr".
-		$lists['users'] = JHtml::_('list.users', 'uid', $row->uid, false, NULL, 'name', 0);
+		$lists['users'] = HTMLHelper::_('list.users', 'uid', $row->uid, false, NULL, 'name', 0);
 
 		//assign data to template
 		$this->lists 	= $lists;

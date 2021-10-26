@@ -10,6 +10,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\HTML\HTMLHelper;
 
 $datemethod      = (int)$params->get('datemethod', 0);
 $showtime        = (int)$params->get('showtime', 0);
@@ -24,7 +25,7 @@ $user_color_is_dark = $params->get('usercolor_is_dark', false);
 $date            = (array)$params->get('date');
 
 if ($flyer_link_type == 1) {
-	JHtml::_('behavior.modal', 'a.flyermodal');
+	HTMLHelper::_('behavior.modal', 'a.flyermodal');
 	$modal = 'flyermodal';
 } elseif ($flyer_link_type == 0) {
 	$modal = 'notmodal';

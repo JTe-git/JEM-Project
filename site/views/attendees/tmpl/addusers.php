@@ -9,11 +9,12 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\HTML\HTMLHelper;
 
 $function = JFactory::getApplication()->input->getCmd('function', 'jSelectUsers');
 $checked = 0;
 
-JHtml::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR.'/helpers/html');
+HTMLHelper::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR.'/helpers/html');
 
 // Get the form.
 JForm::addFormPath(JPATH_COMPONENT . '/models/forms');
@@ -101,9 +102,9 @@ if (empty($form)) {
 					<?php foreach ($this->rows as $i => $row) : ?>
 					<tr class="row<?php echo $i % 2; ?>">
 						<td class="center"><?php echo $this->pagination->getRowOffset( $i ); ?></td>
-						<td class="center"><?php echo JHtml::_('grid.id', $i, $row->id); ?></td>
+						<td class="center"><?php echo HTMLHelper::_('grid.id', $i, $row->id); ?></td>
 						<td align="left"><?php echo $this->escape($row->name); ?></td>
-						<td class="center"><?php echo JHtml::_('jemhtml.toggleAttendanceStatus', $row->status, 0, false); ?></td>
+						<td class="center"><?php echo HTMLHelper::_('jemhtml.toggleAttendanceStatus', $row->status, 0, false); ?></td>
 					</tr>
 					<?php endforeach; ?>
 				<?php endif; ?>

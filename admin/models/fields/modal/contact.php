@@ -9,6 +9,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\HTML\HTMLHelper;
 
 jimport('joomla.form.formfield');
 
@@ -29,7 +30,7 @@ class JFormFieldModal_Contact extends JFormField
 	protected function getInput()
 	{
 		// Load modal behavior
-		JHtml::_('behavior.modal', 'a.modal');
+		HTMLHelper::_('behavior.modal', 'a.modal');
 
 		// Build the script
 		$script = array();

@@ -11,8 +11,9 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\HTML\HTMLHelper;
 
-JHtml::_('behavior.modal', 'a.flyermodal');
+HTMLHelper::_('behavior.modal', 'a.flyermodal');
 ?>
 
 <div class="jemmodulewide<?php echo $params->get('moduleclass_sfx')?>" id="jemmodulewide">

@@ -9,6 +9,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\HTML\HTMLHelper;
 
 /**
  * Category View
@@ -40,8 +41,8 @@ class JemViewCategory extends JemAdminView
 		}
 
 		// Load css
-		JHtml::_('stylesheet', 'com_jem/backend.css', array(), true);
-		JHtml::_('stylesheet', 'com_jem/colorpicker.css', array(), true);
+		HTMLHelper::_('stylesheet', 'com_jem/backend.css', array(), true);
+		HTMLHelper::_('stylesheet', 'com_jem/colorpicker.css', array(), true);
 
 		// Load Script
 		$document->addScript(JUri::root().'media/com_jem/js/colorpicker.js');
@@ -52,12 +53,12 @@ class JemViewCategory extends JemAdminView
 
 		$grouplist = array();
 		if (!empty($this->item->groupid) && !array_key_exists($this->item->groupid, $groups)) {
-			$grouplist[] = JHtml::_('select.option', $this->item->groupid, Text::sprintf('COM_JEM_CATEGORY_UNKNOWN_GROUP', $this->item->groupid));
+			$grouplist[] = HTMLHelper::_('select.option', $this->item->groupid, Text::sprintf('COM_JEM_CATEGORY_UNKNOWN_GROUP', $this->item->groupid));
 		}
-		$grouplist[] = JHtml::_('select.option', '0', Text::_('COM_JEM_CATEGORY_NO_GROUP'));
+		$grouplist[] = HTMLHelper::_('select.option', '0', Text::_('COM_JEM_CATEGORY_NO_GROUP'));
 		$grouplist   = array_merge($grouplist, $groups);
 
-		$Lists['groups'] = JHtml::_('select.genericlist', $grouplist, 'groupid', array('size'=>'1','class'=>'inputbox'), 'value', 'text', $this->item->groupid);
+		$Lists['groups'] = HTMLHelper::_('select.genericlist', $grouplist, 'groupid', array('size'=>'1','class'=>'inputbox'), 'value', 'text', $this->item->groupid);
 		$this->Lists     = $Lists;
 
 		parent::display($tpl);

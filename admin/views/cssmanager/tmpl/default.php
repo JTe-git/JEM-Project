@@ -10,9 +10,10 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\HTML\HTMLHelper;
 
-JHtml::_('behavior.tooltip');
-JHtml::_('behavior.modal');
+HTMLHelper::_('behavior.tooltip');
+HTMLHelper::_('behavior.modal');
 $canDo = JEMHelperBackend::getActions();
 ?>
 
@@ -95,10 +96,10 @@ $canDo = JEMHelperBackend::getActions();
 	<?php if (isset($this->sidebar)) : ?>
 	</div>
 	<?php endif; ?>
-	<?php echo JHtml::_('form.token'); ?>
+	<?php echo HTMLHelper::_('form.token'); ?>
 </form>
 
 <?php
 //keep session alive while editing
-JHtml::_('behavior.keepalive');
+HTMLHelper::_('behavior.keepalive');
 ?>

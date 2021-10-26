@@ -10,10 +10,11 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\HTML\HTMLHelper;
 
-JHtml::_('behavior.tooltip');
+HTMLHelper::_('behavior.tooltip');
 
-JHtml::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR.'/helpers/html');
+HTMLHelper::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR.'/helpers/html');
 
 $colspan = ($this->event->waitinglist ? 10 : 9);
 
@@ -56,18 +57,18 @@ $namelabel = $this->settings->get('global_regname', '1') ? 'COM_JEM_NAME' : 'COM
 <?php
 $sort_by = array();
 if ($this->settings->get('global_regname', '1')) {
-	$sort_by[] = JHtml::_('select.option', 'u.name ASC', Text::_('COM_JEM_NAME') . ' ' . Text::_('COM_JEM_ORDER_ASCENDING'));
-	$sort_by[] = JHtml::_('select.option', 'u.name DESC', Text::_('COM_JEM_NAME') . ' ' . Text::_('COM_JEM_ORDER_DESCENDING'));
+	$sort_by[] = HTMLHelper::_('select.option', 'u.name ASC', Text::_('COM_JEM_NAME') . ' ' . Text::_('COM_JEM_ORDER_ASCENDING'));
+	$sort_by[] = HTMLHelper::_('select.option', 'u.name DESC', Text::_('COM_JEM_NAME') . ' ' . Text::_('COM_JEM_ORDER_DESCENDING'));
 } else {
-	$sort_by[] = JHtml::_('select.option', 'u.username ASC', Text::_('COM_JEM_USERNAME') . ' ' . Text::_('COM_JEM_ORDER_ASCENDING'));
-	$sort_by[] = JHtml::_('select.option', 'u.username DESC', Text::_('COM_JEM_USERNAME') . ' ' . Text::_('COM_JEM_ORDER_DESCENDING'));
+	$sort_by[] = HTMLHelper::_('select.option', 'u.username ASC', Text::_('COM_JEM_USERNAME') . ' ' . Text::_('COM_JEM_ORDER_ASCENDING'));
+	$sort_by[] = HTMLHelper::_('select.option', 'u.username DESC', Text::_('COM_JEM_USERNAME') . ' ' . Text::_('COM_JEM_ORDER_DESCENDING'));
 }
-$sort_by[] = JHtml::_('select.option', 'r.uregdate ASC', Text::_('COM_JEM_REGDATE') . ' ' . Text::_('COM_JEM_ORDER_ASCENDING'));
-$sort_by[] = JHtml::_('select.option', 'r.uregdate DESC', Text::_('COM_JEM_REGDATE') . ' ' . Text::_('COM_JEM_ORDER_DESCENDING'));
-$sort_by[] = JHtml::_('select.option', 'r.status ASC', Text::_('COM_JEM_STATUS') . ' ' . Text::_('COM_JEM_ORDER_ASCENDING'));
-$sort_by[] = JHtml::_('select.option', 'r.status DESC', Text::_('COM_JEM_STATUS') . ' ' . Text::_('COM_JEM_ORDER_DESCENDING'));
+$sort_by[] = HTMLHelper::_('select.option', 'r.uregdate ASC', Text::_('COM_JEM_REGDATE') . ' ' . Text::_('COM_JEM_ORDER_ASCENDING'));
+$sort_by[] = HTMLHelper::_('select.option', 'r.uregdate DESC', Text::_('COM_JEM_REGDATE') . ' ' . Text::_('COM_JEM_ORDER_DESCENDING'));
+$sort_by[] = HTMLHelper::_('select.option', 'r.status ASC', Text::_('COM_JEM_STATUS') . ' ' . Text::_('COM_JEM_ORDER_ASCENDING'));
+$sort_by[] = HTMLHelper::_('select.option', 'r.status DESC', Text::_('COM_JEM_STATUS') . ' ' . Text::_('COM_JEM_ORDER_DESCENDING'));
 
-$this->lists['sort_by'] = JHtml::_('select.genericlist', $sort_by, 'sort_by', array('size'=>'1','class'=>'inputbox','onchange'=>'fullOrdering(\'sort_by\', \'\');'), 'value', 'text', $this->lists['order'] . ' ' . $this->lists['order_Dir']);
+$this->lists['sort_by'] = HTMLHelper::_('select.genericlist', $sort_by, 'sort_by', array('size'=>'1','class'=>'inputbox','onchange'=>'fullOrdering(\'sort_by\', \'\');'), 'value', 'text', $this->lists['order'] . ' ' . $this->lists['order_Dir']);
 ?>
 
 <div id="jem" class="jem_attendees<?php echo $this->pageclass_sfx;?>">
@@ -110,7 +111,7 @@ $this->lists['sort_by'] = JHtml::_('select.genericlist', $sort_by, 'sort_by', ar
 			?>
 			<br />
 			<br />
-			<b><?php echo JHtml::_('image', 'com_jem/icon-16-warning.png', null, 'class="icon-inline-left"', true) . Text::_('COM_JEM_REGISTRATION_DISABLED'); ?></b><br />
+			<b><?php echo HTMLHelper::_('image', 'com_jem/icon-16-warning.png', null, 'class="icon-inline-left"', true) . Text::_('COM_JEM_REGISTRATION_DISABLED'); ?></b><br />
 			<?php echo Text::_(($g_reg < 1) ? 'COM_JEM_REGISTRATION_DISABLED_GLOBAL_HINT' : 'COM_JEM_REGISTRATION_DISABLED_EVENT_HINT'); ?>
 			<?php endif; ?>
 		</div>
@@ -203,26 +204,26 @@ $this->lists['sort_by'] = JHtml::_('select.genericlist', $sort_by, 'sort_by', ar
 					</div>
 					<?php endif; ?>
 					<div class="span<?php echo $a_span['date']; ?> date">
-						<?php if (!empty($row->uregdate)) { echo JHtml::_('date', $row->uregdate, Text::_('DATE_FORMAT_LC2')); } ?>
+						<?php if (!empty($row->uregdate)) { echo HTMLHelper::_('date', $row->uregdate, Text::_('DATE_FORMAT_LC2')); } ?>
 					</div>
 					<div class="span<?php echo $a_span['status']; ?> status">
 						<?php
 						$status = (int)$row->status;
 						if ($status === 1 && $row->waiting == 1) { $status = 2; }
-						echo JHtml::_('jemhtml.toggleAttendanceStatus', $status, $row->id, true);
+						echo HTMLHelper::_('jemhtml.toggleAttendanceStatus', $status, $row->id, true);
 						?><span class="info-text"><?php
-							echo JHtml::_('jemhtml.getAttendanceStatusText', $status, $row->id, false, true);
+							echo HTMLHelper::_('jemhtml.getAttendanceStatusText', $status, $row->id, false, true);
 						?></span>
 					</div>
 					<?php if (array_key_exists('comment', $a_span)) : ?>
 					<div class="span<?php echo $a_span['comment']; ?> comment">
 						<?php $cmnt = (\Joomla\String\StringHelper::strlen($row->comment) > 16) ? (\Joomla\String\StringHelper::substr($row->comment, 0, 14).'&hellip;') : $row->comment; ?>
-						<?php if (!empty($cmnt)) { echo JHtml::_('tooltip', $row->comment, null, null, $cmnt, null, null); } ?>
+						<?php if (!empty($cmnt)) { echo HTMLHelper::_('tooltip', $row->comment, null, null, $cmnt, null, null); } ?>
 					</div>
 					<?php endif;?>
 					<div class="span<?php echo $a_span['remove']; ?> remove">
 						<a href="<?php echo JRoute::_($del_link.'&cid[]='.$row->id); ?>"><?php
-							echo JHtml::_('image','com_jem/publish_r.png', Text::_('COM_JEM_ATTENDEES_DELETE'), array('title' => Text::_('COM_JEM_ATTENDEES_DELETE'), 'class' => (version_compare(JVERSION, '3.3', 'lt')) ? 'hasTip' : 'hasTooltip'), true);
+							echo HTMLHelper::_('image','com_jem/publish_r.png', Text::_('COM_JEM_ATTENDEES_DELETE'), array('title' => Text::_('COM_JEM_ATTENDEES_DELETE'), 'class' => (version_compare(JVERSION, '3.3', 'lt')) ? 'hasTip' : 'hasTooltip'), true);
 						?></a><span class="info-text"><?php
 							echo Text::_('COM_JEM_ATTENDEES_DELETE');
 						?></span>
@@ -233,7 +234,7 @@ $this->lists['sort_by'] = JHtml::_('select.genericlist', $sort_by, 'sort_by', ar
 
 		<?php endif; /* empty($this->rows) */ ?>
 
-		<?php echo JHtml::_('form.token'); ?>
+		<?php echo HTMLHelper::_('form.token'); ?>
 		<input type="hidden" name="option" value="com_jem" />
 		<input type="hidden" name="boxchecked" value="0" />
 		<input type="hidden" name="task" value="" />

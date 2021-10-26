@@ -9,11 +9,12 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\HTML\HTMLHelper;
 
 $function = JFactory::getApplication()->input->getCmd('function', 'jSelectUsers');
 $checked = 0;
 
-JHtml::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR.'/helpers/html');
+HTMLHelper::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR.'/helpers/html');
 ?>
 
 <script type="text/javascript">
@@ -104,8 +105,8 @@ JHtml::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR.'/helpers/html');
             
             <div class="jem-event-info-small jem-users-checkall">
               <?php
-							//echo JHtml::_('grid.id', $i, $row->id);
-							$cb = JHtml::_('grid.id', $i, $row->id);
+							//echo HTMLHelper::_('grid.id', $i, $row->id);
+							$cb = HTMLHelper::_('grid.id', $i, $row->id);
 							if ($row->status == 0) {
 							//	JemHelper::addLogEntry('before: '.$cb, __METHOD__);
 								$cb = preg_replace('/(onclick=)/', 'checked $1', $cb);
@@ -121,7 +122,7 @@ JHtml::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR.'/helpers/html');
             </div>
             
             <div class="jem-event-info-small jem-users-state">
-              <?php echo JHtml::_('jemhtml.toggleAttendanceStatus', $row->status, 0, false); ?>
+              <?php echo HTMLHelper::_('jemhtml.toggleAttendanceStatus', $row->status, 0, false); ?>
             </div>
           </li>
         <?php endforeach; ?>

@@ -10,10 +10,11 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\HTML\HTMLHelper;
 
-JHtml::_('behavior.tooltip');
-JHtml::_('behavior.formvalidation');
-JHtml::_('behavior.keepalive');
+HTMLHelper::_('behavior.tooltip');
+HTMLHelper::_('behavior.formvalidation');
+HTMLHelper::_('behavior.keepalive');
 
 // Create shortcut to parameters.
 $params = $this->state->get('params');
@@ -71,8 +72,8 @@ $params = $params->toArray();
 
 	<!-- START OF LEFT DIV -->
 	<div class="width-55 fltlft">
-		<?php echo JHtml::_('tabs.start', 'det-pane'); ?>
-		<?php echo JHtml::_('tabs.panel',Text::_('COM_JEM_GROUP_INFO_TAB'), 'group-info' ); ?>
+		<?php echo HTMLHelper::_('tabs.start', 'det-pane'); ?>
+		<?php echo HTMLHelper::_('tabs.panel',Text::_('COM_JEM_GROUP_INFO_TAB'), 'group-info' ); ?>
 		<fieldset class="adminform">
 			<legend>
 				<?php echo empty($this->item->id) ? Text::_('COM_JEM_NEW_GROUP') : Text::sprintf('COM_JEM_GROUP_DETAILS', $this->item->id); ?>
@@ -117,9 +118,9 @@ $params = $params->toArray();
 	<!--  START RIGHT DIV -->
 	<div class="width-40 fltrt">
 		<!-- START OF SLIDERS -->
-		<?php echo JHtml::_('sliders.start', 'group-sliders-'.$this->item->id, array('useCookie'=>1)); ?>
+		<?php echo HTMLHelper::_('sliders.start', 'group-sliders-'.$this->item->id, array('useCookie'=>1)); ?>
 		<!-- START OF PANEL PUBLISHING -->
-		<?php echo JHtml::_('sliders.panel', Text::_('COM_JEM_GROUP_PERMISSIONS'), 'group-permission'); ?>
+		<?php echo HTMLHelper::_('sliders.panel', Text::_('COM_JEM_GROUP_PERMISSIONS'), 'group-permission'); ?>
 		<!-- RETRIEVING OF FIELDSET PUBLISHING -->
 		<fieldset class="panelform">
 			<ul class="adminformlist">
@@ -137,10 +138,10 @@ $params = $params->toArray();
 				<?php echo $this->form->getInput('editevent'); ?></li>
 			</ul>
 		</fieldset>
-	<?php echo JHtml::_('sliders.end'); ?>
+	<?php echo HTMLHelper::_('sliders.end'); ?>
 		<input type="hidden" name="task" value="" />
 				<!--  END RIGHT DIV -->
-				<?php echo JHtml::_( 'form.token' ); ?>
+				<?php echo HTMLHelper::_( 'form.token' ); ?>
 				</div>
 		<div class="clr"></div>
 </form>

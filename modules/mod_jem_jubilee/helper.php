@@ -10,6 +10,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\HTML\HTMLHelper;
 
 JModelLegacy::addIncludePath(JPATH_SITE.'/components/com_jem/models', 'JemModel');
 
@@ -176,7 +177,7 @@ abstract class ModJemJubileeHelper
 		}
 
 		if ($params->get('flyer_link_type', 0) == 1) {
-			JHtml::_('behavior.modal', 'a.flyermodal');
+			HTMLHelper::_('behavior.modal', 'a.flyermodal');
 		}
 
 		####

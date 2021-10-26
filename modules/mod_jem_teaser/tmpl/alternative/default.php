@@ -10,9 +10,10 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\HTML\HTMLHelper;
 
 if ($params->get('use_modal', 0)) {
-	JHtml::_('behavior.modal', 'a.flyermodal');
+	HTMLHelper::_('behavior.modal', 'a.flyermodal');
 	$modal = 'flyermodal';
 } else {
 	$modal = 'notmodal';

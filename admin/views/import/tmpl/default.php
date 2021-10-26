@@ -10,6 +10,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\HTML\HTMLHelper;
 ?>
 <?php if($this->progress->step > 1) : ?>
 	<meta http-equiv="refresh" content="1; url=index.php?option=com_jem&amp;view=import&amp;task=import.eventlistimport&amp;step=<?php
@@ -24,9 +25,9 @@ use Joomla\CMS\Language\Text;
 <div id="j-main-container" class="span10">
 <?php endif; ?>
 
-<?php echo JHtml::_('tabs.start', 'det-pane', array('useCookie'=>1)); ?>
+<?php echo HTMLHelper::_('tabs.start', 'det-pane', array('useCookie'=>1)); ?>
 
-<?php echo JHtml::_('tabs.panel',Text::_('COM_JEM_IMPORT_EL_TAB'), 'el-import' ); ?>
+<?php echo HTMLHelper::_('tabs.panel',Text::_('COM_JEM_IMPORT_EL_TAB'), 'el-import' ); ?>
 
 <?php if($this->progress->step == 0 && $this->existingJemData) : ?>
 	<p><?php echo Text::_('COM_JEM_IMPORT_EL_EXISTING_JEM_DATA'); ?></p>
@@ -92,7 +93,7 @@ use Joomla\CMS\Language\Text;
 				<legend><?php echo Text::_('COM_JEM_IMPORT_EL_IMPORT_FROM_EL'); ?></legend>
 				<p><?php echo Text::_('COM_JEM_IMPORT_EL_PREFIX'); ?></p>
 				<p><?php echo Text::_('COM_JEM_IMPORT_EL_PREFIX_ATTENTION'); ?></p>
-				<?php echo JHtml::_('form.token'); ?>
+				<?php echo HTMLHelper::_('form.token'); ?>
 				<input type="hidden" name="task" id="el-task0" value="" />
 				<input type="hidden" name="option" value="com_jem" />
 				<input type="hidden" name="view" value="import" />
@@ -144,7 +145,7 @@ use Joomla\CMS\Language\Text;
 					<?php endif; ?>
 					<?php echo Text::_('COM_JEM_IMPORT_EL_IMPORT_FROM_JOOMLA15'); ?>
 				</p>
-				<?php echo JHtml::_('form.token'); ?>
+				<?php echo HTMLHelper::_('form.token'); ?>
 				<input type="hidden" name="startToken" value="1" />
 				<input type="hidden" name="step" value="2" />
 				<input type="hidden" name="option" value="com_jem" />
@@ -161,7 +162,7 @@ use Joomla\CMS\Language\Text;
 <?php endif; ?>
 
 
-<?php echo JHtml::_('tabs.panel',Text::_('COM_JEM_IMPORT_CSV_TAB'), 'csv-import' ); ?>
+<?php echo HTMLHelper::_('tabs.panel',Text::_('COM_JEM_IMPORT_CSV_TAB'), 'csv-import' ); ?>
 
 <form action="index.php" method="post" name="adminForm" enctype="multipart/form-data" id="adminForm">
 
@@ -186,7 +187,7 @@ use Joomla\CMS\Language\Text;
 	<span id="upload-clear"></span><br /><br/>
 
 	<label for="replace_events"><?php echo Text::_('COM_JEM_IMPORT_REPLACEIFEXISTS').':'; ?></label>
-	<?php echo JHtml::_('select.booleanlist', 'replace_events', 'class="inputbox"', 0); ?>
+	<?php echo HTMLHelper::_('select.booleanlist', 'replace_events', 'class="inputbox"', 0); ?>
 	</fieldset>
 
 
@@ -206,7 +207,7 @@ use Joomla\CMS\Language\Text;
 	<span id="upload-clear"></span><br /><br/>
 
 	<label for="replace_catevents"><?php echo Text::_('COM_JEM_IMPORT_REPLACEIFEXISTS').':'; ?></label>
-	<?php echo JHtml::_('select.booleanlist', 'replace_catevents', 'class="inputbox"', 0); ?>
+	<?php echo HTMLHelper::_('select.booleanlist', 'replace_catevents', 'class="inputbox"', 0); ?>
 	</fieldset>
 
 	<div class="clr"></div>
@@ -230,7 +231,7 @@ use Joomla\CMS\Language\Text;
 	<span id="upload-clear"></span><br /><br/>
 
 	<label for="replace_venues"><?php echo Text::_('COM_JEM_IMPORT_REPLACEIFEXISTS').':'; ?></label>
-	<?php echo JHtml::_('select.booleanlist', 'replace_venues', 'class="inputbox"', 0); ?>
+	<?php echo HTMLHelper::_('select.booleanlist', 'replace_venues', 'class="inputbox"', 0); ?>
 	</fieldset>
 
 	<fieldset class="adminform">
@@ -249,7 +250,7 @@ use Joomla\CMS\Language\Text;
 	<span id="upload-clear"></span><br /><br/>
 
 	<label for="replace_categories"><?php echo Text::_('COM_JEM_IMPORT_REPLACEIFEXISTS').':'; ?></label>
-	<?php echo JHtml::_('select.booleanlist', 'replace_categories', 'class="inputbox"', 0); ?>
+	<?php echo HTMLHelper::_('select.booleanlist', 'replace_categories', 'class="inputbox"', 0); ?>
 	</fieldset>
 
 	<div class="clr"></div>
@@ -260,13 +261,13 @@ use Joomla\CMS\Language\Text;
 	</tr>
 	</table>
 
-	<?php echo JHtml::_('form.token'); ?>
+	<?php echo HTMLHelper::_('form.token'); ?>
 	<input type="hidden" name="option" value="com_jem" />
 	<input type="hidden" name="view" value="import" />
 	<input type="hidden" name="controller" value="import" />
 	<input type="hidden" name="task" id="task1" value="" />
 </form>
-<?php echo JHtml::_('tabs.end'); ?>
+<?php echo HTMLHelper::_('tabs.end'); ?>
 
 <?php if (isset($this->sidebar)) : ?>
 </div>

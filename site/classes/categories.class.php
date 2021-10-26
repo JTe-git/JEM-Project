@@ -10,6 +10,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\HTML\HTMLHelper;
 
 // ensure JemFactory is loaded (because this class is used by modules or plugins too)
 require_once(JPATH_SITE.'/components/com_jem/factory.php');
@@ -684,12 +685,12 @@ class JemCategories
 		$catlist = array();
 
 		if ($top) {
-			$catlist[] = JHtml::_('select.option', '0', Text::_('COM_JEM_TOPLEVEL'));
+			$catlist[] = HTMLHelper::_('select.option', '0', Text::_('COM_JEM_TOPLEVEL'));
 		}
 
 		$catlist = array_merge($catlist, self::getcatselectoptions($list));
 
-		return JHtml::_('select.genericlist', $catlist, $name, $class, 'value', 'text', $selected);
+		return HTMLHelper::_('select.genericlist', $catlist, $name, $class, 'value', 'text', $selected);
 	}
 
 	/**
@@ -707,7 +708,7 @@ class JemCategories
 		$catlist = array();
 
 		foreach ($list as $item) {
-			$catlist[] = JHtml::_('select.option', $item->id, $item->treename, isset($item->disable) ? array('disable' => $item->disable) : array());
+			$catlist[] = HTMLHelper::_('select.option', $item->id, $item->treename, isset($item->disable) ? array('disable' => $item->disable) : array());
 		}
 
 		return $catlist;

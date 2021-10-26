@@ -9,11 +9,12 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\HTML\HTMLHelper;
 
 $function = JFactory::getApplication()->input->getCmd('function', 'jSelectUsers');
 $checked = 0;
 
-JHtml::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR.'/helpers/html');
+HTMLHelper::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR.'/helpers/html');
 
 // Get the form.
 JForm::addFormPath(JPATH_COMPONENT . '/models/forms');
@@ -120,7 +121,7 @@ if (empty($form)) {
             </div>
             
             <div class="jem-event-info-small jem-users-checkall">
-              <?php echo JHtml::_('grid.id', $i, $row->id); ?>
+              <?php echo HTMLHelper::_('grid.id', $i, $row->id); ?>
             </div>
             
             <div class="jem-event-info-small jem-users-name">
@@ -128,7 +129,7 @@ if (empty($form)) {
             </div>
             
             <div class="jem-event-info-small jem-users-state">
-              <?php echo JHtml::_('jemhtml.toggleAttendanceStatus', $row->status, 0, false); ?>
+              <?php echo HTMLHelper::_('jemhtml.toggleAttendanceStatus', $row->status, 0, false); ?>
             </div>
           </li>
         <?php endforeach; ?>

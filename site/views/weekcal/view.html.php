@@ -9,6 +9,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\HTML\HTMLHelper;
 
 /**
  * Weekcal-View
@@ -21,7 +22,7 @@ class JemViewWeekcal extends JemView
 	public function display($tpl = null)
 	{
 		// Load tooltips behavior
-		JHtml::_('behavior.tooltip');
+		HTMLHelper::_('behavior.tooltip');
 
 		// initialize variables
 		$app          = JFactory::getApplication();
@@ -72,7 +73,7 @@ class JemViewWeekcal extends JemView
 		$document->addStyleDeclaration($style);
 
 		// add javascript (using full path - see issue #590)
-		JHtml::_('script', 'media/com_jem/js/calendar.js');
+		HTMLHelper::_('script', 'media/com_jem/js/calendar.js');
 
 		$model = $this->getModel();
 		$rows = $this->get('Items');

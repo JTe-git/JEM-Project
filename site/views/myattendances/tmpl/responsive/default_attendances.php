@@ -9,10 +9,11 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\HTML\HTMLHelper;
 
-JHtml::_('behavior.tooltip');
+HTMLHelper::_('behavior.tooltip');
 
-JHtml::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR.'/helpers/html');
+HTMLHelper::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR.'/helpers/html');
 ?>
 
 <style>
@@ -159,24 +160,24 @@ JHtml::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR.'/helpers/html');
 
 	<div class="jem-sort jem-sort-small">
     <div class="jem-list-row jem-small-list">
-      <div id="jem_date" class="sectiontableheader">&nbsp;<?php echo JHtml::_('grid.sort', 'COM_JEM_TABLE_DATE', 'a.dates', $this->lists['order_Dir'], $this->lists['order']); ?></div>
+      <div id="jem_date" class="sectiontableheader">&nbsp;<?php echo HTMLHelper::_('grid.sort', 'COM_JEM_TABLE_DATE', 'a.dates', $this->lists['order_Dir'], $this->lists['order']); ?></div>
       <?php if ($this->jemsettings->showtitle == 1) : ?>              
-        <div id="jem_title" class="sectiontableheader">&nbsp;<?php echo JHtml::_('grid.sort', 'COM_JEM_TABLE_TITLE', 'a.title', $this->lists['order_Dir'], $this->lists['order']); ?></div>
+        <div id="jem_title" class="sectiontableheader">&nbsp;<?php echo HTMLHelper::_('grid.sort', 'COM_JEM_TABLE_TITLE', 'a.title', $this->lists['order_Dir'], $this->lists['order']); ?></div>
       <?php endif; ?> 
       <?php if ($this->jemsettings->showlocate == 1) : ?>
-        <div id="jem_location" class="sectiontableheader">&nbsp;<?php echo JHtml::_('grid.sort', 'COM_JEM_TABLE_LOCATION', 'l.venue', $this->lists['order_Dir'], $this->lists['order']); ?></div>
+        <div id="jem_location" class="sectiontableheader">&nbsp;<?php echo HTMLHelper::_('grid.sort', 'COM_JEM_TABLE_LOCATION', 'l.venue', $this->lists['order_Dir'], $this->lists['order']); ?></div>
       <?php endif; ?>
       <?php if ($this->jemsettings->showcity == 1) : ?>
-        <div id="jem_city" class="sectiontableheader">&nbsp;<?php echo JHtml::_('grid.sort', 'COM_JEM_TABLE_CITY', 'l.city', $this->lists['order_Dir'], $this->lists['order']); ?></div>
+        <div id="jem_city" class="sectiontableheader">&nbsp;<?php echo HTMLHelper::_('grid.sort', 'COM_JEM_TABLE_CITY', 'l.city', $this->lists['order_Dir'], $this->lists['order']); ?></div>
       <?php endif; ?>
       <?php if ($this->jemsettings->showstate == 1) : ?>
-        <div id="jem_state" class="sectiontableheader">&nbsp;<?php echo JHtml::_('grid.sort', 'COM_JEM_TABLE_STATE', 'l.state', $this->lists['order_Dir'], $this->lists['order']); ?></div>
+        <div id="jem_state" class="sectiontableheader">&nbsp;<?php echo HTMLHelper::_('grid.sort', 'COM_JEM_TABLE_STATE', 'l.state', $this->lists['order_Dir'], $this->lists['order']); ?></div>
       <?php endif; ?>
       <?php if ($this->jemsettings->showcat == 1) : ?>
-        <div id="jem_category" class="sectiontableheader">&nbsp;<?php echo JHtml::_('grid.sort', 'COM_JEM_TABLE_CATEGORY', 'c.catname', $this->lists['order_Dir'], $this->lists['order']); ?></div>
+        <div id="jem_category" class="sectiontableheader">&nbsp;<?php echo HTMLHelper::_('grid.sort', 'COM_JEM_TABLE_CATEGORY', 'c.catname', $this->lists['order_Dir'], $this->lists['order']); ?></div>
       <?php endif; ?>
       <?php /*if ($this->event->waitinglist):*/ ?>
-        <div id="jem_status" class="sectiontableheader"><?php echo JHtml::_('grid.sort', 'COM_JEM_HEADER_WAITINGLIST_STATUS', 'r.status', $this->lists['order_Dir'], $this->lists['order']); ?></div>	
+        <div id="jem_status" class="sectiontableheader"><?php echo HTMLHelper::_('grid.sort', 'COM_JEM_HEADER_WAITINGLIST_STATUS', 'r.status', $this->lists['order_Dir'], $this->lists['order']); ?></div>	
       <?php /*endif;*/?>
       <?php if (!empty($this->jemsettings->regallowcomments)) : ?>
         <div id="jem_comment" class="sectiontableheader"><?php echo Text::_('COM_JEM_COMMENT'); ?></div>
@@ -270,7 +271,7 @@ JHtml::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR.'/helpers/html');
 						<?php
 						$status = (int)$row->status;
 						if ($status === 1 && $row->waiting == 1) { $status = 2; }
-						echo JHtml::_('jemhtml.toggleAttendanceStatus', $status, $row->id, false, $this->print);
+						echo HTMLHelper::_('jemhtml.toggleAttendanceStatus', $status, $row->id, false, $this->print);
 						?>
 					</div>
 
@@ -280,7 +281,7 @@ JHtml::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR.'/helpers/html');
               $len  = ($this->print) ? 256 : 16;
               $cmnt = (\Joomla\String\StringHelper::strlen($row->comment) > $len) ? (\Joomla\String\StringHelper::substr($row->comment, 0, $len - 2).'&hellip;') : $row->comment;
               if (!empty($cmnt)) :
-                echo ($this->print) ? $cmnt : JHtml::_('tooltip', $row->comment, null, null, $cmnt, null, null);
+                echo ($this->print) ? $cmnt : HTMLHelper::_('tooltip', $row->comment, null, null, $cmnt, null, null);
               endif;
               ?>
             </div>

@@ -9,6 +9,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\HTML\HTMLHelper;
 
 /**
  * Editvenue-View
@@ -142,9 +143,9 @@ class JemViewEditvenue extends JemView
 			return false;
 		}
 
-		JHtml::_('behavior.framework');
-		JHtml::_('behavior.formvalidation');
-		JHtml::_('behavior.tooltip');
+		HTMLHelper::_('behavior.framework');
+		HTMLHelper::_('behavior.formvalidation');
+		HTMLHelper::_('behavior.tooltip');
 
 		$access2      = JemHelper::getAccesslevelOptions(true);
 		$this->access = $access2;
@@ -156,8 +157,8 @@ class JemViewEditvenue extends JemView
 		JemHelper::loadCustomTag();
 
 		// Load script
-		JHtml::_('script', 'com_jem/attachments.js', false, true);
-		JHtml::_('script', 'com_jem/other.js', false, true);
+		HTMLHelper::_('script', 'com_jem/attachments.js', false, true);
+		HTMLHelper::_('script', 'com_jem/other.js', false, true);
 		$key = trim($settings->get('global_googleapi', ''));
 		$document->addScript('https://maps.googleapis.com/maps/api/js?'.(!empty($key) ? 'key='.$key.'&amp;' : '').'sensor=false&amp;libraries=places&language='.$language);
 
@@ -166,7 +167,7 @@ class JemViewEditvenue extends JemView
 
 		// JQuery scripts
 		$document->addScript('https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js');
-		JHtml::_('script', 'com_jem/jquery.geocomplete.js', false, true);
+		HTMLHelper::_('script', 'com_jem/jquery.geocomplete.js', false, true);
 
 		// No permissions required/useful on this view
 		$permissions = new stdClass();
@@ -176,7 +177,7 @@ class JemViewEditvenue extends JemView
 		$this->settings      = $settings;
 		$this->permissions   = $permissions;
 		$this->limage        = JemImage::flyercreator($this->item->locimage, 'venue');
-		$this->infoimage     = JHtml::_('image', 'com_jem/icon-16-hint.png', Text::_('COM_JEM_NOTES'), NULL, true);
+		$this->infoimage     = HTMLHelper::_('image', 'com_jem/icon-16-hint.png', Text::_('COM_JEM_NOTES'), NULL, true);
 		$this->user          = $user;
 
 		if (!$publisher) {

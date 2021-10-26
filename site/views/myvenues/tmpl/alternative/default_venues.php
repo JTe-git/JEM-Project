@@ -10,8 +10,9 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\HTML\HTMLHelper;
 
-JHtml::_('behavior.tooltip');
+HTMLHelper::_('behavior.tooltip');
 ?>
 
 <script type="text/javascript">
@@ -44,22 +45,22 @@ JHtml::_('behavior.tooltip');
 	$sort_by = array();
 
 	if (/*$this->jemsettings->showlocate ==*/ 1) {
-		$sort_by[] = JHtml::_('select.option', 'l.venue ASC', Text::_('COM_JEM_VENUE') . ' ' . Text::_('COM_JEM_ORDER_ASCENDING'));
-		$sort_by[] = JHtml::_('select.option', 'l.venue DESC', Text::_('COM_JEM_VENUE') . ' ' . Text::_('COM_JEM_ORDER_DESCENDING'));
+		$sort_by[] = HTMLHelper::_('select.option', 'l.venue ASC', Text::_('COM_JEM_VENUE') . ' ' . Text::_('COM_JEM_ORDER_ASCENDING'));
+		$sort_by[] = HTMLHelper::_('select.option', 'l.venue DESC', Text::_('COM_JEM_VENUE') . ' ' . Text::_('COM_JEM_ORDER_DESCENDING'));
 	}
 	if ($this->jemsettings->showcity == 1) {
-		$sort_by[] = JHtml::_('select.option', 'l.city ASC', Text::_('COM_JEM_CITY') . ' ' . Text::_('COM_JEM_ORDER_ASCENDING'));
-		$sort_by[] = JHtml::_('select.option', 'l.city DESC', Text::_('COM_JEM_CITY') . ' ' . Text::_('COM_JEM_ORDER_DESCENDING'));
+		$sort_by[] = HTMLHelper::_('select.option', 'l.city ASC', Text::_('COM_JEM_CITY') . ' ' . Text::_('COM_JEM_ORDER_ASCENDING'));
+		$sort_by[] = HTMLHelper::_('select.option', 'l.city DESC', Text::_('COM_JEM_CITY') . ' ' . Text::_('COM_JEM_ORDER_DESCENDING'));
 	}
 	if ($this->jemsettings->showstate == 1) {
-		$sort_by[] = JHtml::_('select.option', 'l.state ASC', Text::_('COM_JEM_STATE') . ' ' . Text::_('COM_JEM_ORDER_ASCENDING'));
-		$sort_by[] = JHtml::_('select.option', 'l.state DESC', Text::_('COM_JEM_STATE') . ' ' . Text::_('COM_JEM_ORDER_DESCENDING'));
+		$sort_by[] = HTMLHelper::_('select.option', 'l.state ASC', Text::_('COM_JEM_STATE') . ' ' . Text::_('COM_JEM_ORDER_ASCENDING'));
+		$sort_by[] = HTMLHelper::_('select.option', 'l.state DESC', Text::_('COM_JEM_STATE') . ' ' . Text::_('COM_JEM_ORDER_DESCENDING'));
 	}
 	if (1) {
-		$sort_by[] = JHtml::_('select.option', 'l.country ASC', Text::_('COM_JEM_COUNTRY') . ' ' . Text::_('COM_JEM_ORDER_ASCENDING'));
-		$sort_by[] = JHtml::_('select.option', 'l.country DESC', Text::_('COM_JEM_COUNTRY') . ' ' . Text::_('COM_JEM_ORDER_DESCENDING'));
+		$sort_by[] = HTMLHelper::_('select.option', 'l.country ASC', Text::_('COM_JEM_COUNTRY') . ' ' . Text::_('COM_JEM_ORDER_ASCENDING'));
+		$sort_by[] = HTMLHelper::_('select.option', 'l.country DESC', Text::_('COM_JEM_COUNTRY') . ' ' . Text::_('COM_JEM_ORDER_DESCENDING'));
 	}
-	$this->lists['sort_by'] = JHtml::_('select.genericlist', $sort_by, 'sort_by', array('size'=>'1','class'=>'inputbox','onchange'=>'fullOrdering(\'sort_by\', \'\');'), 'value', 'text', $this->lists['order'] . ' ' . $this->lists['order_Dir']);
+	$this->lists['sort_by'] = HTMLHelper::_('select.genericlist', $sort_by, 'sort_by', array('size'=>'1','class'=>'inputbox','onchange'=>'fullOrdering(\'sort_by\', \'\');'), 'value', 'text', $this->lists['order'] . ' ' . $this->lists['order_Dir']);
 ?>
 
 <?php if (!$this->params->get('show_page_heading', 1)) : /* hide this if page heading is shown */ ?>
@@ -162,7 +163,7 @@ JHtml::_('behavior.tooltip');
 					<div class="span<?php echo $a_span['check']; ?>">
 						<?php
 						if (!empty($row->params) && $row->params->get('access-change', false)) :
-							echo JHtml::_('grid.id', $i, $row->id);
+							echo HTMLHelper::_('grid.id', $i, $row->id);
 						endif;
 						?>
 					</div>
@@ -215,7 +216,7 @@ JHtml::_('behavior.tooltip');
 					<div class="span<?php echo $a_span['status']; ?> status">
 						<?php // Ensure icon is not clickable if user isn't allowed to change state!
 						$enabled = empty($this->print) && !empty($row->params) && $row->params->get('access-change', false);
-						echo JHtml::_('jgrid.published', $row->published, $i, 'myvenues.', $enabled);
+						echo HTMLHelper::_('jgrid.published', $row->published, $i, 'myvenues.', $enabled);
 						?>
 					</div>
 					<?php endif; ?>
@@ -229,7 +230,7 @@ JHtml::_('behavior.tooltip');
 	<input type="hidden" name="boxchecked" value="0" />
 	<input type="hidden" name="task" value="<?php echo $this->task; ?>" />
 	<input type="hidden" name="option" value="com_jem" />
-	<?php echo JHtml::_('form.token'); ?>
+	<?php echo HTMLHelper::_('form.token'); ?>
 </form>
 
 <div class="pagination">

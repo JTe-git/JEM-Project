@@ -10,7 +10,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
-
+use Joomla\CMS\HTML\HTMLHelper;
 
 /**
  * View class Group
@@ -39,9 +39,9 @@ class JemViewGroup extends JemAdminView
 			return false;
 		}
 
-		JHtml::_('behavior.modal', 'a.modal');
-		JHtml::_('behavior.tooltip');
-		JHtml::_('behavior.formvalidation');
+		HTMLHelper::_('behavior.modal', 'a.modal');
+		HTMLHelper::_('behavior.tooltip');
+		HTMLHelper::_('behavior.formvalidation');
 
 		//initialise variables
 		$jemsettings = JemHelper::config();
@@ -52,7 +52,7 @@ class JemViewGroup extends JemAdminView
 		$url 		= JUri::root();
 
 		// Load css
-		JHtml::_('stylesheet', 'com_jem/backend.css', array(), true);
+		HTMLHelper::_('stylesheet', 'com_jem/backend.css', array(), true);
 
 		$maintainers 		= $this->get('Members');
 		$available_users 	= $this->get('Available');
@@ -62,8 +62,8 @@ class JemViewGroup extends JemAdminView
 
 		//create selectlists
 		$lists = array();
-		$lists['maintainers']		= JHtml::_('select.genericlist', $maintainers, 'maintainers[]', array('class'=>'inputbox','size'=>'20','onDblClick'=>'moveOptions(document.adminForm[\'maintainers[]\'], document.adminForm[\'available_users\'])', 'multiple'=>'multiple', 'style'=>'padding: 6px; width: 98%;'), 'value', 'text');
-		$lists['available_users']	= JHtml::_('select.genericlist', $available_users, 'available_users', array('class'=>'inputbox','size'=>'20','onDblClick'=>'moveOptions(document.adminForm[\'available_users\'], document.adminForm[\'maintainers[]\'])', 'multiple'=>'multiple','style'=>'padding: 6px; width: 98%;'), 'value', 'text');
+		$lists['maintainers']		= HTMLHelper::_('select.genericlist', $maintainers, 'maintainers[]', array('class'=>'inputbox','size'=>'20','onDblClick'=>'moveOptions(document.adminForm[\'maintainers[]\'], document.adminForm[\'available_users\'])', 'multiple'=>'multiple', 'style'=>'padding: 6px; width: 98%;'), 'value', 'text');
+		$lists['available_users']	= HTMLHelper::_('select.genericlist', $available_users, 'available_users', array('class'=>'inputbox','size'=>'20','onDblClick'=>'moveOptions(document.adminForm[\'available_users\'], document.adminForm[\'maintainers[]\'])', 'multiple'=>'multiple','style'=>'padding: 6px; width: 98%;'), 'value', 'text');
 
 		$this->jemsettings		= $jemsettings;
 		$this->lists 		= $lists;

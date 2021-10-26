@@ -10,6 +10,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\HTML\HTMLHelper;
 ?>
 
 <fieldset>
@@ -51,7 +52,7 @@ use Joomla\CMS\Language\Text;
 								$attribs['disabled'] = 'disabled';
 							endif;
 
-							echo JHtml::_('select.genericlist', $this->access, 'attached-access[]', $attribs, 'value', 'text', $file->access);
+							echo HTMLHelper::_('select.genericlist', $this->access, 'attached-access[]', $attribs, 'value', 'text', $file->access);
 							?>
 					</div>
 				</td>
@@ -82,7 +83,7 @@ use Joomla\CMS\Language\Text;
 				<td>
 					<div>
 						<div><?php echo Text::_('COM_JEM_ATTACHMENT_ACCESS'); ?></div>
-						<?php echo JHtml::_('select.genericlist', $this->access, 'attach-access[]', array('class' => 'inputbox', 'size' => '7'), 'value', 'text', 0); ?>
+						<?php echo HTMLHelper::_('select.genericlist', $this->access, 'attach-access[]', array('class' => 'inputbox', 'size' => '7'), 'value', 'text', 0); ?>
 					</div>
 				</td>
 			</tr>

@@ -9,6 +9,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\HTML\HTMLHelper;
 
 /**
  * View: Venueslist
@@ -81,21 +82,21 @@ class JemViewVenueslist extends JViewLegacy
 		// Workaround issue #557: Show venue name always.
 		$jemsettings->showlocate = 1;
 
-		//$filters[] = JHtml::_('select.option', '0', Text::_('COM_JEM_CHOOSE'));
+		//$filters[] = HTMLHelper::_('select.option', '0', Text::_('COM_JEM_CHOOSE'));
 		
 		if ($jemsettings->showlocate == 1) {
 
 
 
-			$filters[] = JHtml::_('select.option', '3', Text::_('COM_JEM_CITY'));
+			$filters[] = HTMLHelper::_('select.option', '3', Text::_('COM_JEM_CITY'));
 		}
 
 
-			$filters[] = JHtml::_('select.option', '2', Text::_('COM_JEM_VENUE'));			
+			$filters[] = HTMLHelper::_('select.option', '2', Text::_('COM_JEM_VENUE'));			
 
 
-			$filters[] = JHtml::_('select.option', '5', Text::_('COM_JEM_STATE'));
-		$lists['filter'] = JHtml::_('select.genericlist', $filters, 'filter_type', array('size'=>'1','class'=>'input-medium'), 'value', 'text', $filter);
+			$filters[] = HTMLHelper::_('select.option', '5', Text::_('COM_JEM_STATE'));
+		$lists['filter'] = HTMLHelper::_('select.genericlist', $filters, 'filter_type', array('size'=>'1','class'=>'input-medium'), 'value', 'text', $filter);
 
 		// search filter
 		$lists['search'] = $search;

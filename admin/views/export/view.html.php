@@ -10,7 +10,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
-
+use Joomla\CMS\HTML\HTMLHelper;
 
 /**
  * View class Export
@@ -29,7 +29,7 @@ class JemViewExport extends JemAdminView
 		$document	= JFactory::getDocument();
 
 		// Load css
-		JHtml::_('stylesheet', 'com_jem/backend.css', array(), true);
+		HTMLHelper::_('stylesheet', 'com_jem/backend.css', array(), true);
 
 		//Cause of group limits we can't use class here to build the categories tree
 		$categories = $this->get('Categories');

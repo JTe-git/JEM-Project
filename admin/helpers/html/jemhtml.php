@@ -11,6 +11,7 @@
 defined('_JEXEC') or die();
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\HTML\HTMLHelper;
 
 /**
  * JHtml Class
@@ -43,7 +44,7 @@ abstract class JHtmlJemHtml
 		);
 		$state = \Joomla\Utilities\ArrayHelper::getValue($states, (int) $value, $states[1]);
 		$no_iconfont = (bool)JFactory::getApplication()->isAdmin(); // requires font and css loaded which isn't yet on backend
-		$html = JHtml::_('jemhtml.icon', 'com_jem/'.$state[0], 'fa fa-fw fa-lg '.$state[1].' jem-featured-'.$state[1], $state[3], null, $no_iconfont);
+		$html = HTMLHelper::_('jemhtml.icon', 'com_jem/'.$state[0], 'fa fa-fw fa-lg '.$state[1].' jem-featured-'.$state[1], $state[3], null, $no_iconfont);
 		if ($canChange) {
 			$html = '<a href="#" onclick="return listItemTask(\'cb' . $i . '\',\'' . $state[2] . '\')" title="' . Text::_($state[4]) . '">' . $html . '</a>';
 		}
@@ -83,7 +84,7 @@ abstract class JHtmlJemHtml
 		);
 		$state = \Joomla\Utilities\ArrayHelper::getValue($states, (int) $value, $states[1]);
 		$no_iconfont = (bool)JFactory::getApplication()->isAdmin(); // requires font and css loaded which isn't yet on backend
-		$html = JHtml::_('jemhtml.icon', 'com_jem/'.$state[0], 'fa fa-fw fa-lg '.$state[1].' jem-attendance-status-'.$state[1], $state[3], null, $no_iconfont);
+		$html = HTMLHelper::_('jemhtml.icon', 'com_jem/'.$state[0], 'fa fa-fw fa-lg '.$state[1].' jem-attendance-status-'.$state[1], $state[3], null, $no_iconfont);
 		if ($canChange) {
 			$html = '<a href="#" onclick="return listItemTask(\'cb' . $i . '\',\'' . $state[2] . '\')" title="' . Text::_($state[4]) . '">' . $html . '</a>';
 		}
@@ -219,28 +220,28 @@ abstract class JHtmlJemHtml
 
 		if (version_compare(JVERSION, '3.3', 'lt')) {
 			// on Joomla! 2.5/3.2 we use good old tooltips
-			JHtml::_('behavior.tooltip');
+			HTMLHelper::_('behavior.tooltip');
 			$attr = 'class="hasTip" title="'.Text::_('COM_JEM_STATUS').'::'.Text::_($state[$canChange ? 4 : 3]).'"';
 		} else {
 			// on Joomla! 3.3+ we must use the new tooltips
-			JHtml::_('bootstrap.tooltip');
-			$attr = 'class="hasTooltip" title="'.JHtml::tooltipText(Text::_('COM_JEM_STATUS'), Text::_($state[$canChange ? 4 : 3]), 0).'"';
+			HTMLHelper::_('bootstrap.tooltip');
+			$attr = 'class="hasTooltip" title="'.HTMLHelper::tooltipText(Text::_('COM_JEM_STATUS'), Text::_($state[$canChange ? 4 : 3]), 0).'"';
 		}
 
 		if ($print) {
-			$html = JHtml::_('jemhtml.icon', 'com_jem/'.$state[0], 'fa fa-fw fa-lg '.$state[1].' jem-attendance-status-'.$state[1], $state[3], 'class="icon-inline-left"', $backend);
+			$html = HTMLHelper::_('jemhtml.icon', 'com_jem/'.$state[0], 'fa fa-fw fa-lg '.$state[1].' jem-attendance-status-'.$state[1], $state[3], 'class="icon-inline-left"', $backend);
 			$html .= Text::_($state[5]);
 		} elseif ($canChange && !empty($state[2])) {
-			$html = JHtml::_('jemhtml.icon', 'com_jem/'.$state[0], 'fa fa-fw fa-lg '.$state[1].' jem-attendance-status-'.$state[1], $state[3], null, $backend);
+			$html = HTMLHelper::_('jemhtml.icon', 'com_jem/'.$state[0], 'fa fa-fw fa-lg '.$state[1].' jem-attendance-status-'.$state[1], $state[3], null, $backend);
 			if ($backend) {
 				$attr .= ' onclick="return listItemTask(\'cb' . $i . '\',\'' . $state[2] . '\')"';
 				$url = '#';
 			} else {
 				$url = JRoute::_('index.php?option=com_jem&view=attendees&amp;task=attendees.attendeetoggle&id='.$i.'&'.JSession::getFormToken().'=1');
 			}
-			$html = JHtml::_('link', $url, $html, $attr);
+			$html = HTMLHelper::_('link', $url, $html, $attr);
 		} else {
-			$html = JHtml::_('jemhtml.icon', 'com_jem/'.$state[0], 'fa fa-fw fa-lg '.$state[1].' jem-attendance-status-'.$state[1], $state[3], $attr, $backend);
+			$html = HTMLHelper::_('jemhtml.icon', 'com_jem/'.$state[0], 'fa fa-fw fa-lg '.$state[1].' jem-attendance-status-'.$state[1], $state[3], $attr, $backend);
 		}
 
 		return $html;
@@ -248,7 +249,7 @@ abstract class JHtmlJemHtml
 
 	/**
 	 * Creates html code to show an icon, using image or icon font depending on configuration.
-	 * Call JHtml::_('jemhtml.icon', $image, $icon, $alt, $attribs, $no_iconfont, $relative)
+	 * Call HTMLHelper::_('jemhtml.icon', $image, $icon, $alt, $attribs, $no_iconfont, $relative)
 	 *
 	 * @param string  $value status value
 	 * @param  string        $image        The relative or absolute URL to use for the `<img>` src attribute.
@@ -264,7 +265,7 @@ abstract class JHtmlJemHtml
 		$useiconfont = !$no_iconfont && (JemHelper::config()->useiconfont == 1);
 
 		if (!$useiconfont) {
-			$html = JHtml::_('image', $image, Text::_($alt), $attribs, $relative);
+			$html = HTMLHelper::_('image', $image, Text::_($alt), $attribs, $relative);
 		} elseif (!empty($attribs)) {
 			$html = '<span '.trim((is_array($attribs) ? \Joomla\Utilities\ArrayHelper::toString($attribs) : $attribs) . ' /').'><i class="'.$icon.'"></i></span>';
 		} else {

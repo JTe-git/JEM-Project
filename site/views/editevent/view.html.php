@@ -9,6 +9,7 @@
 defined('_JEXEC') or die();
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\HTML\HTMLHelper;
 
 /**
  * Editevent-View
@@ -175,27 +176,27 @@ class JemViewEditevent extends JemView
 		$access2      = JemHelper::getAccesslevelOptions(true, $access);
 		$this->access = $access2;
 
-		JHtml::_('behavior.formvalidation');
-		JHtml::_('behavior.tooltip');
-		JHtml::_('behavior.modal', 'a.flyermodal');
+		HTMLHelper::_('behavior.formvalidation');
+		HTMLHelper::_('behavior.tooltip');
+		HTMLHelper::_('behavior.modal', 'a.flyermodal');
 
 		// Load css
 		JemHelper::loadCss('jem');
 		JemHelper::loadCustomCss();
 
 		// Load scripts
-		JHtml::_('script', 'com_jem/attachments.js', false, true);
-		JHtml::_('script', 'com_jem/recurrence.js', false, true);
-		JHtml::_('script', 'com_jem/seo.js', false, true);
-		JHtml::_('script', 'com_jem/unlimited.js', false, true);
-		JHtml::_('script', 'com_jem/other.js', false, true);
+		HTMLHelper::_('script', 'com_jem/attachments.js', false, true);
+		HTMLHelper::_('script', 'com_jem/recurrence.js', false, true);
+		HTMLHelper::_('script', 'com_jem/seo.js', false, true);
+		HTMLHelper::_('script', 'com_jem/unlimited.js', false, true);
+		HTMLHelper::_('script', 'com_jem/other.js', false, true);
 
 		// Escape strings for HTML output
 		$this->pageclass_sfx = htmlspecialchars($item->params->get('pageclass_sfx'));
 		$this->dimage        = JemImage::flyercreator($this->item->datimage, 'event');
 		$this->jemsettings   = $jemsettings;
 		$this->settings      = $settings;
-		$this->infoimage     = JHtml::_('image', 'com_jem/icon-16-hint.png', Text::_('COM_JEM_NOTES'), NULL, true);
+		$this->infoimage     = HTMLHelper::_('image', 'com_jem/icon-16-hint.png', Text::_('COM_JEM_NOTES'), NULL, true);
 
 		$this->user = $user;
 		$permissions = new stdClass();
@@ -289,10 +290,10 @@ class JemViewEditevent extends JemView
 		$rows       = $this->get('Venues');
 		$pagination = $this->get('VenuesPagination');
 
-		JHtml::_('behavior.modal', 'a.flyermodal');
+		HTMLHelper::_('behavior.modal', 'a.flyermodal');
 
 		// filter state
-		$lists['state'] = JHtml::_('grid.state', $filter_state);
+		$lists['state'] = HTMLHelper::_('grid.state', $filter_state);
 
 		// table ordering
 		$lists['order_Dir'] = $filter_order_Dir;
@@ -302,10 +303,10 @@ class JemViewEditevent extends JemView
 		JemHelper::loadCss('jem');
 
 		$filters = array();
-		$filters[] = JHtml::_('select.option', '1', Text::_('COM_JEM_VENUE'));
-		$filters[] = JHtml::_('select.option', '2', Text::_('COM_JEM_CITY'));
-		$filters[] = JHtml::_('select.option', '3', Text::_('COM_JEM_STATE'));
-		$searchfilter = JHtml::_('select.genericlist', $filters, 'filter_type', array('size'=>'1','class'=>'inputbox'), 'value', 'text', $filter_type);
+		$filters[] = HTMLHelper::_('select.option', '1', Text::_('COM_JEM_VENUE'));
+		$filters[] = HTMLHelper::_('select.option', '2', Text::_('COM_JEM_CITY'));
+		$filters[] = HTMLHelper::_('select.option', '3', Text::_('COM_JEM_STATE'));
+		$searchfilter = HTMLHelper::_('select.genericlist', $filters, 'filter_type', array('size'=>'1','class'=>'inputbox'), 'value', 'text', $filter_type);
 
 		$this->rows         = $rows;
 		$this->searchfilter = $searchfilter;
@@ -335,8 +336,8 @@ class JemViewEditevent extends JemView
 		$limitstart       = $jinput->get('limitstart', '0', 'int');
 		$limit            = $app->getUserStateFromRequest('com_jem.selectcontact.limit', 'limit', $jemsettings->display_num, 'int');
 
-		JHtml::_('behavior.tooltip');
-		JHtml::_('behavior.modal', 'a.flyermodal');
+		HTMLHelper::_('behavior.tooltip');
+		HTMLHelper::_('behavior.modal', 'a.flyermodal');
 
 		// Load css
 		JemHelper::loadCss('jem');
@@ -353,11 +354,11 @@ class JemViewEditevent extends JemView
 
 		//Build search filter
 		$filters = array();
-		$filters[] = JHtml::_('select.option', '1', Text::_('COM_JEM_NAME'));
-	/*	$filters[] = JHtml::_('select.option', '2', Text::_('COM_JEM_ADDRESS')); */ // data security
-		$filters[] = JHtml::_('select.option', '3', Text::_('COM_JEM_CITY'));
-		$filters[] = JHtml::_('select.option', '4', Text::_('COM_JEM_STATE'));
-		$searchfilter = JHtml::_('select.genericlist', $filters, 'filter_type', array('size'=>'1','class'=>'inputbox'), 'value', 'text', $filter_type);
+		$filters[] = HTMLHelper::_('select.option', '1', Text::_('COM_JEM_NAME'));
+	/*	$filters[] = HTMLHelper::_('select.option', '2', Text::_('COM_JEM_ADDRESS')); */ // data security
+		$filters[] = HTMLHelper::_('select.option', '3', Text::_('COM_JEM_CITY'));
+		$filters[] = HTMLHelper::_('select.option', '4', Text::_('COM_JEM_STATE'));
+		$searchfilter = HTMLHelper::_('select.genericlist', $filters, 'filter_type', array('size'=>'1','class'=>'inputbox'), 'value', 'text', $filter_type);
 
 		// search filter
 		$lists['search']= $search;
@@ -393,8 +394,8 @@ class JemViewEditevent extends JemView
 		$limit            = 0;
 		$eventId          = $jinput->getInt('a_id', 0);
 
-		JHtml::_('behavior.tooltip');
-		JHtml::_('behavior.modal', 'a.flyermodal');
+		HTMLHelper::_('behavior.tooltip');
+		HTMLHelper::_('behavior.modal', 'a.flyermodal');
 
 		// Load css
 		JemHelper::loadCss('jem');
@@ -412,8 +413,8 @@ class JemViewEditevent extends JemView
 
 		//Build search filter - unused
 		$filters = array();
-		$filters[] = JHtml::_('select.option', '1', Text::_('COM_JEM_NAME'));
-		$searchfilter = JHtml::_('select.genericlist', $filters, 'filter_type', array('size'=>'1','class'=>'inputbox'), 'value', 'text', $filter_type);
+		$filters[] = HTMLHelper::_('select.option', '1', Text::_('COM_JEM_NAME'));
+		$searchfilter = HTMLHelper::_('select.genericlist', $filters, 'filter_type', array('size'=>'1','class'=>'inputbox'), 'value', 'text', $filter_type);
 
 		// search filter - unused
 		$lists['search']= $search;

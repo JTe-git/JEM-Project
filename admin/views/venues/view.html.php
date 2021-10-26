@@ -10,6 +10,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\HTML\HTMLHelper;
 
 /**
  * View class: Venues
@@ -47,7 +48,7 @@ use Joomla\CMS\Language\Text;
 		}
 
 		// Load css
-		JHtml::_('stylesheet', 'com_jem/backend.css', array(), true);
+		HTMLHelper::_('stylesheet', 'com_jem/backend.css', array(), true);
 
 		// Add Scripts
 		$document->addScript('https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js');
@@ -59,16 +60,16 @@ use Joomla\CMS\Language\Text;
 		}
 
 		//add style to description of the tooltip (hastip)
-		JHtml::_('behavior.tooltip');
+		HTMLHelper::_('behavior.tooltip');
 
 		// add filter selection for the search
 		$filters = array();
-		$filters[] = JHtml::_('select.option', '1', Text::_('COM_JEM_VENUE'));
-		$filters[] = JHtml::_('select.option', '2', Text::_('COM_JEM_CITY'));
-		$filters[] = JHtml::_('select.option', '3', Text::_('COM_JEM_STATE'));
-		$filters[] = JHtml::_('select.option', '4', Text::_('COM_JEM_COUNTRY'));
-		$filters[] = JHtml::_('select.option', '5', Text::_('JALL'));
-		$lists['filter'] = JHtml::_('select.genericlist', $filters, 'filter_type', array('size'=>'1','class'=>'inputbox'), 'value', 'text', $this->state->get('filter_type'));
+		$filters[] = HTMLHelper::_('select.option', '1', Text::_('COM_JEM_VENUE'));
+		$filters[] = HTMLHelper::_('select.option', '2', Text::_('COM_JEM_CITY'));
+		$filters[] = HTMLHelper::_('select.option', '3', Text::_('COM_JEM_STATE'));
+		$filters[] = HTMLHelper::_('select.option', '4', Text::_('COM_JEM_COUNTRY'));
+		$filters[] = HTMLHelper::_('select.option', '5', Text::_('JALL'));
+		$lists['filter'] = HTMLHelper::_('select.genericlist', $filters, 'filter_type', array('size'=>'1','class'=>'inputbox'), 'value', 'text', $this->state->get('filter_type'));
 
 		//assign data to template
 		$this->lists = $lists;

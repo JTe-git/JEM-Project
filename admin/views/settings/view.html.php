@@ -10,6 +10,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\HTML\HTMLHelper;
 
 /**
  * View class for the JEM Settings screen
@@ -33,8 +34,8 @@ class JemViewSettings extends JemAdminView
 		$jemsettings = $this->get('Data');
 
 		// Load css
-		JHtml::_('stylesheet', 'com_jem/backend.css', array(), true);
-		JHtml::_('stylesheet', 'com_jem/colorpicker.css', array(), true);
+		HTMLHelper::_('stylesheet', 'com_jem/backend.css', array(), true);
+		HTMLHelper::_('stylesheet', 'com_jem/colorpicker.css', array(), true);
 
 		$style = '
 		    div.current fieldset.radio input {
@@ -63,10 +64,10 @@ class JemViewSettings extends JemAdminView
 		// Load Script
 		$document->addScript(JUri::root().'media/com_jem/js/colorpicker.js');
 
-		JHtml::_('behavior.modal', 'a.modal');
-		JHtml::_('behavior.tooltip');
-		JHtml::_('behavior.formvalidation');
-		JHtml::_('behavior.framework');
+		HTMLHelper::_('behavior.modal', 'a.modal');
+		HTMLHelper::_('behavior.tooltip');
+		HTMLHelper::_('behavior.formvalidation');
+		HTMLHelper::_('behavior.framework');
 
 		// only admins have access to this view
 		if (!JemFactory::getUser()->authorise('core.manage', 'com_jem')) {

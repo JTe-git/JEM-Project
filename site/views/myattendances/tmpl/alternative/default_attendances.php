@@ -10,10 +10,11 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\HTML\HTMLHelper;
 
-JHtml::_('behavior.tooltip');
+HTMLHelper::_('behavior.tooltip');
 
-JHtml::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR.'/helpers/html');
+HTMLHelper::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR.'/helpers/html');
 ?>
 
 <script type="text/javascript">
@@ -45,34 +46,34 @@ JHtml::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR.'/helpers/html');
 <?php
 	$sort_by = array();
 
-	$sort_by[] = JHtml::_('select.option', 'a.dates ASC', Text::_('COM_JEM_DATE') . ' ' . Text::_('COM_JEM_ORDER_ASCENDING'));
-	$sort_by[] = JHtml::_('select.option', 'a.dates DESC', Text::_('COM_JEM_DATE') . ' ' . Text::_('COM_JEM_ORDER_DESCENDING'));
+	$sort_by[] = HTMLHelper::_('select.option', 'a.dates ASC', Text::_('COM_JEM_DATE') . ' ' . Text::_('COM_JEM_ORDER_ASCENDING'));
+	$sort_by[] = HTMLHelper::_('select.option', 'a.dates DESC', Text::_('COM_JEM_DATE') . ' ' . Text::_('COM_JEM_ORDER_DESCENDING'));
 
 	if ($this->jemsettings->showtitle == 1) {
-		$sort_by[] = JHtml::_('select.option', 'a.title ASC', Text::_('COM_JEM_TITLE') . ' ' . Text::_('COM_JEM_ORDER_ASCENDING'));
-		$sort_by[] = JHtml::_('select.option', 'a.title DESC', Text::_('COM_JEM_TITLE') . ' ' . Text::_('COM_JEM_ORDER_DESCENDING'));
+		$sort_by[] = HTMLHelper::_('select.option', 'a.title ASC', Text::_('COM_JEM_TITLE') . ' ' . Text::_('COM_JEM_ORDER_ASCENDING'));
+		$sort_by[] = HTMLHelper::_('select.option', 'a.title DESC', Text::_('COM_JEM_TITLE') . ' ' . Text::_('COM_JEM_ORDER_DESCENDING'));
 	}
 	if ($this->jemsettings->showlocate == 1) {
-		$sort_by[] = JHtml::_('select.option', 'l.venue ASC', Text::_('COM_JEM_VENUE') . ' ' . Text::_('COM_JEM_ORDER_ASCENDING'));
-		$sort_by[] = JHtml::_('select.option', 'l.venue DESC', Text::_('COM_JEM_VENUE') . ' ' . Text::_('COM_JEM_ORDER_DESCENDING'));
+		$sort_by[] = HTMLHelper::_('select.option', 'l.venue ASC', Text::_('COM_JEM_VENUE') . ' ' . Text::_('COM_JEM_ORDER_ASCENDING'));
+		$sort_by[] = HTMLHelper::_('select.option', 'l.venue DESC', Text::_('COM_JEM_VENUE') . ' ' . Text::_('COM_JEM_ORDER_DESCENDING'));
 	}
 	if ($this->jemsettings->showcity == 1) {
-		$sort_by[] = JHtml::_('select.option', 'l.city ASC', Text::_('COM_JEM_CITY') . ' ' . Text::_('COM_JEM_ORDER_ASCENDING'));
-		$sort_by[] = JHtml::_('select.option', 'l.city DESC', Text::_('COM_JEM_CITY') . ' ' . Text::_('COM_JEM_ORDER_DESCENDING'));
+		$sort_by[] = HTMLHelper::_('select.option', 'l.city ASC', Text::_('COM_JEM_CITY') . ' ' . Text::_('COM_JEM_ORDER_ASCENDING'));
+		$sort_by[] = HTMLHelper::_('select.option', 'l.city DESC', Text::_('COM_JEM_CITY') . ' ' . Text::_('COM_JEM_ORDER_DESCENDING'));
 	}
 	if ($this->jemsettings->showstate == 1) {
-		$sort_by[] = JHtml::_('select.option', 'l.state ASC', Text::_('COM_JEM_STATE') . ' ' . Text::_('COM_JEM_ORDER_ASCENDING'));
-		$sort_by[] = JHtml::_('select.option', 'l.state DESC', Text::_('COM_JEM_STATE') . ' ' . Text::_('COM_JEM_ORDER_DESCENDING'));
+		$sort_by[] = HTMLHelper::_('select.option', 'l.state ASC', Text::_('COM_JEM_STATE') . ' ' . Text::_('COM_JEM_ORDER_ASCENDING'));
+		$sort_by[] = HTMLHelper::_('select.option', 'l.state DESC', Text::_('COM_JEM_STATE') . ' ' . Text::_('COM_JEM_ORDER_DESCENDING'));
 	}
 	if ($this->jemsettings->showcat == 1) {
-		$sort_by[] = JHtml::_('select.option', 'c.catname ASC', Text::_('COM_JEM_CATEGORY') . ' ' . Text::_('COM_JEM_ORDER_ASCENDING'));
-		$sort_by[] = JHtml::_('select.option', 'c.catname DESC', Text::_('COM_JEM_CATEGORY') . ' ' . Text::_('COM_JEM_ORDER_DESCENDING'));
+		$sort_by[] = HTMLHelper::_('select.option', 'c.catname ASC', Text::_('COM_JEM_CATEGORY') . ' ' . Text::_('COM_JEM_ORDER_ASCENDING'));
+		$sort_by[] = HTMLHelper::_('select.option', 'c.catname DESC', Text::_('COM_JEM_CATEGORY') . ' ' . Text::_('COM_JEM_ORDER_DESCENDING'));
 	}
 
-	$sort_by[] = JHtml::_('select.option', 'r.status ASC', Text::_('COM_JEM_STATUS') . ' ' . Text::_('COM_JEM_ORDER_ASCENDING'));
-	$sort_by[] = JHtml::_('select.option', 'r.status DESC', Text::_('COM_JEM_STATUS') . ' ' . Text::_('COM_JEM_ORDER_DESCENDING'));
+	$sort_by[] = HTMLHelper::_('select.option', 'r.status ASC', Text::_('COM_JEM_STATUS') . ' ' . Text::_('COM_JEM_ORDER_ASCENDING'));
+	$sort_by[] = HTMLHelper::_('select.option', 'r.status DESC', Text::_('COM_JEM_STATUS') . ' ' . Text::_('COM_JEM_ORDER_DESCENDING'));
 
-	$this->lists['sort_by'] = JHtml::_('select.genericlist', $sort_by, 'sort_by', array('size'=>'1','class'=>'inputbox','onchange'=>'fullOrdering(\'sort_by\', \'\');'), 'value', 'text', $this->lists['order'] . ' ' . $this->lists['order_Dir']);
+	$this->lists['sort_by'] = HTMLHelper::_('select.genericlist', $sort_by, 'sort_by', array('size'=>'1','class'=>'inputbox','onchange'=>'fullOrdering(\'sort_by\', \'\');'), 'value', 'text', $this->lists['order'] . ' ' . $this->lists['order_Dir']);
 ?>
 
 <h2><?php echo Text::_('COM_JEM_REGISTERED_TO'); ?></h2>
@@ -248,9 +249,9 @@ JHtml::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR.'/helpers/html');
 						<?php
 						$status = (int)$row->status;
 						if ($status === 1 && $row->waiting == 1) { $status = 2; }
-						echo JHtml::_('jemhtml.toggleAttendanceStatus', $status, $row->id, false, $this->print);
+						echo HTMLHelper::_('jemhtml.toggleAttendanceStatus', $status, $row->id, false, $this->print);
 						?><span class="info-text"><?php
-							echo JHtml::_('jemhtml.getAttendanceStatusText', $status, $row->id, false, true);
+							echo HTMLHelper::_('jemhtml.getAttendanceStatusText', $status, $row->id, false, true);
 						?></span>
 					</div>
 					<?php endif; ?>
@@ -261,7 +262,7 @@ JHtml::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR.'/helpers/html');
 						$len  = ($this->print) ? 256 : 16;
 						$cmnt = (\Joomla\String\StringHelper::strlen($row->comment) > $len) ? (\Joomla\String\StringHelper::substr($row->comment, 0, $len - 2).'&hellip;') : $row->comment;
 						if (!empty($cmnt)) :
-							echo ($this->print) ? $cmnt : JHtml::_('tooltip', $row->comment, null, null, $cmnt, null, null);
+							echo ($this->print) ? $cmnt : HTMLHelper::_('tooltip', $row->comment, null, null, $cmnt, null, null);
 						endif;
 						?>
 					</div>

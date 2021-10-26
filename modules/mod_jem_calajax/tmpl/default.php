@@ -11,6 +11,7 @@
 defined('_JEXEC') or die();
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\HTML\HTMLHelper;
 
 //Month Names
 $uxtime_first_of_month = gmmktime(0, 0, 0, $prev_month, 1, $offset_year);
@@ -222,7 +223,7 @@ if (!defined('_IN_AJAXCALL')) {
 						}
 					}
 
-					$calendar .= JHtml::tooltip($tip, $tipTitle, 'tooltip.png', $space.$day, $link);
+					$calendar .= HTMLHelper::tooltip($tip, $tipTitle, 'tooltip.png', $space.$day, $link);
 				}
 
 				$calendar .= '</td>';

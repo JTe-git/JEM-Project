@@ -1,13 +1,15 @@
 <?php
 /**
- * @version 2.3.1
+ * @version 4.0.0
  * @package JEM
- * @copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright (C) 2005-2009 Christoph Lukes
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 
 defined('_JEXEC') or die;
+
+use Joomla\CMS\HTML\HTMLHelper;
 
 /**
  * Holds helpfull administration related stuff
@@ -38,16 +40,16 @@ class JemAdmin
 	static public function buildtimeselect($max, $name, $selected, $class = array('class'=>'inputbox'))
 	{
 		$timelist = array();
-		$timelist[0] = JHtml::_('select.option', '', '');
+		$timelist[0] = HTMLHelper::_('select.option', '', '');
 
 		foreach(range(0, $max) as $value) {
 			if($value >= 10) {
-				$timelist[] = JHtml::_('select.option', $value, $value);
+				$timelist[] = HTMLHelper::_('select.option', $value, $value);
 			} else {
-				$timelist[] = JHtml::_('select.option', '0'.$value, '0'.$value);
+				$timelist[] = HTMLHelper::_('select.option', '0'.$value, '0'.$value);
 			}
 		}
-		return JHtml::_('select.genericlist', $timelist, $name, $class, 'value', 'text', $selected);
+		return HTMLHelper::_('select.genericlist', $timelist, $name, $class, 'value', 'text', $selected);
 	}
 }
 

@@ -11,14 +11,15 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\HTML\HTMLHelper;
 
 // Include the component HTML helpers.
-JHtml::addIncludePath(JPATH_COMPONENT.'/helpers/html');
+HTMLHelper::addIncludePath(JPATH_COMPONENT.'/helpers/html');
 
 // Load the tooltip behavior.
-JHtml::_('behavior.tooltip');
-JHtml::_('behavior.formvalidation');
-JHtml::_('behavior.keepalive');
+HTMLHelper::_('behavior.tooltip');
+HTMLHelper::_('behavior.formvalidation');
+HTMLHelper::_('behavior.keepalive');
 ?>
 
 <script type="text/javascript">
@@ -72,11 +73,11 @@ JHtml::_('behavior.keepalive');
 	</div>
 
 	<div class="width-40 fltrt">
-		<?php echo JHtml::_('sliders.start', 'categories-sliders-'.$this->item->id, array('useCookie'=>1)); ?>
+		<?php echo HTMLHelper::_('sliders.start', 'categories-sliders-'.$this->item->id, array('useCookie'=>1)); ?>
 			<?php echo $this->loadTemplate('options'); ?>
 			<div class="clr"></div>
 
-			<?php echo JHtml::_('sliders.panel', Text::_('COM_JEM_CATEGORY_FIELDSET_EMAIL'), 'confemail'); ?>
+			<?php echo HTMLHelper::_('sliders.panel', Text::_('COM_JEM_CATEGORY_FIELDSET_EMAIL'), 'confemail'); ?>
 			<fieldset class="panelform">
 				<ul class="adminformlist">
 					<li>
@@ -86,7 +87,7 @@ JHtml::_('behavior.keepalive');
 				</ul>
 			</fieldset>
 
-			<?php echo JHtml::_('sliders.panel', Text::_('COM_JEM_GROUP'), 'group'); ?>
+			<?php echo HTMLHelper::_('sliders.panel', Text::_('COM_JEM_GROUP'), 'group'); ?>
 			<fieldset class="panelform">
 				<ul class="adminformlist">
 					<li><label for="groups"> <?php echo Text::_('COM_JEM_GROUP').':'; ?></label>
@@ -95,7 +96,7 @@ JHtml::_('behavior.keepalive');
 			</fieldset>
 
 		<!-- START OF PANEL IMAGE -->
-		<?php echo JHtml::_('sliders.panel', Text::_('COM_JEM_IMAGE'), 'category-image'); ?>
+		<?php echo HTMLHelper::_('sliders.panel', Text::_('COM_JEM_IMAGE'), 'category-image'); ?>
 
 		<fieldset class="panelform">
 			<ul class="adminformlist">
@@ -105,7 +106,7 @@ JHtml::_('behavior.keepalive');
 		</fieldset>
 
 
-		<?php echo JHtml::_('sliders.panel', Text::_('JGLOBAL_FIELDSET_METADATA_OPTIONS'), 'meta-options'); ?>
+		<?php echo HTMLHelper::_('sliders.panel', Text::_('JGLOBAL_FIELDSET_METADATA_OPTIONS'), 'meta-options'); ?>
 		<fieldset class="panelform">
 			<?php echo $this->loadTemplate('metadata'); ?>
 		</fieldset>
@@ -114,7 +115,7 @@ JHtml::_('behavior.keepalive');
 		<?php foreach ($fieldSets as $name => $fieldSet) : ?>
 			<?php $label = !empty($fieldSet->label) ? $fieldSet->label : 'COM_JEM_'.$name.'_FIELDSET_LABEL'; ?>
 			<?php if ($name != 'editorConfig' && $name != 'basic-limited') : ?>
-				<?php echo JHtml::_('sliders.panel', Text::_($label), $name.'-options'); ?>
+				<?php echo HTMLHelper::_('sliders.panel', Text::_($label), $name.'-options'); ?>
 				<?php if (isset($fieldSet->description) && trim($fieldSet->description)) : ?>
 					<p class="tip"><?php echo $this->escape(Text::_($fieldSet->description));?></p>
 				<?php endif; ?>
@@ -128,11 +129,11 @@ JHtml::_('behavior.keepalive');
 				</fieldset>
 			<?php endif ?>
 		<?php endforeach; ?>
-	<?php echo JHtml::_('sliders.end'); ?>
+	<?php echo HTMLHelper::_('sliders.end'); ?>
 	</div>
 	<div class="clr"></div>
 	<div>
 		<input type="hidden" name="task" value="" />
-		<?php echo JHtml::_('form.token'); ?>
+		<?php echo HTMLHelper::_('form.token'); ?>
 	</div>
 </form>

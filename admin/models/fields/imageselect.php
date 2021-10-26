@@ -10,6 +10,7 @@
 defined('_JEXEC') or die();
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\HTML\HTMLHelper;
 
 jimport('joomla.form.formfield');
 jimport('joomla.html.parameter.element');
@@ -37,7 +38,7 @@ class JFormFieldImageselect extends JFormFieldList
 	public function getInput()
 	{
 		// Load the modal behavior script.
-		JHtml::_('behavior.modal', 'a.modal');
+		HTMLHelper::_('behavior.modal', 'a.modal');
 
 		// ImageType
 		$imagetype = $this->element['imagetype'];

@@ -10,6 +10,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\HTML\HTMLHelper;
 ?>
 
 <script type="text/javascript">
@@ -41,30 +42,30 @@ use Joomla\CMS\Language\Text;
 <?php
 	$sort_by = array();
 
-	$sort_by[] = JHtml::_('select.option', 'a.dates ASC', Text::_('COM_JEM_DATE') . ' ' . Text::_('COM_JEM_ORDER_ASCENDING'));
-	$sort_by[] = JHtml::_('select.option', 'a.dates DESC', Text::_('COM_JEM_DATE') . ' ' . Text::_('COM_JEM_ORDER_DESCENDING'));
+	$sort_by[] = HTMLHelper::_('select.option', 'a.dates ASC', Text::_('COM_JEM_DATE') . ' ' . Text::_('COM_JEM_ORDER_ASCENDING'));
+	$sort_by[] = HTMLHelper::_('select.option', 'a.dates DESC', Text::_('COM_JEM_DATE') . ' ' . Text::_('COM_JEM_ORDER_DESCENDING'));
 
 	if ($this->jemsettings->showtitle == 1) {
-		$sort_by[] = JHtml::_('select.option', 'a.title ASC', Text::_('COM_JEM_TITLE') . ' ' . Text::_('COM_JEM_ORDER_ASCENDING'));
-		$sort_by[] = JHtml::_('select.option', 'a.title DESC', Text::_('COM_JEM_TITLE') . ' ' . Text::_('COM_JEM_ORDER_DESCENDING'));
+		$sort_by[] = HTMLHelper::_('select.option', 'a.title ASC', Text::_('COM_JEM_TITLE') . ' ' . Text::_('COM_JEM_ORDER_ASCENDING'));
+		$sort_by[] = HTMLHelper::_('select.option', 'a.title DESC', Text::_('COM_JEM_TITLE') . ' ' . Text::_('COM_JEM_ORDER_DESCENDING'));
 	}
 	if ($this->jemsettings->showlocate == 1) {
-		$sort_by[] = JHtml::_('select.option', 'l.venue ASC', Text::_('COM_JEM_VENUE') . ' ' . Text::_('COM_JEM_ORDER_ASCENDING'));
-		$sort_by[] = JHtml::_('select.option', 'l.venue DESC', Text::_('COM_JEM_VENUE') . ' ' . Text::_('COM_JEM_ORDER_DESCENDING'));
+		$sort_by[] = HTMLHelper::_('select.option', 'l.venue ASC', Text::_('COM_JEM_VENUE') . ' ' . Text::_('COM_JEM_ORDER_ASCENDING'));
+		$sort_by[] = HTMLHelper::_('select.option', 'l.venue DESC', Text::_('COM_JEM_VENUE') . ' ' . Text::_('COM_JEM_ORDER_DESCENDING'));
 	}
 	if ($this->jemsettings->showcity == 1) {
-		$sort_by[] = JHtml::_('select.option', 'l.city ASC', Text::_('COM_JEM_CITY') . ' ' . Text::_('COM_JEM_ORDER_ASCENDING'));
-		$sort_by[] = JHtml::_('select.option', 'l.city DESC', Text::_('COM_JEM_CITY') . ' ' . Text::_('COM_JEM_ORDER_DESCENDING'));
+		$sort_by[] = HTMLHelper::_('select.option', 'l.city ASC', Text::_('COM_JEM_CITY') . ' ' . Text::_('COM_JEM_ORDER_ASCENDING'));
+		$sort_by[] = HTMLHelper::_('select.option', 'l.city DESC', Text::_('COM_JEM_CITY') . ' ' . Text::_('COM_JEM_ORDER_DESCENDING'));
 	}
 	if ($this->jemsettings->showstate == 1) {
-		$sort_by[] = JHtml::_('select.option', 'l.state ASC', Text::_('COM_JEM_STATE') . ' ' . Text::_('COM_JEM_ORDER_ASCENDING'));
-		$sort_by[] = JHtml::_('select.option', 'l.state DESC', Text::_('COM_JEM_STATE') . ' ' . Text::_('COM_JEM_ORDER_DESCENDING'));
+		$sort_by[] = HTMLHelper::_('select.option', 'l.state ASC', Text::_('COM_JEM_STATE') . ' ' . Text::_('COM_JEM_ORDER_ASCENDING'));
+		$sort_by[] = HTMLHelper::_('select.option', 'l.state DESC', Text::_('COM_JEM_STATE') . ' ' . Text::_('COM_JEM_ORDER_DESCENDING'));
 	}
 	if ($this->jemsettings->showcat == 1) {
-		$sort_by[] = JHtml::_('select.option', 'c.catname ASC', Text::_('COM_JEM_CATEGORY') . ' ' . Text::_('COM_JEM_ORDER_ASCENDING'));
-		$sort_by[] = JHtml::_('select.option', 'c.catname DESC', Text::_('COM_JEM_CATEGORY') . ' ' . Text::_('COM_JEM_ORDER_DESCENDING'));
+		$sort_by[] = HTMLHelper::_('select.option', 'c.catname ASC', Text::_('COM_JEM_CATEGORY') . ' ' . Text::_('COM_JEM_ORDER_ASCENDING'));
+		$sort_by[] = HTMLHelper::_('select.option', 'c.catname DESC', Text::_('COM_JEM_CATEGORY') . ' ' . Text::_('COM_JEM_ORDER_DESCENDING'));
 	}
-	$this->lists['sort_by'] = JHtml::_('select.genericlist', $sort_by, 'sort_by', array('size'=>'1','class'=>'inputbox','onchange'=>'fullOrdering(\'sort_by\', \'\');'), 'value', 'text', $this->lists['order'] . ' ' . $this->lists['order_Dir']);
+	$this->lists['sort_by'] = HTMLHelper::_('select.genericlist', $sort_by, 'sort_by', array('size'=>'1','class'=>'inputbox','onchange'=>'fullOrdering(\'sort_by\', \'\');'), 'value', 'text', $this->lists['order'] . ' ' . $this->lists['order_Dir']);
 ?>
 
 <?php if ($this->settings->get('global_show_filter',1) || $this->settings->get('global_display',1)) : ?>

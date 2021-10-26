@@ -10,6 +10,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\HTML\HTMLHelper;
 
 /**
  * View class: Venue
@@ -34,10 +35,10 @@ class JemViewVenue extends JemAdminView
 			return false;
 		}
 
-		JHtml::_('behavior.framework');
-		JHtml::_('behavior.modal', 'a.modal');
-		JHtml::_('behavior.tooltip');
-		JHtml::_('behavior.formvalidation');
+		HTMLHelper::_('behavior.framework');
+		HTMLHelper::_('behavior.modal', 'a.modal');
+		HTMLHelper::_('behavior.tooltip');
+		HTMLHelper::_('behavior.formvalidation');
 
 		//initialise variables
 		$document       = JFactory::getDocument();
@@ -47,11 +48,11 @@ class JemViewVenue extends JemAdminView
 		$this->task     = $task;
 
 		// Load css
-		JHtml::_('stylesheet', 'com_jem/backend.css', array(), true);
-		JHtml::_('stylesheet', 'com_jem/geostyle.css', array(), true);
+		HTMLHelper::_('stylesheet', 'com_jem/backend.css', array(), true);
+		HTMLHelper::_('stylesheet', 'com_jem/geostyle.css', array(), true);
 
 		// Load Scripts
-		JHtml::_('script', 'com_jem/attachments.js', false, true);
+		HTMLHelper::_('script', 'com_jem/attachments.js', false, true);
 		//$document->addScript('https://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places');
 
 		$language = JFactory::getLanguage();
@@ -66,7 +67,7 @@ class JemViewVenue extends JemAdminView
 
 		// JQuery scripts
 		$document->addScript('https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js');
-		JHtml::_('script', 'com_jem/jquery.geocomplete.js', false, true);
+		HTMLHelper::_('script', 'com_jem/jquery.geocomplete.js', false, true);
 
 		$access2 = JemHelper::getAccesslevelOptions();
 		$this->access = $access2;

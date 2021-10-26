@@ -9,6 +9,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\HTML\HTMLHelper;
 
 /**
  * Venueselect-View
@@ -24,8 +25,8 @@ class JemViewVenueelement extends JViewLegacy {
 		$document	= JFactory::getDocument();
 		$itemid 	= $app->input->getInt('id', 0) . ':' . $app->input->getInt('Itemid', 0);
 
-		JHtml::_('behavior.tooltip');
-		JHtml::_('behavior.modal');
+		HTMLHelper::_('behavior.tooltip');
+		HTMLHelper::_('behavior.modal');
 
 		//get vars
 		$filter_order     = $app->getUserStateFromRequest('com_jem.venueelement.'.$itemid.'.filter_order', 'filter_order', 'l.ordering', 'cmd');
@@ -38,7 +39,7 @@ class JemViewVenueelement extends JViewLegacy {
 		$document->setTitle(Text::_('COM_JEM_SELECTVENUE'));
 
 		// Load css
-		JHtml::_('stylesheet', 'com_jem/backend.css', array(), true);
+		HTMLHelper::_('stylesheet', 'com_jem/backend.css', array(), true);
 
 		// Get data from the model
 		$rows = $this->get('Data');
@@ -52,10 +53,10 @@ class JemViewVenueelement extends JViewLegacy {
 
 		//Build search filter
 		$filters = array();
-		$filters[] = JHtml::_('select.option', '1', Text::_('COM_JEM_VENUE'));
-		$filters[] = JHtml::_('select.option', '2', Text::_('COM_JEM_CITY'));
-		$filters[] = JHtml::_('select.option', '3', Text::_('COM_JEM_STATE'));
-		$lists['filter'] = JHtml::_('select.genericlist', $filters, 'filter_type', array('size'=>'1','class'=>'inputbox'), 'value', 'text', $filter_type);
+		$filters[] = HTMLHelper::_('select.option', '1', Text::_('COM_JEM_VENUE'));
+		$filters[] = HTMLHelper::_('select.option', '2', Text::_('COM_JEM_CITY'));
+		$filters[] = HTMLHelper::_('select.option', '3', Text::_('COM_JEM_STATE'));
+		$lists['filter'] = HTMLHelper::_('select.genericlist', $filters, 'filter_type', array('size'=>'1','class'=>'inputbox'), 'value', 'text', $filter_type);
 
 		// search filter
 		$lists['search']= $filter_search;

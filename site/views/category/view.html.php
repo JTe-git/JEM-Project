@@ -9,6 +9,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\HTML\HTMLHelper;
 
 /**
  * Category-View
@@ -40,7 +41,7 @@ class JemViewCategory extends JemView
 			### Category Calendar view ###
 
 			// Load tooltips behavior
-			JHtml::_('behavior.tooltip');
+			HTMLHelper::_('behavior.tooltip');
 
 			//initialize variables
 			$app         = JFactory::getApplication();
@@ -79,7 +80,7 @@ class JemViewCategory extends JemView
 			$document->addStyleDeclaration($style);
 
 			// add javascript (using full path - see issue #590)
-			JHtml::_('script', 'media/com_jem/js/calendar.js');
+			HTMLHelper::_('script', 'media/com_jem/js/calendar.js');
 
 			// Retrieve date variables
 			$year  = (int)$app->input->getInt('yearID', strftime("%Y"));
@@ -156,7 +157,7 @@ class JemViewCategory extends JemView
 			$user        = JemFactory::getUser();
 			$print       = $app->input->getBool('print', false);
 
-			JHtml::_('behavior.tooltip');
+			HTMLHelper::_('behavior.tooltip');
 
 			// get menu information
 			$uri      = JFactory::getURI();
@@ -216,21 +217,21 @@ class JemViewCategory extends JemView
 			$filters = array();
 
 			if ($jemsettings->showtitle == 1) {
-				$filters[] = JHtml::_('select.option', '1', Text::_('COM_JEM_TITLE'));
+				$filters[] = HTMLHelper::_('select.option', '1', Text::_('COM_JEM_TITLE'));
 			}
 			if ($jemsettings->showlocate == 1) {
-				$filters[] = JHtml::_('select.option', '2', Text::_('COM_JEM_VENUE'));
+				$filters[] = HTMLHelper::_('select.option', '2', Text::_('COM_JEM_VENUE'));
 			}
 			if ($jemsettings->showcity == 1) {
-				$filters[] = JHtml::_('select.option', '3', Text::_('COM_JEM_CITY'));
+				$filters[] = HTMLHelper::_('select.option', '3', Text::_('COM_JEM_CITY'));
 			}
 			if ($jemsettings->showcat == 1) {
-				$filters[] = JHtml::_('select.option', '4', Text::_('COM_JEM_CATEGORY'));
+				$filters[] = HTMLHelper::_('select.option', '4', Text::_('COM_JEM_CATEGORY'));
 			}
 			if ($jemsettings->showstate == 1) {
-				$filters[] = JHtml::_('select.option', '5', Text::_('COM_JEM_STATE'));
+				$filters[] = HTMLHelper::_('select.option', '5', Text::_('COM_JEM_STATE'));
 			}
-			$lists['filter'] = JHtml::_('select.genericlist', $filters, 'filter_type', array('size'=>'1','class'=>'inputbox'), 'value', 'text', $filter_type);
+			$lists['filter'] = HTMLHelper::_('select.genericlist', $filters, 'filter_type', array('size'=>'1','class'=>'inputbox'), 'value', 'text', $filter_type);
 
 			// search filter
 			$lists['search'] = $search;

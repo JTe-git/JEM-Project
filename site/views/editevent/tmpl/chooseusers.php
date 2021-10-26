@@ -9,11 +9,12 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\HTML\HTMLHelper;
 
 $function = JFactory::getApplication()->input->getCmd('function', 'jSelectUsers');
 $checked = 0;
 
-JHtml::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR.'/helpers/html');
+HTMLHelper::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR.'/helpers/html');
 ?>
 
 <script type="text/javascript">
@@ -93,8 +94,8 @@ JHtml::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR.'/helpers/html');
 					<tr class="row<?php echo $i % 2; ?>">
 						<td class="center"><?php echo $this->pagination->getRowOffset( $i ); ?></td>
 						<td class="center"><?php
-							//echo JHtml::_('grid.id', $i, $row->id);
-							$cb = JHtml::_('grid.id', $i, $row->id);
+							//echo HTMLHelper::_('grid.id', $i, $row->id);
+							$cb = HTMLHelper::_('grid.id', $i, $row->id);
 							if ($row->status == 0) {
 							//	JemHelper::addLogEntry('before: '.$cb, __METHOD__);
 								$cb = preg_replace('/(onclick=)/', 'checked $1', $cb);
@@ -104,7 +105,7 @@ JHtml::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR.'/helpers/html');
 							echo $cb;
 						?></td>
 						<td align="left"><?php echo $this->escape($row->name); ?></td>
-						<td class="center"><?php echo JHtml::_('jemhtml.toggleAttendanceStatus', $row->status, 0, false); ?></td>
+						<td class="center"><?php echo HTMLHelper::_('jemhtml.toggleAttendanceStatus', $row->status, 0, false); ?></td>
 					</tr>
 					<?php endforeach; ?>
 				<?php endif; ?>

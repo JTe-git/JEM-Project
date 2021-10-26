@@ -9,6 +9,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\HTML\HTMLHelper;
 
 jimport('joomla.filesystem.file');
 jimport('joomla.filesystem.folder');
@@ -680,7 +681,7 @@ class JemHelper
 	static public function buildtimeselect($max, $name, $selected, $class = array('class'=>'inputbox'))
 	{
 		$timelist = array();
-		$timelist[0] = JHtml::_('select.option', '', '');
+		$timelist[0] = HTMLHelper::_('select.option', '', '');
 
 		if ($max == 23) {
 			// does user prefer 12 or 24 hours format?
@@ -695,10 +696,10 @@ class JemHelper
 				$value = '0'.$value;
 			}
 
-			$timelist[] = JHtml::_('select.option', $value, ($format ? strftime($format, strtotime("$value:00:00")) : $value));
+			$timelist[] = HTMLHelper::_('select.option', $value, ($format ? strftime($format, strtotime("$value:00:00")) : $value));
 		}
 
-		return JHtml::_('select.genericlist', $timelist, $name, $class, 'value', 'text', $selected);
+		return HTMLHelper::_('select.genericlist', $timelist, $name, $class, 'value', 'text', $selected);
 	}
 
 	/**
@@ -1153,12 +1154,12 @@ class JemHelper
 			}
 		} else {
 			// on Joomla! 3.3+ we must use the new tooltips
-			JHtml::_('bootstrap.tooltip');
+			HTMLHelper::_('bootstrap.tooltip');
 			if (0) { /* old style using 'hasTip' */
-				$title = JHtml::tooltipText($title, '<div style="font-weight:normal;">'.$tooltip.'</div>', 0);
+				$title = HTMLHelper::tooltipText($title, '<div style="font-weight:normal;">'.$tooltip.'</div>', 0);
 			} else { /* new style using 'has Tooltip' */
 				$class = str_replace('hasTip', '', $class) . ' hasTooltip';
-				$title = JHtml::tooltipText($title, $tooltip, 0); // this calls htmlspecialchars()
+				$title = HTMLHelper::tooltipText($title, $tooltip, 0); // this calls htmlspecialchars()
 			}
 			$tooltip = '';
 		}
@@ -1300,27 +1301,27 @@ class JemHelper
 
 			if ($is_file) {
 				# we do have a valid file so we will use it.
-				$css = JHtml::_('stylesheet', $file, array(), false);
+				$css = HTMLHelper::_('stylesheet', $file, array(), false);
 			} else {
 				# unfortunately we don't have a valid file so we're looking at the default
-				$files = JHtml::_('stylesheet', 'com_jem/' . $css . $suffix . '.css', array(), true, true);
+				$files = HTMLHelper::_('stylesheet', 'com_jem/' . $css . $suffix . '.css', array(), true, true);
 				if (!empty($files)) {
 					# we have to call this stupid function twice; no other way to know if something was loaded
-					$css = JHtml::_('stylesheet', 'com_jem/' . $css . $suffix . '.css', array(), true);
+					$css = HTMLHelper::_('stylesheet', 'com_jem/' . $css . $suffix . '.css', array(), true);
 				} else {
 					# no css for layout style configured, so use the default css
-					$css = JHtml::_('stylesheet', 'com_jem/' . $css . '.css', array(), true);
+					$css = HTMLHelper::_('stylesheet', 'com_jem/' . $css . '.css', array(), true);
 				}
 			}
 		} else {
 			# here we want to use the normal css
-			$files = JHtml::_('stylesheet', 'com_jem/' . $css . $suffix . '.css', array(), true, true);
+			$files = HTMLHelper::_('stylesheet', 'com_jem/' . $css . $suffix . '.css', array(), true, true);
 			if (!empty($files)) {
 				# we have to call this stupid function twice; no other way to know if something was loaded
-				$css = JHtml::_('stylesheet', 'com_jem/' . $css . $suffix . '.css', array(), true);
+				$css = HTMLHelper::_('stylesheet', 'com_jem/' . $css . $suffix . '.css', array(), true);
 			} else {
 				# no css for layout style configured, so use the default css
-				$css = JHtml::_('stylesheet', 'com_jem/' . $css . '.css', array(), true);
+				$css = HTMLHelper::_('stylesheet', 'com_jem/' . $css . '.css', array(), true);
 			}
 		}
 
@@ -1346,35 +1347,35 @@ class JemHelper
 		if (!empty($suffix)) {
 			# search for template overrides
 			$path = $module . '/' . $suffix . '/' . $css . '.css';
-			$files = JHtml::_('stylesheet', $path, array(), true, true);
+			$files = HTMLHelper::_('stylesheet', $path, array(), true, true);
 			if (!empty($files)) {
 				# we have to call this stupid function twice; no other way to know if something was loaded
-				JHtml::_('stylesheet', $path, array(), true);
+				HTMLHelper::_('stylesheet', $path, array(), true);
 				return;
 			} else {
 				# search within module because JEM modules doesn't use media folder
 				$path = 'modules/' . $module . '/tmpl/' . $suffix . '/' . $css . '.css';
-				$files = JHtml::_('stylesheet', $path, array(), false, true);
+				$files = HTMLHelper::_('stylesheet', $path, array(), false, true);
 				if (!empty($files)) {
 					# we have to call this stupid function twice; no other way to know if something was loaded
-					JHtml::_('stylesheet', $path, array(), false);
+					HTMLHelper::_('stylesheet', $path, array(), false);
 					return;
 				}
 			}
 		}
 
 		$path = $module . '/' . $suffix . '/' . $css . '.css';
-		$files = JHtml::_('stylesheet', $path, array(), true, true);
+		$files = HTMLHelper::_('stylesheet', $path, array(), true, true);
 		if (!empty($files)) {
 			# we have to call this stupid function twice; no other way to know if something was loaded
-			JHtml::_('stylesheet', $path, array(), true);
+			HTMLHelper::_('stylesheet', $path, array(), true);
 			return;
 		} else {
 			$path = 'modules/' . $module . '/tmpl/' . $css . '.css';
-			$files = JHtml::_('stylesheet', $path, array(), false, true);
+			$files = HTMLHelper::_('stylesheet', $path, array(), false, true);
 			if (!empty($files)) {
 				# no css for layout style configured, so use the default css
-				JHtml::_('stylesheet', $path, array(), false);
+				HTMLHelper::_('stylesheet', $path, array(), false);
 				return;
 			}
 		}
@@ -1386,8 +1387,8 @@ class JemHelper
 		if ($jemsettings->useiconfont == 1) {
 			# This will automaticly search for 'font-awesome.css' if site is in debug mode.
 			# Note: css files must be stored on /media/com_jem/FontAwesome/css/ to be conform to Joomla and also allow template overrides.
-			JHtml::_('stylesheet', 'com_jem/FontAwesome/font-awesome.min.css', array(), true);
-			JHtml::_('stylesheet', 'com_jem/FontAwesome/jem-icon-font.css', array(), true);
+			HTMLHelper::_('stylesheet', 'com_jem/FontAwesome/font-awesome.min.css', array(), true);
+			HTMLHelper::_('stylesheet', 'com_jem/FontAwesome/jem-icon-font.css', array(), true);
 		}
 	}
 
@@ -1690,7 +1691,7 @@ class JemHelper
 		$options = array();
 		$options = array_merge(JemHelperCountries::getCountryOptions(),$options);
 
-		array_unshift($options, JHtml::_('select.option', '0', Text::_('COM_JEM_SELECT_COUNTRY')));
+		array_unshift($options, HTMLHelper::_('select.option', '0', Text::_('COM_JEM_SELECT_COUNTRY')));
 
 		return $options;
 	}

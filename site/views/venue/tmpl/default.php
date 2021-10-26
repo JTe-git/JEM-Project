@@ -9,8 +9,9 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\HTML\HTMLHelper;
 
-JHtml::_('behavior.modal', 'a.flyermodal');
+HTMLHelper::_('behavior.modal', 'a.flyermodal');
 ?>
 <div id="jem" class="jem_venue<?php echo $this->pageclass_sfx;?>" itemscope="itemscope" itemtype="https://schema.org/Place">
 	<div class="buttons">

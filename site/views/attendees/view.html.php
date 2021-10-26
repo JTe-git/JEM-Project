@@ -9,6 +9,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\HTML\HTMLHelper;
 
 /**
  * Attendees-view
@@ -49,8 +50,8 @@ class JemViewAttendees extends JemView
 		$menuitem	= $menu->getActive();
 		$uri 		= JFactory::getURI();
 
-		JHtml::_('behavior.tooltip');
-		JHtml::_('behavior.modal', 'a.flyermodal');
+		HTMLHelper::_('behavior.tooltip');
+		HTMLHelper::_('behavior.modal', 'a.flyermodal');
 
 		// Load css
 		JemHelper::loadCss('jem');
@@ -107,22 +108,22 @@ class JemViewAttendees extends JemView
 		//build filter selectlist
 		$filters = array();
 		if ($settings->get('global_regname', '1')) {
-			$filters[] = JHtml::_('select.option', '1', Text::_('COM_JEM_NAME'));
+			$filters[] = HTMLHelper::_('select.option', '1', Text::_('COM_JEM_NAME'));
 		} else {
-			$filters[] = JHtml::_('select.option', '2', Text::_('COM_JEM_USERNAME'));
+			$filters[] = HTMLHelper::_('select.option', '2', Text::_('COM_JEM_USERNAME'));
 		}
-		$lists['filter'] = JHtml::_('select.genericlist', $filters, 'filter', array('size'=>'1','class'=>'inputbox'), 'value', 'text', $filter);
+		$lists['filter'] = HTMLHelper::_('select.genericlist', $filters, 'filter', array('size'=>'1','class'=>'inputbox'), 'value', 'text', $filter);
 
 		// search filter
 		$lists['search'] = $search;
 
 		// attendee status
-		$options = array(JHtml::_('select.option', -2, Text::_('COM_JEM_ATT_FILTER_ALL')),
-		                 JHtml::_('select.option',  0, Text::_('COM_JEM_ATT_FILTER_INVITED')),
-		                 JHtml::_('select.option', -1, Text::_('COM_JEM_ATT_FILTER_NOT_ATTENDING')),
-		                 JHtml::_('select.option',  1, Text::_('COM_JEM_ATT_FILTER_ATTENDING')),
-		                 JHtml::_('select.option',  2, Text::_('COM_JEM_ATT_FILTER_WAITING'))) ;
-		$lists['status'] = JHtml::_('select.genericlist', $options, 'filter_status', array('class'=>'inputbox','onChange'=>'this.form.submit();'), 'value', 'text', $filter_status);
+		$options = array(HTMLHelper::_('select.option', -2, Text::_('COM_JEM_ATT_FILTER_ALL')),
+		                 HTMLHelper::_('select.option',  0, Text::_('COM_JEM_ATT_FILTER_INVITED')),
+		                 HTMLHelper::_('select.option', -1, Text::_('COM_JEM_ATT_FILTER_NOT_ATTENDING')),
+		                 HTMLHelper::_('select.option',  1, Text::_('COM_JEM_ATT_FILTER_ATTENDING')),
+		                 HTMLHelper::_('select.option',  2, Text::_('COM_JEM_ATT_FILTER_WAITING'))) ;
+		$lists['status'] = HTMLHelper::_('select.genericlist', $options, 'filter_status', array('class'=>'inputbox','onChange'=>'this.form.submit();'), 'value', 'text', $filter_status);
 
 		// table ordering
 		$lists['order_Dir'] = $filter_order_Dir;
@@ -199,8 +200,8 @@ class JemViewAttendees extends JemView
 	//	$limit            = $app->getUserStateFromRequest('com_jem.selectusers.limit', 'limit', $this->jemsettings->display_num, 'int');
 	//	$eventId          = !empty($event->id) ? $event->id : 0;
 
-		JHtml::_('behavior.tooltip');
-		JHtml::_('behavior.modal', 'a.flyermodal');
+		HTMLHelper::_('behavior.tooltip');
+		HTMLHelper::_('behavior.modal', 'a.flyermodal');
 
 		// Load css
 		JemHelper::loadCss('jem');
@@ -218,8 +219,8 @@ class JemViewAttendees extends JemView
 
 		//Build search filter - unused
 		$filters = array();
-		$filters[] = JHtml::_('select.option', '1', Text::_('COM_JEM_NAME'));
-		$searchfilter = JHtml::_('select.genericlist', $filters, 'filter_type', array('size'=>'1','class'=>'inputbox'), 'value', 'text', $filter_type);
+		$filters[] = HTMLHelper::_('select.option', '1', Text::_('COM_JEM_NAME'));
+		$searchfilter = HTMLHelper::_('select.genericlist', $filters, 'filter_type', array('size'=>'1','class'=>'inputbox'), 'value', 'text', $filter_type);
 
 		// search filter - unused
 		$lists['search'] = $search;

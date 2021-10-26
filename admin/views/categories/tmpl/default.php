@@ -9,11 +9,12 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\HTML\HTMLHelper;
 
 // Include the component HTML helpers.
-JHtml::addIncludePath(JPATH_COMPONENT.'/helpers/html');
-JHtml::_('behavior.tooltip');
-JHtml::_('behavior.multiselect');
+HTMLHelper::addIncludePath(JPATH_COMPONENT.'/helpers/html');
+HTMLHelper::_('behavior.tooltip');
+HTMLHelper::_('behavior.multiselect');
 
 $user		= JemFactory::getUser();
 $userId		= $user->get('id');
@@ -39,17 +40,17 @@ $saveOrder 	= ($listOrder == 'a.lft' && strtolower($listDirn) == 'asc');
 			<div class="filter-select fltrt">
 				<select name="filter_level" class="inputbox" onchange="this.form.submit()">
 					<option value=""><?php echo Text::_('JOPTION_SELECT_MAX_LEVELS');?></option>
-					<?php echo JHtml::_('select.options', $this->f_levels, 'value', 'text', $this->state->get('filter.level'));?>
+					<?php echo HTMLHelper::_('select.options', $this->f_levels, 'value', 'text', $this->state->get('filter.level'));?>
 				</select>
 
 				<select name="filter_published" class="inputbox" onchange="this.form.submit()">
 					<option value=""><?php echo Text::_('JOPTION_SELECT_PUBLISHED');?></option>
-					<?php echo JHtml::_('select.options', JHtml::_('jgrid.publishedOptions'), 'value', 'text', $this->state->get('filter.published'), true);?>
+					<?php echo HTMLHelper::_('select.options', HTMLHelper::_('jgrid.publishedOptions'), 'value', 'text', $this->state->get('filter.published'), true);?>
 				</select>
 
 				<select name="filter_access" class="inputbox" onchange="this.form.submit()">
 					<option value=""><?php echo Text::_('JOPTION_SELECT_ACCESS');?></option>
-					<?php echo JHtml::_('select.options', JHtml::_('access.assetgroups'), 'value', 'text', $this->state->get('filter.access'));?>
+					<?php echo HTMLHelper::_('select.options', HTMLHelper::_('access.assetgroups'), 'value', 'text', $this->state->get('filter.access'));?>
 				</select>
 			</div>
 		</fieldset>
@@ -62,27 +63,27 @@ $saveOrder 	= ($listOrder == 'a.lft' && strtolower($listDirn) == 'asc');
 						<input type="checkbox" name="checkall-toggle" value="" title="<?php echo Text::_('JGLOBAL_CHECK_ALL'); ?>" onclick="Joomla.checkAll(this)" />
 					</th>
 					<th>
-						<?php echo JHtml::_('grid.sort', 'JGLOBAL_TITLE', 'a.catname', $listDirn, $listOrder); ?>
+						<?php echo HTMLHelper::_('grid.sort', 'JGLOBAL_TITLE', 'a.catname', $listDirn, $listOrder); ?>
 					</th>
 					<th width="5%" nowrap="nowrap">
 						<?php echo Text::_( 'COM_JEM_COLOR' ); ?>
 					</th>
-					<th width="15%"><?php echo JHtml::_('grid.sort', 'COM_JEM_GROUP', 'gr.name', $listDirn, $listOrder ); ?></th>
+					<th width="15%"><?php echo HTMLHelper::_('grid.sort', 'COM_JEM_GROUP', 'gr.name', $listDirn, $listOrder ); ?></th>
 					<th width="1%" class="center" nowrap="nowrap"><?php echo Text::_( 'COM_JEM_EVENTS' ); ?></th>
 					<th width="5%">
-						<?php echo JHtml::_('grid.sort', 'JSTATUS', 'a.published', $listDirn, $listOrder); ?>
+						<?php echo HTMLHelper::_('grid.sort', 'JSTATUS', 'a.published', $listDirn, $listOrder); ?>
 					</th>
 					<th width="10%">
-						<?php echo JHtml::_('grid.sort', 'JGRID_HEADING_ORDERING', 'a.lft', $listDirn, $listOrder); ?>
+						<?php echo HTMLHelper::_('grid.sort', 'JGRID_HEADING_ORDERING', 'a.lft', $listDirn, $listOrder); ?>
 						<?php if ($saveOrder) :?>
-							<?php echo JHtml::_('grid.order',  $this->items, 'filesave.png', 'categories.saveorder'); ?>
+							<?php echo HTMLHelper::_('grid.order',  $this->items, 'filesave.png', 'categories.saveorder'); ?>
 						<?php endif; ?>
 					</th>
 					<th class="center" width="10%">
-						<?php echo JHtml::_('grid.sort',  'JGRID_HEADING_ACCESS', 'a.access', $listDirn, $listOrder); ?>
+						<?php echo HTMLHelper::_('grid.sort',  'JGRID_HEADING_ACCESS', 'a.access', $listDirn, $listOrder); ?>
 					</th>
 					<th width="1%" class="nowrap">
-						<?php echo JHtml::_('grid.sort',  'JGRID_HEADING_ID', 'a.id', $listDirn, $listOrder); ?>
+						<?php echo HTMLHelper::_('grid.sort',  'JGRID_HEADING_ID', 'a.id', $listDirn, $listOrder); ?>
 					</th>
 				</tr>
 			</thead>
@@ -112,12 +113,12 @@ $saveOrder 	= ($listOrder == 'a.lft' && strtolower($listDirn) == 'asc');
 				?>
 					<tr class="row<?php echo $i % 2; ?>">
 						<td class="center">
-							<?php echo JHtml::_('grid.id', $i, $item->id); ?>
+							<?php echo HTMLHelper::_('grid.id', $i, $item->id); ?>
 						</td>
 						<td>
 							<?php echo str_repeat('<span class="gi">|&mdash;</span>', $repeat) ?>
 							<?php if ($item->checked_out) : ?>
-								<?php echo JHtml::_('jgrid.checkedout', $i, $item->editor, $item->checked_out_time, 'categories.', $canCheckin); ?>
+								<?php echo HTMLHelper::_('jgrid.checkedout', $i, $item->editor, $item->checked_out_time, 'categories.', $canCheckin); ?>
 							<?php endif; ?>
 							<?php if ($canEdit || $canEditOwn) : ?>
 								<a href="<?php echo JRoute::_('index.php?option=com_jem&task=category.edit&id='.$item->id);?>">
@@ -154,7 +155,7 @@ $saveOrder 	= ($listOrder == 'a.lft' && strtolower($listDirn) == 'asc');
 							<?php echo $item->assignedevents; ?>
 						</td>
 						<td class="center">
-							<?php echo JHtml::_('jgrid.published', $item->published, $i, 'categories.', $canChange);?>
+							<?php echo HTMLHelper::_('jgrid.published', $item->published, $i, 'categories.', $canChange);?>
 						</td>
 						<td class="order">
 							<?php if ($canChange) : ?>
@@ -191,6 +192,6 @@ $saveOrder 	= ($listOrder == 'a.lft' && strtolower($listDirn) == 'asc');
 		<input type="hidden" name="filter_order_Dir" value="<?php echo $listDirn; ?>" />
 		<input type="hidden" name="original_order_values" value="<?php echo implode($originalOrders, ','); ?>" />
 		
-		<?php echo JHtml::_('form.token'); ?>
+		<?php echo HTMLHelper::_('form.token'); ?>
 	</div>
 </form>

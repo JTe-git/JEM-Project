@@ -17,6 +17,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\HTML\HTMLHelper;
 
 require_once(dirname(__FILE__).'/helper.php');
 require_once(JPATH_SITE.'/components/com_jem/helpers/route.php');
@@ -27,9 +28,9 @@ require_once(JPATH_SITE.'/components/com_jem/factory.php');
 JemHelper::addFileLogger();
 
 # Include mootools or bootstrap tooltip
-JHtml::_('behavior.tooltip');
+HTMLHelper::_('behavior.tooltip');
 if (version_compare(JVERSION, '3.3', 'ge')) {
-	JHtml::_('bootstrap.tooltip');
+	HTMLHelper::_('bootstrap.tooltip');
 }
 
 # Parameters

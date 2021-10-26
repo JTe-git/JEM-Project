@@ -10,6 +10,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\HTML\HTMLHelper;
 
 /**
  * View class for the JEM import screen
@@ -25,10 +26,10 @@ class JemViewImport extends JemAdminView
 		jimport('joomla.html.pane');
 
 		// Load css
-		JHtml::_('stylesheet', 'com_jem/backend.css', array(), true);
+		HTMLHelper::_('stylesheet', 'com_jem/backend.css', array(), true);
 
 		// Load script
-		JHtml::_('behavior.framework');
+		HTMLHelper::_('behavior.framework');
 
 		// Get data from the model
 		$eventfields = $this->get('EventFields');

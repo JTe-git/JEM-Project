@@ -10,6 +10,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\HTML\HTMLHelper;
 
 jimport('joomla.form.formfield');
 
@@ -31,7 +32,7 @@ class JFormFieldModal_Users extends JFormField
 	protected function getInput()
 	{
 		// Load modal behavior
-		JHtml::_('behavior.modal', 'a.flyermodal');
+		HTMLHelper::_('behavior.modal', 'a.flyermodal');
 
 		// Build the script
 		$script = array();

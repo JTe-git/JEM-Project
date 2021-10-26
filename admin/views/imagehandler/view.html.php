@@ -10,7 +10,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
-
+use Joomla\CMS\HTML\HTMLHelper;
 
 /**
  * View class for the JEM imageselect screen
@@ -30,7 +30,7 @@ class JemViewImagehandler extends JViewLegacy
 		$app    = JFactory::getApplication();
 		$option = $app->input->getString('option', 'com_jem');
 
-		JHtml::_('behavior.framework');
+		HTMLHelper::_('behavior.framework');
 
 		if ($this->getLayout() == 'uploadimage') {
 			$this->_displayuploadimage($tpl);
@@ -67,7 +67,7 @@ class JemViewImagehandler extends JViewLegacy
 		}
 
 		// Load css
-		JHtml::_('stylesheet', 'com_jem/backend.css', array(), true);
+		HTMLHelper::_('stylesheet', 'com_jem/backend.css', array(), true);
 
 		//get images
 		$images = $this->get('images');
@@ -116,7 +116,7 @@ class JemViewImagehandler extends JViewLegacy
 		$task = JFactory::getApplication()->input->get('task', '');
 
 		// Load css
-		JHtml::_('stylesheet', 'com_jem/backend.css', array(), true);
+		HTMLHelper::_('stylesheet', 'com_jem/backend.css', array(), true);
 
 		jimport('joomla.client.helper');
 		$ftp = JClientHelper::setCredentialsFromRequest('ftp');

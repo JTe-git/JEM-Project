@@ -9,6 +9,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\HTML\HTMLHelper;
 
 $user		= JemFactory::getUser();
 $userId		= $user->get('id');
@@ -41,7 +42,7 @@ $params		= (isset($this->state->params)) ? $this->state->params : new JObject();
 				<tr>
 				<th width="5" class="center"><?php echo Text::_( 'COM_JEM_NUM' ); ?></th>
 				<th width="5" class="center"><input type="checkbox" name="checkall-toggle" value="" title="<?php echo Text::_('JGLOBAL_CHECK_ALL'); ?>" onclick="Joomla.checkAll(this)" /></th>
-				<th width="30%" class="title"><?php echo JHtml::_('grid.sort', 'COM_JEM_GROUP_NAME', 'name', $listDirn, $listOrder ); ?></th>
+				<th width="30%" class="title"><?php echo HTMLHelper::_('grid.sort', 'COM_JEM_GROUP_NAME', 'name', $listDirn, $listOrder ); ?></th>
 				<th><?php echo Text::_( 'COM_JEM_DESCRIPTION' ); ?></th>
 				</tr>
 			</thead>
@@ -66,10 +67,10 @@ $params		= (isset($this->state->params)) ? $this->state->params : new JObject();
 				?>
 				<tr class="row<?php echo $i % 2; ?>">
 					<td class="center"><?php echo $this->pagination->getRowOffset( $i ); ?></td>
-					<td class="center"><?php echo JHtml::_('grid.id', $i, $row->id); ?></td>
+					<td class="center"><?php echo HTMLHelper::_('grid.id', $i, $row->id); ?></td>
 					<td>
 						<?php if ($row->checked_out) : ?>
-							<?php echo JHtml::_('jgrid.checkedout', $i, $row->editor, $row->checked_out_time, 'groups.', $canCheckin); ?>
+							<?php echo HTMLHelper::_('jgrid.checkedout', $i, $row->editor, $row->checked_out_time, 'groups.', $canCheckin); ?>
 						<?php endif; ?>
 						<?php if ($canEdit) : ?>
 							<a href="<?php echo $link; ?>">
@@ -98,5 +99,5 @@ $params		= (isset($this->state->params)) ? $this->state->params : new JObject();
 	<input type="hidden" name="task" value="" />
 	<input type="hidden" name="filter_order" value="<?php echo $listOrder; ?>" />
 	<input type="hidden" name="filter_order_Dir" value="<?php echo $listDirn; ?>" />
-	<?php echo JHtml::_('form.token'); ?>
+	<?php echo HTMLHelper::_('form.token'); ?>
 </form>

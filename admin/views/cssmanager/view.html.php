@@ -9,6 +9,7 @@
 defined('_JEXEC') or die();
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\HTML\HTMLHelper;
 
 /**
  * View class for the Css-manager screen
@@ -37,7 +38,7 @@ class JemViewCssmanager extends JemAdminView
 		$user = JemFactory::getUser();
 
 		// Load css
-		JHtml::_('stylesheet', 'com_jem/backend.css', array(), true);
+		HTMLHelper::_('stylesheet', 'com_jem/backend.css', array(), true);
 
 		$this->addToolbar();
 

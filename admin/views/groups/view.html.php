@@ -11,6 +11,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\HTML\HTMLHelper;
 
 /**
  * View class for the JEM Groups screen
@@ -37,13 +38,13 @@ class JemViewGroups extends JemAdminView
 		$this->state      = $this->get('State');
 
 		// loading Mootools
-		JHtml::_('behavior.framework');
+		HTMLHelper::_('behavior.framework');
 
 		// Load css
-		JHtml::_('stylesheet', 'com_jem/backend.css', array(), true);
+		HTMLHelper::_('stylesheet', 'com_jem/backend.css', array(), true);
 
 		// add style to description of the tooltip (hastip)
-		JHtml::_('behavior.tooltip');
+		HTMLHelper::_('behavior.tooltip');
 
 		// assign data to template
 		$this->user			= $user;

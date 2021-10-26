@@ -10,6 +10,7 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\Access\Access;
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\HTML\HTMLHelper;
 
 require_once(JPATH_SITE.'/components/com_jem/factory.php');
 
@@ -160,7 +161,7 @@ class JemHelperBackend
 		$options = array();
 		$options = array_merge(JEMHelperCountries::getCountryOptions(),$options);
 
-		array_unshift($options, JHtml::_('select.option', '0', Text::_('COM_JEM_SELECT_COUNTRY')));
+		array_unshift($options, HTMLHelper::_('select.option', '0', Text::_('COM_JEM_SELECT_COUNTRY')));
 
 		return $options;
 	}

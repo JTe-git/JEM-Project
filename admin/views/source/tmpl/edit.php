@@ -10,11 +10,12 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\HTML\HTMLHelper;
 
-JHtml::addIncludePath(JPATH_COMPONENT.'/helpers/html');
-JHtml::_('behavior.tooltip');
-JHtml::_('behavior.formvalidation');
-JHtml::_('behavior.keepalive');
+HTMLHelper::addIncludePath(JPATH_COMPONENT.'/helpers/html');
+HTMLHelper::_('behavior.tooltip');
+HTMLHelper::_('behavior.formvalidation');
+HTMLHelper::_('behavior.keepalive');
 ?>
 <script type="text/javascript">
 	Joomla.submitbutton = function(task)
@@ -47,7 +48,7 @@ JHtml::_('behavior.keepalive');
 		<?php echo $this->form->getInput('source'); ?>
 		</div>
 		<input type="hidden" name="task" value="" />
-		<?php echo JHtml::_('form.token'); ?>
+		<?php echo HTMLHelper::_('form.token'); ?>
 	</fieldset>
 
 	<?php echo $this->form->getInput('filename'); ?>

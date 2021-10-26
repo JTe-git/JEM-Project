@@ -9,10 +9,11 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\HTML\HTMLHelper;
 
-JHtml::_('behavior.tooltip');
-JHtml::_('behavior.formvalidation');
-JHtml::_('behavior.keepalive');
+HTMLHelper::_('behavior.tooltip');
+HTMLHelper::_('behavior.formvalidation');
+HTMLHelper::_('behavior.keepalive');
 
 // Create shortcut to parameters.
 $params = $this->state->get('params');
@@ -208,8 +209,8 @@ $location = JemHelper::defineCenterMap($this->form);
 	<!-- START OF LEFT DIV -->
 	<div class="width-55 fltlft">
 
-	<?php echo JHtml::_('tabs.start', 'det-pane'); ?>
-	<?php echo JHtml::_('tabs.panel',Text::_('COM_JEM_VENUE_INFO_TAB'), 'info' ); ?>
+	<?php echo HTMLHelper::_('tabs.start', 'det-pane'); ?>
+	<?php echo HTMLHelper::_('tabs.panel',Text::_('COM_JEM_VENUE_INFO_TAB'), 'info' ); ?>
 		<fieldset class="adminform">
 			<legend>
 				<?php echo empty($this->item->id) ? Text::_('COM_JEM_NEW_VENUE') : Text::sprintf('COM_JEM_VENUE_DETAILS', $this->item->id); ?>
@@ -252,9 +253,9 @@ $location = JemHelper::defineCenterMap($this->form);
 				<?php echo $this->form->getInput('locdescription'); ?>
 			</div>
 		</fieldset>
-		<?php echo JHtml::_('tabs.panel',Text::_('COM_JEM_EVENT_ATTACHMENTS_TAB'), 'attachments' ); ?>
+		<?php echo HTMLHelper::_('tabs.panel',Text::_('COM_JEM_EVENT_ATTACHMENTS_TAB'), 'attachments' ); ?>
 		<?php echo $this->loadTemplate('attachments'); ?>
-		<?php echo JHtml::_('tabs.end'); ?>
+		<?php echo HTMLHelper::_('tabs.end'); ?>
 
 	<!-- END OF LEFT DIV -->
 	</div>
@@ -262,8 +263,8 @@ $location = JemHelper::defineCenterMap($this->form);
 	<!-- START RIGHT DIV -->
 	<div class="width-40 fltrt">
 
-	<?php echo JHtml::_('sliders.start', 'venue-sliders-'.$this->item->id, array('useCookie'=>1)); ?>
-	<?php echo JHtml::_('sliders.panel', Text::_('COM_JEM_FIELDSET_PUBLISHING'), 'publishing-details'); ?>
+	<?php echo HTMLHelper::_('sliders.start', 'venue-sliders-'.$this->item->id, array('useCookie'=>1)); ?>
+	<?php echo HTMLHelper::_('sliders.panel', Text::_('COM_JEM_FIELDSET_PUBLISHING'), 'publishing-details'); ?>
 		<fieldset class="panelform">
 			<ul class="adminformlist">
 				<li><?php echo $this->form->getLabel('id'); ?>
@@ -278,7 +279,7 @@ $location = JemHelper::defineCenterMap($this->form);
 				<?php endforeach; ?>
 			</ul>
 		</fieldset>
-	<?php echo JHtml::_('sliders.panel', Text::_('COM_JEM_CUSTOMFIELDS'), 'venue-custom'); ?>
+	<?php echo HTMLHelper::_('sliders.panel', Text::_('COM_JEM_CUSTOMFIELDS'), 'venue-custom'); ?>
 		<fieldset class="panelform">
 			<ul class="adminformlist">
 				<?php foreach($this->form->getFieldset('custom') as $field): ?>
@@ -287,14 +288,14 @@ $location = JemHelper::defineCenterMap($this->form);
 				<?php endforeach; ?>
 			</ul>
 		</fieldset>
-	<?php echo JHtml::_('sliders.panel', Text::_('COM_JEM_IMAGE'), 'image-event'); ?>
+	<?php echo HTMLHelper::_('sliders.panel', Text::_('COM_JEM_IMAGE'), 'image-event'); ?>
 		<fieldset class="panelform">
 			<ul class="adminformlist">
 				<li><?php echo $this->form->getLabel('locimage'); ?>
 					<?php echo $this->form->getInput('locimage'); ?></li>
 			</ul>
 		</fieldset>
-	<?php echo JHtml::_('sliders.panel', Text::_('COM_JEM_METADATA_INFORMATION'), 'meta-event'); ?>
+	<?php echo HTMLHelper::_('sliders.panel', Text::_('COM_JEM_METADATA_INFORMATION'), 'meta-event'); ?>
 		<fieldset class="panelform">
 			<input type="button" class="button" value="<?php echo Text::_( 'COM_JEM_ADD_VENUE_CITY' ); ?>" onclick="meta()" />
 			<ul class="adminformlist">
@@ -304,7 +305,7 @@ $location = JemHelper::defineCenterMap($this->form);
 				<?php endforeach; ?>
 			</ul>
 		</fieldset>
-	<?php echo JHtml::_('sliders.panel', Text::_('COM_JEM_FIELDSET_GEODATA'), 'venue-geodata'); ?>
+	<?php echo HTMLHelper::_('sliders.panel', Text::_('COM_JEM_FIELDSET_GEODATA'), 'venue-geodata'); ?>
 		<fieldset class="adminform" id="geodata">
 			<ul class="adminformlist">
 				<li><?php echo $this->form->getLabel('map'); ?>
@@ -353,12 +354,12 @@ $location = JemHelper::defineCenterMap($this->form);
 				<input id="cp-latlong" class="geobutton" type="button" value="<?php echo Text::_('COM_JEM_VENUE_COPY_COORDINATES'); ?>" />
 			</div>
 		</fieldset>
-	<?php echo JHtml::_('sliders.end'); ?>
+	<?php echo HTMLHelper::_('sliders.end'); ?>
 		<input type="hidden" name="task" value="" />
 		<input type="hidden" name="author_ip" value="<?php echo $this->item->author_ip; ?>" />
 
 	<!-- END RIGHT DIV -->
-	<?php echo JHtml::_( 'form.token' ); ?>
+	<?php echo HTMLHelper::_( 'form.token' ); ?>
 	</div>
 	<div class="clr"></div>
 </form>

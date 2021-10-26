@@ -9,8 +9,9 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\HTML\HTMLHelper;
 
-JHtml::addIncludePath(JPATH_COMPONENT . '/helpers');
+HTMLHelper::addIncludePath(JPATH_COMPONENT . '/helpers');
 
 // Create shortcuts to some parameters.
 $params      = $this->item->params;
@@ -26,7 +27,7 @@ if ($jemsettings->oldevent > 0) {
   $expDate = date("D, d M Y H:i:s", strtotime('+1 day', $enddate));
   $document->addCustomTag('<meta http-equiv="expires" content="' . $expDate . '"/>');
 }
-JHtml::_('behavior.modal', 'a.flyermodal');
+HTMLHelper::_('behavior.modal', 'a.flyermodal');
 ?>
 <?php if ($params->get('access-view')) { /* This will show nothings otherwise - ??? */ ?>
 <div id="jem" class="event_id<?php echo $this->item->did; ?> jem_event<?php echo $this->pageclass_sfx;?>"
@@ -138,7 +139,7 @@ JHtml::_('behavior.modal', 'a.flyermodal');
             $menu = JFactory::getApplication()->getMenu();
             $item = $menu->getItems('link', $needle, true);
             $cntlink = !empty($item) ? $needle . '&Itemid=' . $item->id : $needle;
-            echo Text::sprintf('COM_JEM_EVENT_CREATED_BY', JHtml::_('link', JRoute::_($cntlink), $author));
+            echo Text::sprintf('COM_JEM_EVENT_CREATED_BY', HTMLHelper::_('link', JRoute::_($cntlink), $author));
           else :
             echo Text::sprintf('COM_JEM_EVENT_CREATED_BY', $author);
           endif;
@@ -195,10 +196,10 @@ JHtml::_('behavior.modal', 'a.flyermodal');
 					}
 
 					if ($params->get('event_show_readmore_title', 0) != 0) {
-					    echo JHtml::_('string.truncate', ($this->item->title), $params->get('event_readmore_limit'));
+					    echo HTMLHelper::_('string.truncate', ($this->item->title), $params->get('event_readmore_limit'));
 					} elseif ($params->get('event_show_readmore_title', 0) == 0) {
 					} else {
-						echo JHtml::_('string.truncate', ($this->item->title), $params->get('event_readmore_limit'));
+						echo HTMLHelper::_('string.truncate', ($this->item->title), $params->get('event_readmore_limit'));
 					} ?>
 					</a>
 				</p>
@@ -224,7 +225,7 @@ JHtml::_('behavior.modal', 'a.flyermodal');
 			$menu = JFactory::getApplication()->getMenu();
 			$item = $menu->getItems('link', $needle, true);
 			$cntlink2 = !empty($item) ? $needle . '&Itemid=' . $item->id : $needle;
-			echo Text::sprintf('COM_JEM_EVENT_CONTACT', JHtml::_('link', JRoute::_($cntlink2), $contact));
+			echo Text::sprintf('COM_JEM_EVENT_CONTACT', HTMLHelper::_('link', JRoute::_($cntlink2), $contact));
 		else :
 			echo Text::sprintf('COM_JEM_EVENT_CONTACT', $contact);
 		endif;

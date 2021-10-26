@@ -11,6 +11,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\HTML\HTMLHelper;
 
 $options = array(
 		'onActive' => 'function(title, description){
@@ -26,9 +27,9 @@ $options = array(
 		'useCookie' => true, // this must not be a string. Don't use quotes.
 );
 
-JHtml::_('behavior.tooltip');
-JHtml::_('behavior.formvalidation');
-JHtml::_('behavior.keepalive');
+HTMLHelper::_('behavior.tooltip');
+HTMLHelper::_('behavior.formvalidation');
+HTMLHelper::_('behavior.keepalive');
 
 // Create shortcut to parameters.
 $params = $this->state->get('params');
@@ -188,8 +189,8 @@ function showUnregistraUntil()
 	<!-- START OF LEFT DIV -->
 	<div class="width-55 fltlft">
 
-		<?php echo JHtml::_('tabs.start', 'det-pane'); ?>
-		<?php echo JHtml::_('tabs.panel',Text::_('COM_JEM_EVENT_INFO_TAB'), 'info' ); ?>
+		<?php echo HTMLHelper::_('tabs.start', 'det-pane'); ?>
+		<?php echo HTMLHelper::_('tabs.panel',Text::_('COM_JEM_EVENT_INFO_TAB'), 'info' ); ?>
 
 		<!-- START OF LEFT FIELDSET -->
 		<fieldset class="adminform">
@@ -238,13 +239,13 @@ function showUnregistraUntil()
 			<!-- END OF FIELDSET -->
 		</fieldset>
 
-		<?php echo JHtml::_('tabs.panel',Text::_('COM_JEM_EVENT_ATTACHMENTS_TAB'), 'attachments' ); ?>
+		<?php echo HTMLHelper::_('tabs.panel',Text::_('COM_JEM_EVENT_ATTACHMENTS_TAB'), 'attachments' ); ?>
 		<?php echo $this->loadTemplate('attachments'); ?>
 
-		<?php echo JHtml::_('tabs.panel',Text::_('COM_JEM_EVENT_SETTINGS_TAB'), 'event-settings' ); ?>
+		<?php echo HTMLHelper::_('tabs.panel',Text::_('COM_JEM_EVENT_SETTINGS_TAB'), 'event-settings' ); ?>
 		<?php echo $this->loadTemplate('settings'); ?>
 
-		<?php echo JHtml::_('tabs.end'); ?>
+		<?php echo HTMLHelper::_('tabs.end'); ?>
 		<!-- END OF LEFT DIV -->
 	</div>
 
@@ -252,10 +253,10 @@ function showUnregistraUntil()
 	<div class="width-40 fltrt">
 
 		<!-- START OF SLIDERS -->
-		<?php echo JHtml::_('sliders.start', 'event-sliders-'.$this->item->id, $options); ?>
+		<?php echo HTMLHelper::_('sliders.start', 'event-sliders-'.$this->item->id, $options); ?>
 
 		<!-- START OF PANEL PUBLISHING -->
-		<?php echo JHtml::_('sliders.panel', Text::_('COM_JEM_FIELDSET_PUBLISHING'), 'publishing-details'); ?>
+		<?php echo HTMLHelper::_('sliders.panel', Text::_('COM_JEM_FIELDSET_PUBLISHING'), 'publishing-details'); ?>
 
 		<!-- RETRIEVING OF FIELDSET PUBLISHING -->
 		<fieldset class="panelform">
@@ -275,7 +276,7 @@ function showUnregistraUntil()
 			</ul>
 		</fieldset>
 
-		<?php echo JHtml::_('sliders.panel', Text::_('COM_JEM_CUSTOMFIELDS'), 'custom'); ?>
+		<?php echo HTMLHelper::_('sliders.panel', Text::_('COM_JEM_CUSTOMFIELDS'), 'custom'); ?>
 		<fieldset class="panelform">
 			<ul class="adminformlist">
 				<?php foreach($this->form->getFieldset('custom') as $field): ?>
@@ -285,7 +286,7 @@ function showUnregistraUntil()
 			</ul>
 		</fieldset>
 
-		<?php echo JHtml::_('sliders.panel', Text::_('COM_JEM_REGISTRATION'), 'registra'); ?>
+		<?php echo HTMLHelper::_('sliders.panel', Text::_('COM_JEM_REGISTRATION'), 'registra'); ?>
 		<fieldset class="panelform">
 			<ul class="adminformlist">
 				<li><?php echo $this->form->getLabel('registra'); ?> <?php echo $this->form->getInput('registra'); ?>
@@ -308,7 +309,7 @@ function showUnregistraUntil()
 		</fieldset>
 
 		<!-- START OF PANEL IMAGE -->
-		<?php echo JHtml::_('sliders.panel', Text::_('COM_JEM_IMAGE'), 'image-event'); ?>
+		<?php echo HTMLHelper::_('sliders.panel', Text::_('COM_JEM_IMAGE'), 'image-event'); ?>
 
 		<fieldset class="panelform">
 			<ul class="adminformlist">
@@ -317,7 +318,7 @@ function showUnregistraUntil()
 			</ul>
 		</fieldset>
 
-		<?php echo JHtml::_('sliders.panel', Text::_('COM_JEM_RECURRING_EVENTS'), 'recurrence'); ?>
+		<?php echo HTMLHelper::_('sliders.panel', Text::_('COM_JEM_RECURRING_EVENTS'), 'recurrence'); ?>
 		<fieldset class="panelform">
 			<ul class="adminformlist">
 				<li><?php echo $this->form->getLabel('recurrence_type'); ?> <?php echo $this->form->getInput('recurrence_type'); ?>
@@ -441,7 +442,7 @@ function showUnregistraUntil()
 		} ?>
 
 		<!-- START OF PANEL META -->
-		<?php echo JHtml::_('sliders.panel', Text::_('COM_JEM_METADATA_INFORMATION'), 'meta-event'); ?>
+		<?php echo HTMLHelper::_('sliders.panel', Text::_('COM_JEM_METADATA_INFORMATION'), 'meta-event'); ?>
 
 		<!-- RETRIEVING OF FIELDSET META -->
 		<fieldset class="panelform">
@@ -504,11 +505,11 @@ function showUnregistraUntil()
 		-->
 		</script>
 
-		<?php echo JHtml::_('sliders.end'); ?>
+		<?php echo HTMLHelper::_('sliders.end'); ?>
 
 		<input type="hidden" name="task" value="" />
 		<input type="hidden" name="author_ip" value="<?php echo $this->item->author_ip; ?>" />
-		<?php echo JHtml::_('form.token'); ?>
+		<?php echo HTMLHelper::_('form.token'); ?>
 		<!--  END RIGHT DIV -->
 	</div>
 	<div class="clr"></div>

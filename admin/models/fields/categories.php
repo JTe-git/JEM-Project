@@ -9,6 +9,7 @@
 defined('_JEXEC') or die();
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\HTML\HTMLHelper;
 
 jimport('joomla.form.formfield');
 JFormHelper::loadFieldClass('list');
@@ -32,7 +33,7 @@ class JFormFieldCategories extends JFormFieldList
 	protected function getInput()
 	{
 		// Load the modal behavior script.
-		JHtml::_('behavior.modal', 'a.modal');
+		HTMLHelper::_('behavior.modal', 'a.modal');
 
 		// Build the script.
 		$script = array();

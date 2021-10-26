@@ -10,6 +10,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\HTML\HTMLHelper;
 
 jimport('joomla.application.component.modellist');
 
@@ -251,7 +252,7 @@ class JemModelAttendees extends JModelList
 					$item->name,
 					$item->username,
 					$item->email,
-					empty($item->uregdate) ? '' : JHtml::_('date', $item->uregdate, Text::_('DATE_FORMAT_LC2')),
+					empty($item->uregdate) ? '' : HTMLHelper::_('date', $item->uregdate, Text::_('DATE_FORMAT_LC2')),
 					Text::_($txt_stat)
 				);
 			if ($comments) {

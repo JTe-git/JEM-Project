@@ -9,8 +9,9 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\HTML\HTMLHelper;
 
-JHtml::addIncludePath(JPATH_COMPONENT.'/helpers/html');
+HTMLHelper::addIncludePath(JPATH_COMPONENT.'/helpers/html');
 $user		= JemFactory::getUser();
 $userId		= $user->get('id');
 $listOrder	= $this->escape($this->state->get('list.ordering'));
@@ -52,19 +53,19 @@ $(document).ready(function() {
 			</div>
 			<div class="filter-select fltrt">
 				<label class="filter-hide-lbl" for="filter_begin"><?php echo Text::_('COM_JEM_EVENTS_FILTER_STARTDATE'); ?></label>
-				<?php echo JHtml::_('calendar', $this->state->get('filter_begin'), 'filter_begin', 'filter_begin', '%Y-%m-%d' , array('size'=>10, 'onchange'=>"this.form.fireEvent('submit');this.form.submit()"));?>
+				<?php echo HTMLHelper::_('calendar', $this->state->get('filter_begin'), 'filter_begin', 'filter_begin', '%Y-%m-%d' , array('size'=>10, 'onchange'=>"this.form.fireEvent('submit');this.form.submit()"));?>
 
 				<label class="filter-hide-lbl" for="filter_end"><?php echo Text::_('COM_JEM_EVENTS_FILTER_ENDDATE'); ?></label>
-				<?php echo JHtml::_('calendar', $this->state->get('filter_end'), 'filter_end', 'filter_end', '%Y-%m-%d' , array('size'=>10, 'onchange'=>"this.form.fireEvent('submit');this.form.submit()"));?>
+				<?php echo HTMLHelper::_('calendar', $this->state->get('filter_end'), 'filter_end', 'filter_end', '%Y-%m-%d' , array('size'=>10, 'onchange'=>"this.form.fireEvent('submit');this.form.submit()"));?>
 
 				<select name="filter_state" class="inputbox" onchange="this.form.submit()">
 					<option value=""><?php echo Text::_('JOPTION_SELECT_PUBLISHED');?></option>
-					<?php echo JHtml::_('select.options', JHtml::_('jgrid.publishedOptions'), 'value', 'text', $this->state->get('filter_state'), true);?>
+					<?php echo HTMLHelper::_('select.options', HTMLHelper::_('jgrid.publishedOptions'), 'value', 'text', $this->state->get('filter_state'), true);?>
 				</select>
 
 				<select name="filter_access" class="inputbox" onchange="this.form.submit()">
 					<option value=""><?php echo Text::_('JOPTION_SELECT_ACCESS');?></option>
-					<?php echo JHtml::_('select.options', JHtml::_('access.assetgroups'), 'value', 'text', $this->state->get('filter.access'));?>
+					<?php echo HTMLHelper::_('select.options', HTMLHelper::_('access.assetgroups'), 'value', 'text', $this->state->get('filter.access'));?>
 				</select>
 			</div>
 		</fieldset>
@@ -75,20 +76,20 @@ $(document).ready(function() {
 				<tr>
 					<th width="1%" class="center"><?php echo Text::_('COM_JEM_NUM'); ?></th>
 					<th width="1%" class="center"><input type="checkbox" name="checkall-toggle" value="" title="<?php echo Text::_('JGLOBAL_CHECK_ALL'); ?>" onclick="Joomla.checkAll(this)" /></th>
-					<th class="nowrap"><?php echo JHtml::_('grid.sort', 'COM_JEM_DATE', 'a.dates', $listDirn, $listOrder ); ?></th>
-					<th><?php echo JHtml::_('grid.sort', 'COM_JEM_EVENT_TIME', 'a.times', $listDirn, $listOrder ); ?></th>
-					<th class="nowrap"><?php echo JHtml::_('grid.sort', 'COM_JEM_EVENT_TITLE', 'a.title', $listDirn, $listOrder ); ?></th>
-					<th><?php echo JHtml::_('grid.sort', 'COM_JEM_VENUE', 'loc.venue', $listDirn, $listOrder ); ?></th>
-					<th><?php echo JHtml::_('grid.sort', 'COM_JEM_CITY', 'loc.city', $listDirn, $listOrder ); ?></th>
-					<th><?php echo JHtml::_('grid.sort', 'COM_JEM_STATE', 'loc.state', $listDirn, $listOrder ); ?></th>
+					<th class="nowrap"><?php echo HTMLHelper::_('grid.sort', 'COM_JEM_DATE', 'a.dates', $listDirn, $listOrder ); ?></th>
+					<th><?php echo HTMLHelper::_('grid.sort', 'COM_JEM_EVENT_TIME', 'a.times', $listDirn, $listOrder ); ?></th>
+					<th class="nowrap"><?php echo HTMLHelper::_('grid.sort', 'COM_JEM_EVENT_TITLE', 'a.title', $listDirn, $listOrder ); ?></th>
+					<th><?php echo HTMLHelper::_('grid.sort', 'COM_JEM_VENUE', 'loc.venue', $listDirn, $listOrder ); ?></th>
+					<th><?php echo HTMLHelper::_('grid.sort', 'COM_JEM_CITY', 'loc.city', $listDirn, $listOrder ); ?></th>
+					<th><?php echo HTMLHelper::_('grid.sort', 'COM_JEM_STATE', 'loc.state', $listDirn, $listOrder ); ?></th>
 					<th><?php echo Text::_('COM_JEM_CATEGORIES'); ?></th>
 					<th width="1%" class="center nowrap"><?php echo Text::_('JSTATUS'); ?></th>
-					<th width="1%"><?php echo JHtml::_('grid.sort', 'JFEATURED', 'a.featured', $listDirn, $listOrder, NULL, 'desc'); ?></th>
+					<th width="1%"><?php echo HTMLHelper::_('grid.sort', 'JFEATURED', 'a.featured', $listDirn, $listOrder, NULL, 'desc'); ?></th>
 					<th class="nowrap"><?php echo Text::_('COM_JEM_CREATION'); ?></th>
-					<th class="center"><?php echo JHtml::_('grid.sort', 'COM_JEM_HITS', 'a.hits', $listDirn, $listOrder ); ?></th>
+					<th class="center"><?php echo HTMLHelper::_('grid.sort', 'COM_JEM_HITS', 'a.hits', $listDirn, $listOrder ); ?></th>
 					<th width="1%" class="center nowrap"><?php echo Text::_('COM_JEM_REGISTERED_USERS'); ?></th>
-					<th width="9%" class="center"><?php echo JHtml::_('grid.sort',  'JGRID_HEADING_ACCESS', 'a.access', $listDirn, $listOrder); ?></th>
-					<th width="1%" class="center nowrap"><?php echo JHtml::_('grid.sort', 'COM_JEM_ID', 'a.id', $listDirn, $listOrder ); ?></th>
+					<th width="9%" class="center"><?php echo HTMLHelper::_('grid.sort',  'JGRID_HEADING_ACCESS', 'a.access', $listDirn, $listOrder); ?></th>
+					<th width="1%" class="center nowrap"><?php echo HTMLHelper::_('grid.sort', 'COM_JEM_ID', 'a.id', $listDirn, $listOrder ); ?></th>
 				</tr>
 			</thead>
 
@@ -122,14 +123,14 @@ $(document).ready(function() {
 					$canChange	= $user->authorise('core.edit.state') && $canCheckin;
 
 					$venuelink 		= 'index.php?option=com_jem&amp;task=venue.edit&amp;id='.$row->locid;
-					$published 		= JHtml::_('jgrid.published', $row->published, $i, 'events.');
+					$published 		= HTMLHelper::_('jgrid.published', $row->published, $i, 'events.');
 				?>
 				<tr class="row<?php echo $i % 2; ?>">
 					<td class="center"><?php echo $this->pagination->getRowOffset( $i ); ?></td>
-					<td class="center"><?php echo JHtml::_('grid.id', $i, $row->id); ?></td>
+					<td class="center"><?php echo HTMLHelper::_('grid.id', $i, $row->id); ?></td>
 					<td>
 						<?php if ($row->checked_out) : ?>
-							<?php echo JHtml::_('jgrid.checkedout', $i, $row->editor, $row->checked_out_time, 'events.', $canCheckin); ?>
+							<?php echo HTMLHelper::_('jgrid.checkedout', $i, $row->editor, $row->checked_out_time, 'events.', $canCheckin); ?>
 						<?php endif; ?>
 						<?php if ($canEdit) : ?>
 							<a href="<?php echo JRoute::_('index.php?option=com_jem&task=event.edit&id='.(int) $row->id); ?>">
@@ -177,15 +178,15 @@ $(document).ready(function() {
 					</td>
 					<td class="center"><?php echo $published; ?></td>
 					<td class="center">
-						<?php echo JHtml::_('jemhtml.featured', $row->featured, $i, $canChange); ?>
+						<?php echo HTMLHelper::_('jemhtml.featured', $row->featured, $i, $canChange); ?>
 					</td>
 					<td>
 						<?php echo Text::_('COM_JEM_AUTHOR').': '; ?><a href="<?php echo 'index.php?option=com_users&amp;task=edit&amp;hidemainmenu=1&amp;cid[]='.$row->created_by; ?>"><?php echo $row->author; ?></a><br />
 						<?php echo Text::_('COM_JEM_EMAIL').': '; ?><a href="mailto:<?php echo $row->email; ?>"><?php echo $row->email; ?></a><br />
 						<?php
-						$created	 	= JHtml::_('date',$row->created,Text::_('DATE_FORMAT_LC2'));
-						$modified 		= JHtml::_('date',$row->modified,Text::_('DATE_FORMAT_LC2') );
-						$image 			= JHtml::_('image','com_jem/icon-16-info.png',NULL,NULL,true );
+						$created	 	= HTMLHelper::_('date',$row->created,Text::_('DATE_FORMAT_LC2'));
+						$modified 		= HTMLHelper::_('date',$row->modified,Text::_('DATE_FORMAT_LC2') );
+						$image 			= HTMLHelper::_('image','com_jem/icon-16-info.png',NULL,NULL,true );
 
 						$overlib 		= Text::_('COM_JEM_CREATED_AT').': '.$created.'<br />';
 						if ($row->author_ip != '') {
@@ -225,7 +226,7 @@ $(document).ready(function() {
 								<?php echo $count; ?>
 							</a>
 						<?php } else { ?>
-							<?php echo JHtml::_('image', 'com_jem/publish_r.png', NULL, NULL, true); ?>
+							<?php echo HTMLHelper::_('image', 'com_jem/publish_r.png', NULL, NULL, true); ?>
 						<?php } ?>
 					</td>
 					<td class="center">
@@ -244,5 +245,5 @@ $(document).ready(function() {
 	<input type="hidden" name="task" value="" />
 	<input type="hidden" name="filter_order" value="<?php echo $listOrder; ?>" />
 	<input type="hidden" name="filter_order_Dir" value="<?php echo $listDirn; ?>" />
-	<?php echo JHtml::_('form.token'); ?>
+	<?php echo HTMLHelper::_('form.token'); ?>
 </form>

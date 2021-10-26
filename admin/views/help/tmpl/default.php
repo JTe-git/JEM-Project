@@ -9,6 +9,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\HTML\HTMLHelper;
 
 $options = array(
     'onActive' => 'function(title, description){
@@ -52,7 +53,7 @@ $options = array(
 								|
 								<a href="<?php echo 'components/com_jem/help/'.$this->langTag.'/helpsite/credits.html'; ?>" target='helpFrame'><?php echo Text::_('COM_JEM_CREDITS'); ?></a>
 								|
-								<?php echo JHtml::_('link', 'https://www.gnu.org/licenses/gpl-2.0.html', Text::_('COM_JEM_LICENSE'), array('target' => 'helpFrame')) ?>
+								<?php echo HTMLHelper::_('link', 'https://www.gnu.org/licenses/gpl-2.0.html', Text::_('COM_JEM_LICENSE'), array('target' => 'helpFrame')) ?>
 							</td>
 						</tr>
 					</table>
@@ -61,20 +62,20 @@ $options = array(
 		</table>
 		<div class="clr"> </div>
 		<div id="treecellhelp" class="width-20 fltleft">
-			<?php echo JHtml::_('sliders.start', 'det-pane', $options); ?>
-			<?php echo JHtml::_('sliders.panel', Text::_('COM_JEM_SCREEN_HELP'), 'help'); ?>
+			<?php echo HTMLHelper::_('sliders.start', 'det-pane', $options); ?>
+			<?php echo HTMLHelper::_('sliders.panel', Text::_('COM_JEM_SCREEN_HELP'), 'help'); ?>
 				<table class="adminlist">
 					<?php
 					foreach ($this->toc as $k=>$v) {
 						echo '<tr>';
 						echo '<td>';
-						echo JHtml::Link('components/com_jem/help/'.$this->langTag.'/'.$k, $v, array('target' => 'helpFrame'));
+						echo HTMLHelper::Link('components/com_jem/help/'.$this->langTag.'/'.$k, $v, array('target' => 'helpFrame'));
 						echo '</td>';
 						echo '</tr>';
 					}
 					?>
 				</table>
-			<?php echo JHtml::_('sliders.end');?>
+			<?php echo HTMLHelper::_('sliders.end');?>
 		</div>
 		<div id="datacellhelp" class="width-80 fltrt">
 			<fieldset title="<?php echo Text::_('COM_JEM_HELP_VIEW'); ?>">
@@ -94,5 +95,5 @@ $options = array(
 
 <?php
 //keep session alive
-JHtml::_('behavior.keepalive');
+HTMLHelper::_('behavior.keepalive');
 ?>

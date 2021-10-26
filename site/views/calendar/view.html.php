@@ -9,6 +9,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\HTML\HTMLHelper;
 
 /**
  * Calendar-View
@@ -23,8 +24,8 @@ class JemViewCalendar extends JemView
 		$app = JFactory::getApplication();
 
 		// Load tooltips behavior
-		JHtml::_('behavior.tooltip');
-		JHtml::_('behavior.framework');
+		HTMLHelper::_('behavior.tooltip');
+		HTMLHelper::_('behavior.framework');
 
 		// initialize variables
 		$document     = JFactory::getDocument();
@@ -74,7 +75,7 @@ class JemViewCalendar extends JemView
 		$document->addStyleDeclaration($style);
 
 		// add javascript (using full path - see issue #590)
-		JHtml::_('script', 'media/com_jem/js/calendar.js');
+		HTMLHelper::_('script', 'media/com_jem/js/calendar.js');
 
 		$year  = (int)$jinput->getInt('yearID', strftime("%Y"));
 		$month = (int)$jinput->getInt('monthID', strftime("%m"));

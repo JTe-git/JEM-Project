@@ -10,6 +10,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\HTML\HTMLHelper;
 
 /**
  * View class: Attendees
@@ -34,7 +35,7 @@ class JemViewAttendees extends JemAdminView
 		$filter_search    = $db->escape(trim(\Joomla\String\StringHelper::strtolower($filter_search)));
 
 		// Load css
-		JHtml::_('stylesheet', 'com_jem/backend.css', array(), true);
+		HTMLHelper::_('stylesheet', 'com_jem/backend.css', array(), true);
 
 		// Get data from the model
 		$event = $this->get('Event');
@@ -64,20 +65,20 @@ class JemViewAttendees extends JemAdminView
 
 		//build filter selectlist
 		$filters = array();
-		$filters[] = JHtml::_('select.option', '1', Text::_('COM_JEM_NAME'));
-		$filters[] = JHtml::_('select.option', '2', Text::_('COM_JEM_USERNAME'));
-		$lists['filter'] = JHtml::_('select.genericlist', $filters, 'filter_type', array('size'=>'1','class'=>'inputbox'), 'value', 'text', $filter_type);
+		$filters[] = HTMLHelper::_('select.option', '1', Text::_('COM_JEM_NAME'));
+		$filters[] = HTMLHelper::_('select.option', '2', Text::_('COM_JEM_USERNAME'));
+		$lists['filter'] = HTMLHelper::_('select.genericlist', $filters, 'filter_type', array('size'=>'1','class'=>'inputbox'), 'value', 'text', $filter_type);
 
 		// search filter
 		$lists['search'] = $filter_search;
 
 		// registration status
-		$options = array(JHtml::_('select.option', -2, Text::_('COM_JEM_ATT_FILTER_ALL')),
-		                 JHtml::_('select.option',  0, Text::_('COM_JEM_ATT_FILTER_INVITED')),
-		                 JHtml::_('select.option', -1, Text::_('COM_JEM_ATT_FILTER_NOT_ATTENDING')),
-		                 JHtml::_('select.option',  1, Text::_('COM_JEM_ATT_FILTER_ATTENDING')),
-		                 JHtml::_('select.option',  2, Text::_('COM_JEM_ATT_FILTER_WAITING')));
-		$lists['status'] = JHtml::_('select.genericlist', $options, 'filter_status', array('onChange'=>'this.form.submit();'), 'value', 'text', $filter_status);
+		$options = array(HTMLHelper::_('select.option', -2, Text::_('COM_JEM_ATT_FILTER_ALL')),
+		                 HTMLHelper::_('select.option',  0, Text::_('COM_JEM_ATT_FILTER_INVITED')),
+		                 HTMLHelper::_('select.option', -1, Text::_('COM_JEM_ATT_FILTER_NOT_ATTENDING')),
+		                 HTMLHelper::_('select.option',  1, Text::_('COM_JEM_ATT_FILTER_ATTENDING')),
+		                 HTMLHelper::_('select.option',  2, Text::_('COM_JEM_ATT_FILTER_WAITING')));
+		$lists['status'] = HTMLHelper::_('select.genericlist', $options, 'filter_status', array('onChange'=>'this.form.submit();'), 'value', 'text', $filter_status);
 
 		//assign to template
 		$this->lists 		= $lists;
@@ -95,7 +96,7 @@ class JemViewAttendees extends JemAdminView
 	protected function _displayprint($tpl = null)
 	{
 		// Load css
-		JHtml::_('stylesheet', 'com_jem/backend.css', array(), true);
+		HTMLHelper::_('stylesheet', 'com_jem/backend.css', array(), true);
 
 		$rows = $this->get('Items');
 		$event = $this->get('Event');

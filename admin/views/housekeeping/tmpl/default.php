@@ -10,6 +10,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\HTML\HTMLHelper;
 ?>
 <form name="adminForm" method="post" id="adminForm">
 	<?php if (isset($this->sidebar)) : ?>
@@ -25,7 +26,7 @@ use Joomla\CMS\Language\Text;
 				<td width="10%">
 					<div class="linkicon">
 						<a href="index.php?option=com_jem&amp;task=housekeeping.cleaneventimg&amp;<?php echo JSession::getFormToken(); ?>=1">
-							<?php echo JHtml::_('image', 'com_jem/icon-48-cleaneventimg.png', Text::_('COM_JEM_HOUSEKEEPING_EVENT_IMG'), NULL, true); ?>
+							<?php echo HTMLHelper::_('image', 'com_jem/icon-48-cleaneventimg.png', Text::_('COM_JEM_HOUSEKEEPING_EVENT_IMG'), NULL, true); ?>
 							<span><?php echo Text::_('COM_JEM_HOUSEKEEPING_EVENT_IMG'); ?></span>
 						</a>
 					</div>
@@ -38,7 +39,7 @@ use Joomla\CMS\Language\Text;
 				<td width="10%">
 					<div class="linkicon">
 						<a href="index.php?option=com_jem&amp;task=housekeeping.cleanvenueimg&amp;<?php echo JSession::getFormToken(); ?>=1">
-							<?php echo JHtml::_('image', 'com_jem/icon-48-cleanvenueimg.png', Text::_('COM_JEM_HOUSEKEEPING_VENUE_IMG'), NULL, true); ?>
+							<?php echo HTMLHelper::_('image', 'com_jem/icon-48-cleanvenueimg.png', Text::_('COM_JEM_HOUSEKEEPING_VENUE_IMG'), NULL, true); ?>
 							<span><?php echo Text::_('COM_JEM_HOUSEKEEPING_VENUE_IMG'); ?></span>
 						</a>
 					</div>
@@ -53,7 +54,7 @@ use Joomla\CMS\Language\Text;
 				<td width="10%">
 					<div class="linkicon">
 						<a href="index.php?option=com_jem&amp;task=housekeeping.cleancategoryimg&amp;<?php echo JSession::getFormToken(); ?>=1">
-							<?php echo JHtml::_('image', 'com_jem/icon-48-cleancategoryimg.png', Text::_('COM_JEM_HOUSEKEEPING_CATEGORY_IMG'), NULL, true); ?>
+							<?php echo HTMLHelper::_('image', 'com_jem/icon-48-cleancategoryimg.png', Text::_('COM_JEM_HOUSEKEEPING_CATEGORY_IMG'), NULL, true); ?>
 							<span><?php echo Text::_('COM_JEM_HOUSEKEEPING_CATEGORY_IMG'); ?></span>
 						</a>
 					</div>
@@ -66,7 +67,7 @@ use Joomla\CMS\Language\Text;
 				<td width="10%">
 					<div class="linkicon">
 						<a href="index.php?option=com_jem&amp;task=housekeeping.triggerarchive&amp;<?php echo JSession::getFormToken(); ?>=1">
-							<?php echo JHtml::_('image', 'com_jem/icon-48-archive.png', Text::_('COM_JEM_HOUSEKEEPING_TRIGGER_AUTOARCHIVE'), NULL, true); ?>
+							<?php echo HTMLHelper::_('image', 'com_jem/icon-48-archive.png', Text::_('COM_JEM_HOUSEKEEPING_TRIGGER_AUTOARCHIVE'), NULL, true); ?>
 							<span><?php echo Text::_('COM_JEM_HOUSEKEEPING_TRIGGER_AUTOARCHIVE'); ?></span>
 						</a>
 					</div>
@@ -81,7 +82,7 @@ use Joomla\CMS\Language\Text;
 				<td width="10%">
 					<div class="linkicon">
 						<a href="index.php?option=com_jem&amp;task=housekeeping.cleanupCatsEventRelations&amp;<?php echo JSession::getFormToken(); ?>=1">
-							<?php echo JHtml::_('image', 'com_jem/icon-48-cleancategoryimg.png', Text::_('COM_JEM_HOUSEKEEPING_CATSEVENT_RELS'), NULL, true); ?>
+							<?php echo HTMLHelper::_('image', 'com_jem/icon-48-cleancategoryimg.png', Text::_('COM_JEM_HOUSEKEEPING_CATSEVENT_RELS'), NULL, true); ?>
 							<span><?php echo Text::_('COM_JEM_HOUSEKEEPING_CLEANUP_CATSEVENT_RELS'); ?></span>
 						</a>
 					</div>
@@ -95,7 +96,7 @@ use Joomla\CMS\Language\Text;
 				<td width="10%">
 					<div class="linkicon">
 						<a href="index.php?option=com_jem&amp;task=housekeeping.truncateAllData&amp;<?php echo JSession::getFormToken(); ?>=1" onclick="javascript:return confirm('<?php echo Text::_('COM_JEM_HOUSEKEEPING_TRUNCATE_ALL_DATA_CONFIRM'); ?>');">
-							<?php echo JHtml::_('image', 'com_jem/icon-48-truncatealldata.png', Text::_('COM_JEM_HOUSEKEEPING_TRUNCATE_ALL_DATA'), NULL, true); ?>
+							<?php echo HTMLHelper::_('image', 'com_jem/icon-48-truncatealldata.png', Text::_('COM_JEM_HOUSEKEEPING_TRUNCATE_ALL_DATA'), NULL, true); ?>
 							<span><?php echo Text::_('COM_JEM_HOUSEKEEPING_TRUNCATE_ALL_DATA'); ?></span>
 						</a>
 					</div>

@@ -10,11 +10,12 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\HTML\HTMLHelper;
 
-JHtml::_('behavior.modal', 'a.usermodal');
-JHtml::_('behavior.tooltip');
-JHtml::_('behavior.formvalidation');
-JHtml::_('behavior.keepalive');
+HTMLHelper::_('behavior.modal', 'a.usermodal');
+HTMLHelper::_('behavior.tooltip');
+HTMLHelper::_('behavior.formvalidation');
+HTMLHelper::_('behavior.keepalive');
 
 $selectuser_link = JRoute::_('index.php?option=com_jem&task=attendee.selectuser&tmpl=component');
 ?>
@@ -87,11 +88,11 @@ $selectuser_link = JRoute::_('index.php?option=com_jem&task=attendee.selectuser&
 				</td>
 				<td>
 					<?php
-					$options = array(JHtml::_('select.option',  0, Text::_('COM_JEM_ATTENDEES_INVITED')),
-					                 JHtml::_('select.option', -1, Text::_('COM_JEM_ATTENDEES_NOT_ATTENDING')),
-					                 JHtml::_('select.option',  1, Text::_('COM_JEM_ATTENDEES_ATTENDING')),
-						             JHtml::_('select.option',  2, Text::_('COM_JEM_ATTENDEES_ON_WAITINGLIST'), array('disable' => empty($this->row->waitinglist))));
-					echo JHtml::_('select.genericlist', $options, 'status', array('id' => 'reg_status', 'list.select' => $this->row->status));
+					$options = array(HTMLHelper::_('select.option',  0, Text::_('COM_JEM_ATTENDEES_INVITED')),
+					                 HTMLHelper::_('select.option', -1, Text::_('COM_JEM_ATTENDEES_NOT_ATTENDING')),
+					                 HTMLHelper::_('select.option',  1, Text::_('COM_JEM_ATTENDEES_ATTENDING')),
+						             HTMLHelper::_('select.option',  2, Text::_('COM_JEM_ATTENDEES_ON_WAITINGLIST'), array('disable' => empty($this->row->waitinglist))));
+					echo HTMLHelper::_('select.genericlist', $options, 'status', array('id' => 'reg_status', 'list.select' => $this->row->status));
 					?>
 				</td>
 			</tr>
@@ -125,7 +126,7 @@ $selectuser_link = JRoute::_('index.php?option=com_jem&task=attendee.selectuser&
 		</table>
 	</fieldset>
 
-	<?php echo JHtml::_('form.token'); ?>
+	<?php echo HTMLHelper::_('form.token'); ?>
 	<input type="hidden" name="id" value="<?php echo $this->row->id; ?>" />
 	<input type="hidden" name="event" value="<?php echo ($this->row->event ? $this->row->event : $this->event); ?>" />
 	<input type="hidden" name="task" value="" />
@@ -134,5 +135,5 @@ $selectuser_link = JRoute::_('index.php?option=com_jem&task=attendee.selectuser&
 
 <?php
 //keep session alive while editing
-JHtml::_('behavior.keepalive');
+HTMLHelper::_('behavior.keepalive');
 ?>

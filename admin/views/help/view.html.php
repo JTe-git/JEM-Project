@@ -10,7 +10,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
-
+use Joomla\CMS\HTML\HTMLHelper;
 
 /**
  * View class for the JEM Help screen
@@ -33,7 +33,7 @@ class JemViewHelp extends JemAdminView
 		$helpsearch = JFactory::getApplication()->input->getString('filter_search', '');
 
 		// Load css
-		JHtml::_('stylesheet', 'com_jem/backend.css', array(), true);
+		HTMLHelper::_('stylesheet', 'com_jem/backend.css', array(), true);
 
 		// Check for files in the actual language
 		$langTag = $lang->getTag();

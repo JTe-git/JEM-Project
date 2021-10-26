@@ -10,6 +10,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\HTML\HTMLHelper;
 
 /**
  * View class for the JEM Updatecheck screen
@@ -26,10 +27,10 @@ class JemViewUpdatecheck extends JemAdminView
 		$updatedata      	= $this->get('Updatedata');
 
 		// Load css
-		JHtml::_('stylesheet', 'com_jem/backend.css', array(), true);
+		HTMLHelper::_('stylesheet', 'com_jem/backend.css', array(), true);
 
 		// Load script
-		JHtml::_('behavior.framework');
+		HTMLHelper::_('behavior.framework');
 
 		//assign data to template
 		$this->updatedata	= $updatedata;

@@ -9,6 +9,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\HTML\HTMLHelper;
 
 /**
  * Housekeeping-View
@@ -29,10 +30,10 @@ class JemViewHousekeeping extends JemAdminView
 		}
 
 		// Load css
-		JHtml::_('stylesheet', 'com_jem/backend.css', array(), true);
+		HTMLHelper::_('stylesheet', 'com_jem/backend.css', array(), true);
 
 		// Load Script
-		JHtml::_('behavior.framework');
+		HTMLHelper::_('behavior.framework');
 
 		// add toolbar
 		$this->addToolbar();

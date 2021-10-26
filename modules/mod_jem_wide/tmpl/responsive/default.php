@@ -11,8 +11,9 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\HTML\HTMLHelper;
 
-JHtml::_('behavior.modal', 'a.flyermodal');
+HTMLHelper::_('behavior.modal', 'a.flyermodal');
 
 /*$module_name = 'mod_jem_wide';
 $css_path = JPATH_THEMES. '/'.$document->template.'/css/'.$module_name;

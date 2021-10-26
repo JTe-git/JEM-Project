@@ -17,6 +17,7 @@
 defined('_JEXEC') or die();
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\HTML\HTMLHelper;
 
 # Ensure $use_ajax is defined and boolean
 $use_ajax = !empty($use_ajax);
@@ -199,7 +200,7 @@ for ($day = 1; $day <= $days_in_month; $day++, $weekday++) {
 				# J! version < 3.2.7: title already within $tip to ensure always '::' is present
 				# But with J! 3.3+ is a bug in script so we need to use the bad 'hasTooltip'
 				#  which is default of class parameter.
-				$calendar .= JHtml::tooltip($tip, $tipTitle, 'tooltip.png', $space . $day, $link);
+				$calendar .= HTMLHelper::tooltip($tip, $tipTitle, 'tooltip.png', $space . $day, $link);
 			}
 
 			$calendar .= '</td>';

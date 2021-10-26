@@ -9,6 +9,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\HTML\HTMLHelper;
 ?>
 
 <div id="jem" class="jlcalendar jem_calendar<?php echo $this->pageclass_sfx;?>">
@@ -141,15 +142,15 @@ use Joomla\CMS\Language\Text;
 			switch ($row->multi) {
 			case 'first': // first day
 				$multi_mode = 1;
-				$multi_icon = JHtml::_("image","com_jem/arrow-left.png",'', NULL, true);
+				$multi_icon = HTMLHelper::_("image","com_jem/arrow-left.png",'', NULL, true);
 				break;
 			case 'middle': // middle day
 				$multi_mode = 2;
-				$multi_icon = JHtml::_("image","com_jem/arrow-middle.png",'', NULL, true);
+				$multi_icon = HTMLHelper::_("image","com_jem/arrow-middle.png",'', NULL, true);
 				break;
 			case 'zlast': // last day
 				$multi_mode = 3;
-				$multi_icon = JHtml::_("image","com_jem/arrow-right.png",'', NULL, true);
+				$multi_icon = HTMLHelper::_("image","com_jem/arrow-right.png",'', NULL, true);
 				break;
 			}
 		}

@@ -10,6 +10,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\HTML\HTMLHelper;
 // JEMHelper::headerDeclarations();
 ?>
 <script type="text/javascript">
@@ -51,18 +52,18 @@ use Joomla\CMS\Language\Text;
 							<?php echo Text::_('COM_JEM_EXPORT_ADD_CATEGORYCOLUMN'); ?></label>
 							<?php
 								$categorycolumn = array();
-								$categorycolumn[] = JHtml::_('select.option', '0', Text::_('JNO'));
-								$categorycolumn[] = JHtml::_('select.option', '1', Text::_('JYES'));
-								$categorycolumn = JHtml::_('select.genericlist', $categorycolumn, 'categorycolumn', array('size'=>'1','class'=>'inputbox'), 'value', 'text', '1');
+								$categorycolumn[] = HTMLHelper::_('select.option', '0', Text::_('JNO'));
+								$categorycolumn[] = HTMLHelper::_('select.option', '1', Text::_('JYES'));
+								$categorycolumn = HTMLHelper::_('select.genericlist', $categorycolumn, 'categorycolumn', array('size'=>'1','class'=>'inputbox'), 'value', 'text', '1');
 								echo $categorycolumn;?>
 						</li>
 						<li>
 							<label for="dates"><?php echo Text::_('COM_JEM_EXPORT_FROM_DATE').':'; ?></label>
-							<?php echo JHtml::_('calendar', date("Y-m-d"), 'dates', 'dates', '%Y-%m-%d', array('class' => 'inputbox validate-date', 'showTime' => false)); ?>
+							<?php echo HTMLHelper::_('calendar', date("Y-m-d"), 'dates', 'dates', '%Y-%m-%d', array('class' => 'inputbox validate-date', 'showTime' => false)); ?>
 						</li>
 						<li>
 							<label for="enddates"><?php echo Text::_('COM_JEM_EXPORT_TO_DATE').':'; ?></label>
-							<?php echo JHtml::_('calendar', date("Y-m-d"), 'enddates', 'enddates', '%Y-%m-%d', array('class' => 'inputbox validate-date', 'showTime' => false)); ?>
+							<?php echo HTMLHelper::_('calendar', date("Y-m-d"), 'enddates', 'enddates', '%Y-%m-%d', array('class' => 'inputbox validate-date', 'showTime' => false)); ?>
 						</li>
 						<li>
 							<label for="cid"><?php echo Text::_('COM_JEM_CATEGORY').':'; ?></label>
@@ -106,7 +107,7 @@ use Joomla\CMS\Language\Text;
 		</div>
 		<?php endif; ?>
 
-		<?php echo JHtml::_( 'form.token' ); ?>
+		<?php echo HTMLHelper::_( 'form.token' ); ?>
 		<input type="hidden" name="option" value="com_jem" />
 		<input type="hidden" name="view" value="export" />
 		<input type="hidden" name="controller" value="export" />

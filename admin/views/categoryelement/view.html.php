@@ -9,7 +9,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
-
+use Joomla\CMS\HTML\HTMLHelper;
 
 /**
  * Categoryelement-View
@@ -24,8 +24,8 @@ class JemViewCategoryelement extends JViewLegacy {
 		$app 		= JFactory::getApplication();
 		$itemid 	= $app->input->getInt('id', 0) . ':' . $app->input->getInt('Itemid', 0);
 
-		JHtml::_('behavior.tooltip');
-		JHtml::_('behavior.modal');
+		HTMLHelper::_('behavior.tooltip');
+		HTMLHelper::_('behavior.modal');
 
 		//get vars
 		$filter_order		= $app->getUserStateFromRequest('com_jem.categoryelement.filter_order', 'filter_order', 'c.lft', 'cmd');
@@ -38,14 +38,14 @@ class JemViewCategoryelement extends JViewLegacy {
 		$document->setTitle(Text::_('COM_JEM_SELECT_CATEGORY'));
 
 		// Load css
-		JHtml::_('stylesheet', 'com_jem/backend.css', array(), true);
+		HTMLHelper::_('stylesheet', 'com_jem/backend.css', array(), true);
 
 		// Get data from the model
 		$rows = $this->get('Data');
 		$pagination = $this->get('Pagination');
 
 		//publish unpublished filter
-		$lists['state'] = JHtml::_('grid.state', $filter_state);
+		$lists['state'] = HTMLHelper::_('grid.state', $filter_state);
 
 		// table ordering
 		$lists['order_Dir'] = $filter_order_Dir;

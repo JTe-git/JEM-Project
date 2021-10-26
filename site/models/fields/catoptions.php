@@ -1,13 +1,15 @@
 <?php
 /**
- * @version     2.3.1
+ * @version     4.0.0
  * @package     JEM
- * @copyright   Copyright (C) 2013-2021 joomlaeventmanager.net
+ * @copyright   Copyright (C) 2013-2022 joomlaeventmanager.net
  * @copyright   Copyright (C) 2005-2009 Christoph Lukes
  * @license     http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 
 defined('JPATH_BASE') or die;
+
+use Joomla\CMS\HTML\HTMLHelper;
 
 JFormHelper::loadFieldClass('list');
 
@@ -90,13 +92,13 @@ class JFormFieldCatOptions extends JFormFieldList
 		// Create a read-only list (no name) with a hidden input to store the value.
 		if ((string) $this->readonly == '1' || (string) $this->readonly == 'true')
 		{
-			$html[] = JHtml::_('select.genericlist', $options, $this->name, trim($attr), 'value', 'text', $selectedcats,$this->id);
+			$html[] = HTMLHelper::_('select.genericlist', $options, $this->name, trim($attr), 'value', 'text', $selectedcats,$this->id);
 			$html[] = '<input type="hidden" name="' . $this->name . '" value="' . htmlspecialchars($selectedcats, ENT_COMPAT, 'UTF-8') . '"/>';
 		}
 		else
 		// Create a regular list.
 		{
-			$html[] = JHtml::_('select.genericlist', $options, $this->name, trim($attr), 'value', 'text', $selectedcats,$this->id);
+			$html[] = HTMLHelper::_('select.genericlist', $options, $this->name, trim($attr), 'value', 'text', $selectedcats,$this->id);
 		}
 
 		return implode($html);

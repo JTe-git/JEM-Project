@@ -9,10 +9,11 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\HTML\HTMLHelper;
 
-//JHtml::_('behavior.tooltip');
-JHtml::_('behavior.formvalidation');
-JHtml::_('behavior.keepalive');
+//HTMLHelper::_('behavior.tooltip');
+HTMLHelper::_('behavior.formvalidation');
+HTMLHelper::_('behavior.keepalive');
 jimport('joomla.html.html.tabs');
 
 // Create shortcut to parameters.
@@ -222,10 +223,10 @@ $location = JemHelper::defineCenterMap($this->form);
 
 			<p>&nbsp;</p>
 
-			<?php echo JHtml::_('tabs.start', 'venueTab', $options); ?>
+			<?php echo HTMLHelper::_('tabs.start', 'venueTab', $options); ?>
 
 			<!--  VENUE-DETAILS TAB -->
-			<?php echo JHtml::_('tabs.panel', Text::_('COM_JEM_EDITVENUE_INFO_TAB'), 'venue-details'); ?>
+			<?php echo HTMLHelper::_('tabs.panel', Text::_('COM_JEM_EDITVENUE_INFO_TAB'), 'venue-details'); ?>
 
 			<fieldset>
 				<legend><?php echo Text::_('COM_JEM_EDITVENUE_DETAILS_LEGEND'); ?></legend>
@@ -309,33 +310,33 @@ $location = JemHelper::defineCenterMap($this->form);
 			<p>&nbsp;</p>
 
 			<!-- EXTENDED TAB -->
-			<?php echo JHtml::_('tabs.panel', Text::_('COM_JEM_EDITVENUE_EXTENDED_TAB'), 'editvenue-extendedtab'); ?>
+			<?php echo HTMLHelper::_('tabs.panel', Text::_('COM_JEM_EDITVENUE_EXTENDED_TAB'), 'editvenue-extendedtab'); ?>
 			<?php echo $this->loadTemplate('extended'); ?>
 
 
 			<!-- PUBLISHING TAB -->
 			<?php if ($this->jemsettings->frontendpublish != 0) : ?>														  
-			<?php echo JHtml::_('tabs.panel', Text::_('COM_JEM_EDITVENUE_PUBLISH_TAB'), 'venue-publishtab'); ?>
+			<?php echo HTMLHelper::_('tabs.panel', Text::_('COM_JEM_EDITVENUE_PUBLISH_TAB'), 'venue-publishtab'); ?>
 			<?php echo $this->loadTemplate('publish'); ?>
 			<?php endif; ?>				  
 			<!-- ATTACHMENTS TAB -->
 			<?php if (!empty($this->item->attachments) || ($this->jemsettings->attachmentenabled != 0)) : ?>
-			<?php echo JHtml::_('tabs.panel', Text::_('COM_JEM_EDITVENUE_ATTACHMENTS_TAB'), 'venue-attachments'); ?>
+			<?php echo HTMLHelper::_('tabs.panel', Text::_('COM_JEM_EDITVENUE_ATTACHMENTS_TAB'), 'venue-attachments'); ?>
 			<?php echo $this->loadTemplate('attachments'); ?>
 			<?php endif; ?>
 
 			<!-- OTHER TAB -->
-			<?php echo JHtml::_('tabs.panel', Text::_('COM_JEM_EDITVENUE_OTHER_TAB'), 'venue-other' ); ?>
+			<?php echo HTMLHelper::_('tabs.panel', Text::_('COM_JEM_EDITVENUE_OTHER_TAB'), 'venue-other' ); ?>
 			<?php echo $this->loadTemplate('other'); ?>
 
-			<?php echo JHtml::_('tabs.end'); ?>
+			<?php echo HTMLHelper::_('tabs.end'); ?>
 
 			<div class="clearfix"></div>
 			<input type="hidden" name="country" id="country" geo-data="country_short" value="">
 			<input type="hidden" name="author_ip" value="<?php echo $this->item->author_ip; ?>" />
 			<input type="hidden" name="task" value="" />
 			<input type="hidden" name="return" value="<?php echo $this->return_page; ?>" />
-			<?php echo JHtml::_('form.token'); ?>
+			<?php echo HTMLHelper::_('form.token'); ?>
 		</form>
 	</div>
 

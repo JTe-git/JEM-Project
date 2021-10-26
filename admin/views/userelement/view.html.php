@@ -10,6 +10,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\HTML\HTMLHelper;
 
 /**
  * View class for the JEM userelement screen
@@ -38,7 +39,7 @@ class JEMViewUserElement extends JViewLegacy {
 		$document->setTitle(Text::_('COM_JEM_SELECTATTENDEE'));
 		
 		// Load css
-		JHtml::_('stylesheet', 'com_jem/backend.css', array(), true);
+		HTMLHelper::_('stylesheet', 'com_jem/backend.css', array(), true);
 
 		// Get data from the model
 		$users			= $this->get('Data');

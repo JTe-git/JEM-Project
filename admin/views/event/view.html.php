@@ -9,7 +9,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
-
+use Joomla\CMS\HTML\HTMLHelper;
 
 /**
  * Event View
@@ -33,10 +33,10 @@ class JemViewEvent extends JemAdminView
 			\Joomla\CMS\Factory::getApplication()->enqueueMessage(implode("\n", $errors), 'error');
 			return false;
 		}
-		JHtml::_('behavior.framework');
-		JHtml::_('behavior.modal', 'a.modal');
-		JHtml::_('behavior.tooltip');
-		JHtml::_('behavior.formvalidation');
+		HTMLHelper::_('behavior.framework');
+		HTMLHelper::_('behavior.modal', 'a.modal');
+		HTMLHelper::_('behavior.tooltip');
+		HTMLHelper::_('behavior.formvalidation');
 
 		//initialise variables
 		$jemsettings 	= JemHelper::config();
@@ -54,7 +54,7 @@ class JemViewEvent extends JemAdminView
 		$Lists['category'] = JemCategories::buildcatselect($categories, 'cid[]', $selectedcats, 0, 'multiple="multiple" size="8"');
 
 		// Load css
-		JHtml::_('stylesheet', 'com_jem/backend.css', array(), true);
+		HTMLHelper::_('stylesheet', 'com_jem/backend.css', array(), true);
 
 		if (version_compare(JVERSION, '3.0', 'lt')) {
 			$style = 'select.required {'
@@ -64,10 +64,10 @@ class JemViewEvent extends JemAdminView
 		}
 
 		// Load scripts
-		JHtml::_('script', 'com_jem/attachments.js', false, true);
-		JHtml::_('script', 'com_jem/recurrence.js', false, true);
-		JHtml::_('script', 'com_jem/unlimited.js', false, true);
-		JHtml::_('script', 'com_jem/seo.js', false, true);
+		HTMLHelper::_('script', 'com_jem/attachments.js', false, true);
+		HTMLHelper::_('script', 'com_jem/recurrence.js', false, true);
+		HTMLHelper::_('script', 'com_jem/unlimited.js', false, true);
+		HTMLHelper::_('script', 'com_jem/seo.js', false, true);
 
 		// JQuery noConflict
 		//$document->addCustomTag('<script type="text/javascript">jQuery.noConflict();</script>');
