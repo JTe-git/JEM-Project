@@ -34,7 +34,8 @@ class Pkg_JemInstallerScript
 			'0' => '5.5' // Preferred version
 			),
 		'Joomla!' => array (
-			'4.0' => '4.0.0', // Not supported
+      '5.0' => '', // Not supported
+			'4.0' => '4.0.0', 
 			'3.10' => '3.10.0',
 			'3.3' => '3.3.3',
 			'3.2' => '3.2.7',

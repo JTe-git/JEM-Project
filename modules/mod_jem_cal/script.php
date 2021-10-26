@@ -36,7 +36,7 @@ class mod_jem_calInstallerScript
 			$this->oldRelease = $this->getParam('version');
 
 			// Installing component version as per Manifest file
-			$this->newRelease = (string) $parent->get('manifest')->version;
+			$this->newRelease = (string) $parent->getManifest()->version;
 
 			if (version_compare($this->newRelease, $this->oldRelease, 'lt')) {
 				return false;
