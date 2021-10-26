@@ -12,6 +12,7 @@ defined('_JEXEC') or die;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Factory;
+use Joomla\CMS\Filesystem\Folder;
 
 /**
  * View class for the JEM Help screen
@@ -39,7 +40,7 @@ class JemViewHelp extends JemAdminView
 		// Check for files in the actual language
 		$langTag = $lang->getTag();
 
-		if (!JFolder::exists(JPATH_SITE .'/administrator/components/com_jem/help/'.$langTag)) {
+		if (!Folder::exists(JPATH_SITE .'/administrator/components/com_jem/help/'.$langTag)) {
 			$langTag = 'en-GB';		// use english as fallback
 		}
 
@@ -71,10 +72,10 @@ class JemViewHelp extends JemAdminView
 		// Check for files in the actual language
 		$langTag = $lang->getTag();
 
-		if (!JFolder::exists(JPATH_SITE .'/administrator/components/com_jem/help/'.$langTag)) {
+		if (!Folder::exists(JPATH_SITE .'/administrator/components/com_jem/help/'.$langTag)) {
 			$langTag = 'en-GB';		// use english as fallback
 		}
-		$files = JFolder::files(JPATH_SITE .'/administrator/components/com_jem/help/'.$langTag, '\.xml$|\.html$');
+		$files = Folder::files(JPATH_SITE .'/administrator/components/com_jem/help/'.$langTag, '\.xml$|\.html$');
 
 		$toc = array();
 		foreach ($files as $file) {

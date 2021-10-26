@@ -11,6 +11,7 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Factory;
+use Joomla\CMS\Filesystem\Folder;
 
 jimport('joomla.application.component.model');
 
@@ -930,8 +931,8 @@ class JemModelImport extends JModelLegacy
 			$fromFolder = JPATH_SITE.'/images/eventlist/'.$folder.'/';
 			$toFolder   = JPATH_SITE.'/images/jem/'.$folder.'/';
 
-			if (JFolder::exists($fromFolder) && JFolder::exists($toFolder)) {
-				$files = JFolder::files($fromFolder, null, false, false);
+			if (Folder::exists($fromFolder) && Folder::exists($toFolder)) {
+				$files = Folder::files($fromFolder, null, false, false);
 
 				foreach ($files as $file) {
 					if (!JFile::exists($toFolder.$file)) {
@@ -955,12 +956,12 @@ class JemModelImport extends JModelLegacy
 		$fromFolder = JPATH_SITE.'/media/com_eventlist/attachments/';
 		$toFolder   = JPATH_SITE.'/'.$jemsettings->attachments_path.'/';
 
-		if (!JFolder::exists($toFolder)) {
-			JFolder::create($toFolder);
+		if (!Folder::exists($toFolder)) {
+			Folder::create($toFolder);
 		}
 
-		if (JFolder::exists($fromFolder) && JFolder::exists($toFolder)) {
-			$files = JFolder::files($fromFolder, null, false, false);
+		if (Folder::exists($fromFolder) && Folder::exists($toFolder)) {
+			$files = Folder::files($fromFolder, null, false, false);
 			foreach ($files as $file) {
 				if (!JFile::exists($toFolder.$file)) {
 					JFile::copy($fromFolder.$file, $toFolder.$file);
@@ -969,13 +970,13 @@ class JemModelImport extends JModelLegacy
 
 			// attachments are stored in folders like "event123"
 			// so we need to walk through all these subfolders
-			$folders = JFolder::folders($fromFolder, null, false, false);
+			$folders = Folder::folders($fromFolder, null, false, false);
 			foreach ($folders as $folder) {
-				if (!JFolder::exists($toFolder.$folder)) {
-					JFolder::create($toFolder.$folder);
+				if (!Folder::exists($toFolder.$folder)) {
+					Folder::create($toFolder.$folder);
 				}
 
-				$files = JFolder::files($fromFolder.$folder, null, false, false);
+				$files = Folder::files($fromFolder.$folder, null, false, false);
 				$folder .= '/';
 				foreach ($files as $file) {
 					if (!JFile::exists($toFolder.$folder.$file)) {

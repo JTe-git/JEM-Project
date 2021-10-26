@@ -10,6 +10,7 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Factory;
+use Joomla\CMS\Filesystem\Folder;
 
 jimport('joomla.filesystem.folder');
 jimport('joomla.filesystem.file');
@@ -91,7 +92,7 @@ class JemModelCssmanager extends JModelLegacy
 		// Check if the template path exists.
 		if (is_dir($path)) {
 			// Handle the CSS files.
-			$files = JFolder::files($path.'/css', '\.css$', false, false);
+			$files = Folder::files($path.'/css', '\.css$', false, false);
 
 			foreach ($files as $file) {
 				$result['css'][] = $this->getFile($path.'/css/', $file);

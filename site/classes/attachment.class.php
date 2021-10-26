@@ -11,6 +11,7 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Factory;
+use Joomla\CMS\Filesystem\Folder;
 
 jimport('joomla.filesystem.file');
 jimport('joomla.filesystem.folder');
@@ -70,9 +71,9 @@ class JemAttachment extends JObject
 				continue;
 			}
 
-			if (!JFolder::exists($path)) {
+			if (!Folder::exists($path)) {
 				// try to create it
-				$res = JFolder::create($path);
+				$res = Folder::create($path);
 				if (!$res) {
 					\Joomla\CMS\Factory::getApplication()->enqueueMessage(Text::_('COM_JEM_ERROR_COULD_NOT_CREATE_FOLDER').': '.$path, 'warning');
 					return false;
@@ -156,7 +157,7 @@ class JemAttachment extends JObject
 		}
 
 		// first list files in the folder
-		$files = JFolder::files($path, null, false, false);
+		$files = Folder::files($path, null, false, false);
 
 		// then get info for files from db
 		$db = Factory::getDBO();

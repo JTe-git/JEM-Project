@@ -11,6 +11,7 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Factory;
+use Joomla\CMS\Filesystem\Folder;
 
 jimport('joomla.application.component.model');
 jimport('joomla.filesystem.folder');
@@ -197,7 +198,7 @@ class JemModelHousekeeping extends JModelLegacy
 		$images = array ();
 
 		// Get the list of files and folders from the given folder
-		$fileList = JFolder::files($basePath);
+		$fileList = Folder::files($basePath);
 
 		// Iterate over the files if they exist
 		if ($fileList !== false) {

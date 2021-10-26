@@ -11,6 +11,7 @@ defined('_JEXEC') or die();
 
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Factory;
+use Joomla\CMS\Filesystem\Folder;
 
 jimport('joomla.application.component.model');
 jimport('joomla.filesystem.folder');
@@ -222,7 +223,7 @@ class JemModelSampledata extends JModelLegacy
 	private function deleteTmpFolder()
 	{
 		if ($this->filelist['folder']) {
-			if (!JFolder::delete($this->filelist['folder'])) {
+			if (!Folder::delete($this->filelist['folder'])) {
 				return false;
 			}
 			return true;

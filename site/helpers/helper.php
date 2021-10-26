@@ -11,6 +11,7 @@ defined('_JEXEC') or die;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Factory;
+use Joomla\CMS\Filesystem\Folder;
 
 jimport('joomla.filesystem.file');
 jimport('joomla.filesystem.folder');
@@ -497,7 +498,7 @@ class JemHelper
 			}
 
 			// get all files and delete if not in $used
-			$fileList = JFolder::files($fullPath);
+			$fileList = Folder::files($fullPath);
 			if ($fileList !== false) {
 				foreach ($fileList as $file)
 				{
@@ -532,7 +533,7 @@ class JemHelper
 		$res         = true;
 
 		// Get list of all folders matching type (format is "$type$id")
-		$folders = JFolder::folders($basepath, ($type ? '^'.$type : '.'), false, false, array('.', '..'));
+		$folders = Folder::folders($basepath, ($type ? '^'.$type : '.'), false, false, array('.', '..'));
 
 		// Get list of all used attachments of given type
 		$fnames = array();
@@ -553,7 +554,7 @@ class JemHelper
 
 		// Delete unused files and folders (ignore 'index.html')
 		foreach ($folders as $folder) {
-			$files = JFolder::files($basepath.'/'.$folder, '.', false, false, array('index.html'), array());
+			$files = Folder::files($basepath.'/'.$folder, '.', false, false, array('index.html'), array());
 			if (!empty($files)) {
 				foreach ($files as $file) {
 					if (!array_key_exists($folder.'/'.$file, $files)) {
@@ -561,9 +562,9 @@ class JemHelper
 					}
 				}
 			}
-			$files = JFolder::files($basepath.'/'.$folder, '.', false, true, array('index.html'), array());
+			$files = Folder::files($basepath.'/'.$folder, '.', false, true, array('index.html'), array());
 			if (empty($files)) {
-				$res &= JFolder::delete($basepath.'/'.$folder);
+				$res &= Folder::delete($basepath.'/'.$folder);
 			}
 		}
 	}
@@ -933,7 +934,7 @@ class JemHelper
 		$vcal = new vcalendar();
 		if (!file_exists(JPATH_SITE.'/cache/com_jem')) {
 			jimport('joomla.filesystem.folder');
-			JFolder::create(JPATH_SITE.'/cache/com_jem');
+			Folder::create(JPATH_SITE.'/cache/com_jem');
 		}
 		$vcal->setConfig('directory', JPATH_SITE.'/cache/com_jem');
 		$vcal->setProperty("calscale", "GREGORIAN");
