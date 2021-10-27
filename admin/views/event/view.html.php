@@ -34,10 +34,10 @@ class JemViewEvent extends JemAdminView
 			\Joomla\CMS\Factory::getApplication()->enqueueMessage(implode("\n", $errors), 'error');
 			return false;
 		}
-		HTMLHelper::_('behavior.framework');
-		HTMLHelper::_('behavior.modal', 'a.modal');
-		HTMLHelper::_('behavior.tooltip');
-		HTMLHelper::_('behavior.formvalidation');
+		HTMLHelper::_('jQuery.framework');
+		HTMLHelper::_('bootstrap.modal', 'a.modal');
+		HTMLHelper::_('bootstrap.tooltip');
+		HTMLHelper::_('behavior.formvalidator');
 
 		//initialise variables
 		$jemsettings 	= JemHelper::config();

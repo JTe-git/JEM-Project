@@ -595,14 +595,14 @@ class JemCategories
 		$where .= ' AND access IN ('.implode(',', $levels).')';
 
 		$query = 'SELECT *, id AS value, catname AS text' . ' FROM #__jem_categories' . $where . ' ORDER BY parent_id, lft';
-		$db->setQuery($query);
-		$mitems = $db->loadObjectList();
-
+    
 		// Check for a database error.
-		if ($db->getErrorNum())
-		{
-			\Joomla\CMS\Factory::getApplication()->enqueueMessage($db->getErrorMsg(), 'notice');
-		}
+    try {
+      $db->setQuery($query);
+      $mitems = $db->loadObjectList();
+    } catch (RuntimeException $e) {
+      \Joomla\CMS\Factory::getApplication()->enqueueMessage($db->getErrorMsg(), 'notice');
+    }
 
 		if (!$mitems)
 		{

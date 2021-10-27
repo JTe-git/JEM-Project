@@ -33,7 +33,7 @@ class JFormFieldModal_Venue extends JFormField
 	protected function getInput()
 	{
 		// Load modal behavior
-		HTMLHelper::_('behavior.modal', 'a.modal');
+		HTMLHelper::_('bootstrap.modal', 'a.modal');
 
 		// Build the script
 		$script = array();
@@ -55,13 +55,13 @@ class JFormFieldModal_Venue extends JFormField
 		$query->select('venue');
 		$query->from('#__jem_venues');
 		$query->where(array('id='.(int)$this->value));
-		$db->setQuery($query);
-
-		$venue = $db->loadResult();
-
-		if ($error = $db->getErrorMsg()) {
+    
+    try {
+      $db->setQuery($query);
+      $venue = $db->loadResult();
+    } catch (RuntimeException $e) {
 			\Joomla\CMS\Factory::getApplication()->enqueueMessage($error, 'warning');
-		}
+    }
 
 		if (empty($venue)) {
 			$venue = Text::_('COM_JEM_SELECTVENUE');

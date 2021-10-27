@@ -28,8 +28,8 @@ $options = array(
 		'useCookie' => true, // this must not be a string. Don't use quotes.
 );
 
-HTMLHelper::_('behavior.tooltip');
-HTMLHelper::_('behavior.formvalidation');
+HTMLHelper::_('bootstrap.tooltip');
+HTMLHelper::_('behavior.formvalidator');
 HTMLHelper::_('behavior.keepalive');
 
 // Create shortcut to parameters.
@@ -190,8 +190,8 @@ function showUnregistraUntil()
 	<!-- START OF LEFT DIV -->
 	<div class="width-55 fltlft">
 
-		<?php echo HTMLHelper::_('tabs.start', 'det-pane'); ?>
-		<?php echo HTMLHelper::_('tabs.panel',Text::_('COM_JEM_EVENT_INFO_TAB'), 'info' ); ?>
+		<?php echo HTMLHelper::_('bootstrap.startTabSet', 'det-pane'); ?>
+		<?php echo HTMLHelper::_('bootstrap.addTab', 'det-pane', 'info', Text::_('COM_JEM_EVENT_INFO_TAB')); ?>
 
 		<!-- START OF LEFT FIELDSET -->
 		<fieldset class="adminform">
@@ -239,14 +239,17 @@ function showUnregistraUntil()
 			<?php echo $this->form->getInput('articletext'); ?>
 			<!-- END OF FIELDSET -->
 		</fieldset>
+    <?php echo HTMLHelper::_('bootstrap.endTab'); ?>
 
-		<?php echo HTMLHelper::_('tabs.panel',Text::_('COM_JEM_EVENT_ATTACHMENTS_TAB'), 'attachments' ); ?>
+		<?php echo HTMLHelper::_('bootstrap.addTab', 'det-pane', 'attachments', Text::_('COM_JEM_EVENT_ATTACHMENTS_TAB')); ?>
 		<?php echo $this->loadTemplate('attachments'); ?>
+    <?php echo HTMLHelper::_('bootstrap.endTab'); ?>
 
-		<?php echo HTMLHelper::_('tabs.panel',Text::_('COM_JEM_EVENT_SETTINGS_TAB'), 'event-settings' ); ?>
+		<?php echo HTMLHelper::_('bootstrap.addTab', 'det-pane', 'event-settings', Text::_('COM_JEM_EVENT_SETTINGS_TAB')); ?>
 		<?php echo $this->loadTemplate('settings'); ?>
+    <?php echo HTMLHelper::_('bootstrap.endTab'); ?>
 
-		<?php echo HTMLHelper::_('tabs.end'); ?>
+		<?php echo HTMLHelper::_('bootstrap.endTabSet'); ?>
 		<!-- END OF LEFT DIV -->
 	</div>
 
@@ -254,10 +257,10 @@ function showUnregistraUntil()
 	<div class="width-40 fltrt">
 
 		<!-- START OF SLIDERS -->
-		<?php echo HTMLHelper::_('sliders.start', 'event-sliders-'.$this->item->id, $options); ?>
+		<?php echo HTMLHelper::_('bootstrap.startAccordion', 'editaccordion', 'event-sliders-'.$this->item->id, $options); ?>
 
 		<!-- START OF PANEL PUBLISHING -->
-		<?php echo HTMLHelper::_('sliders.panel', Text::_('COM_JEM_FIELDSET_PUBLISHING'), 'publishing-details'); ?>
+		<?php echo HTMLHelper::_('bootstrap.addSlide', 'editaccordion', Text::_('COM_JEM_FIELDSET_PUBLISHING'), 'publishing-details'); ?>
 
 		<!-- RETRIEVING OF FIELDSET PUBLISHING -->
 		<fieldset class="panelform">
@@ -276,8 +279,9 @@ function showUnregistraUntil()
 				</li>
 			</ul>
 		</fieldset>
-
-		<?php echo HTMLHelper::_('sliders.panel', Text::_('COM_JEM_CUSTOMFIELDS'), 'custom'); ?>
+    <?php echo HTMLHelper::_('bootstrap.endSlide'); ?>
+    
+		<?php echo HTMLHelper::_('bootstrap.addSlide', 'editaccordion', Text::_('COM_JEM_CUSTOMFIELDS'), 'custom'); ?>
 		<fieldset class="panelform">
 			<ul class="adminformlist">
 				<?php foreach($this->form->getFieldset('custom') as $field): ?>
@@ -286,8 +290,9 @@ function showUnregistraUntil()
 				<?php endforeach; ?>
 			</ul>
 		</fieldset>
-
-		<?php echo HTMLHelper::_('sliders.panel', Text::_('COM_JEM_REGISTRATION'), 'registra'); ?>
+    <?php echo HTMLHelper::_('bootstrap.endSlide'); ?>
+    
+		<?php echo HTMLHelper::_('bootstrap.addSlide', 'editaccordion', Text::_('COM_JEM_REGISTRATION'), 'registra'); ?>
 		<fieldset class="panelform">
 			<ul class="adminformlist">
 				<li><?php echo $this->form->getLabel('registra'); ?> <?php echo $this->form->getInput('registra'); ?>
@@ -308,9 +313,10 @@ function showUnregistraUntil()
 				</li>
 			</ul>
 		</fieldset>
+    <?php echo HTMLHelper::_('bootstrap.endSlide'); ?>
 
 		<!-- START OF PANEL IMAGE -->
-		<?php echo HTMLHelper::_('sliders.panel', Text::_('COM_JEM_IMAGE'), 'image-event'); ?>
+		<?php echo HTMLHelper::_('bootstrap.addSlide', 'editaccordion', Text::_('COM_JEM_IMAGE'), 'image-event'); ?>
 
 		<fieldset class="panelform">
 			<ul class="adminformlist">
@@ -318,8 +324,9 @@ function showUnregistraUntil()
 				</li>
 			</ul>
 		</fieldset>
+    <?php echo HTMLHelper::_('bootstrap.endSlide'); ?>
 
-		<?php echo HTMLHelper::_('sliders.panel', Text::_('COM_JEM_RECURRING_EVENTS'), 'recurrence'); ?>
+		<?php echo HTMLHelper::_('bootstrap.addSlide', 'editaccordion', Text::_('COM_JEM_RECURRING_EVENTS'), 'recurrence'); ?>
 		<fieldset class="panelform">
 			<ul class="adminformlist">
 				<li><?php echo $this->form->getLabel('recurrence_type'); ?> <?php echo $this->form->getInput('recurrence_type'); ?>
@@ -441,9 +448,10 @@ function showUnregistraUntil()
 		<?php
 			}
 		} ?>
+    <?php echo HTMLHelper::_('bootstrap.endSlide'); ?>
 
 		<!-- START OF PANEL META -->
-		<?php echo HTMLHelper::_('sliders.panel', Text::_('COM_JEM_METADATA_INFORMATION'), 'meta-event'); ?>
+		<?php echo HTMLHelper::_('bootstrap.addSlide', 'editaccordion', Text::_('COM_JEM_METADATA_INFORMATION'), 'meta-event'); ?>
 
 		<!-- RETRIEVING OF FIELDSET META -->
 		<fieldset class="panelform">
@@ -504,9 +512,10 @@ function showUnregistraUntil()
 			echo Text::_ ( 'COM_JEM_META_ERROR' );
 			?>");	// window.onload is already in use, call the function manualy instead
 		-->
-		</script>
-
-		<?php echo HTMLHelper::_('sliders.end'); ?>
+		</script>    
+    <?php echo HTMLHelper::_('bootstrap.endSlide'); ?>
+    
+		<?php echo HTMLHelper::_('bootstrap.endAccordion'); ?>
 
 		<input type="hidden" name="task" value="" />
 		<input type="hidden" name="author_ip" value="<?php echo $this->item->author_ip; ?>" />

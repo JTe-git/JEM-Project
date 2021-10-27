@@ -31,7 +31,7 @@ class JFormFieldModal_Contact extends JFormField
 	protected function getInput()
 	{
 		// Load modal behavior
-		HTMLHelper::_('behavior.modal', 'a.modal');
+		HTMLHelper::_('bootstrap.modal', 'a.modal');
 
 		// Build the script
 		$script = array();
@@ -53,13 +53,13 @@ class JFormFieldModal_Contact extends JFormField
 		$query->select('name');
 		$query->from('#__contact_details');
 		$query->where(array('id='.(int)$this->value));
-		$db->setQuery($query);
 
-		$contact = $db->loadResult();
-
-		if ($error = $db->getErrorMsg()) {
+    try {
+      $db->setQuery($query);
+      $contact = $db->loadResult();
+    } catch (RuntimeException $e) {
 			\Joomla\CMS\Factory::getApplication()->enqueueMessage($error, 'warning');
-		}
+    }
 
 		if (empty($contact)) {
 			$contact = Text::_('COM_JEM_SELECTCONTACT');
